@@ -1,0 +1,897 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>prime factor</title>
+  <meta name="author" content="succi0303">
+
+  
+  <meta name="description" content="タイトルの通りですが、Windows 2000 Serverが、MSDNサブスクライバダウンロードでは入手できませんでした。 業務で、古いシステムの評価のために、Windows 2000 Serverでの環境を構築することになりました。OSは、MSDNで入手すれば何とかなると思っていました。しかし &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://succi0303.github.io/posts/9">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="prime factor" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-28929380-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">prime factor</a></h1>
+  
+    <h2>blog by @succi0303</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/succi0303" rel="subscribe-github" title="@succi0303 on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/succi0303" rel="subscribe-twitter" title="@succi0303 on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="succi0303.github.io" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/18/cannot-get-windows-server-2000-from-msdn-subscriber/">Windows 2000 ServerはMSDNで入手できない</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-06-18T15:10:00+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>3:10 pm</span></time>
+        
+         | <a href="/blog/2012/06/18/cannot-get-windows-server-2000-from-msdn-subscriber/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>タイトルの通りですが、Windows 2000 Serverが、<a href="http://msdn.microsoft.com/ja-jp/subscriptions">MSDNサブスクライバダウンロード</a>では入手できませんでした。</p>
+
+<p>業務で、古いシステムの評価のために、Windows 2000 Serverでの環境を構築することになりました。OSは、MSDNで入手すれば何とかなると思っていました。しかし、MSDNにアクセスしたところ、Windows 2000 Serverは入手できない、ということがわかりました。</p>
+
+<p>2005年2月に、MSJVMを含む製品の提供停止があり、この中でWindows 2000 Serverの提供が停止された模様です。Sun Microsystems, Incとの和解云々。詳細はこちら「<a href="http://msdn.microsoft.com/ja-jp/subscriptions/dd179309.aspx">MSDN サブスクライバ ダウンロードサイトからの MSJVM を含む製品の提供停止に関するご案内</a>」です。</p>
+
+<p>「既にご入手いただいているソフトウェア製品については、継続して使用いただくことは可能」とのこと。運よくダウンロード済みのものがあれば良いですが、無い場合は、今からWindows 2000 Serverを入手することはいろいろ手間がかかるようです。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/07/implement-240g-ssd-into-macbook-air/">MacBook AirのSSDを大容量240Gに換装しました</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-06-07T22:47:00+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>10:47 pm</span></time>
+        
+         | <a href="/blog/2012/06/07/implement-240g-ssd-into-macbook-air/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ひと月ほど前の話ですが、手持ちのMacBook AirのSSDを大容量のものに換装しました。Ruby技術者認定試験に合格した自分へのご褒美という位置付けです。手持ちのMacBook Airは、Late2010の11インチ最低スペックでSSDの容量は64Gでした。これを240Gの大容量SSDに交換したので容量が一気にほぼ4倍になったことになります。</p>
+
+<h2>MacBook Air &lsquo;11 Late2010</h2>
+
+<p>MacBook Air &lsquo;11 Late2010は、Core i 世代が現役の今にあってもなおモバイルノートとして最高の機種だと僕は思っています。たしかに、最新機種と較べるとカタログスペックは見劣りしますが、実際の体感速度に不満を感じたことはほとんどありません。それに、Core i 世代で再発してしまった発熱の問題とも無縁です。バッテリの持ちもそこそこで、常に持ち歩くノートとしては奇跡的にバランスが良いと言えます。そんな、MBA Late2010の唯一の不満がSSDの容量でした。</p>
+
+<h2>OWC Mercury Aura Pro Express SSD</h2>
+
+<p>今回換装したSSDは、OWC Mercury Aura Pro Express SSDです。OWCのMacBook Air用SSDは、容量180/240/480Gの3種類がラインアップされていて、いずれもLate2010とMid2011に対応しています。このSSDは、ランダムアクセスが純正のSSDよりも高速で、換装することで速度も速くなるという噂もあります。ちなみに、アクセス速度がより高速な6Gというバージョンもありますが、残念ながらそちらはMid2011のみ対応です。また、換装の作業で必要になる特殊なドライバが付属するため、その他の特別な準備が不要であることも、こちらのSSDを選ぶ際のメリットです。</p>
+
+<p>OWC Mercury Aura Pro Express SSDは国内では主にVintage Computerで販売されていますが、英語であることを気にしなければOWCのサイトで購入することもできます。Vintage Computerのサイトは<a href="http://www.vintagecomp.com/shop/shopexd.asp?id=3250">こちら</a>、OWCのサイトは<a href="http://eshop.macsales.com/shop/SSD/OWC/Aura_Pro_Express">こちら</a>です。</p>
+
+<h2>Mercury Aura Proの価格</h2>
+
+<p>大容量SSDを選ぶ際の最大のネックは価格だと思います。ぶっちゃけ高いです。</p>
+
+<p>2012年6月7日現在の価格をOWCのサイトで調べてみるとこんな感じでした。(為替は$1=¥80で換算しています)</p>
+
+<ul>
+<li>OWC 180G → $249.99 = 約20,000円</li>
+<li>OWC 240G → $339.99 = 約27,000円</li>
+<li>OWC 480G → $759.99 = 約60,000円</li>
+</ul>
+
+
+<p>Vintage Computerでの価格はこちらです。</p>
+
+<ul>
+<li>Vintage 240G → 29,800円</li>
+<li>Vintage 480G → 85,800円</li>
+</ul>
+
+
+<p>いずれのショップでも価格は日々変動しています。そして日を追うごとに安くなっています。容量480Gのものなんて、ほんの数ヶ月前は10万円を超えていました。それを考えれば、これでもかなり安くなってきています。また、480Gの価格を見るとわかりますが、国内サイトで購入する場合とOWCから購入する場合でかなりの価格差がある場合があります。基本的にはOWCから購入するのが割安ですが、その時々できちんとチェックした方が良いと思います。</p>
+
+<p>僕自身はOWCのサイトで240Gを購入し、送料込みでおよそ30,000円と少しでした。注文してから届くまでの日数も4日程度と、特別時間がかかるということもありませんでした。</p>
+
+<h2>SSDの換装手順</h2>
+
+<p>OWCのサイトで換装手順のビデオが公開されています。ビデオを参考に作業をしましたが、とくに問題はなく、15分ほどで作業を完了しました。複雑な手順は何もないので、ビデオを見れば充分だと思います。OWCの換装手順ビデオは<a href="http://eshop.macsales.com/installvideos/macbook_air_2010/">こちら</a>です。</p>
+
+<p>その後、リカバリUSBからOSを復元し、AppStoreからLionへのアップグレードを実施しました。基本的な環境設定を含めて、およそ2時間程度で基本的な作業が出来るところまで復帰しました。</p>
+
+<h2>その後の使い心地</h2>
+
+<p>およそひと月を経過しましたが、まずとくに不具合は発生していません。体感速度が上がったかどうかは、残念ながら正直なところ実感はありません。しかし、もともとが64Gしかなかったこともあって容量の増加は劇的でした。</p>
+
+<p>容量が増えたおかげでできるようになったことを挙げておきます。</p>
+
+<ul>
+<li>BootCampでWindows7を動くようにしました。MS Officeは、Windowsで使った方が快適です。50Gを割り当てたので、WindowsPCとして制限なく使えるようになりました。</li>
+<li>諸々のアプリを遠慮なくインストールできるようになりました。いろんなツールをダウンロードして評価してます。EclipseとかNetBeansとかAptanaStudioとか。</li>
+<li>iPhotoのフォトストリームをONにできるようになりました。ONにして放っておくと、あっという間に容量を食い潰していくため、これまではOFFにしていました。</li>
+<li>iTunesの音楽データを置けるようになりました。</li>
+<li>画像のファイルも遠慮なくローカルに置けるようになりました。</li>
+</ul>
+
+
+<p>そうして、いろいろやってもまだ100Gほどの容量が余っているので、神経質にファイルを整理する必要がなくなりました。クラウドがもてはやされる昨今ですが、やはりローカルのディスク容量はそれなりに必要だと思いました。そんなわけで、値段なりの元は取れたと思います。</p>
+
+<p>これで、現行機種であと2年は戦えるはず。物欲に負けさえしなければ。WWDC2012が来週にせまる今日この頃です…。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/06/06/aptana-studio-3-for-ruby/">Aptana Studio 3 で Ruby の開発環境を構築する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-06-06T01:12:00+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>1:12 am</span></time>
+        
+         | <a href="/blog/2012/06/06/aptana-studio-3-for-ruby/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rubyでプログラミングをする場合の開発環境は、テキストエディタ+ターミナルという場合が多いような印象があります。Rubyは手軽に利用できるスクリプト言語なので、それは自然なことだと思います。しかし、世の中には Rubyの開発に対応した統合開発環境(IDE)も複数存在します。とくにRubyをサポートするIDEは、同時にRuby on Rails(Rails)による開発をサポートしている場合が多いようです。Railsが登場して以来、Rubyを使って、規模がそれなりに大きい開発をするケースが増えてきたことが、Ruby対応のIDEが広まってきた原因かなぁと勝手に思っています。今回は、そんなRuby対応IDEのひとつであるAptana Studioをインストールしてみましたので、ソフトの概要とそのインストール手順をまとめました。</p>
+
+<h2>Aptana Studio</h2>
+
+<p>Aptana Studioは、ウェブ系の開発に特化したIDEです。HTML/CSS/JavaScript といった言語による開発に対応しています。Aptana Studioのホームページは<a href="http://www.aptana.com/">こちら</a>です 。2012年6月5日現在の最新バージョンは、3.1.3です。</p>
+
+<h2>Aptana Studio と RadRails</h2>
+
+<p>Ruby/Rails対応のIDEとしてはRadRailsが有名です。RadRailsは、もともとAptanaからリリースされていた Ruby on Rails用のIDEですが、現在は標準モジュールのひとつとしてAptana Studioの中に含まれています。Aptana Studioと独立した形でのRadRailsの提供も継続されていますが、特別な事情がない分にはAptana Studioを利用すれば良いと思います。RadRailsの2012年6月5日現在の最新バージョンは、2.0.5です。</p>
+
+<h2>Aptana StudioとEclipse</h2>
+
+<p>Aptana Studioは、Eclipse をベースにしています。Eclipseは、言わずと知れた Java開発のデファクトスタンダードであるオープンソースのIDEです。Eclipseのホームページは<a href="http://www.eclipse.org/">こちら</a>です。Aptana Studioは、単独で動作するスタンドアロンバージョンの他に、Eclipseのプラグインとして動作するバージョンも提供されています。今回はこのEclipseプラグインバージョンで開発環境を構築してみます。インストール先の環境は、MacBook Airで、OSのバージョンは Mac OSX 10.7.4です。</p>
+
+<h2>インストール手順</h2>
+
+<p>Aptana Studioの環境構築の手順は、おおざっぱに「1. Eclipseのインストール、2. Eclipseの日本語化、3. Aptana Studioのインストール」に分かれます。</p>
+
+<h2>Eclipse のインストール</h2>
+
+<p>Eclipse Foundationの<a href="http://www.eclipse.org/downloads/">ダウンロードページ</a>からEclipse をダウンロードします。ダウンロードできるEclipseにはいくつか種類がありますが、今回はEclipse IDE for Java EE Developers(Mac OSX 64 bit)を選択しました。 ダウンロードしたzipファイルを解凍します。 解凍してできたeclipseフォルダをアプリケーションフォルダにコピーします。 以上で Eclipse のインストールは完了ですが、そのままだと UI がすべて英語なのでこれを日本語化します。</p>
+
+<h2>Eclipse の日本語化</h2>
+
+<p>Eclipseを日本語化するにはPleiadesを使います。MergeDoc Projectの<a href="http://mergedoc.sourceforge.jp/index.html#/pleiades.html">Pleiades Eclipseプラグイン日本語化プラグインのホームページ</a>にアクセスします。 Pleiades本体ダウンロードの欄から、安定版1.3.3をダウンロードします。 ダウンロードしたzipファイルを解凍します。 解凍してできた Pleiadesフォルダを開き、featuresフォルダ内のjp.sourceforge.mergedoc.pleiadesを、先ほどインストールしたeclipseフォルダ内のfeaturesフォルダ配下にコピーします。 同様にPleiades/pluginフォルダ内のjp.sourceforge.mergedoc.pleiades をeclipse/pluginフォルダ配下にコピーします。 Finderでeclipse.appを選択し「パッケージの内容を表示」を選択します。 eclipse.app/Contents/MacOS 配下の eclipse.ini をエディタで開き、ファイルの末尾に「-javaagent:../../../plugins/jp.sourceforge.mergedoc.pleiades/pleiades.jar」の行を追加します。 ターミナルを起動して「/Applications/eclipse/eclipse -clean」のコマンドでEclipseを起動します。 これでEclipseの日本語化は完了です。続けてAptana Studioをインストールします。</p>
+
+<h2>Aptana Studioのインストール</h2>
+
+<p><a href="http://www.aptana.com/products/studio3/download">Download Aptana Studioのページ</a>にアクセスします。StandAlone VersionとEclipse plug-in Versionを選択する欄があるので、Eclipse plug-in Versionを選択し、DOWNLOADボタンを押します。すると、画面にUpdate Site URLが表示されますので、これをコピーします。 Eclipseを起動し、メニューバーから「ヘルプ - 新規ソフトウェアのインストール」を選択します。 「使用可能なソフトウェア」ウィンドウの「作業対象」に、先ほどコピーしたUpdate Site URLをペーストし、追加ボタンを押します。 「リポジトリの追加」ウィンドウの「名前」に任意の名前を入力します。ここでは「AptanaStudio3」と入力します。一覧にAptanaStudio3が表示されるのでチェックボックスのチェックをオンにして「次へ」ボタンを押します。 「インストール詳細」ウィンドウで「次へ」ボタンを押します。 「ラインセンスのレビュー」ウィンドウでライセンス条項を確認し、同意を選択して「完了」ボタンをクリックします。 インストールの処理が開始されるのでしばらく待って、Eclipseの再起動を求められたら、メッセージにしたがって再起動します。 以上でAptana Studioのインストールは完了です。新規プロジェクトで「Rubyプロジェクト」や「Railsプロジェクト」を選択できることを確認します。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/26/back-slash-on-mac/">Macでバックスラッシュを入力する方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-03-26T15:04:00+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>3:04 pm</span></time>
+        
+         | <a href="/blog/2012/03/26/back-slash-on-mac/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ものすごく基本的なことですが、はまってしまったのでメモしておきます。</p>
+
+<h2>optionを押しながら¥(円マーク)</h2>
+
+<p>Macでバックスラッシュを入力する時に「¥(円マーク)」をそのまま使うと、式展開されなかったり、エラーが発生したりします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;hogehoge¥n&quot;</span> <span class="c1">#=&gt; &quot;hogehoge¥n&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これを回避するためには、optionを押しながら「¥(円マーク)」を押します。すると、「(バックスラッシュ)」が入力されます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="s2">&quot;hogehoge</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="c1">#=&gt; &quot;hogehoge&quot;(改行)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Macでは、OSのレベルで円マークとバックスラッシュを区別しており、円マークとバックスラッシュは別の文字として扱われることがエラーの原因のようです。</p>
+
+<p>プログラミングの参考書では、「¥(円マーク)」でソースを記載していたりするので、見た目はまったく一緒なのに、Macで入力するとエラーが発生する!!という場合には、チェックしてみると良いかも知れません。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/10/venture-cafe-report-3/">ベンチャー・カフェ「これからの『エンジニアリング』の話をしよう」に行ってきました 3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-03-10T16:05:00+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>4:05 pm</span></time>
+        
+         | <a href="/blog/2012/03/10/venture-cafe-report-3/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回、前々回につづいて、ベンチャー・カフェ「これからの「エンジニアリング」の話をしよう」のレポートその3です。ジンガジャパン株式会社　山岡広幸氏によるスピーチをまとめます。テーマは「WEB業界でほしい人材とは?」</p>
+
+<h2>山岡氏のキャリア</h2>
+
+<ul>
+<li>キャリアのはじまりは中堅SIer。SIerにいてもこれ以上成長できないと思い、SIerに見切りをつけた。</li>
+<li>SIerではスキルが伸びない。スキルが評価につながらない。</li>
+<li>いろいろあった後ウノウに転職した。その後ウノウがzyngaに買収されて、現職は、zynga japanに。</li>
+<li>ウノウに転職してからの肩書は「エンジニア「リードエンジニア」「ジェネラルマネージャ」</li>
+<li>ジェネラルマネージャもモノづくりをする。そこは、SIerとの違いかも。</li>
+<li>WEB業界でエンジニアでの採用を担当した。</li>
+</ul>
+
+
+<p>山岡氏のキャリアの紹介からはじまり、WEB業界で実際にエンジニアの採用を担当した視点をふまえて、お話は「WEB業界でほしい人材とは」に展開しました。</p>
+
+<h2>WEB業界でほしい人材とは</h2>
+
+<ul>
+<li>採用のプロセスとしては「書類選考」「エンジニアによる面接」「管理者による面接」を実施していた。</li>
+<li>書類選考について。応募は大量に来る。2、3日で600件とか。目を通すだけでも大変。一番多いのはSIer出身者だった。</li>
+<li>書類選考においてプラスになることは、外から見える活動をしていること。サービス、アプリを公開している。コードを公開している。ブログやTwitterで情報を発信していること。SIerでの経験は評価しない。SIerでの経験は諸々の事情で公開できなかったりする。わからない。何ができるか見えるようになっていると助かる。</li>
+<li>年齢はあまり気にしない。</li>
+<li>学歴は見ることもある。データ解析で高度な数学が必要になる場合とか。</li>
+<li>面接で確認すること。その1、何をどういう立場でやってきたか。入社して何をやりたいのか、何ができるのか。業務をきちんと理解しているかを確認する。</li>
+<li>面接で確認すること。その2、コードが書けるか。</li>
+<li>面接で確認すること。その3、ソーシャルゲーム、WEBサービスを使っているか。WEBサービス、ソーシャルゲームとは何かをちゃんとわかっているのか。</li>
+<li>何かを作ったり、発信をしているか。</li>
+</ul>
+
+
+<p>お話の内容が明解で、すごくわかりやすかったです。では、そんなふうに採用されたWEB業界の実態とは? 「SIerとは違うWEB業界の実態」へ続きます。</p>
+
+<h2>SIerとは違うWEB業界の実態</h2>
+
+<ul>
+<li>ベンチャーとは何か。スタートアップとは何か。誤解してない? たぶん、SI業界の人がベンチャーと言ってイメージする会社はもうベンチャーじゃない。</li>
+<li>WEB業界は、自社サービス・自社アプリのイメージがあるようだけれど、受託開発もしている。売上に対する比率は結構たかい。</li>
+<li>WEB業界では工程が分断されることが少ない。設計も実装もテストもやる。</li>
+<li>ただし、WEB業界にもSIer業界のようなピラミッド構造ができつつある。</li>
+<li>その結果、WEB業界もSIer業界と同様の問題をかかえることになるか…、正直なところわからない。</li>
+<li>WEB業界もハードワークですよ。ブラックですよ。</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/10/venture-cafe-report-2/">ベンチャー・カフェ「これからの『エンジニアリング』の話をしよう」に行ってきました 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-03-10T13:06:00+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>1:06 pm</span></time>
+        
+         | <a href="/blog/2012/03/10/venture-cafe-report-2/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回につづいて、ベンチャー・カフェ「これからの「エンジニアリング」の話をしよう」のレポートです。ひがやすを氏によるスピーチをまとめます。テーマは「SIerでのキャリア 一般的な話」「SIerでのキャリア ひが氏のキャリア」の2本立てでした。まずは、一般的な話から。</p>
+
+<h2>元請けと下請け</h2>
+
+<ul>
+<li>SIerでのキャリアは元請けと下請けに分けて考えられる</li>
+</ul>
+
+
+<h2>元請けでのキャリア</h2>
+
+<ul>
+<li>元請けは大きいプロジェクトを担当する。</li>
+<li>元請けに求められるのはパートナー企業をいかに使うかということ。</li>
+<li>元請けのキャリアは、まず雑用からはじまる。</li>
+<li>雑用の次は打合せに同行して仕様書をまとめる。そして、パートナーに要件を伝えて作ってもらう。できあがったプログラムをテストする。</li>
+<li>そこまでできれば後は繰り返し。それ以上成長しない。スキルが伸びない。</li>
+</ul>
+
+
+<h2>下請けでのキャリア</h2>
+
+<ul>
+<li>下請けではモノを作る。だから、そこそこ技術はつく。</li>
+<li>しかし、会社が社員を育てる気がない。高いスキルがあっても人月単価が上がるわけではないから。失敗しなければ良い、になりがち。</li>
+</ul>
+
+
+<h2>SIerの業務ではスキルがつかない</h2>
+
+<ul>
+<li>元請けでも下請けでも会社は、社員を育てるつもりがない。</li>
+<li>だから、元請け、下請けのどちらにいてもスキルがつかない。</li>
+</ul>
+
+
+<p>業界の構造をふまえて、SIerでは企業が社員を育てるつもりがない。だから、スキルがつかないという指摘に、はっとしました。 次に、ひが氏のキャリアのお話です。</p>
+
+<h2>キャリアのはじまり</h2>
+
+<ul>
+<li>小さい会社に行きたかった。小さい会社ならいろいろ任せてもらえるのでスキルがつくと思ったから。その結果、できたばかりの30人くらいの会社に就職する。</li>
+<li>最初は地方の金融機関のシステムを担当した。金融機関のシステムは金融の知識がないと作れない。勉強して、知識がついてお客様と話ができるようになることが面白かった。</li>
+<li>しかし、ひととおり知識がつくとそれ以上の成長がない。また、モノを作れないことに不安を感じる。何か起きたときに自分で対応できない。自分で勉強するにも20年前はプログラムを個人で自由にできる環境がなかった。</li>
+</ul>
+
+
+<h2>オラクルと出会う</h2>
+
+<ul>
+<li>とある案件でオラクルを使うことになる。オラクルはオープンな技術である。1カ月でマニュアルを全部読んだ。</li>
+<li>マニュアルを読破したことで自信がついた。しかし、そこで成長がとまる。</li>
+<li>ニフティのオラクルフォーラムに常駐して回答を返すことで経験値をつんだ。</li>
+</ul>
+
+
+<h2>Javaをはじめる</h2>
+
+<ul>
+<li>オラクルのフォーラムのつながりで本を書くことになった。本を書くと経験値がすごくあがる。大変だけど…。</li>
+<li>当時は「良いコード」を書くにはどうすればよいかを考えていた。</li>
+<li>そして、XP(eXtreme Programing)に出会う。良いコードを書かなくても良いんだ。</li>
+<li>その次は、ではそのプログラミングで何を作れば良いのかがわらない。</li>
+</ul>
+
+
+<h2>seasarをつくる</h2>
+
+<ul>
+<li>とある人からの依頼で、seasar0を作った。人の役に立つものを作れた。</li>
+<li>seasar1を作る。しかし、誰もダウンロードしてくれない。ダウンロードしてもらえるものを作りたい。ヒットするものを作りたい。</li>
+<li>そして、seasar2を作る。</li>
+<li>以下略。</li>
+</ul>
+
+
+<p>ひが氏のキャリア、こうしてまとめてみて、改めて「学び、成長することへの貪欲さ」を感じます。</p>
+
+<h2>まとめ</h2>
+
+<p>2つの話をあわせると、SIerの業界では、企業が社員のスキル(ここでいうスキルは技術的な意味のスキル、ですよね。)を育てるモチベーションがない。だから、スキルアップについて会社に期待することはできない。だから、自分自身が、どん欲に成長を求めなければいけない、ということかと思います。 SIerの会社は社員に技術面の成長を求めていない、というのはまさにその通りだと思いました。ただ、僕は、SIerの仕事はスキルアップに向かないなんてことはないと思うのです。本人に意欲さえあれば。ひが氏のキャリアはそのよい例ではないかと思いました。 とはいえ、本人の意欲というのもなかなかハンパないですね。ひが氏の話と較べてしまうと、自分はこれまで何をしてきただろうかと考えてしまいます。 今回の記事はここまで。山岡広幸氏のスピーチ、ワールド・カフェでの議論、自分自身の気付きをまた別の記事にまとめていきたいと思います。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/10/venture-cafe-report-1/">ベンチャー・カフェ「これからの『エンジニアリング』の話をしよう」に行ってきました 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-03-10T11:41:00+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>11:41 am</span></time>
+        
+         | <a href="/blog/2012/03/10/venture-cafe-report-1/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>「勉強会は、ブログにまとめをアップするまでが勉強会です」ということで、アップします。ベンチャー・カフェ「これからの「エンジニアリング」の話をしよう」に参加してきました。</p>
+
+<h2>イベントの概要</h2>
+
+<p>テーマは「SIerでのキャリアパスを考える ～ここにいても大丈夫？SIerのメリット・デメリット～」でした。SIer勤めの自分としては非常に気になるテーマです。 会場は、外苑前のオラクル青山センター。設備が整っている、とても立派な会場でした。会場を提供いただいているオラクル様に感謝です。 イベントの前半は、アルファブロガー　GoTheDistance（湯本堅隆）氏、ジンガジャパン株式会社　山岡広幸氏、そしてメインスピーカー ひがやすを氏によるスピーチとパネルディスカッション。そして後半は、ワールド・カフェ形式で参加者同士のディスカッションという構成でした。 まずは、スピーカー3名によるスピーチを自分なりにまとめてみたいと思います。最初のスピーチは、GoTheDistance（湯本堅隆）氏による「これだけは知っておきたいSI 業界のよもやま話」。</p>
+
+<h2>SIerの業界構造</h2>
+
+<ul>
+<li>SIerの業界は、プレーヤー企業が、規模によって分かれている。ビッグ5、中堅、中小・零細という感じ。</li>
+<li>Sierの業界は、上流と下流が分断されている。ビッグ5が上流を担当して、下流を中堅、中小・零細が担当するなど。</li>
+<li>上流と下流の分断が問題を生む</li>
+</ul>
+
+
+<p>補足：SIer業界での一般的なシステム開発は、お客様がやりたいことを明確にする「要件定義」、要件定義をもとに見た目上の設計を行う「基本設計」、基本設計をもとにシステム内部を設計する「詳細設計」、そして実際にプログラムを作る「開発」、プログラムが正しく動くことを確認する「テスト」というように進みます。このプロセスのはじめの方を上流、あとの方を下流と言います。一般的には、要件定義、基本設計あたりが上流、それ以降詳細設計、開発、テストが下流にあたります。</p>
+
+<h2>上流と下流が分断することによる弊害</h2>
+
+<ul>
+<li>上流を担当する人間はものを作らない、作れない。結果、自分自身でITによる解決策を生み出すことができない。</li>
+<li>下流に求められるのはとりあえず設計どおり動くことのみ。結果、下流を担当する人間は、高度な実装を行う意欲がわかない。</li>
+<li>上流のしわよせが下流にいく。</li>
+<li>一連の工程に複数の企業が関わっているため、問題が発生した場合にどこに原因や責任があるのかわからない。要件にしろ、設計にしろ何が正しいのかわからなくなる→その結果、デスマーチが発生する。</li>
+</ul>
+
+
+<h2>黒船の襲来 クラウドの潮流</h2>
+
+<ul>
+<li>黒船=クラウド(Saas, Paas, Iaas)</li>
+<li>クラウドを活用したサービスでは、時間もコストもかけずにシステムを提供可能である。この事態にSIerはどう対処する?? SIerやばい。</li>
+</ul>
+
+
+<p>このクラウドの話については、クラウドサービスによって明らかにコストが下がるのはインフラ周りの構築・運用の話であって、システムの初期開発は別に考えた方が良いのではとの指摘が入りました。また、ひがやすを氏からは、「SIerのインフラ担当はかなりの技術とノウハウを持っている。しかし、クラウドの普及によって、そういったノウハウを求められることがなくなってきたんじゃないか」との指摘がありました。あとは、「クラウド」という言葉は意味が曖昧すぎるので、きっちり定義した上で使わないと話がよくわからなくなっちゃいますよね、との指摘も。</p>
+
+<h2>まとめ</h2>
+
+<p>GoTheDistance（湯本堅隆）氏のスピーチで、SIer業界のおおよその位置付けを再確認した感じでした。とくに「上流と下流が分断することによる弊害」の部分については、ワールド・カフェで他の参加者の方々と話した中でも、それぞれの立場で感じている不安、不満として共通の認識であったと思います。 スピーチ中のスライド資料は、もっといろいろなことが書いてありました。資料を落とせるようにする、とのことでしたがどういう手段になるんだろう。 今回の記事は、ここまで。山岡広幸氏、ひがやすを氏のスピーチ、そしてワールド・カフェでの議論、自分自身の気付きなど、順次アップしていきたいと思います。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/03/vermeer-center-ginza/">「フェルメール 光の王国展」に行ってきました</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-03-03T16:52:00+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2012</span></span> <span class='time'>4:52 pm</span></time>
+        
+         | <a href="/blog/2012/03/03/vermeer-center-ginza/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>フェルメール・センター銀座で開催中の「フェルメール 光の王国展」に行ってきました。</p>
+
+<h2>「フェルメール 光の王国展」</h2>
+
+<p>「フェルメール 光の王国展」は、フェルメール・センター銀座で開催されている展覧会です。この展覧会では、現存するフェルメールの絵画全37作品のリ・クリエイト作品が展示されています。</p>
+
+<h2>リ・クリエイトとは</h2>
+
+<p>この展覧会で展示されているのは本物ではありません。「リ・クリエイト作品」と呼ばれる精巧な模造品です。リ・クリエイトの意味について、公式サイトでは「作家の世界観・生命観を最新のデジタル画像技術によって翻訳した新たな創作物である」と説明されています。実際に観たリ・クリエイト作品は、たしかによくできていると思いました。さすがに本物でないことはわかりましたが、安っぽさがなくて、単なるコピーではない、絵を見ている気分にさせてくれました。</p>
+
+<h2>フェルメールの全作品をゆっくり、じっくり鑑賞できる</h2>
+
+<p>フェルメールの全作品をまとめて鑑賞できることがすごくよかったです。作品が時系列に並んでいるので、時とともにタッチがどんなふうに変化していったかがわかります。また、フロア内は自由に行きつ戻りつできるので、ひととおり鑑賞した後は気に入った作品同士を見較べながらゆっくり過ごすことができました。</p>
+
+<p>実は「フェルメール 光の王国展」の前に、bunkamura ザ・ミュージアムで開催中の「フェルメールからのラブレター展」にも行ってきました。「フェルメールからのラブレター展」では、複製品ではない本物のフェルメール作品3作が展示されています。しかし、それはもう大混雑であまり落ち着いて絵を見ることができませんでした。そちらと較べると「フェルメール 光の王国展」は入場者が少なかったです。周りを気にせずゆっくり、じっくり鑑賞できて、満足しました。</p>
+
+<h2>撮影が自由だった</h2>
+
+<p>会場は、フラッシュを炊かない限り写真の撮影が自由でした。展示しているものが本物ではないからなのだと思いますが新鮮でした。せっかくなので何枚か写真を撮ってきました。</p>
+
+<h2>フェルメールの絵について</h2>
+
+<p>よかったです。好きです。フェルメールの作品は色味が透きとおっていて、キラキラしているんだなぁと思いました。やわらかい光の白、深い青、ガラスや金属の光沢など。宝石を見ているような印象を受けました。</p>
+
+<h2>リンク</h2>
+
+<p>アクセス情報など開催概要は以下の公式サイトをご覧ください。行って損のない展覧会だと思います。</p>
+
+<ul>
+<li><a href="http://www.vermeer-center-ginza.com/">フェルメール・センター銀座「フェルメール 光の王国展」</a></li>
+<li><a href="http://www.bunkamura.co.jp/museum/exhibition/11_loveletter.html">bunkamura ザ・ミュージアム「フェルメールからのラブレター展」</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/02/read-foundation-of-writing/">「文章力の基本」を読んだ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-03-02T10:13:00+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2012</span></span> <span class='time'>10:13 am</span></time>
+        
+         | <a href="/blog/2012/03/02/read-foundation-of-writing/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>少し以前の話ですが、阿部絋久「文章力の基本 簡単だけど、だれも教えてくれない77のテクニック」(日本実業出版社)を読みました。</p>
+
+<p><a href="https://www.amazon.co.jp/%E6%96%87%E7%AB%A0%E5%8A%9B%E3%81%AE%E5%9F%BA%E6%9C%AC-%E9%98%BF%E9%83%A8-%E7%B4%98%E4%B9%85/dp/4534045883?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4534045883">文章力の基本</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E6%96%87%E7%AB%A0%E5%8A%9B%E3%81%AE%E5%9F%BA%E6%9C%AC-%E9%98%BF%E9%83%A8-%E7%B4%98%E4%B9%85/dp/4534045883?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4534045883"><img src="https://images-fe.ssl-images-amazon.com/images/I/31A-LWpBy6L._SL160_.jpg" /></a></p>
+
+<p>「わかりやすい文章の書き方」の本はたくさんあります。そういった本の内容は全体的な文章の構成の話であることが多いように思います。たとえば、「起承転結をきっちりする」とか、「結論を最初に書く」とか。</p>
+
+<p>この本はそういったものと少し違います。この本はもう一歩細かい、文の書き方の基本の部分を教えてくれます。第2章「自然な正しい表現で書く」からいくつかを抜粋すると、「文の前半と後半をかみ合わせる 能動と受動」「必要な『てにをは』を省かない」「列挙するときは品詞を揃える」などなど。それぞれ何が問題なのか、悪い例とそれを改善した例を挙げて説明してくれます。あーたしかに、それやりがちだわ…という文がボロボロと出てきたなかなか耳が痛い。意識すれば、すぐに直せる部分なので即効性があります。</p>
+
+<p>そうして、正しく分かりやすい文の書き方から積み上げた延長で文章構成の話にも少し触れているという感じです。文章の構成とか言われてもそれ以前の問題で〜という人間にとって非常に心強い本でした。たまにペラペラとめくって、気になった部分を読んでは日頃のメールの文面などを反省しています。 僕がとくに「これは!」と思った指摘を抜き出します。</p>
+
+<ul>
+<li>短く言い切る勇気を持つ</li>
+<li>省略された主語は変えない</li>
+<li>話は1つずつすませる</li>
+<li>削れる言葉は徹底的に削る</li>
+<li>「これから説明します」「これから述べます」は不要</li>
+<li>「なぜなら」「理由としては」なども省く</li>
+<li>「という」を削る</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/27/wp-social-bookmarking-light/">ソーシャルブックマークのリンクボタンを設置しました - WP Social Bookmarking Light</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-02-27T14:57:00+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>2:57 pm</span></time>
+        
+         | <a href="/blog/2012/02/27/wp-social-bookmarking-light/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>この記事は、過去のブログサイト運営時に書いたものです。現在、このブログはGithub Pagesで運営しています。</p>
+
+<hr />
+
+<p>記事の末尾にソーシャルブックマークのリンクボタンを設置しました。<a href="http://wordpress.org/extend/plugins/wp-social-bookmarking-light/" title="">WP Social Bookmarking Light</a>というプラグインを使っています。</p>
+
+<p>WP Social Bookmarking Lightは、記事の先頭または末尾に様々なソーシャルブックマークサービスのリンクボタンを設置してくれるプラグインです。設定によっていろいろなサービスのリンクを設置できます。今回は、Evernote、はてブ、Twitter、Google+1、Facebookのリンクボタンを設置しました。</p>
+
+<h2>WP Social Bookmarking Lightの設定方法</h2>
+
+<ul>
+<li>プラグインをインストールする</li>
+<li>全体の設定をする</li>
+<li>個別の設定をする</li>
+</ul>
+
+
+<p>プラグインのインストールはいつもどおりです。WordPressのダッシュボードのプラグインメニューから"WP Social Bookmarking Light"を検索してインストールし有効化します。</p>
+
+<p>WP Socail Bookmarking Lightの設定画面を表示します。一般設定タブで全体を設定をします。リンクボタンを記事の末尾に表示するため「位置」を「Bottom」に変更します。固定ページにリンクボタンを表示しない場合は「ページ」を「No」に変更します。「サービス」でどのサービスのリンクボタンを表示するかを設定します。</p>
+
+<p>「サービス」で有効にしたサービスについて個別の設定タブが表示されます。それぞれのタブで個別の設定をします。設定できる項目はボタンのサイズやカウント数の表示有無などです。たとえば、Twitterの場合は下の画像のような設定ができます。</p>
+
+<h2>WP Social Bookmarking Lightが対応しているサービス</h3></h2>
+
+<p>2012年2月27日現在、Social Bookmarking Lightはこれだけのソーシャルサービスに対応しています。主要なサービスはすべて網羅している感じです。</p>
+
+<ul>
+<li>Hatena</li>
+<li>Facebook</li>
+<li>Facebook Like Button</li>
+<li>Facebook Send Button</li>
+<li>Twitter</li>
+<li>Livedoor Clip</li>
+<li>BuzzURL</li>
+<li>@nifty clip</li>
+<li>Tumblr</li>
+<li>FC2 Bookmark</li>
+<li>newsing</li>
+<li>Choix</li>
+<li>Yahoo!JAPAN Bookmark</li>
+<li>Yahoo!Buzz</li>
+<li>Google Bookmark</li>
+<li>Google Buzz</li>
+<li>Google +1</li>
+<li>Delicious</li>
+<li>Digg</li>
+<li>FriendFeed</li>
+<li>reddit</li>
+<li>LinkedIn</li>
+<li>Evernote</li>
+<li>Instapaper</li>
+<li>StumbleUpon</li>
+<li>mixi Check</li>
+<li>mixi Like</li>
+<li>GREE Social Feedback</li>
+<li>atode (toread)</li>
+<li>Grow!</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/10">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/8">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - succi0303 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'prime-factor';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

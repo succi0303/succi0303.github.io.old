@@ -1,0 +1,2289 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>prime factor</title>
+  <meta name="author" content="succi0303">
+
+  
+  <meta name="description" content="現在時刻の美人時計の画像URLを返すHubotスクリプト「hubot-bijin-tokei」を作った。 仕様は以下の通り。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+# Description:
+# Hubot responds current time bijin &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://succi0303.github.io/posts/6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="prime factor" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-28929380-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">prime factor</a></h1>
+  
+    <h2>blog by @succi0303</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/succi0303" rel="subscribe-github" title="@succi0303 on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/succi0303" rel="subscribe-twitter" title="@succi0303 on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="succi0303.github.io" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/21/hubot-bijin-tokei/">美人時計の現在時刻のURLを返すHubotスクリプトを作った</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-21T15:22:00+00:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>3:22 pm</span></time>
+        
+         | <a href="/blog/2015/03/21/hubot-bijin-tokei/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>現在時刻の<a href="http://www.bijint.com">美人時計</a>の画像URLを返すHubotスクリプト「<a href="https://github.com/succi0303/hubot-bijin-tokei" title="succi0303/hubot-bijin-tokei · GitHub">hubot-bijin-tokei</a>」を作った。</p>
+
+<p>仕様は以下の通り。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='CoffeeScript'><span class='line'><span class="c1"># Description:</span>
+</span><span class='line'><span class="c1">#   Hubot responds current time bijin-tokei URL</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1"># Dependencies:</span>
+</span><span class='line'><span class="c1">#   None</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1"># Configuration:</span>
+</span><span class='line'><span class="c1">#   None</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1"># Commands:</span>
+</span><span class='line'><span class="c1">#   hubot bijin now - Hubot responds bijin-tokei URL of &#39;all japan&#39;</span>
+</span><span class='line'><span class="c1">#   美人なう - &#39;hubot bijin now&#39;と同じ。</span>
+</span><span class='line'><span class="c1">#   hubot bijin now [local] - Hubot responds bijin-tokei URL of &#39;local&#39;</span>
+</span><span class='line'><span class="c1">#   美人なう、[local] - &#39;hubot bijin now [local]&#39;と同じ。</span>
+</span><span class='line'><span class="c1">#</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>使用イメージ</h2>
+
+<p>使用イメージ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>user1&gt;&gt; hubot bijin now
+</span><span class='line'>hubot&gt;&gt; 現在の時刻は15時46分です。<span class="o">[</span>全国版<span class="o">]</span>
+</span><span class='line'>        http://www.bijint.com/assets/pict/jp/pc/1546.jpg
+</span><span class='line'>  
+</span><span class='line'>user1&gt;&gt; hubot bijin now tokyo
+</span><span class='line'>hubot&gt;&gt; 現在の時刻は15時48分です。<span class="o">[</span>地域版: tokyo<span class="o">]</span>
+</span><span class='line'>        http://www.bijint.com/assets/pict/tokyo/pc/1548.jpg
+</span><span class='line'>  
+</span><span class='line'>user1&gt;&gt; 美人なう
+</span><span class='line'>hubot&gt;&gt; 現在の時刻は15時49分です。<span class="o">[</span>全国版<span class="o">]</span>
+</span><span class='line'>        http://www.bijint.com/assets/pict/jp/pc/1549.jpg
+</span><span class='line'>  
+</span><span class='line'>user1&gt;&gt; 美人なう、東京
+</span><span class='line'>hubot&gt;&gt; 現在の時刻は15時51分です。<span class="o">[</span>地域版: tokyo<span class="o">]</span>
+</span><span class='line'>        http://www.bijint.com/assets/pict/tokyo/pc/1551.jpg
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>インストール方法</h2>
+
+<p>Hubotのプロジェクトディレクトリで以下のコマンドを実行する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>npm install succi0303/hubot-bijin-tokei --save
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>external-scripts.json</code>に以下の内容を追加する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='JSON'><span class='line'><span class="p">[</span>
+</span><span class='line'>  <span class="s2">&quot;hubot-bijin-tokei&quot;</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>メモ</h2>
+
+<p>システムのタイムゾーンに関わらず、日本時間の時刻を返す。<a href="https://www.heroku.com">Heroku</a>でHubotを動かすことを想定している。Herokuのタイムゾーンを変更するのが面倒だと思ったので、スクリプトで日本時間を返すようにした。</p>
+
+<p><code>[local]</code>は、URLに含まれるアルファベットを指定することが基本であるが、日本語の名称を指定することも出来る。日本語の<code>美人なう</code>は、<code>respond</code>ではなく<code>hear</code>で設定しているため、Hubotへの呼びかけでなくても反応する。IMEがONの時に、IMEをいじることなく、そのまま<code>美人なう、北海道</code>などと入力することを想定している。</p>
+
+<h2>リポジトリ</h2>
+
+<p>Githubでソースコードを公開しています。</p>
+
+<ul>
+<li><a href="https://github.com/succi0303/hubot-bijin-tokei" title="succi0303/hubot-bijin-tokei · GitHub">succi0303/hubot-bijin-tokei</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/21/setup-rails-environment-with-vagrant-and-chef/">VagrantとChefでRailsの開発環境を構築する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-21T09:20:00+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>9:20 am</span></time>
+        
+         | <a href="/blog/2015/02/21/setup-rails-environment-with-vagrant-and-chef/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>手元のMacBookにRailsの開発環境を構築した。手順と調べたことを記録しておく。</p>
+
+<h2>構築する環境について</h2>
+
+<p>開発用の仮想環境を作り、ゲストOSでRailsを動作させる。仮想環境の管理には<a href="https://www.vagrantup.com" title="Vagrant">Vagrant</a>を使用する。ゲストOSの環境構築は<a href="https://www.chef.io/chef/" title="Chef | IT automation for speed and awesomeness | Chef">Chef</a>を使用して自動化する。開発時のファイルの編集は、Vagrantの共有フォルダ機能を使用してホスト側で行うものとする。</p>
+
+<p>ホスト側の環境はOSX Yosemite 10.10.2である。</p>
+
+<p>ゲストOSにはCentOSを使用する。Rubyはrbenvで管理する。システムにインストールするgemはbundlerのみとし、railsを含めその他のgemはすべてbundlerで管理する。</p>
+
+<p>環境を構築するに当たって、事前にウェブの関連情報を探してみた。ヒットする情報の量は多いが、内容がまちまちなようである。同じことをするにも複数のやり方があったり、ツールのバージョンによってやり方が異なったりするようである。今回は、できる限り現時点の最新の公式情報に則り、公式のツールを使うことを目標とする。</p>
+
+<h2>Vagrantのインストールと設定</h2>
+
+<p>VagrantとVirtualBoxをインストールする。VagrantはHomebrewで、VirtualBoxはHomebrew Caskでインストールできる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install vagrant
+</span><span class='line'>brew cask install virtualbox
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vagrantのプラグインである「<a href="https://github.com/chef/vagrant-omnibus" title="chef/vagrant-omnibus · GitHub">vagrant-omnibus</a>」をインストールする。vagrant-omnibusは、ゲストOSのChefの状態を確認し、指定したバージョンのChefをゲストOSに自動的にインストールするか、または指定したバージョンにアップデートしてくれる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant plugin install vagrant-omnibus
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>プロジェクト用のディレクトリを作る。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir project
+</span><span class='line'><span class="nb">cd </span>project
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>vagrant init</code>で、Vagrantfileを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant init
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vagrantfileを編集する。Vagrantfileの設定方法は、<a href="https://docs.vagrantup.com/v2/" title="Vagrant Documentation">Vagrantの公式ドキュメント</a>を参考にする。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># -*- mode: ruby -*-</span>
+</span><span class='line'><span class="c1"># vi: set ft=ruby :</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">VAGRANTFILE_API_VERSION</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="no">VAGRANTFILE_API_VERSION</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;chef/centos-6.5&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;forwarded_port&quot;</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">4000</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span> <span class="ss">:virtualbox</span> <span class="k">do</span> <span class="o">|</span><span class="n">vb</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">vb</span><span class="o">.</span><span class="n">customize</span> <span class="o">[</span><span class="s2">&quot;modifyvm&quot;</span><span class="p">,</span> <span class="ss">:id</span><span class="p">,</span> <span class="s2">&quot;--memory&quot;</span><span class="p">,</span> <span class="s2">&quot;2048&quot;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">omnibus</span><span class="o">.</span><span class="n">chef_version</span> <span class="o">=</span> <span class="ss">:latest</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;chef_solo&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">chef</span><span class="o">.</span><span class="n">cookbooks_path</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;chef-repo/cookbooks&quot;</span><span class="p">,</span> <span class="s2">&quot;chef-repo/site-cookbooks&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;nodejs&quot;</span>
+</span><span class='line'>    <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;rbenv::default&quot;</span>
+</span><span class='line'>    <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;rbenv::ruby_build&quot;</span>
+</span><span class='line'>    <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;sqlite&quot;</span>
+</span><span class='line'>    <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;vim&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;base&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>config.vm.box</code>について。どこからBoxを調達するのが良いかという点であるが、<a href="https://docs.vagrantup.com/v2/boxes.html" title="Boxes - Vagrant Documentation">公式ドキュメントの解説</a>では、<a href="https://atlas.hashicorp.com/boxes/search" title="Discover Vagrant Boxes | Atlas by HashiCorp">ATLASのDiscover Vagrant Boxesページ</a>が案内されている。<a href="https://atlas.hashicorp.com/help" title="Atlas by HashiCorp">ATLAS</a>は、Vagrantの開発主体である<a href="https://hashicorp.com" title="HashiCorp">HashiCorp</a>が運営するサービスであるらしい。また、<code>config.vm.box</code>に、<code>&lt;ユーザ名&gt;/&lt;Box名&gt;</code>の形式で設定を記述した場合、同名のBoxがローカルに存在しなければ、自動的にATLASのサイトを検索して、該当するBoxをダウンロードするようになっている。</p>
+
+<p>今回は、Discover Vagrant Boxesを「centos」で検索した時に最もダウンロード数が多い「<a href="https://atlas.hashicorp.com/chef/boxes/centos-6.5" title="chef/centos-6.5 | Atlas by HashiCorp">chef/centos-6.5</a>」を使うこととする。</p>
+
+<p><code>config.omnibus.chef_version</code>は、vagrant-omnibusのための設定である。<code>chef_version = :latest</code>は、最新版のChefを表す。</p>
+
+<p><code>config.vm.provision "chef_solo"</code>以下に、Chef Soloによるプロビジョニングの設定を記述する。設定方法は、<a href="https://docs.vagrantup.com/v2/provisioning/chef_solo.html" title="Chef Solo - Provisioning - Vagrant Documentation">公式のドキュメント</a>が詳しい。<code>cookbooks_path</code>に適用するクックブックの保存先ディレクトリを指定する。<code>add_recipe</code>で実行するレシピを指定する。</p>
+
+<h2>Chef関連ツールのインストール</h2>
+
+<p>Chef関連のツールをインストールする。Chefは関連するツールが様々あり、多くはgemを使ってインストールすることができる。<a href="https://learn.chef.io" title="Learn Chef">Chefの公式の案内</a>によると、これからChefの利用を始める場合には、<a href="https://downloads.chef.io/chef-dk/" title="Chef Development Kit | Chef Downloads | Chef">Chef Development Kit(ChefDK)</a>を利用することが推奨されているようである。</p>
+
+<p>ChefDKには、Chef、Berkshelf、Test Kitchen、ChefSpec、Foodcritic、Chef client、Knife、Ohai、Chef zeroが含まれている。それらのツール群と、それらのツール群が依存するRubyの処理系をパッケージにまとめたものが、Chef Development Kitであるらしい。</p>
+
+<p>ChefDKは、Homebrew-Caskでインストールすることができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew cask install chefdk
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ChefDKには、<a href="http://matschaffer.github.io/knife-solo/" title="knife-solo">knife solo</a>が含まれていない。ChefDKのインストール後に、knife-soloを個別にインストールする。<code>chef gem</code>コマンドを使うことで、ChefDKの処理系に対してknife-soloをインストールすることができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chef gem install knife-solo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>クックブックの準備</h2>
+
+<p><code>knife solo init</code>でChef関連ファイルのひな形を作る。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>knife solo init chef-repo
+</span><span class='line'><span class="nb">cd </span>chef-repo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Berksfileを編集する。Berksfileは、サードパーティのクックブックを、依存関係を解決しつつまとめて管理するツールである<a href="http://berkshelf.com" title="Berkshelf">Berkshelf</a>の設定ファイルである。Berkshelfで取得できるクックブックは、<a href="https://supermarket.chef.io" title="Welcome - The resource for Chef cookbooks - Chef Supermarket">Chef Supermarket</a>で探すことができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s2">&quot;https://supermarket.chef.io&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;nodejs&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.2.0&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;rbenv&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.7.1&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;sqlite&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.1.0&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;vim&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.1.2&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>berks vendor</code>で、必要なクックブックをcookbooksディレクトリ配下に取得する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>berks vendor cookbooks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>knife cookbook create</code>で、新しいクックブックのひな形を、site-cookbooks配下に作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>knife cookbook create base -o site-cookbooks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>新しく作成したクックブックのメタデータ(<code>site-cookbooks/base/metadata.rb</code>)とレシピファイル(<code>site-cookbooks/base/recipes/default.rb</code>)を編集する。</p>
+
+<p>メタデータには、依存するクックブックを<code>depends</code>で指定する。今回は、rbenvクックブックが提供するリソースを使用するため、<code>depends 'rbenv'</code>を指定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># metadata.rb</span>
+</span><span class='line'><span class="n">depends</span> <span class="s1">&#39;rbenv&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rbenv_ruby</span> <span class="s2">&quot;2.1.5&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">ruby_version</span> <span class="s2">&quot;2.1.5&quot;</span>
+</span><span class='line'>  <span class="n">global</span> <span class="kp">true</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">rbenv_gem</span> <span class="s2">&quot;bundler&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">ruby_version</span> <span class="s2">&quot;2.1.5&quot;</span>
+</span><span class='line'>  <span class="n">version</span> <span class="s2">&quot;1.8.2&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">service</span> <span class="s1">&#39;iptables&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">action</span> <span class="o">[</span><span class="ss">:disable</span><span class="p">,</span> <span class="ss">:stop</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Chef Supermarketのrbenvクックブックは、rbenvを自動的にインストールしてくれる。また、カスタムクックブックでruby本体とgemをインストールするための、<code>rbenv_ruby</code>リソースと、<code>rbenv_gem</code>リソースを提供してくれる。詳しい使い方は<a href="https://supermarket.chef.io/cookbooks/rbenv" title="rbenv versions">Chef Supermarketのrbenvのページ</a>で解説されている。<code>rbenv_ruby</code>を使って、Ruby 2.1.5をグローバルにインストールし、<code>rbenv_gem</code>を使って、bundlerをインストールする。</p>
+
+<p>chef/centos-6.5のBoxは、デフォルトではssh以外のほとんどの通信を遮断するように設定されている。ホストのブラウザからゲストOSのRailsにアクセスするために、ここではiptablesを無効にすることとする。</p>
+
+<h2>vagrant upからrails sの実行まで</h2>
+
+<p>事前の準備が完了したので、ここで<code>vagrant up</code>する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../
+</span><span class='line'>vagrant up
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初回の<code>vagrant up</code>時に、自動的にプロヴィジョニングが実行される。起動とプロヴィジョニングが完了したら、ゲストOSにログインし、プロヴィジョニングが正しく完了していることを確認する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant ssh
+</span><span class='line'><span class="c"># 以下はゲストOSでの操作</span>
+</span><span class='line'>sqlite3 -version
+</span><span class='line'>node -v
+</span><span class='line'>rbenv -v
+</span><span class='line'>ruby -v
+</span><span class='line'>bundler -v
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>次にRailsアプリを作成するが、その際にプロジェクトのディレクトリとして<code>/vagrant</code>を使用する。<code>/vagrant</code>は、ホスト側のVagrantfileが存在するディレクトリと自動的に共有設定されている。そのため、<code>/vagrant</code>に保存したファイルは、ホスト側から編集することが可能になる。</p>
+
+<p><code>/vagrant</code>ディレクトリに移動して、Gemfileを作る。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> /vagrant
+</span><span class='line'>bundle init
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileを編集する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;4.2.0&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle install</code>を実行する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle install --path vendor/bundle
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>rails new</code>を実行する。Gemfileを上書きするか確認されるので、Yesを選択する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>rails new .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>rails s</code>で動作確認用のサーバを起動する。Rails 4.2で、ゲストOSのRailsにホスト側から接続する場合、<code>-b 0.0.0.0</code>を指定しなければ接続することが出来ない。<a href="http://railsguides.jp/4_2_release_notes.html">Rails 4.2のリリースノート</a>によると、Rails 4.2からrails serverのデフォルトホストが<code>0.0.0.0</code>から<code>localhost</code>に変更されたことが原因であるらしい。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>rails s -b 0.0.0.0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ホスト側のブラウザで<code>http://localhost:4000</code>にアクセスする(Vagrantのポートフォワードでホストの4000をゲストの3000にフォワードしているため)。Railsのトップ画面が表示される。</p>
+
+<p>以上で開発環境の構築は完了である。以降、<code>rails g</code>、<code>rails s</code>などRailsのタスク実行、マイグレーション、Gemfileを更新した時の<code>bundle install</code>、テストの実行は、ゲストOS側で実行する。また、バージョン管理はホスト側のプロジェクトディレクトリで<code>git init</code>して、基本的にはホスト側で行う。</p>
+
+<p>ホスト側でも<code>rails s</code>できるか、試しに実行してみたが、<code>already initialized constant APP_PATH</code>というワーニングが発生して、起動することは出来なかった。ゲストOS側、ホスト側を意識せずに、どちらでもRailsのタスクが実行できたら便利なのにと思う。</p>
+
+<h2>その他の話題：vagrant provisionが失敗する</h2>
+
+<p>vagrantのプロヴィジョン機能について。</p>
+
+<p>私の環境では、初回の<code>vagrant up</code>時のプロヴィジョンは成功するが、２回目以降の<code>vagrant provision</code>、<code>vagrant reload --provision</code>は、cookbookがゲストOSに正しく転送されず、必ず<code>Cookbook (hoge) not found</code>のエラーが発生する現象が起きている。</p>
+
+<p>本来、<code>cookbooks_path</code>で指定したパスが共有フォルダに設定されなければいけないところが、初回の<code>vagrant up</code>時以外は、該当のパスが共有フォルダに指定されないためにエラーが発生しているらしい。このエラーが発生した場合、<code>.vagrant</code>ディレクトリ以下の<code>.vagrant/machines/default/virtualbox/synced_folders</code>を削除して、<code>vagrant reload --provision</code>を実行すると、正常にプロヴィジョンすることができる。</p>
+
+<p>ひとまず上記の方法で回避はできているが、根本的な原因と解決策は不明である。誰かわかる人がいたら教えてください。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/02/06/active-record-migration-at-non-rails-environment/">非Railsの環境でActiveRecordのマイグレーションを利用する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-02-06T04:53:00+00:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:53 am</span></time>
+        
+         | <a href="/blog/2015/02/06/active-record-migration-at-non-rails-environment/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>非Railsの環境でActiveRecordのマイグレーションを使う方法を調べた。</p>
+
+<p>まず、ディレクトリ構造を作成する。<code>db/migrate/</code>ディレクトリ以下にマイグレーションファイルを配置することとする。<code>config/</code>ディレクトリ以下、<code>database.yml</code>にデータベース接続の設定を記述する。<code>log/</code>ディレクトリ以下、<code>migration.log</code>にマイグレーション実行時のログを出力する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir -p db/migrate config log
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>database.yml</code>にデータベース接続の設定を記述する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># database.yml</span>
+</span><span class='line'><span class="l-Scalar-Plain">adapter</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sqlite3</span>
+</span><span class='line'><span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">db/database.sqlite3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>マイグレーションタスクを実行するための<code>Rakefile</code>を作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Rakefile</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;active_record&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;logger&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s1">&#39;db:migrate&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
+</span><span class='line'>  <span class="no">MIGRATIONS_DIR</span> <span class="o">=</span> <span class="s2">&quot;db/migrate&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Migrate the database&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:migrate</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migrator</span><span class="o">.</span><span class="n">migrate</span><span class="p">(</span><span class="no">MIGRATIONS_DIR</span><span class="p">,</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;VERSION&quot;</span><span class="o">]</span> <span class="p">?</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;VERSION&quot;</span><span class="o">]</span> <span class="p">:</span> <span class="kp">nil</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s2">&quot;Roll back the database schema to the previous version&quot;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:rollback</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migrator</span><span class="o">.</span><span class="n">rollback</span><span class="p">(</span><span class="no">MIGRATIONS_DIR</span><span class="p">,</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;STEP&quot;</span><span class="o">]</span> <span class="p">?</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;STEP&quot;</span><span class="o">]</span> <span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">establish_connection</span><span class="p">(</span><span class="no">YAML</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;config/database.yml&#39;</span><span class="p">)))</span>
+</span><span class='line'>    <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="no">Logger</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;log/migration.log&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">))</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>db/migrate/</code>ディレクトリ以下にマイグレーションファイルを作成する。マイグレーションファイルのファイル名は、<code>001_create_tests.rb</code>というようにマイグレーションの順番を表す数字で始める。また、ファイル名とマイグレーションファイル内のクラス名を合わせる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># 001_create_tests.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">CreateTests</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:tests</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">string</span> <span class="ss">:name</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span>
+</span><span class='line'>    <span class="n">drop_table</span> <span class="ss">:tests</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>rake</code>を実行すると、マイグレーションが実行される。<code>rake VERSION=x</code>でバージョンを指定したマイグレーションを実行する。また、<code>rake rollback</code>を実行すると、ロールバックが実行される。<code>rake rollback STEP=x</code>で、ステップ数を指定したロールバックを実行する。</p>
+
+<h3>参考にしたウェブサイト</h3>
+
+<p>以下のウェブサイトを参考にした。</p>
+
+<ul>
+<li><a href="http://easyramble.com/active-record-migration-for-sqlite3.html" title="ActiveRecord 単体をインストールして sqlite3 データベースのマイグレーション | EasyRamble">ActiveRecord 単体をインストールして sqlite3 データベースのマイグレーション | EasyRamble</a></li>
+<li><a href="http://blog.aizatto.com/2007/05/27/activerecord-migrations-without-rails/" title="ActiveRecord Migrations Without Rails | Strange Symphonies">ActiveRecord Migrations Without Rails | Strange Symphonies</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/10/will-pagenate-on-rails-project/">will pagenateをRailsで使用する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-10T08:53:00+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:53 am</span></time>
+        
+         | <a href="/blog/2014/05/10/will-pagenate-on-rails-project/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Railsのプロジェクトでページネーション用のライブラリ「<a href="https://github.com/mislav/will_paginate">will_paginate</a>」を使用する手順をまとめました。</p>
+
+<h2>will_paginateの使用手順</h2>
+
+<ul>
+<li>Gemfileを編集する</li>
+<li>paginate用のデータを準備する</li>
+<li>ヘルパーメソッドを記述する</li>
+</ul>
+
+
+<h2>1. Gemfileを編集する</h2>
+
+<p>Gemfileに<code>gem 'will_paginate'</code>を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Gemfile</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;will_paginate&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileを編集後、<code>bundle install</code>を実行します。</p>
+
+<h2>2. paginate用のデータを準備する</h2>
+
+<p>コントローラの中でページネーション用のデータを準備します。ページネーション用のデータは<code>paginate</code>メソッドを使って作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">Model</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ページごとの件数を指定する</h3>
+
+<p>ページごとの件数を指定する場合は、<code>paginate</code>メソッドに<code>:per_page</code>オプションを渡します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vi">@models</span> <span class="o">=</span> <span class="no">Model</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. ヘルパーメソッドを記述する</h2>
+
+<p>ビューの中のページネーションを表示したい場所に<code>will_paginate</code>ヘルパーを記述します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">will_paginate</span> <span class="vi">@models</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>will_paginate</code>を記述した位置にページネーションが表示されます。</p>
+
+<h2>Bootstrapのスタイルを適用する</h2>
+
+<p>will_paginateのページネーションに<a href="http://getbootstrap.com/">Bootstrap</a>のスタイルを適用したい場合、「<a href="https://github.com/bootstrap-ruby/will_paginate-bootstrap">will_paginate-bootstrap</a>」を使用すると簡単に実装できます。</p>
+
+<h2>will_paginate-bootstrapの使用手順</h2>
+
+<p>Gemfileに<code>gem 'will_paginate-bootstrap'</code>を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Gemfile</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;will_paginate-bootstrap&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>will_paginate</code>のrendererオプションに<code>BootstrapPagination::Rails</code>を渡します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='Ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= will_paginate @models, :renderer =</span><span class="o">&gt;</span> <span class="no">BootstrapPagination</span><span class="o">::</span><span class="no">Rails</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ページネーションにBootstrapのスタイルが適用されます。</p>
+
+<h2>参考URL</h2>
+
+<ul>
+<li><a href="https://github.com/mislav/will_paginate">mislav/will_paginate - Github</a></li>
+<li><a href="https://github.com/bootstrap-ruby/will_paginate-bootstrap">bootstrap-ruby/will_paginate-bootstrap - GitHub</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/09/chartkick-on-rails-project/">グラフ描画ライブラリChartkickをRailsで使用する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-09T09:46:00+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:46 am</span></time>
+        
+         | <a href="/blog/2014/05/09/chartkick-on-rails-project/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Railsプロジェクトでグラフ描画用のライブラリ「<a href="http://chartkick.com/">Chartkick</a>」を使用する手順をまとめました。</p>
+
+<h2>Railsでグラフを描画する</h2>
+
+<p>Railsでグラフを描画する場合、「lazy_high_chart」「Chartkick」「Gruff」などのライブラリを利用することができます。</p>
+
+<ul>
+<li><a href="http://easyramble.com/graph-libraries-for-rails.html">Ruby on Rails で使えるグラフ・チャート用ライブラリまとめ | EasyRamble</a></li>
+</ul>
+
+
+<p>今回は、比較的簡単そうな「Chartkick」を使用してみました。</p>
+
+<ul>
+<li><a href="http://chartkick.com/">Chartkick</a></li>
+</ul>
+
+
+<h2>Chartkickの使用手順</h2>
+
+<ul>
+<li>Gemfileを編集する</li>
+<li>JavaScriptのライブラリを読み込む</li>
+<li>グラフ描画用のデータを準備する</li>
+<li>ヘルパーメソッドでグラフを描画する</li>
+</ul>
+
+
+<h2>1. Gemfileを編集する</h2>
+
+<p>Gemfileに<code>gem 'chartkick'</code>を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Gemfile</span>
+</span><span class='line'><span class="n">gem</span> <span class="s2">&quot;chartkick&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. JavaScriptのライブラリを読み込む</h2>
+
+<p>Chartkickを使用するためには、Chartkickのヘルパーメソッドを使用するより前にJavaScriptのライブラリを読み込む必要があります。ライブラリとして「Google Charts」を利用する場合、Google APIからファイルを読み込みます。</p>
+
+<p>ここでは<code>layouts/application.html.erb</code>のheadタグに<code>javascript_include_tag</code>を記述します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># layouts/application.html.erbのheadタグ内</span>
+</span><span class='line'><span class="o">&lt;%=</span> <span class="n">javascript_include_tag</span> <span class="s2">&quot;//www.google.com/jsapi&quot;</span><span class="p">,</span> <span class="s2">&quot;chartkick&quot;</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>「Google Charts」の代わりに「<a href="http://www.highcharts.com/">High Charts</a>」を使用することもできるようです。</p>
+
+<h2>3. グラフ描画用のデータを準備する</h2>
+
+<p>グラフ描画用のデータは、配列かハッシュのいずれかの形式で準備します。</p>
+
+<p>たとえば、コントローラの中で以下のような形でデータを作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># charts_controller</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>  <span class="c1"># 配列の場合</span>
+</span><span class='line'>  <span class="vi">@chart_data</span> <span class="o">=</span> <span class="o">[[</span><span class="s1">&#39;2014-04-01&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;2014-04-02&#39;</span><span class="p">,</span> <span class="mi">65</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;2014-04-03&#39;</span><span class="p">,</span> <span class="mi">64</span><span class="o">]]</span>
+</span><span class='line'>  <span class="c1"># ハッシュの場合</span>
+</span><span class='line'>  <span class="vi">@chart_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;2014-04-01&#39;</span> <span class="o">=&gt;</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;2014-04-02&#39;</span> <span class="o">=&gt;</span> <span class="mi">65</span><span class="p">,</span> <span class="s1">&#39;2014-04-03&#39;</span> <span class="o">=&gt;</span> <span class="mi">64</span><span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配列の1つめ(またはハッシュのkey)が横軸の値、配列の2つめ(またはハッシューのvalue)が縦軸の値になります。</p>
+
+<p>一般的にはモデルからデータを作成するはずですから、おおよそ以下のような形式になることが多いと思われます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># charts_controller</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>  <span class="c1"># 日ごとの件数</span>
+</span><span class='line'>  <span class="vi">@chart_data</span> <span class="o">=</span> <span class="no">Model</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s1">&#39;date ASC&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="ss">:date</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>  <span class="c1"># 日ごとの合計値</span>
+</span><span class='line'>  <span class="vi">@chart_data</span> <span class="o">=</span> <span class="no">Model</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s1">&#39;date ASC&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="ss">:date</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="ss">:value</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. ヘルパーメソッドでグラフを描画する</h2>
+
+<p>ビューの中のグラフを表示したい場所にヘルパーメソッドを記述します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">line_chart</span> <span class="vi">@chart_data</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>準備したデータを渡すだけでグラフを描画することができます。上記の<code>line_chart</code>の他にグラフの種類ごとにヘルパーメソッドが準備されています。</p>
+
+<ul>
+<li>line_chart</li>
+<li>pie_chart</li>
+<li>column_chart</li>
+<li>bar_chart</li>
+<li>area_chart</li>
+<li>geo_chart</li>
+</ul>
+
+
+<p>詳細は<a href="http://chartkick.com/">公式ページ</a>を参照してください。</p>
+
+<h2>ヘルパーメソッドのオプション</h2>
+
+<p>ヘルパーメソッドにオプションを指定することで、見た目をカスタマイズすることができます。</p>
+
+<h3>グラフの高さを指定する</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">line_chart</span> <span class="vi">@chart_data</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="s2">&quot;500px&quot;</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>グラフの最小値、最大値を指定する</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">line_chart</span> <span class="vi">@chart_data</span><span class="p">,</span> <span class="ss">min</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">max</span><span class="p">:</span> <span class="mi">100</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>グラフの色を指定する</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">line_chart</span> <span class="vi">@chart_data</span><span class="p">,</span> <span class="ss">colors</span><span class="p">:</span> <span class="o">[</span><span class="s2">&quot;pink&quot;</span><span class="p">,</span> <span class="s2">&quot;#999&quot;</span><span class="o">]</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>複数のグラフを重ねて表示する方法</h2>
+
+<p>複数のグラフを重ねて表示する場合は、ひとつひとつのグラフを表すハッシュを配列にしてヘルパーメソッドに渡します。グラフを表すハッシュは、<code>name</code>と<code>data</code>で構成します。<code>name</code>にはグラフを表す名前、<code>data</code>にはグラフ描画用のデータを指定します。<code>name</code>に指定した名前は、グラフの凡例に反映されます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">line_chart</span> <span class="o">[</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;グラフA&quot;</span><span class="p">,</span> <span class="ss">data</span><span class="p">:</span> <span class="vi">@data_a</span> <span class="p">},</span>
+</span><span class='line'>  <span class="p">{</span> <span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;グラフB&quot;</span><span class="p">,</span> <span class="ss">data</span><span class="p">:</span> <span class="vi">@data_b</span> <span class="p">}</span>
+</span><span class='line'><span class="o">]</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上です。</p>
+
+<h2>参考URL</h2>
+
+<ul>
+<li><a href="http://chartkick.com/">Chartkick</a></li>
+<li><a href="http://rubydoc.info/gems/chartkick/1.2.4/frames">Documentation for chartkick (1.2.4)</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/07/jquery-ui-datepicker-on-rails4/">jQuery UIのdatepickerをRails4で使用する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-07T09:48:00+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:48 am</span></time>
+        
+         | <a href="/blog/2014/05/07/jquery-ui-datepicker-on-rails4/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ruby on Rails 4のプロジェクトでjQuery UIのdatepickerを利用する手順をまとめました。</p>
+
+<h2>手順</h2>
+
+<p>手順の全体は以下のとおりです。</p>
+
+<ul>
+<li>Gemfileを編集する</li>
+<li>application.jsを編集する</li>
+<li>application.cssを編集する</li>
+<li>ビューを編集する</li>
+<li>JavaScriptを編集する</li>
+</ul>
+
+
+<h2>1. Gemfileを編集する</h2>
+
+<p>「<a href="https://github.com/joliss/jquery-ui-rails">jquery-ui-rails</a>」を使用します。Gemfileにjquery-ui-railsを追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Gemfile</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;jquery-ui-rails&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileを編集したのち、<code>bundle install</code>を実行します。</p>
+
+<h2>2. application.jsを編集する</h2>
+
+<p><code>app/assets/javascripts/application.js</code>を編集します。<code>require jquery.ui.core</code>と<code>require jquery.ui.datepicker</code>を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//= require jquery</span>
+</span><span class='line'><span class="c1">//= require jquery.ui.core // 追加</span>
+</span><span class='line'><span class="c1">//= require jquery.ui.datepicker // 追加</span>
+</span><span class='line'><span class="c1">//= require jquery_ujs</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. application.cssを編集する</h2>
+
+<p><code>app/assets/stylesheets/application.css</code>を編集します。<code>require jquery.ui.datepicker</code>を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="c">/*</span>
+</span><span class='line'><span class="c"> *= require_tree .</span>
+</span><span class='line'><span class="c"> *= require jquery.ui.datepicker // 追加</span>
+</span><span class='line'><span class="c"> *= require_self</span>
+</span><span class='line'><span class="c"> */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. ビューを編集する</h2>
+
+<p>datepickerを適用する入力項目を参照可能にするためにビューを編集します。以下は<a href="https://github.com/plataformatec/simple_form">simple_form</a>を利用したフォームにdatepickerクラスを設定する例です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= simple_form_for(@model) do |f| %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>%= f.input :date, as: :string, label: &#39;年月日(yyyy-mm-dd)&#39;,
+</span><span class='line'>    input_html: { class: &#39;datepicker&#39; } %&gt;
+</span><span class='line'>  <span class="err">&lt;</span>%= f.button :submit %&gt;
+</span><span class='line'><span class="err">&lt;</span>% end %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>5. JavaScriptを編集する</h2>
+
+<p><code>assets/javascripts</code>配下のJavaScriptファイルでdatepickerを実装します。以下はCoffeeScriptで設定する例です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nx">$</span> <span class="nf">-&gt;</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s">&quot;.datepicker&quot;</span><span class="p">).</span><span class="nx">datepicker</span><span class="p">(</span>
+</span><span class='line'>    <span class="nv">dateFormat: </span><span class="s">&#39;yy-mm-dd&#39;</span>
+</span><span class='line'>  <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上で設定は完了ですが、Rails4の場合はTurbolinksの関連で正常に動作しないようです。具体的には、初回読み込み時にはdatepickerが有効にならず、画面を再読み込みしたときに初めてdatepickerが有効になる、という状態になります。</p>
+
+<h2>Turbolinks対応</h2>
+
+<p>datepickerを正常に使用するためには、なんらかの形でTurbolinksに対応する必要があります。今回は、あまり望ましい対応ではないと思いますが、datepickerを利用するページでTurbolinksを無効にするという対応をとることにします。(他の方法を調べてみたけど正直よくわからなかった。。。)</p>
+
+<p>特定のページでTurbolinksを無効にするには、<code>link_to</code>で<code>no_turbolink: true</code>を設定します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="err">&lt;</span>%= link_to &#39;link text&#39;, &#39;#&#39;, data: { no_turbolink: true } %&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>リンク先のページを表示する際にアセットの再読み込みが発生し、datepickerが有効になります。</p>
+
+<p>以上でdatepickerが利用可能になります。Turbolinks対応は、きっともっと良い方法があるはずと思われます。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/02/bootstrap-3-with-rails-layout/">rails layoutでBootstrap3を使用する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-02T01:18:00+00:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>1:18 am</span></time>
+        
+         | <a href="/blog/2014/05/02/bootstrap-3-with-rails-layout/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>rails_layoutを使用してRailsプロジェクトのレイアウトにBootstrap3を適用する手順をまとめました。</p>
+
+<ul>
+<li><a href="https://github.com/RailsApps/rails_layout">RailsApps/rails_layout</a></li>
+<li><a href="http://getbootstrap.com">Bootstrap</a></li>
+</ul>
+
+
+<h2>手順</h2>
+
+<ul>
+<li>gemのインストール</li>
+<li>セットアップコマンドの実行</li>
+<li>適用結果の確認</li>
+</ul>
+
+
+<h2>1. gemのインストール</h2>
+
+<p>Gemfileに必要なgemを記述します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rails_layout&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>bundle install</code>を実行します。</p>
+
+<h2>2. セットアップコマンドの実行</h2>
+
+<p><code>rails generate</code>コマンドで、基本レイアウトをセットアップします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate layout:install bootstrap3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>実行時にファイルの上書き確認が発生する場合があります。問題なければYesで先に進めます。</p>
+
+<h2>3. 適用結果の確認</h2>
+
+<p>セットアップコマンドの適用結果を確認します。</p>
+
+<h3>作成・更新されるファイル</h3>
+
+<ul>
+<li><code>app/assets/stylesheets/application.css.scss</code></li>
+<li><code>app/assets/stylesheets/framework_and_overrides.css.scss</code></li>
+<li><code>app/assets/javascripts/application.js</code></li>
+<li><code>app/views/layouts/application.html.erb</code></li>
+<li><code>app/view/layouts/_messages.html.erb</code></li>
+<li><code>app/view/layouts/_navigation.html.erb</code></li>
+<li><code>app/view/layouts/_navigation_links.html.erb</code></li>
+</ul>
+
+
+<h3>application.css.scss</h3>
+
+<p>cssをscssに変更しているだけで、実質的な内容に変化はありません。</p>
+
+<h3>framework_and_overrides.css.scss</h3>
+
+<p>Bootstrap関連のCSSをインポートしています。また、その他の各種調整がなされています。</p>
+
+<p>気に入らない部分があれば修正します。その場合、<code>framework_and_overrides.css.scss</code>を直接変更しても良いと思います。ただ、個人的には別途<code>custom.css.scss</code>というファイルを作ってそちらを編集するようにしています。</p>
+
+<h3>app/assets/javascripts/application.js</h3>
+
+<p>Bootstrap関連のJavaScriptのrequireが追加されます。</p>
+
+<h3>app/views/layousの各種ファイル</h3>
+
+<ul>
+<li><code>app/views/layouts/application.html.erb</code></li>
+<li><code>app/view/layouts/_messages.html.erb</code></li>
+<li><code>app/view/layouts/_navigation.html.erb</code></li>
+<li><code>app/view/layouts/_navigation_links.html.erb</code></li>
+</ul>
+
+
+<p><code>application.html.erb</code>がBootstrapを適用した形式に更新されます。ナビゲーションバー用に<code>_navigation.html.erb</code>と<code>_navigation_links.html.erb</code>が作成されます。また、フラッシュメッセージ用に<code>_messages.html.erb</code>が作成されます。</p>
+
+<p>以上です。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/24/setup-guard-and-spork-for-rails/">Rails開発時のguardとsporkの設定</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-24T06:54:00+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:54 am</span></time>
+        
+         | <a href="/blog/2014/01/24/setup-guard-and-spork-for-rails/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://rubyonrails.org/">Ruby on Rails</a>開発向けです。<a href="http://cukes.info/">Cucumber</a>と<a href="http://rspec.info/">RSpec</a>でBDD環境を作る手順をまとめました。テストの自動実行と高速化のために<a href="https://github.com/guard/guard">guard</a>と<a href="https://github.com/sporkrb/spork">spork</a>を使用します。</p>
+
+<h2>プロジェクトの作成</h2>
+
+<p><code>rails new</code>でプロジェクトを作成します。その際、<code>--skip-test-unit</code>を付加してTest::Unit関連のファイルが作成されないようにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails new sample_app --skip-test-unit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Gemのインストール</h2>
+
+<p><code>Gemfile</code>を編集して下記のGemを追加します。<code>selenium-webdriver</code>、<code>capybara</code>、<code>factory_girl</code>は必要に応じて。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rspec-rails&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;guard-rspec&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;guard-cucumber&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;guard-spork&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;spork-rails&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;childprocess&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="ss">:test</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;cucumber-rails&#39;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;database_cleaner&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;selenium-webdriver&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;factory_girl&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;factory_girl_rails&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># with &#39;osx&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;growl&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileを編集したら<code>bundle install</code>を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>初期設定</h2>
+
+<p>RSpec、Cucumber、guard、sporkそれぞれの初期設定を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate rspec:install
+</span><span class='line'><span class="nv">$ </span>rails generate cucumber:install
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard init rspec
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard init cucumber
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard init spork
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>spork rspec --bootstrap
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>spork cucumber --bootstrap
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Guradfileの編集</h2>
+
+<p><code>Guardfile</code>を開き、以下のように編集します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># 編集前</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;rspec&#39;</span> <span class="k">do</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;cucumber&#39;</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 編集後</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;rsepc&#39;</span><span class="p">,</span> <span class="ss">after_all_pass</span><span class="p">:</span> <span class="kp">false</span><span class="p">,</span> <span class="ss">cli</span><span class="p">:</span> <span class="s1">&#39;--drb&#39;</span> <span class="k">do</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;cucumber&#39;</span><span class="p">,</span> <span class="ss">after_all_pass</span><span class="p">:</span> <span class="kp">false</span> <span class="k">do</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>--drb</code>はsporkを実行するためのオプションです。本当はCucumberもsporkで実行したいところですが、Cucumber 1.3からsporkはサポートされないようになったようです。</p>
+
+<h2>spec_helperの編集</h2>
+
+<p><code>spec/spec_helper</code>を開き、<code>ENV["RAILS_ENV"] ||= 'test'</code>以下をすべて<code>Spork.prefork</code>ブロック内に移動します。</p>
+
+<p>以上で設定は完了です。</p>
+
+<h2>実行方法</h2>
+
+<p>Railsのルートディレクトリで<code>guard</code>を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定が読み込まれ、RSpecとCucumberが実行されます。</p>
+
+<p>以降、関連するファイルを更新するたびにRSpecとCucumberが自動的に実行されます。端末がOSXでGrowlをインストールしていれば、あわせてGrowlでテスト結果が通知されます。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/08/web-site-for-learning-web-scraping-by-ruby/">Rubyによるスクレイピングが学べるウェブサイト</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-08T09:39:00+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:39 am</span></time>
+        
+         | <a href="/blog/2014/01/08/web-site-for-learning-web-scraping-by-ruby/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rubyを使ったウェブのスパイダリング、スクレイピングを学べる情報源がないか探していたところ<a href="http://ruby.bastardsbook.com/chapters/mechanize">こちらのサイト</a>を見つけました。</p>
+
+<ul>
+<li><a href="http://ruby.bastardsbook.com/">The Bastards Book of Ruby</a></li>
+</ul>
+
+
+<p>トップページから「Contents」「Supplements」と順に追っていくと、ウェブ・スクレイピングの基礎をテーマにした以下の記事が見つかります。</p>
+
+<ul>
+<li><a href="http://ruby.bastardsbook.com/chapters/web-scraping">An Intro to Web Scraping</a></li>
+<li><a href="http://ruby.bastardsbook.com/chapters/web-inspecting-html">Meet Your Web Inspector</a></li>
+<li><a href="http://ruby.bastardsbook.com/chapters/web-inspecting-traffic">Inspecting a Webpage&rsquo;s Traffic</a></li>
+<li><a href="http://ruby.bastardsbook.com/chapters/html-parsing">Parsing HTML with Nokogiri</a></li>
+<li><a href="http://ruby.bastardsbook.com/chapters/web-crawling">Writing a Web Crawler</a></li>
+<li><a href="http://ruby.bastardsbook.com/chapters/mechanize">The Mechanize Gem</a></li>
+</ul>
+
+
+<p>スクレイピングの基本的な考え方から始まって、ブラウザ付属のインスペクタの使い方、「<a href="http://nokogiri.org/%22>Nokogiri&lt;/a>%E3%80%8D%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9FHTML%E3%81%AE%E3%83%91%E3%83%BC%E3%82%B9%E3%80%81%E5%AE%9F%E9%9A%9B%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E5%AF%BE%E8%B1%A1%E3%81%AB%E3%81%97%E3%81%9F%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%81%AE%E4%BD%9C%E6%88%90%E3%80%81%E3%80%8C&lt;a%20href=%22http://mechanize.rubyforge.org/Mechanize.html">Mechanize</a>」の紹介と、ひととおりの情報がまとまっています。</p>
+
+<p>実用的なスクリプトを書くにはまだ少しハードルがありそうですが、基本的な考え方はこちらの記事で理解できたと思います。復習を兼ねてサンプルスクリプトを少しいじってみました。</p>
+
+<h2>1. Wikipedia 検索ボックスのサジェスト情報を取得する</h2>
+
+<p>「<a href="http://ruby.bastardsbook.com/chapters/web-inspecting-traffic">Inspecting a Webpage&rsquo;s Traffic</a>」のサンプルを元に、Wikipediaの検索ボックスからサジェスト情報を取得してみます。元のサンプルでは英語版のWikipediaを対象にアルファベット毎のサジェスト情報を取得しています。少し手を加えて日本語版のWikipediaから五十音毎のサジェスト情報を取得してみます。</p>
+
+<p>できあがったのものはこちら。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;restclient&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;crack&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;cgi&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">WURL</span><span class="o">=</span> <span class="s1">&#39;http://ja.wikipedia.org/w/api.php?action=opensearch&amp;format=json&amp;namespace=0&amp;suggest=&amp;search=&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">hiragana</span> <span class="o">=</span> <span class="s1">&#39;あいうえおかきくけこたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">hiragana</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">letter</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">resp</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">WURL</span><span class="si">}#{</span><span class="no">CGI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s1">&#39;User-Agent&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ruby&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">array</span> <span class="o">=</span> <span class="no">Crack</span><span class="o">::</span><span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">array</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最初にrequireしている「<a href="https://github.com/jnunemaker/crack">crack</a>」は、調べてみるとJSON/XML用のシンプルなパーサでした。</p>
+
+<p>リクエストの送信に「<a href="https://github.com/rest-client/rest-client%22>rest-client&lt;/a>%E3%80%8D%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%81%8C%E3%80%81%E5%8D%98%E7%B4%94%E3%81%AAGET%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AA%E3%81%AE%E3%81%A7%E3%81%8A%E3%81%9D%E3%82%89%E3%81%8F%E3%80%8C&lt;a%20href=%22http://docs.ruby-lang.org/ja/2.0.0/library/open=2duri.html">open-uri</a>」でopenするのでも問題はないと思われます。</p>
+
+<p>ひらがなはそのままでは送信することができないので、CGI.escapeでURIエンコードしています。もしかすると、<a href="http://docs.ruby-lang.org/ja/2.0.0/class/URI.html">URI.encode</a>を使う方が正しいのかも。使い分けがあまり理解できていません。</p>
+
+<p>実行すると、Wikipediaの検索ボックスにひらがな一文字を入力したときサジェストされる単語の一覧が取得できます。</p>
+
+<p>結果はこちら。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">あ</span><span class="p">,</span> <span class="err">あ</span><span class="p">,</span> <span class="err">あいテレビ</span><span class="p">,</span> <span class="err">あしたのジョー</span><span class="p">,</span> <span class="err">あっ</span><span class="o">!</span><span class="err">とおどろく放送局</span><span class="p">,</span> <span class="err">あらびき団</span><span class="p">,</span> <span class="err">あぶない刑事</span><span class="p">,</span> <span class="err">あたしンち</span><span class="p">,</span> <span class="err">ああっ女神さまっ</span><span class="p">,</span> <span class="err">あきる野市</span><span class="p">,</span> <span class="err">あまちゃん</span>
+</span><span class='line'><span class="err">い</span><span class="p">,</span> <span class="err">い</span><span class="p">,</span> <span class="err">いわき市</span><span class="p">,</span> <span class="err">いすゞ自動車</span><span class="p">,</span> <span class="err">いじめ</span><span class="p">,</span> <span class="err">いとこ</span><span class="p">,</span> <span class="err">いのちのことば社</span><span class="p">,</span> <span class="err">いきものがかり</span><span class="p">,</span> <span class="err">いしだあゆみ</span><span class="p">,</span> <span class="err">いきなり</span><span class="o">!</span><span class="err">黄金伝説。</span><span class="p">,</span> <span class="err">いて座</span>
+</span><span class='line'><span class="err">う</span><span class="p">,</span> <span class="err">う</span><span class="p">,</span> <span class="err">うつ病</span><span class="p">,</span> <span class="err">うどん</span><span class="p">,</span> <span class="err">うたばん</span><span class="p">,</span> <span class="err">うえだゆうじ</span><span class="p">,</span> <span class="err">うるま市</span><span class="p">,</span> <span class="err">うる星やつら</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">う蝕</span><span class="p">,</span> <span class="err">うた・ホーダイ</span><span class="p">,</span> <span class="err">うる星やつら</span>
+</span><span class='line'><span class="err">え</span><span class="p">,</span> <span class="err">え</span><span class="p">,</span> <span class="err">えびの市</span><span class="p">,</span> <span class="err">えら</span><span class="p">,</span> <span class="err">えちぜん鉄道</span><span class="p">,</span> <span class="err">えびす</span><span class="p">,</span> <span class="err">えなりかずき</span><span class="p">,</span> <span class="err">えびす</span> <span class="p">(</span><span class="err">曖昧さ回避</span><span class="p">),</span> <span class="err">えんじ色</span><span class="p">,</span> <span class="err">えちぜん鉄道三国芦原線</span><span class="p">,</span> <span class="err">えちぜん鉄道勝山永平寺線</span>
+</span><span class='line'><span class="err">お</span><span class="p">,</span> <span class="err">お笑いタレント</span><span class="p">,</span> <span class="err">おたく</span><span class="p">,</span> <span class="err">お</span><span class="p">,</span> <span class="err">お笑いコンビ</span><span class="p">,</span> <span class="err">おサイフケータイ</span><span class="p">,</span> <span class="err">お茶の水女子大学</span><span class="p">,</span> <span class="err">お台場</span><span class="p">,</span> <span class="err">おはスタ</span><span class="p">,</span> <span class="err">おかあさんといっしょ</span><span class="p">,</span> <span class="err">おニャン子クラブ</span>
+</span><span class='line'><span class="err">か</span><span class="p">,</span> <span class="err">か</span><span class="p">,</span> <span class="err">がん保険</span><span class="p">,</span> <span class="err">かないみか</span><span class="p">,</span> <span class="err">かつら</span> <span class="p">(</span><span class="err">装身具</span><span class="p">),</span> <span class="err">かまやつひろし</span><span class="p">,</span> <span class="err">から揚げ</span><span class="p">,</span> <span class="err">かご形三相誘導電動機</span><span class="p">,</span> <span class="err">がん診療連携拠点病院</span><span class="p">,</span> <span class="err">かんぽ生命保険</span><span class="p">,</span> <span class="err">かいけつゾロリ</span>
+</span><span class='line'><span class="err">き</span><span class="p">,</span> <span class="err">き</span><span class="p">,</span> <span class="err">ぎょうせい</span><span class="p">,</span> <span class="err">きらりん☆レボリューション</span><span class="p">,</span> <span class="err">きかんしゃトーマス</span><span class="p">,</span> <span class="err">きたろう</span><span class="p">,</span> <span class="err">きまぐれオレンジ☆ロード</span><span class="p">,</span> <span class="err">きゃりーぱみゅぱみゅ</span><span class="p">,</span> <span class="err">きさらぎ賞</span><span class="p">,</span> <span class="err">きょうの料理</span><span class="p">,</span> <span class="err">ぎゃろっぷ</span>
+</span><span class='line'><span class="err">く</span><span class="p">,</span> <span class="err">く</span><span class="p">,</span> <span class="err">ぐるぐるナインティナイン</span><span class="p">,</span> <span class="err">くりぃむしちゅー</span><span class="p">,</span> <span class="err">くるり</span><span class="p">,</span> <span class="err">くちばし</span><span class="p">,</span> <span class="err">くるみ割り人形</span><span class="p">,</span> <span class="err">くまいもとこ</span><span class="p">,</span> <span class="err">くノ一</span><span class="p">,</span> <span class="err">くじ</span><span class="p">,</span> <span class="err">くりぃむナントカ</span>
+</span><span class='line'><span class="err">け</span><span class="p">,</span> <span class="err">け</span><span class="p">,</span> <span class="err">けいおん</span><span class="o">!</span><span class="p">,</span> <span class="err">げんしけん</span><span class="p">,</span> <span class="err">けものみち</span><span class="p">,</span> <span class="err">けんぷファー</span><span class="p">,</span> <span class="err">けん玉</span><span class="p">,</span> <span class="err">けいおん</span><span class="o">!</span><span class="err">の登場人物</span><span class="p">,</span> <span class="err">けっこう仮面</span><span class="p">,</span> <span class="err">けん銃</span><span class="p">,</span> <span class="err">けろっこデメタン</span>
+</span><span class='line'><span class="err">こ</span><span class="p">,</span> <span class="err">こ</span><span class="p">,</span> <span class="err">こちら葛飾区亀有公園前派出所</span><span class="p">,</span> <span class="err">こちら葛飾区亀有公園前派出所</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">こおろぎさとみ</span><span class="p">,</span> <span class="err">ごくせん</span> <span class="p">(</span><span class="err">テレビドラマ</span><span class="p">),</span> <span class="err">ことわざ</span><span class="p">,</span> <span class="err">ごみ</span><span class="p">,</span> <span class="err">こだまさおり</span><span class="p">,</span> <span class="err">ご当地グルメ</span><span class="p">,</span> <span class="err">こけら落し</span>
+</span><span class='line'><span class="err">た</span><span class="p">,</span> <span class="err">た</span><span class="p">,</span> <span class="err">ため池</span><span class="p">,</span> <span class="err">たつの市</span><span class="p">,</span> <span class="err">たむらけんじ</span><span class="p">,</span> <span class="err">たんぱく質</span><span class="p">,</span> <span class="err">たこ焼き</span><span class="p">,</span> <span class="err">たかはし智秋</span><span class="p">,</span> <span class="err">たかじんのそこまで言って委員会</span><span class="p">,</span> <span class="err">たまごっち</span><span class="o">!</span><span class="p">,</span> <span class="err">たまごっち</span>
+</span><span class='line'><span class="err">ち</span><span class="p">,</span> <span class="err">ちびまる子ちゃん</span><span class="p">,</span> <span class="err">ち</span><span class="p">,</span> <span class="err">ちくま学芸文庫</span><span class="p">,</span> <span class="err">ちくま文庫</span><span class="p">,</span> <span class="err">ちちんぷいぷい</span> <span class="p">(</span><span class="err">テレビ番組</span><span class="p">),</span> <span class="err">ちゃお</span><span class="p">,</span> <span class="err">ちあきなおみ</span><span class="p">,</span> <span class="err">ちくま新書</span><span class="p">,</span> <span class="err">ちはやふる</span><span class="p">,</span> <span class="err">ちばてつや</span>
+</span><span class='line'><span class="err">つ</span><span class="p">,</span> <span class="err">つんく♂</span><span class="p">,</span> <span class="err">つ</span><span class="p">,</span> <span class="err">つくば市</span><span class="p">,</span> <span class="err">つなぎ番組</span><span class="p">,</span> <span class="err">つるの剛士</span><span class="p">,</span> <span class="err">つる植物</span><span class="p">,</span> <span class="err">つくばみらい市</span><span class="p">,</span> <span class="err">つぼみ</span> <span class="p">(</span><span class="no">AV</span><span class="err">女優</span><span class="p">),</span> <span class="err">つがる市</span><span class="p">,</span> <span class="err">つり革</span>
+</span><span class='line'><span class="err">て</span><span class="p">,</span> <span class="err">て</span><span class="p">,</span> <span class="err">てらそままさき</span><span class="p">,</span> <span class="err">てんかん</span><span class="p">,</span> <span class="err">てれびくん</span><span class="p">,</span> <span class="err">でんでん</span><span class="p">,</span> <span class="err">てんとう虫コミックス</span><span class="p">,</span> <span class="err">てんびん座</span><span class="p">,</span> <span class="err">できちゃった結婚</span><span class="p">,</span> <span class="err">てこ</span><span class="p">,</span> <span class="err">てるてる家族</span>
+</span><span class='line'><span class="err">と</span><span class="p">,</span> <span class="err">と</span><span class="p">,</span> <span class="err">とんねるず</span><span class="p">,</span> <span class="err">とんねるずのみなさんのおかげでした</span><span class="p">,</span> <span class="err">とちぎテレビ</span><span class="p">,</span> <span class="err">とっとこハム太郎</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">とある科学の超電磁砲</span><span class="p">,</span> <span class="err">ときめきメモリアル</span><span class="p">,</span> <span class="err">ど根性ガエル</span><span class="p">,</span> <span class="err">となりのトトロ</span><span class="p">,</span> <span class="err">ともさかりえ</span>
+</span><span class='line'><span class="err">な</span><span class="p">,</span> <span class="err">なかよし</span><span class="p">,</span> <span class="err">な</span><span class="p">,</span> <span class="err">なかにし礼</span><span class="p">,</span> <span class="err">なんばグランド花月</span><span class="p">,</span> <span class="err">なるほど</span><span class="o">!</span><span class="err">ザ・ワールド</span><span class="p">,</span> <span class="err">なぎら健壱</span><span class="p">,</span> <span class="err">なべおさみ</span><span class="p">,</span> <span class="err">なだぎ武</span><span class="p">,</span> <span class="err">なかやまきんに君</span><span class="p">,</span> <span class="err">なるトモ</span><span class="o">!</span>
+</span><span class='line'><span class="err">に</span><span class="p">,</span> <span class="err">に</span><span class="p">,</span> <span class="err">にっかつ</span><span class="p">,</span> <span class="err">にっぽん</span><span class="o">!</span><span class="err">いい旅</span><span class="p">,</span> <span class="err">にかほ市</span><span class="p">,</span> <span class="err">にっぽんの歌</span><span class="p">,</span> <span class="err">にしおかすみこ</span><span class="p">,</span> <span class="err">におい</span><span class="p">,</span> <span class="err">にちりん</span> <span class="p">(</span><span class="err">列車</span><span class="p">),</span> <span class="err">にじいろジーン</span><span class="p">,</span> <span class="err">にんじん</span>
+</span><span class='line'><span class="err">ぬ</span><span class="p">,</span> <span class="err">ぬ</span><span class="p">,</span> <span class="err">ぬいぐるみ</span><span class="p">,</span> <span class="err">ぬらりひょんの孫</span><span class="p">,</span> <span class="err">ぬらりひょん</span><span class="p">,</span> <span class="err">ぬかるみの女</span><span class="p">,</span> <span class="err">ぬっぺふほふ</span><span class="p">,</span> <span class="err">ぬれせんべい</span><span class="p">,</span> <span class="err">ぬりかべ</span> <span class="p">(</span><span class="err">ゲゲゲの鬼太郎</span><span class="p">),</span> <span class="err">ぬた</span><span class="p">,</span> <span class="err">ぬらりひょん</span> <span class="p">(</span><span class="err">ゲゲゲの鬼太郎</span><span class="p">)</span>
+</span><span class='line'><span class="err">ね</span><span class="p">,</span> <span class="err">ね</span><span class="p">,</span> <span class="err">ねじ</span><span class="p">,</span> <span class="err">ねぎぼうずのあさたろう</span><span class="p">,</span> <span class="err">ねるとん紅鯨団</span><span class="p">,</span> <span class="err">ねんどろいど</span><span class="p">,</span> <span class="err">ねぎ</span><span class="p">,</span> <span class="err">ねぶた</span><span class="p">,</span> <span class="err">ねじれ国会</span><span class="p">,</span> <span class="err">ねじめ正一</span><span class="p">,</span> <span class="err">ねじ式</span>
+</span><span class='line'><span class="err">の</span><span class="p">,</span> <span class="err">の</span><span class="p">,</span> <span class="err">のだめカンタービレ</span><span class="p">,</span> <span class="err">のだめカンタービレ</span> <span class="p">(</span><span class="err">テレビドラマ</span><span class="p">),</span> <span class="err">のぞみ</span> <span class="p">(</span><span class="err">列車</span><span class="p">),</span> <span class="err">のらみみ</span><span class="p">,</span> <span class="err">のと鉄道</span><span class="p">,</span> <span class="err">ののちゃん</span><span class="p">,</span> <span class="err">のと里山海道</span><span class="p">,</span> <span class="err">のらくろ</span><span class="p">,</span> <span class="err">のりスタ</span><span class="o">!</span>
+</span><span class='line'><span class="err">は</span><span class="p">,</span> <span class="err">はぐれ刑事純情派</span><span class="p">,</span> <span class="err">は</span><span class="p">,</span> <span class="err">はなまるマーケット</span><span class="p">,</span> <span class="err">はがき</span><span class="p">,</span> <span class="err">はみだし刑事情熱系</span><span class="p">,</span> <span class="err">はじめの一歩</span><span class="p">,</span> <span class="err">ばね</span><span class="p">,</span> <span class="err">はるな愛</span><span class="p">,</span> <span class="err">はなわ</span><span class="p">,</span> <span class="err">はねるのトびら</span>
+</span><span class='line'><span class="err">ひ</span><span class="p">,</span> <span class="err">ひ</span><span class="p">,</span> <span class="err">ぴあ</span><span class="p">,</span> <span class="err">びわ湖放送</span><span class="p">,</span> <span class="err">ひたちなか市</span><span class="p">,</span> <span class="err">ひみつのアッコちゃん</span><span class="p">,</span> <span class="err">ぴえろ</span><span class="p">,</span> <span class="err">ひるおび</span><span class="o">!</span><span class="p">,</span> <span class="err">ひらけ</span><span class="o">!</span><span class="err">ポンキッキ</span><span class="p">,</span> <span class="err">ひぐらしのなく頃に</span><span class="p">,</span> <span class="err">ひかり</span><span class="no">TV</span>
+</span><span class='line'><span class="err">ふ</span><span class="p">,</span> <span class="err">ぶんか社</span><span class="p">,</span> <span class="err">ふ</span><span class="p">,</span> <span class="err">ふたりはプリキュア</span><span class="p">,</span> <span class="err">ぷろだくしょんバオバブ</span><span class="p">,</span> <span class="err">ふんどし</span><span class="p">,</span> <span class="err">ふかわりょう</span><span class="p">,</span> <span class="err">ふしぎの海のナディア</span><span class="p">,</span> <span class="err">ふしぎ遊戯</span><span class="p">,</span> <span class="err">ふじみ野市</span><span class="p">,</span> <span class="err">ふたご座</span>
+</span><span class='line'><span class="err">へ</span><span class="p">,</span> <span class="err">へ</span><span class="p">,</span> <span class="err">べるぜバブ</span><span class="p">,</span> <span class="err">へうげもの</span><span class="p">,</span> <span class="err">へびつかい座</span><span class="p">,</span> <span class="err">へそ</span><span class="p">,</span> <span class="err">ぺりかん社</span><span class="p">,</span> <span class="err">へたれ</span><span class="p">,</span> <span class="err">へろへろくん</span><span class="p">,</span> <span class="err">ぺとぺとさん</span><span class="p">,</span> <span class="err">へら</span>
+</span><span class='line'><span class="err">ほ</span><span class="p">,</span> <span class="err">ほ</span><span class="p">,</span> <span class="err">ほんとにあった怖い話</span><span class="p">,</span> <span class="err">ほしのあき</span><span class="p">,</span> <span class="err">ほっしゃん。</span><span class="p">,</span> <span class="err">ほ乳類</span><span class="p">,</span> <span class="err">ほるぷ出版</span><span class="p">,</span> <span class="err">ほくろ</span><span class="p">,</span> <span class="err">ほんこん</span><span class="p">,</span> <span class="err">ぼのぼの</span><span class="p">,</span> <span class="err">ぼくらの</span>
+</span><span class='line'><span class="err">ま</span><span class="p">,</span> <span class="err">ま</span><span class="p">,</span> <span class="err">ますだおかだ</span><span class="p">,</span> <span class="err">まじめにふまじめ</span> <span class="err">かいけつゾロリ</span><span class="p">,</span> <span class="err">まるマシリーズ</span><span class="p">,</span> <span class="err">まんが日本昔ばなし</span><span class="p">,</span> <span class="err">まんがタイムきらら</span><span class="p">,</span> <span class="err">まいっちんぐマチコ先生</span><span class="p">,</span> <span class="err">まんのう町</span><span class="p">,</span> <span class="err">まちづくり</span><span class="p">,</span> <span class="err">まじかる☆タルるートくん</span>
+</span><span class='line'><span class="err">み</span><span class="p">,</span> <span class="err">みどりの窓口</span><span class="p">,</span> <span class="err">みんなのうた</span><span class="p">,</span> <span class="err">みずほ銀行</span><span class="p">,</span> <span class="err">みすず書房</span><span class="p">,</span> <span class="err">みんなの党</span><span class="p">,</span> <span class="err">み</span><span class="p">,</span> <span class="err">みのもんた</span><span class="p">,</span> <span class="err">みのもんたの朝ズバッ</span><span class="o">!</span><span class="p">,</span> <span class="err">みずほコーポレート銀行</span><span class="p">,</span> <span class="err">みうらじゅん</span>
+</span><span class='line'><span class="err">む</span><span class="p">,</span> <span class="err">む</span><span class="p">,</span> <span class="err">むつ市</span><span class="p">,</span> <span class="err">むかわ町</span><span class="p">,</span> <span class="err">むらさめ型護衛艦</span><span class="p">,</span> <span class="err">むちゃぶり</span><span class="o">!</span><span class="p">,</span> <span class="err">むたあきこ</span><span class="p">,</span> <span class="err">むつ</span> <span class="p">(</span><span class="err">原子力船</span><span class="p">),</span> <span class="err">むさしの</span> <span class="p">(</span><span class="err">列車</span><span class="p">),</span> <span class="err">むかいねね</span><span class="p">,</span> <span class="err">むち</span> <span class="p">(</span><span class="err">楽器</span><span class="p">)</span>
+</span><span class='line'><span class="err">め</span><span class="p">,</span> <span class="err">めざましテレビ</span><span class="p">,</span> <span class="err">めちゃ×</span><span class="mi">2</span><span class="err">イケてるッ</span><span class="o">!</span><span class="p">,</span> <span class="err">め</span><span class="p">,</span> <span class="err">めっき</span><span class="p">,</span> <span class="err">めざましどようび</span><span class="p">,</span> <span class="err">めまい</span><span class="p">,</span> <span class="err">めぞん一刻</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">めぞん一刻</span><span class="p">,</span> <span class="err">めだかボックス</span><span class="p">,</span> <span class="err">めざにゅ〜</span>
+</span><span class='line'><span class="err">も</span><span class="p">,</span> <span class="err">も</span><span class="p">,</span> <span class="err">ももいろクローバー</span><span class="n">Z</span><span class="p">,</span> <span class="err">もののけ姫</span><span class="p">,</span> <span class="err">ものまね</span><span class="p">,</span> <span class="err">ものまねタレント</span><span class="p">,</span> <span class="err">ものまね王座決定戦</span><span class="p">,</span> <span class="err">もやしもん</span><span class="p">,</span> <span class="err">もーれつア太郎</span><span class="p">,</span> <span class="err">ものまねバトル</span><span class="p">,</span> <span class="err">もしものシミュレーションバラエティー</span> <span class="err">お試しかっ</span><span class="o">!</span>
+</span><span class='line'><span class="err">や</span><span class="p">,</span> <span class="err">や</span><span class="p">,</span> <span class="err">やりすぎコージー</span><span class="p">,</span> <span class="err">やしきたかじん</span><span class="p">,</span> <span class="err">やり投</span><span class="p">,</span> <span class="err">やらせ</span><span class="p">,</span> <span class="err">やくみつる</span><span class="p">,</span> <span class="err">やまと学校</span><span class="p">,</span> <span class="err">やなせたかし</span><span class="p">,</span> <span class="err">やじうまプラス</span><span class="p">,</span> <span class="err">やぎ座</span>
+</span><span class='line'><span class="err">ゆ</span><span class="p">,</span> <span class="err">ゆうちょ銀行</span><span class="p">,</span> <span class="err">ゆうパック</span><span class="p">,</span> <span class="err">ゆうゆう窓口</span><span class="p">,</span> <span class="err">ゆ</span><span class="p">,</span> <span class="err">ゆず</span> <span class="p">(</span><span class="err">音楽グループ</span><span class="p">),</span> <span class="err">ゆるキャラ</span><span class="p">,</span> <span class="err">ゆかな</span><span class="p">,</span> <span class="err">ゆりかもめ東京臨海新交通臨海線</span><span class="p">,</span> <span class="err">ゆうどきネットワーク</span><span class="p">,</span> <span class="err">ゆうばり国際ファンタスティック映画祭</span>
+</span><span class='line'><span class="err">よ</span><span class="p">,</span> <span class="err">よしもとクリエイティブ・エージェンシー</span><span class="p">,</span> <span class="err">よ</span><span class="p">,</span> <span class="err">よみうりテレビ</span><span class="p">,</span> <span class="err">よしもとアール・アンド・シー</span><span class="p">,</span> <span class="err">よゐこ</span><span class="p">,</span> <span class="err">よみうりランド</span><span class="p">,</span> <span class="err">よしもと新喜劇</span><span class="p">,</span> <span class="err">よんでますよ、アザゼルさん。</span><span class="p">,</span> <span class="err">よど号ハイジャック事件</span><span class="p">,</span> <span class="err">よしもとばなな</span>
+</span><span class='line'><span class="err">ら</span><span class="p">,</span> <span class="err">ら</span><span class="p">,</span> <span class="err">らんま</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="err">らき☆すた</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">らき☆すた</span><span class="p">,</span> <span class="err">らいむいろ戦奇譚</span><span class="p">,</span> <span class="err">ららぽーと</span><span class="p">,</span> <span class="err">ららぽーと</span><span class="no">TOKYO</span><span class="o">-</span><span class="no">BAY</span><span class="p">,</span> <span class="err">らぶドル</span> <span class="err">〜</span><span class="no">Lovely</span> <span class="no">Idol</span><span class="err">〜</span><span class="p">,</span> <span class="err">らせん</span> <span class="p">(</span><span class="err">鈴木光司の小説</span><span class="p">),</span> <span class="err">らき☆すたの登場人物</span>
+</span><span class='line'><span class="err">り</span><span class="p">,</span> <span class="err">り</span><span class="p">,</span> <span class="err">りそな銀行</span><span class="p">,</span> <span class="err">りぼん</span><span class="p">,</span> <span class="err">りぼんマスコットコミックス</span><span class="p">,</span> <span class="err">りょう</span><span class="p">,</span> <span class="err">りりィ</span><span class="p">,</span> <span class="err">りそなホールディングス</span><span class="p">,</span> <span class="err">りゅう座</span><span class="p">,</span> <span class="err">りんたろう</span><span class="p">,</span> <span class="err">りゅうこつ座</span>
+</span><span class='line'><span class="err">る</span><span class="p">,</span> <span class="err">る</span><span class="p">,</span> <span class="err">るろうに剣心</span> <span class="o">-</span><span class="err">明治剣客浪漫譚</span><span class="o">-</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">るろうに剣心</span> <span class="o">-</span><span class="err">明治剣客浪漫譚</span><span class="o">-</span><span class="p">,</span> <span class="err">るろうに剣心</span> <span class="p">(</span><span class="err">実写映画</span><span class="p">),</span> <span class="err">るるぶ</span><span class="p">,</span> <span class="err">るつぼ</span><span class="p">,</span> <span class="err">るんるん</span> <span class="p">(</span><span class="err">講談社</span><span class="p">),</span> <span class="err">るーぷる仙台</span><span class="p">,</span> <span class="err">るくなす</span><span class="p">,</span> <span class="err">るろうに剣心</span> <span class="o">-</span><span class="err">明治剣客浪漫譚</span><span class="o">-</span><span class="err">の登場人物一覧</span>
+</span><span class='line'><span class="err">れ</span><span class="p">,</span> <span class="err">れ</span><span class="p">,</span> <span class="err">れでぃ×ばと</span><span class="o">!</span><span class="p">,</span> <span class="err">れいめい中学校・高等学校</span><span class="p">,</span> <span class="err">れんこん</span><span class="p">,</span> <span class="err">れんが書房新社</span><span class="p">,</span> <span class="err">れいめい</span><span class="p">,</span> <span class="err">れい子内親王</span><span class="p">,</span> <span class="err">れすきゅー</span><span class="no">ME</span><span class="o">!</span><span class="p">,</span> <span class="err">れいか</span><span class="p">,</span> <span class="err">れっつ</span><span class="o">!</span><span class="err">おひめさまだっこ</span><span class="o">/</span><span class="err">オトメチック初心者でーす</span>
+</span><span class='line'><span class="err">ろ</span><span class="p">,</span> <span class="err">ろ</span><span class="p">,</span> <span class="err">ろうそく</span><span class="p">,</span> <span class="err">ろ過</span><span class="p">,</span> <span class="err">ろくでなし</span><span class="no">BLUES</span><span class="p">,</span> <span class="err">ろう者</span><span class="p">,</span> <span class="err">ろう教育</span><span class="p">,</span> <span class="err">ろう学校</span><span class="p">,</span> <span class="err">ろみひー</span><span class="p">,</span> <span class="err">ろくろ首</span><span class="p">,</span> <span class="err">ろぼっ子ビートン</span>
+</span><span class='line'><span class="err">わ</span><span class="p">,</span> <span class="err">わ</span><span class="p">,</span> <span class="err">わいせつ</span><span class="p">,</span> <span class="err">わがまま☆フェアリー</span> <span class="err">ミルモでポン</span><span class="o">!</span><span class="p">,</span> <span class="err">わたらせ渓谷鐵道わたらせ渓谷線</span><span class="p">,</span> <span class="err">わたらせ渓谷鐵道</span><span class="p">,</span> <span class="err">わが家の歴史</span><span class="p">,</span> <span class="err">わるいやつら</span><span class="p">,</span> <span class="err">わたしが子どもだったころ</span> <span class="p">(</span><span class="err">テレビ番組</span><span class="p">),</span> <span class="err">わがまま</span><span class="o">!</span><span class="err">気まま</span><span class="o">!</span><span class="err">旅気分</span><span class="p">,</span> <span class="err">わんわん物語</span>
+</span><span class='line'><span class="err">を</span><span class="p">,</span> <span class="err">を</span><span class="p">,</span> <span class="err">をはり万造</span><span class="p">,</span> <span class="err">をかし</span><span class="p">,</span> <span class="err">をちこち</span><span class="no">Magazine</span><span class="p">,</span> <span class="err">をなり神</span><span class="p">,</span> <span class="err">を除いて一意的</span><span class="p">,</span> <span class="err">をぐら山春秋</span><span class="p">,</span> <span class="err">をけら参り</span>
+</span><span class='line'><span class="err">ん</span><span class="p">,</span> <span class="err">ん</span><span class="p">,</span> <span class="err">ん廻し</span><span class="p">,</span> <span class="err">んぐるわ会報</span><span class="p">,</span> <span class="err">んなことあるか</span><span class="p">,</span> <span class="err">んだスタ</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ジャンルと年代にひどく偏りがある気がしますね。コミック、アニメ、エロ、あと年代的にわりとおっさん向けのような。</p>
+
+<h2>2. Recovery.govから州ごとの資金情報を取得するスクリプトの修正</h2>
+
+<p>「<a href="http://ruby.bastardsbook.com/chapters/web-inspecting-traffic%22>Inspecting%20a%20Webpage's%20Traffic&lt;/a>%E3%80%8D%E3%81%AB%E3%80%81%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%81%AE%E3%80%8C&lt;a%20href=%22http://ruby.bastardsbook.com/chapters/web-inspecting-traffic/">Recovery.gov</a>」というサイトから、フラッシュの地図が利用しているXML情報を解析して、州ごとの資金の情報を取得する、というサンプルがあるのですが、対象データのレイアウトが変わったのか、そのままでは動作しませんでした。正しく動作するように修正してみます。</p>
+
+<p>修正後のスクリプトがこちら。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;crack&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">URL</span> <span class="o">=</span> <span class="s1">&#39;http://www.recovery.gov/arra/pages/GetXmlData.aspx?data=recipientHomeMap&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;awarded&#39;</span><span class="p">,</span> <span class="s1">&#39;received&#39;</span><span class="p">,</span> <span class="s1">&#39;jobs&#39;</span><span class="o">].</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Crack</span><span class="o">::</span><span class="no">XML</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="no">URL</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">)</span><span class="o">[</span><span class="s2">&quot;map&quot;</span><span class="o">][</span><span class="s2">&quot;view&quot;</span><span class="o">][</span><span class="s2">&quot;totals&quot;</span><span class="o">][</span><span class="s2">&quot;state&quot;</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">state</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;awarded&#39;</span><span class="p">,</span> <span class="s1">&#39;received&#39;</span><span class="p">,</span> <span class="s1">&#39;jobs&#39;</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">state</span><span class="o">[</span><span class="n">f</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>パース後のハッシュのネストが元のサンプルスクリプトが想定しているよりも深くなっていることがエラーの原因だったようです。</p>
+
+<p>実行するとこんなデータを取得できます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">id</span><span class="p">,</span> <span class="nb">name</span><span class="p">,</span> <span class="n">awarded</span><span class="p">,</span> <span class="n">received</span><span class="p">,</span> <span class="n">jobs</span>
+</span><span class='line'><span class="no">AL</span><span class="p">,</span> <span class="no">Alabama</span><span class="p">,</span> <span class="mi">3683</span><span class="o">.</span><span class="mi">18</span><span class="p">,</span> <span class="mi">3371</span><span class="o">.</span><span class="mo">04</span><span class="p">,</span> <span class="mi">655</span><span class="o">.</span><span class="mi">98</span>
+</span><span class='line'><span class="no">AK</span><span class="p">,</span> <span class="no">Alaska</span><span class="p">,</span> <span class="mi">2312</span><span class="o">.</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2046</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">396</span><span class="o">.</span><span class="mo">03</span>
+</span><span class='line'><span class="no">AZ</span><span class="p">,</span> <span class="no">Arizona</span><span class="p">,</span> <span class="mi">7689</span><span class="o">.</span><span class="mi">68</span><span class="p">,</span> <span class="mi">7098</span><span class="o">.</span><span class="mi">27</span><span class="p">,</span> <span class="mi">2105</span><span class="o">.</span><span class="mi">26</span>
+</span><span class='line'><span class="no">AR</span><span class="p">,</span> <span class="no">Arkansas</span><span class="p">,</span> <span class="mi">2335</span><span class="p">,</span> <span class="mi">2125</span><span class="o">.</span><span class="mi">54</span><span class="p">,</span> <span class="mi">556</span><span class="o">.</span><span class="mi">58</span>
+</span><span class='line'><span class="no">CA</span><span class="p">,</span> <span class="no">California</span><span class="p">,</span> <span class="mi">34577</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mi">29156</span><span class="o">.</span><span class="mi">76</span><span class="p">,</span> <span class="mi">9414</span><span class="o">.</span><span class="mi">91</span>
+</span><span class='line'><span class="no">CO</span><span class="p">,</span> <span class="no">Colorado</span><span class="p">,</span> <span class="mi">5660</span><span class="o">.</span><span class="mi">26</span><span class="p">,</span> <span class="mi">4774</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1325</span><span class="o">.</span><span class="mi">56</span>
+</span><span class='line'><span class="no">CT</span><span class="p">,</span> <span class="no">Connecticut</span><span class="p">,</span> <span class="mi">2540</span><span class="o">.</span><span class="mi">72</span><span class="p">,</span> <span class="mi">2358</span><span class="o">.</span><span class="mi">99</span><span class="p">,</span> <span class="mi">273</span><span class="o">.</span><span class="mi">87</span>
+</span><span class='line'><span class="no">DE</span><span class="p">,</span> <span class="no">Delaware</span><span class="p">,</span> <span class="mi">957</span><span class="o">.</span><span class="mi">28</span><span class="p">,</span> <span class="mi">832</span><span class="o">.</span><span class="mi">74</span><span class="p">,</span> <span class="mi">350</span><span class="o">.</span><span class="mi">33</span>
+</span><span class='line'><span class="no">DC</span><span class="p">,</span> <span class="no">District</span> <span class="n">of</span> <span class="no">Columbia</span><span class="p">,</span> <span class="mi">5987</span><span class="o">.</span><span class="mo">03</span><span class="p">,</span> <span class="mi">4796</span><span class="o">.</span><span class="mi">41</span><span class="p">,</span> <span class="mi">1743</span><span class="o">.</span><span class="mi">65</span>
+</span><span class='line'><span class="no">FL</span><span class="p">,</span> <span class="no">Florida</span><span class="p">,</span> <span class="mi">11210</span><span class="o">.</span><span class="mi">61</span><span class="p">,</span> <span class="mi">10117</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">3810</span><span class="o">.</span><span class="mi">37</span>
+</span><span class='line'><span class="no">GA</span><span class="p">,</span> <span class="no">Georgia</span><span class="p">,</span> <span class="mi">7003</span><span class="o">.</span><span class="mi">78</span><span class="p">,</span> <span class="mi">6082</span><span class="o">.</span><span class="mi">77</span><span class="p">,</span> <span class="mi">1265</span><span class="o">.</span><span class="mi">44</span>
+</span><span class='line'><span class="no">HI</span><span class="p">,</span> <span class="no">Hawaii</span><span class="p">,</span> <span class="mi">1432</span><span class="o">.</span><span class="mi">42</span><span class="p">,</span> <span class="mi">1238</span><span class="o">.</span><span class="mi">77</span><span class="p">,</span> <span class="mi">490</span><span class="o">.</span><span class="mi">84</span>
+</span><span class='line'><span class="no">ID</span><span class="p">,</span> <span class="no">Idaho</span><span class="p">,</span> <span class="mi">1698</span><span class="o">.</span><span class="mo">04</span><span class="p">,</span> <span class="mi">1623</span><span class="o">.</span><span class="mi">77</span><span class="p">,</span> <span class="mi">240</span><span class="o">.</span><span class="mi">51</span>
+</span><span class='line'><span class="no">IL</span><span class="p">,</span> <span class="no">Illinois</span><span class="p">,</span> <span class="mi">11933</span><span class="o">.</span><span class="mi">95</span><span class="p">,</span> <span class="mi">9350</span><span class="o">.</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1696</span><span class="o">.</span><span class="mi">32</span>
+</span><span class='line'><span class="no">IN</span><span class="p">,</span> <span class="no">Indiana</span><span class="p">,</span> <span class="mi">4510</span><span class="o">.</span><span class="mi">18</span><span class="p">,</span> <span class="mi">4203</span><span class="o">.</span><span class="mi">24</span><span class="p">,</span> <span class="mi">865</span><span class="o">.</span><span class="mi">91</span>
+</span><span class='line'><span class="no">IA</span><span class="p">,</span> <span class="no">Iowa</span><span class="p">,</span> <span class="mi">2268</span><span class="o">.</span><span class="mi">72</span><span class="p">,</span> <span class="mi">2035</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">393</span><span class="o">.</span><span class="mi">43</span>
+</span><span class='line'><span class="no">KS</span><span class="p">,</span> <span class="no">Kansas</span><span class="p">,</span> <span class="mi">2324</span><span class="o">.</span><span class="mi">38</span><span class="p">,</span> <span class="mi">2093</span><span class="o">.</span><span class="mi">49</span><span class="p">,</span> <span class="mi">208</span><span class="o">.</span><span class="mi">83</span>
+</span><span class='line'><span class="no">KY</span><span class="p">,</span> <span class="no">Kentucky</span><span class="p">,</span> <span class="mi">3583</span><span class="o">.</span><span class="mi">37</span><span class="p">,</span> <span class="mi">3252</span><span class="o">.</span><span class="mo">04</span><span class="p">,</span> <span class="mi">969</span><span class="o">.</span><span class="mi">99</span>
+</span><span class='line'><span class="no">LA</span><span class="p">,</span> <span class="no">Louisiana</span><span class="p">,</span> <span class="mi">3328</span><span class="o">.</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3008</span><span class="o">.</span><span class="mi">65</span><span class="p">,</span> <span class="mi">706</span>
+</span><span class='line'><span class="no">ME</span><span class="p">,</span> <span class="no">Maine</span><span class="p">,</span> <span class="mi">1451</span><span class="o">.</span><span class="mi">87</span><span class="p">,</span> <span class="mi">1399</span><span class="o">.</span><span class="mi">49</span><span class="p">,</span> <span class="mi">302</span><span class="o">.</span><span class="mi">77</span>
+</span><span class='line'><span class="no">MD</span><span class="p">,</span> <span class="no">Maryland</span><span class="p">,</span> <span class="mi">7019</span><span class="o">.</span><span class="mi">52</span><span class="p">,</span> <span class="mi">5913</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3134</span><span class="o">.</span><span class="mo">07</span>
+</span><span class='line'><span class="no">MA</span><span class="p">,</span> <span class="no">Massachusetts</span><span class="p">,</span> <span class="mi">7648</span><span class="o">.</span><span class="mi">29</span><span class="p">,</span> <span class="mi">6687</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2552</span><span class="o">.</span><span class="mi">87</span>
+</span><span class='line'><span class="no">MI</span><span class="p">,</span> <span class="no">Michigan</span><span class="p">,</span> <span class="mi">8671</span><span class="o">.</span><span class="mi">94</span><span class="p">,</span> <span class="mi">7798</span><span class="o">.</span><span class="mi">87</span><span class="p">,</span> <span class="mi">1551</span><span class="o">.</span><span class="mi">3</span>
+</span><span class='line'><span class="no">MN</span><span class="p">,</span> <span class="no">Minnesota</span><span class="p">,</span> <span class="mi">4026</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">3655</span><span class="o">.</span><span class="mi">08</span><span class="p">,</span> <span class="mi">532</span><span class="o">.</span><span class="mo">06</span>
+</span><span class='line'><span class="no">MS</span><span class="p">,</span> <span class="no">Mississippi</span><span class="p">,</span> <span class="mi">2767</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2391</span><span class="o">.</span><span class="mi">72</span><span class="p">,</span> <span class="mi">407</span><span class="o">.</span><span class="mi">61</span>
+</span><span class='line'><span class="no">MO</span><span class="p">,</span> <span class="no">Missouri</span><span class="p">,</span> <span class="mi">4956</span><span class="o">.</span><span class="mi">85</span><span class="p">,</span> <span class="mi">4632</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1265</span><span class="o">.</span><span class="mi">28</span>
+</span><span class='line'><span class="no">MT</span><span class="p">,</span> <span class="no">Montana</span><span class="p">,</span> <span class="mi">1525</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">1382</span><span class="o">.</span><span class="mo">01</span><span class="p">,</span> <span class="mi">506</span><span class="o">.</span><span class="mi">33</span>
+</span><span class='line'><span class="no">NE</span><span class="p">,</span> <span class="no">Nebraska</span><span class="p">,</span> <span class="mi">1333</span><span class="o">.</span><span class="mi">93</span><span class="p">,</span> <span class="mi">1278</span><span class="o">.</span><span class="mi">13</span><span class="p">,</span> <span class="mi">235</span><span class="o">.</span><span class="mo">03</span>
+</span><span class='line'><span class="no">NV</span><span class="p">,</span> <span class="no">Nevada</span><span class="p">,</span> <span class="mi">2886</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2468</span><span class="o">.</span><span class="mi">96</span><span class="p">,</span> <span class="mi">2191</span><span class="o">.</span><span class="mi">68</span>
+</span><span class='line'><span class="no">NH</span><span class="p">,</span> <span class="no">New</span> <span class="no">Hampshire</span><span class="p">,</span> <span class="mi">977</span><span class="o">.</span><span class="mi">95</span><span class="p">,</span> <span class="mi">911</span><span class="p">,</span> <span class="mi">275</span><span class="o">.</span><span class="mi">25</span>
+</span><span class='line'><span class="no">NJ</span><span class="p">,</span> <span class="no">New</span> <span class="no">Jersey</span><span class="p">,</span> <span class="mi">5400</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">4982</span><span class="o">.</span><span class="mi">08</span><span class="p">,</span> <span class="mi">630</span><span class="o">.</span><span class="mi">31</span>
+</span><span class='line'><span class="no">NM</span><span class="p">,</span> <span class="no">New</span> <span class="no">Mexico</span><span class="p">,</span> <span class="mi">2718</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">2533</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">366</span><span class="o">.</span><span class="mo">04</span>
+</span><span class='line'><span class="no">NY</span><span class="p">,</span> <span class="no">New</span> <span class="no">York</span><span class="p">,</span> <span class="mi">17163</span><span class="o">.</span><span class="mi">48</span><span class="p">,</span> <span class="mi">15188</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">4107</span><span class="o">.</span><span class="mi">69</span>
+</span><span class='line'><span class="no">NC</span><span class="p">,</span> <span class="no">North</span> <span class="no">Carolina</span><span class="p">,</span> <span class="mi">7617</span><span class="o">.</span><span class="mi">62</span><span class="p">,</span> <span class="mi">6373</span><span class="o">.</span><span class="mi">42</span><span class="p">,</span> <span class="mi">2497</span><span class="o">.</span><span class="mi">45</span>
+</span><span class='line'><span class="no">ND</span><span class="p">,</span> <span class="no">North</span> <span class="no">Dakota</span><span class="p">,</span> <span class="mi">1098</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">993</span><span class="o">.</span><span class="mi">47</span><span class="p">,</span> <span class="mi">375</span><span class="o">.</span><span class="mi">79</span>
+</span><span class='line'><span class="no">OH</span><span class="p">,</span> <span class="no">Ohio</span><span class="p">,</span> <span class="mi">8745</span><span class="o">.</span><span class="mi">91</span><span class="p">,</span> <span class="mi">7982</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">3011</span><span class="o">.</span><span class="mi">61</span>
+</span><span class='line'><span class="no">OK</span><span class="p">,</span> <span class="no">Oklahoma</span><span class="p">,</span> <span class="mi">3056</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span> <span class="mi">2836</span><span class="o">.</span><span class="mi">09</span><span class="p">,</span> <span class="mi">1271</span><span class="o">.</span><span class="mi">97</span>
+</span><span class='line'><span class="no">OR</span><span class="p">,</span> <span class="no">Oregon</span><span class="p">,</span> <span class="mi">3257</span><span class="o">.</span><span class="mi">39</span><span class="p">,</span> <span class="mi">3080</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span> <span class="mi">524</span><span class="o">.</span><span class="mi">23</span>
+</span><span class='line'><span class="no">PA</span><span class="p">,</span> <span class="no">Pennsylvania</span><span class="p">,</span> <span class="mi">9305</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">8620</span><span class="o">.</span><span class="mi">98</span><span class="p">,</span> <span class="mi">1700</span><span class="o">.</span><span class="mi">43</span>
+</span><span class='line'><span class="no">RI</span><span class="p">,</span> <span class="no">Rhode</span> <span class="no">Island</span><span class="p">,</span> <span class="mi">1222</span><span class="o">.</span><span class="mi">83</span><span class="p">,</span> <span class="mi">1066</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1392</span><span class="o">.</span><span class="mi">22</span>
+</span><span class='line'><span class="no">SC</span><span class="p">,</span> <span class="no">South</span> <span class="no">Carolina</span><span class="p">,</span> <span class="mi">4658</span><span class="o">.</span><span class="mi">81</span><span class="p">,</span> <span class="mi">4420</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">517</span><span class="o">.</span><span class="mi">77</span>
+</span><span class='line'><span class="no">SD</span><span class="p">,</span> <span class="no">South</span> <span class="no">Dakota</span><span class="p">,</span> <span class="mi">1351</span><span class="o">.</span><span class="mi">51</span><span class="p">,</span> <span class="mi">1254</span><span class="o">.</span><span class="mi">67</span><span class="p">,</span> <span class="mi">304</span><span class="o">.</span><span class="mi">61</span>
+</span><span class='line'><span class="no">TN</span><span class="p">,</span> <span class="no">Tennessee</span><span class="p">,</span> <span class="mi">6521</span><span class="o">.</span><span class="mi">49</span><span class="p">,</span> <span class="mi">5699</span><span class="o">.</span><span class="mi">83</span><span class="p">,</span> <span class="mi">1908</span><span class="o">.</span><span class="mi">9</span>
+</span><span class='line'><span class="no">TX</span><span class="p">,</span> <span class="no">Texas</span><span class="p">,</span> <span class="mi">17043</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">15424</span><span class="o">.</span><span class="mi">96</span><span class="p">,</span> <span class="mi">4030</span><span class="o">.</span><span class="mi">79</span>
+</span><span class='line'><span class="no">UT</span><span class="p">,</span> <span class="no">Utah</span><span class="p">,</span> <span class="mi">2260</span><span class="o">.</span><span class="mi">62</span><span class="p">,</span> <span class="mi">2118</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mi">378</span><span class="o">.</span><span class="mi">13</span>
+</span><span class='line'><span class="no">VT</span><span class="p">,</span> <span class="no">Vermont</span><span class="p">,</span> <span class="mi">1055</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">909</span><span class="o">.</span><span class="mi">63</span><span class="p">,</span> <span class="mi">249</span><span class="o">.</span><span class="mi">93</span>
+</span><span class='line'><span class="no">VA</span><span class="p">,</span> <span class="no">Virginia</span><span class="p">,</span> <span class="mi">6462</span><span class="o">.</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5701</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span> <span class="mi">1485</span><span class="o">.</span><span class="mi">98</span>
+</span><span class='line'><span class="no">WA</span><span class="p">,</span> <span class="no">Washington</span><span class="p">,</span> <span class="mi">8394</span><span class="o">.</span><span class="mi">24</span><span class="p">,</span> <span class="mi">7216</span><span class="o">.</span><span class="mi">52</span><span class="p">,</span> <span class="mi">1211</span><span class="o">.</span><span class="mi">72</span>
+</span><span class='line'><span class="no">WV</span><span class="p">,</span> <span class="no">West</span> <span class="no">Virginia</span><span class="p">,</span> <span class="mi">1802</span><span class="o">.</span><span class="mi">33</span><span class="p">,</span> <span class="mi">1636</span><span class="o">.</span><span class="mi">31</span><span class="p">,</span> <span class="mi">399</span><span class="o">.</span><span class="mi">09</span>
+</span><span class='line'><span class="no">WI</span><span class="p">,</span> <span class="no">Wisconsin</span><span class="p">,</span> <span class="mi">4042</span><span class="o">.</span><span class="mo">07</span><span class="p">,</span> <span class="mi">3636</span><span class="o">.</span><span class="mi">97</span><span class="p">,</span> <span class="mi">666</span><span class="o">.</span><span class="mi">84</span>
+</span><span class='line'><span class="no">WY</span><span class="p">,</span> <span class="no">Wyoming</span><span class="p">,</span> <span class="mi">665</span><span class="o">.</span><span class="mi">57</span><span class="p">,</span> <span class="mi">621</span><span class="o">.</span><span class="mi">09</span><span class="p">,</span> <span class="mi">39</span><span class="o">.</span><span class="mi">18</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Wikipediaから歴代の総理大臣の一覧を取得する</h2>
+
+<p>「<a href="http://ruby.bastardsbook.com/chapters/web-crawling">Writing a Web Crawler</a>」の、Wikipedaからノーベル賞受賞者のページをまとめてダウンロードする、というサンプルを参考にして、日本語版Wikipediaから歴代総理大臣の一覧を取得するスクリプトを作ってみます。</p>
+
+<p>スクレイピング対象のページは<a href="http://ja.wikipedia.org/wiki/%E5%86%85%E9%96%A3%E7%B7%8F%E7%90%86%E5%A4%A7%E8%87%A3%E3%81%AE%E4%B8%80%E8%A6%A7">こちら</a>。</p>
+
+<p>表になっている部分から情報を抜き出してみます。</p>
+
+<ul>
+<li><a href="http://ja.wikipedia.org/wiki/%E5%86%85%E9%96%A3%E7%B7%8F%E7%90%86%E5%A4%A7%E8%87%A3%E3%81%AE%E4%B8%80%E8%A6%A7">内閣総理大臣の一覧 - Wikipedia</a></li>
+</ul>
+
+
+<p>こんな感じ。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;nokogiri&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;cgi&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">BASE_URL</span> <span class="o">=</span> <span class="s1">&#39;http://ja.wikipedia.org&#39;</span>
+</span><span class='line'><span class="no">LIST_URL</span> <span class="o">=</span> <span class="no">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/wiki/&#39;</span> <span class="o">+</span> <span class="no">CGI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="s1">&#39;内閣総理大臣の一覧&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">page</span> <span class="o">=</span> <span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="no">LIST_URL</span><span class="p">))</span>
+</span><span class='line'><span class="n">rows</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;div.mw-content-ltr table.wikitable tr&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ministers</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'><span class="n">prev_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">rows</span><span class="o">[</span><span class="mi">3</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">4</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">time</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;th&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">time</span> <span class="o">=~</span> <span class="sr">/\d/</span>
+</span><span class='line'>    <span class="nb">name</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;td b&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">chomp</span>
+</span><span class='line'>    <span class="k">if</span> <span class="nb">name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>      <span class="nb">name</span> <span class="o">=</span> <span class="n">prev_name</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">prev_name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">ministers</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">time</span><span class="p">,</span> <span class="nb">name</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;代, 名前&#39;</span>
+</span><span class='line'><span class="n">ministers</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">minister</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">minister</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>代と名前をカンマ区切りで出力します。「代」の部分をフィルタリングして余分な行を切り落としています。また、同一人物が連続で勤めた場合に名前の欄が空欄になってしまうため、一つ前の名前を保存して使い回すようにしました。</p>
+
+<p>実行結果はこちら。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">代</span><span class="p">,</span> <span class="err">名前</span>
+</span><span class='line'><span class="mi">1</span><span class="p">,</span> <span class="err">伊藤博文</span>
+</span><span class='line'><span class="mi">2</span><span class="p">,</span> <span class="err">黒田清隆</span>
+</span><span class='line'><span class="mi">3</span><span class="p">,</span> <span class="err">山縣有朋</span>
+</span><span class='line'><span class="mi">4</span><span class="p">,</span> <span class="err">松方正義</span>
+</span><span class='line'><span class="mi">5</span><span class="p">,</span> <span class="err">伊藤博文</span>
+</span><span class='line'><span class="mi">6</span><span class="p">,</span> <span class="err">松方正義</span>
+</span><span class='line'><span class="mi">7</span><span class="p">,</span> <span class="err">伊藤博文</span>
+</span><span class='line'><span class="mi">8</span><span class="p">,</span> <span class="err">大隈重信</span>
+</span><span class='line'><span class="mi">9</span><span class="p">,</span> <span class="err">山縣有朋</span>
+</span><span class='line'><span class="mi">10</span><span class="p">,</span> <span class="err">伊藤博文</span>
+</span><span class='line'><span class="mi">11</span><span class="p">,</span> <span class="err">桂太郎</span>
+</span><span class='line'><span class="mi">12</span><span class="p">,</span> <span class="err">西園寺公望</span>
+</span><span class='line'><span class="mi">13</span><span class="p">,</span> <span class="err">桂太郎</span>
+</span><span class='line'><span class="mi">14</span><span class="p">,</span> <span class="err">西園寺公望</span>
+</span><span class='line'><span class="mi">15</span><span class="p">,</span> <span class="err">桂太郎</span>
+</span><span class='line'><span class="mi">16</span><span class="p">,</span> <span class="err">山本権兵衛</span>
+</span><span class='line'><span class="mi">17</span><span class="p">,</span> <span class="err">大隈重信</span>
+</span><span class='line'><span class="mi">18</span><span class="p">,</span> <span class="err">寺内正毅</span>
+</span><span class='line'><span class="mi">19</span><span class="p">,</span> <span class="err">原敬</span>
+</span><span class='line'><span class="mi">20</span><span class="p">,</span> <span class="err">高橋是清</span>
+</span><span class='line'><span class="mi">21</span><span class="p">,</span> <span class="err">加藤友三郎</span>
+</span><span class='line'><span class="mi">22</span><span class="p">,</span> <span class="err">山本権兵衛</span>
+</span><span class='line'><span class="mi">23</span><span class="p">,</span> <span class="err">清浦奎吾</span>
+</span><span class='line'><span class="mi">24</span><span class="p">,</span> <span class="err">加藤高明</span>
+</span><span class='line'><span class="mi">25</span><span class="p">,</span> <span class="err">若槻禮次郎</span>
+</span><span class='line'><span class="mi">26</span><span class="p">,</span> <span class="err">田中義一</span>
+</span><span class='line'><span class="mi">27</span><span class="p">,</span> <span class="err">濱口雄幸</span>
+</span><span class='line'><span class="mi">28</span><span class="p">,</span> <span class="err">若槻禮次郎</span>
+</span><span class='line'><span class="mi">29</span><span class="p">,</span> <span class="err">犬養毅</span>
+</span><span class='line'><span class="mi">30</span><span class="p">,</span> <span class="err">齋藤実</span>
+</span><span class='line'><span class="mi">31</span><span class="p">,</span> <span class="err">岡田啓介</span>
+</span><span class='line'><span class="mi">32</span><span class="p">,</span> <span class="err">廣田弘毅</span>
+</span><span class='line'><span class="mi">33</span><span class="p">,</span> <span class="err">林銑十郎</span>
+</span><span class='line'><span class="mi">34</span><span class="p">,</span> <span class="err">近衛文麿</span>
+</span><span class='line'><span class="mi">35</span><span class="p">,</span> <span class="err">平沼騏一郎</span>
+</span><span class='line'><span class="mi">36</span><span class="p">,</span> <span class="err">阿部信行</span>
+</span><span class='line'><span class="mi">37</span><span class="p">,</span> <span class="err">米内光政</span>
+</span><span class='line'><span class="mi">38</span><span class="p">,</span> <span class="err">近衛文麿</span>
+</span><span class='line'><span class="mi">39</span><span class="p">,</span> <span class="err">近衛文麿</span>
+</span><span class='line'><span class="mi">40</span><span class="p">,</span> <span class="err">東條英機</span>
+</span><span class='line'><span class="mi">41</span><span class="p">,</span> <span class="err">小磯國昭</span>
+</span><span class='line'><span class="mi">42</span><span class="p">,</span> <span class="err">鈴木貫太郎</span>
+</span><span class='line'><span class="mi">43</span><span class="p">,</span> <span class="err">東久邇宮稔彦王</span>
+</span><span class='line'><span class="mi">44</span><span class="p">,</span> <span class="err">幣原喜重郎</span>
+</span><span class='line'><span class="mi">45</span><span class="p">,</span> <span class="err">吉田茂</span>
+</span><span class='line'><span class="mi">46</span><span class="p">,</span> <span class="err">片山哲</span>
+</span><span class='line'><span class="mi">47</span><span class="p">,</span> <span class="err">芦田均</span>
+</span><span class='line'><span class="mi">48</span><span class="p">,</span> <span class="err">吉田茂</span>
+</span><span class='line'><span class="mi">49</span><span class="p">,</span> <span class="err">吉田茂</span>
+</span><span class='line'><span class="mi">50</span><span class="p">,</span> <span class="err">吉田茂</span>
+</span><span class='line'><span class="mi">51</span><span class="p">,</span> <span class="err">吉田茂</span>
+</span><span class='line'><span class="mi">52</span><span class="p">,</span> <span class="err">鳩山一郎</span>
+</span><span class='line'><span class="mi">53</span><span class="p">,</span> <span class="err">鳩山一郎</span>
+</span><span class='line'><span class="mi">54</span><span class="p">,</span> <span class="err">鳩山一郎</span>
+</span><span class='line'><span class="mi">55</span><span class="p">,</span> <span class="err">石橋湛山</span>
+</span><span class='line'><span class="mi">56</span><span class="p">,</span> <span class="err">岸信介</span>
+</span><span class='line'><span class="mi">57</span><span class="p">,</span> <span class="err">岸信介</span>
+</span><span class='line'><span class="mi">58</span><span class="p">,</span> <span class="err">池田勇人</span>
+</span><span class='line'><span class="mi">59</span><span class="p">,</span> <span class="err">池田勇人</span>
+</span><span class='line'><span class="mi">60</span><span class="p">,</span> <span class="err">池田勇人</span>
+</span><span class='line'><span class="mi">61</span><span class="p">,</span> <span class="err">佐藤栄作</span>
+</span><span class='line'><span class="mi">62</span><span class="p">,</span> <span class="err">佐藤栄作</span>
+</span><span class='line'><span class="mi">63</span><span class="p">,</span> <span class="err">佐藤栄作</span>
+</span><span class='line'><span class="mi">64</span><span class="p">,</span> <span class="err">田中角栄</span>
+</span><span class='line'><span class="mi">65</span><span class="p">,</span> <span class="err">田中角栄</span>
+</span><span class='line'><span class="mi">66</span><span class="p">,</span> <span class="err">三木武夫</span>
+</span><span class='line'><span class="mi">67</span><span class="p">,</span> <span class="err">福田赳夫</span>
+</span><span class='line'><span class="mi">68</span><span class="p">,</span> <span class="err">大平正芳</span>
+</span><span class='line'><span class="mi">69</span><span class="p">,</span> <span class="err">大平正芳</span>
+</span><span class='line'><span class="mi">70</span><span class="p">,</span> <span class="err">鈴木善幸</span>
+</span><span class='line'><span class="mi">71</span><span class="p">,</span> <span class="err">中曽根康弘</span>
+</span><span class='line'><span class="mi">72</span><span class="p">,</span> <span class="err">中曽根康弘</span>
+</span><span class='line'><span class="mi">73</span><span class="p">,</span> <span class="err">中曽根康弘</span>
+</span><span class='line'><span class="mi">74</span><span class="p">,</span> <span class="err">竹下登</span>
+</span><span class='line'><span class="mi">75</span><span class="p">,</span> <span class="err">宇野宗佑</span>
+</span><span class='line'><span class="mi">76</span><span class="p">,</span> <span class="err">海部俊樹</span>
+</span><span class='line'><span class="mi">77</span><span class="p">,</span> <span class="err">海部俊樹</span>
+</span><span class='line'><span class="mi">78</span><span class="p">,</span> <span class="err">宮澤喜一</span>
+</span><span class='line'><span class="mi">79</span><span class="p">,</span> <span class="err">細川護熙</span>
+</span><span class='line'><span class="mi">80</span><span class="p">,</span> <span class="err">羽田孜</span>
+</span><span class='line'><span class="mi">81</span><span class="p">,</span> <span class="err">村山富市</span>
+</span><span class='line'><span class="mi">82</span><span class="p">,</span> <span class="err">橋本龍太郎</span>
+</span><span class='line'><span class="mi">83</span><span class="p">,</span> <span class="err">橋本龍太郎</span>
+</span><span class='line'><span class="mi">84</span><span class="p">,</span> <span class="err">小渕恵三</span>
+</span><span class='line'><span class="mi">85</span><span class="p">,</span> <span class="err">森喜朗</span>
+</span><span class='line'><span class="mi">86</span><span class="p">,</span> <span class="err">森喜朗</span>
+</span><span class='line'><span class="mi">87</span><span class="p">,</span> <span class="err">小泉純一郎</span>
+</span><span class='line'><span class="mi">88</span><span class="p">,</span> <span class="err">小泉純一郎</span>
+</span><span class='line'><span class="mi">89</span><span class="p">,</span> <span class="err">小泉純一郎</span>
+</span><span class='line'><span class="mi">90</span><span class="p">,</span> <span class="err">安倍晋三</span>
+</span><span class='line'><span class="mi">91</span><span class="p">,</span> <span class="err">福田康夫</span>
+</span><span class='line'><span class="mi">92</span><span class="p">,</span> <span class="err">麻生太郎</span>
+</span><span class='line'><span class="mi">93</span><span class="p">,</span> <span class="err">鳩山由紀夫</span>
+</span><span class='line'><span class="mi">94</span><span class="p">,</span> <span class="err">菅直人</span>
+</span><span class='line'><span class="mi">95</span><span class="p">,</span> <span class="err">野田佳彦</span>
+</span><span class='line'><span class="mi">96</span><span class="p">,</span> <span class="err">安倍晋三</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>そのほか</h2>
+
+<p>ここで挙げたものの他に、「<a href="http://ruby.bastardsbook.com/chapters/web-crawling%22>Writing%20a%20Web%20Crawler&lt;/a>%E3%80%8D%E3%81%A7%E3%81%AF%E3%80%81&lt;a%20href=%22http://www.fec.gov/">連邦選挙委員会(Federal Election Commision)のページ</a>の検索機能を使ってレポートを検索して、検索結果に付随するPDFファイル(必要な場合はPOSTリクエストでPDF生成を自動実行する)を片っ端からダウンロードするという、かなりガチなサンプルも紹介されています。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/31/failure-screenshot-with-cucumber-and-capybara/">CucumberとCapybaraでシナリオ失敗時にスクリーンショットを撮る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-31T05:32:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:32 am</span></time>
+        
+         | <a href="/blog/2013/12/31/failure-screenshot-with-cucumber-and-capybara/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Cucumber + Capybaraの環境で、CucumberのシナリオがFailした時にスクリーンショットを取る方法です。</p>
+
+<h2>スクリーンショット取得の設定方法</h2>
+
+<p>「features/support」ディレクトリ配下に以下の内容でファイルを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># features/support/screenshot.rb</span>
+</span><span class='line'><span class="no">After</span><span class="p">(</span><span class="s1">&#39;@javascript&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">scenario</span><span class="o">|</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">scenario</span><span class="o">.</span><span class="n">fialed?</span>
+</span><span class='line'>    <span class="n">page</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="s2">&quot;html-report/</span><span class="si">#{</span><span class="n">scenario</span><span class="o">.</span><span class="n">__id__</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">embed</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">scenario</span><span class="o">.</span><span class="n">__id__</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="s2">&quot;image/png&quot;</span><span class="p">,</span> <span class="s2">&quot;SCREENSHOT&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="err">「</span><span class="n">html</span><span class="o">-</span><span class="n">report</span><span class="err">」ディレクトリを作成しておく。</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">以下のオプションで</span><span class="n">cucumber</span><span class="err">を実行する。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>bash
+$ cucumber &ndash;format html &ndash;out html-report/index.html</p>
+
+<p>「html-report/index.html」をブラウザで開くとテストレポートが表示されます。</p>
+
+<p>シナリオが失敗した箇所に「SCREENSHOT」のリンクが表示され、クリックすると画像を確認できます。お手軽な割にリッチなレポートになるので、初めてやると感動しますね。</p>
+
+<h2>補足</h2>
+
+<p>上記の設定についての補足です。</p>
+
+<h3>Before/Afterフック</h3>
+
+<p>Cucumberでは、Before/Afterフックを使って各シナリオの実行の前後に特定の処理を実行します。上記のコードではAfterフックでシナリオ実行後の処理を指定しています。</p>
+
+<h3>Taggedフック</h3>
+
+<p>Before/Afterの引数にタグを与えることで、Cucumberは特定のタグがついたシナリオのみを対象に処理を実行します。上記のコードではAfterフックに@javascriptタグを与えることで、「@javascript」のタグがついたシナリオの後にのみ処理を実行します。</p>
+
+<h3>@javascriptタグ</h3>
+
+<p>Capybaraは通常rack-testを通じてIn-Processアプローチでテストを実行します。しかし、In-ProcessアプローチではJavaScriptを利用したページのテストができません。そこでJavaScriptを利用するシナリオには@javascriptタグを指定します。</p>
+
+<p>Capybaraは、@javascriptタグがついたシナリオを見つけるとOut-of-Processでテストを実行します。デフォルトではSeleniumを利用してブラウザを操作します。</p>
+
+<p>スクリーンショットを取得する場合、ブラウザを使用することが前提になるため、上記のコードでは@javascriptタグで対象のシナリオを絞り込んでいます。</p>
+
+<h3>scenarioオブジェクト</h3>
+
+<p>Before/Afterフックはブロック引数にscenarioオブジェクトを引き渡します。scenarioオブジェクトにはシナリオ名、ID、シナリオの正否などが含まれます。上記のコードでは、scenario.faild?でシナリオの正否を判定しています。</p>
+
+<h3>Selenium, save_screenshot</h3>
+
+<p>page.driver.browserでSeleniumのbrowserオブジェクトにアクセスし、save_screenshotでスクリーンショットを取得します。</p>
+
+<h3>embedメソッド</h3>
+
+<p>embedメソッドは、ファイル名、MIMEタイプ、ラベルの3つの引数を取り、HTML形式の出力に対してファイルを紐づけます。</p>
+
+<p>上記のコードでは、スクリーンショットのpngファイルを「SCREENSHOT」というラベルでレポートに紐づけています。ラベルはレポート中のリンクテキストになります。</p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808">The Cucumber Book: Behaviour-Driven Development for Testers and Developers (Pragmatic Programmers)</a></p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808"><img src="https://images-fe.ssl-images-amazon.com/images/I/51dKVQPJolL._SL160_.jpg" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/7">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/5">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - succi0303 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'prime-factor';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

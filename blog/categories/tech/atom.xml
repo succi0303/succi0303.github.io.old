@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tech | prime factor]]></title>
+  <link href="http://succi0303.github.io/blog/categories/tech/atom.xml" rel="self"/>
+  <link href="http://succi0303.github.io/"/>
+  <updated>2018-07-07T09:34:47+00:00</updated>
+  <id>http://succi0303.github.io/</id>
+  <author>
+    <name><![CDATA[succi0303]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[VagrantとChefでNode.jsの開発環境を構築する2]]></title>
+    <link href="http://succi0303.github.io/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef-part2/"/>
+    <updated>2015-12-30T09:15:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef-part2</id>
+    <content type="html"><![CDATA[<p>『JS+Node.jsによるWebクローラー／ネットエージェント開発テクニック』のサンプル実行環境の構築について。</p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930">JS+Node.jsによるWebクローラー/ネットエージェント開発テクニック</a></p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930"><img src="https://images-fe.ssl-images-amazon.com/images/I/61DHJGf1uSL._SL160_.jpg" /></a></p>
+
+<p><a href="http://succi.jp/blog/?p=1614">一つ前のエントリ</a>でnvmクックブックを使ってNode.jsの開発環境を構築する手順をまとめたが、いくつか不便な点があった。</p>
+
+<ul>
+<li>sudoでnode、npmを使うために設定ファイルの編集が必要</li>
+<li>npmパッケージのインストールは別途コマンドを打つ必要がある</li>
+</ul>
+
+
+<p>上記の点を解決できないかと、nvmクックブックを使うのをやめて、nodejsクックブックで環境を作り直してみた。そもそもNode.jsのバージョンを変更する場合は、仮想マシンそのものを作り直すので敢えてnvmを使う必要もないと思う。</p>
+
+<p>npmモジュールのインストールに合わせて、freetype、fontconfig、mecabなど必要なツールのインストールも追加した。</p>
+
+<p>手順の差分を記載する。</p>
+
+<h2>Berksfile</h2>
+
+<pre><code class="ruby"># Berksfile
+source 'https://supermarket.chef.io'
+
+cookbook 'nodejs', '~&gt; 2.4.4'
+cookbook 'git', '~&gt; 4.3.5'
+cookbook 'sqlite', '~&gt; 1.1.2'
+cookbook 'vim', '~&gt; 2.0.0'
+</code></pre>
+
+<h2>カスタムクックブック</h2>
+
+<pre><code class="ruby"># metadata.rb
+
+depends "nodejs"
+</code></pre>
+
+<pre><code class="ruby"># default.rb
+
+# iconvモジュールインストール時に発生する下記エラーの対処
+# error: ‘REPLACE_INVALID_UTF8’ is not a member of ‘v8::String’
+# https://github.com/nodejs/nan/issues/414
+nodejs_npm "npm"
+
+nodejs_npm "cheerio-httpcli"
+nodejs_npm "request"
+nodejs_npm "xml2js"
+nodejs_npm "phantomjs"
+nodejs_npm "casperjs"
+nodejs_npm 'iconv'
+nodejs_npm 'jschardet'
+nodejs_npm 'iconv-lite'
+nodejs_npm 'json5'
+nodejs_npm 'cson'
+nodejs_npm 'js-yaml'
+nodejs_npm 'ini'
+nodejs_npm 'comma-separated-values'
+nodejs_npm 'coffee-script'
+nodejs_npm 'sqlite3'
+nodejs_npm 'cheerio'
+nodejs_npm 'level'
+nodejs_npm 'pdfkit'
+nodejs_npm 'officegen'
+nodejs_npm 'twit'
+nodejs_npm 'fb'
+nodejs_npm 'apac'
+nodejs_npm 'node-flickr'
+nodejs_npm 'youtube-node'
+nodejs_npm 'bayes'
+nodejs_npm 'mecab-lite'
+nodejs_npm 'svm'
+nodejs_npm 'topojson'
+
+# for PhantomJS &amp; CasperJS
+%w{freetype fontconfig}.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
+
+%w{gdal wget curl}.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
+</code></pre>
+
+<h2>Vagrantfile</h2>
+
+<pre><code class="ruby"># Vagrantfile
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "puphpet/centos65-x64"
+
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  config.omnibus.chef_version = :latest
+
+  config.vm.provision "chef_zero" do |chef|
+      chef.cookbooks_path = ["chef-repo/cookbooks", "chef-repo/site-cookbooks"]
+
+      chef.add_recipe "mecab"
+      chef.add_recipe "nodejs"
+      chef.add_recipe "git"
+      chef.add_recipe "sqlite"
+      chef.add_recipe "vim"
+
+      chef.add_recipe "base"
+  end
+end
+</code></pre>
+
+<h2>感想</h2>
+
+<ul>
+<li>nodejsモジュールでは、Node.jsのバージョンを指定することはできないらしい。今回実行したところ、v0.10.36がインストールされた。</li>
+<li>npmパッケージのインストールをレシピにまとめることができた。</li>
+</ul>
+
+
+<p>iconvモジュールのインストールで<code>'REPLACE_INVALID_UTF8’ is not a member of ‘v8::String'</code>というエラーが発生した。理由はよくわかっていないが、事前に<code>npm install -g npm</code>を実行することでエラーを回避することができた。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[VagrantとChefでNode.jsの開発環境を構築する]]></title>
+    <link href="http://succi0303.github.io/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef/"/>
+    <updated>2015-12-30T02:25:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef</id>
+    <content type="html"><![CDATA[<p>『JS+Node.jsによるWebクローラー／ネットエージェント[開発テクニック]』のサンプルを試すためにNode.jsの開発環境を作った。本の紹介に従ってVagrantを使用し、CentOS6.5の環境を作った。ゲストOSの設定を手動でポチポチするのは面倒だったので、プロヴィジョニングにChefを使用した。</p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930">JS+Node.jsによるWebクローラー/ネットエージェント開発テクニック</a></p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930"><img src="https://images-fe.ssl-images-amazon.com/images/I/61DHJGf1uSL._SL160_.jpg" /></a></p>
+
+<p>基本的には以前に書いた<a href="https://succi0303.github.io/blog/2015/02/21/setup-rails-environment-with-vagrant-and-chef/">VagrantとChefでRailsの開発環境を構築する</a>と同じ。主な変更点は以下の通り。</p>
+
+<ul>
+<li>knife soloを使わない。</li>
+<li>Chef soloではなく、Chef zeroを使う。</li>
+</ul>
+
+
+<h2>利用したツールのバージョン</h2>
+
+<ul>
+<li>ゲストOS: OSX El Capitan 10.11.2</li>
+<li>VirtualBox 5.0.10 r104061</li>
+<li>Vagrant 1.7.4</li>
+<li>Chef Development Kit Version: 0.10.0</li>
+</ul>
+
+
+<h2>事前準備</h2>
+
+<p>VagrantとVirtualBox、ChefDKをインストールする。</p>
+
+<pre><code class="bash">brew install vagrant
+brew cask install virtualbox
+brew cask install chefdk
+</code></pre>
+
+<p>Vagrantのプラグインをインストールする。</p>
+
+<pre><code class="bash">vagrant plugin install vagrant-omnibus
+</code></pre>
+
+<p>プロジェクトのディレクトリを作成する。</p>
+
+<pre><code class="bash">mkdir node_crawler
+cd node_crawler
+</code></pre>
+
+<h2>クックブックの配置</h2>
+
+<p>クックブックのリポジトリを作成する。</p>
+
+<pre><code class="bash">chef generate repo chef-repo
+cd chef-repo
+</code></pre>
+
+<p>Berksfileを作成する。</p>
+
+<pre><code class="ruby"># Berksfile
+source "https://supermarket.chef.io"
+
+cookbook 'nvm', '~&gt; 0.1.7'
+cookbook 'git', '~&gt; 4.3.5'
+cookbook 'vim', '~&gt; 2.0.0'
+</code></pre>
+
+<p>berkshelfを実行する。</p>
+
+<pre><code class="bash">berks vendor cookbooks
+</code></pre>
+
+<p>カスタムクックブックを作成する。</p>
+
+<pre><code class="bash">knife cookbook create base -o site-cookbooks
+</code></pre>
+
+<p>metadata.rbに<code>depends 'nvm'</code>を追加する。</p>
+
+<p><code>default.rb</code>を編集する。</p>
+
+<pre><code class="ruby">nvm_install 'v0.12.4' do
+  from_source false
+  alias_as_default true
+  action :create
+end
+</code></pre>
+
+<h2>vagrant up</h2>
+
+<p>Vagrantfileを作成する。</p>
+
+<pre><code class="bash">cd ../
+vagrant init
+</code></pre>
+
+<p>Vagrantfileを編集する。</p>
+
+<ul>
+<li>boxは<code>puphpet/centos65-x64</code>を使用する。</li>
+<li>provisionerにchef_zeroを指定する。</li>
+</ul>
+
+
+<pre><code class="ruby"># Vagrantfile
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "puphpet/centos65-x64"
+
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  config.omnibus.chef_version = :latest
+
+  config.vm.provision "chef_zero" do |chef|
+      chef.cookbooks_path = ["chef-repo/cookbooks", "chef-repo/site-cookbooks"]
+
+      chef.add_recipe 'nvm'
+      chef.add_recipe 'git'
+      chef.add_recipe 'vim'
+
+      chef.add_recipe 'base'
+  end
+end
+</code></pre>
+
+<p>vagrant up。</p>
+
+<pre><code class="bash">vagrant up
+</code></pre>
+
+<p>しばらく待てばプロヴィジョニングと仮想マシンの起動が完了する。</p>
+
+<h2>動作確認</h2>
+
+<p>仮想マシンにログインしてnvmとnodeがインストールされていることを確認する。</p>
+
+<pre><code class="bash">vagrant ssh
+
+$ nvm --version
+0.30.1
+$ node -v
+v0.12.4
+</code></pre>
+
+<h2>感想</h2>
+
+<ul>
+<li>Chef関連の手順は、あまり情報を追っていないこともあり、正直よくわからない。</li>
+<li>Chef soloとChef zeroの違いがよくわからない。</li>
+<li><code>chef/centos-6.5</code>のboxがなくなっていて驚いた。</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[美人時計の現在時刻のURLを返すHubotスクリプトを作った]]></title>
+    <link href="http://succi0303.github.io/blog/2015/03/21/hubot-bijin-tokei/"/>
+    <updated>2015-03-21T15:22:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2015/03/21/hubot-bijin-tokei</id>
+    <content type="html"><![CDATA[<p>現在時刻の<a href="http://www.bijint.com">美人時計</a>の画像URLを返すHubotスクリプト「<a href="https://github.com/succi0303/hubot-bijin-tokei" title="succi0303/hubot-bijin-tokei · GitHub">hubot-bijin-tokei</a>」を作った。</p>
+
+<p>仕様は以下の通り。</p>
+
+<pre><code class="CoffeeScript"># Description:
+#   Hubot responds current time bijin-tokei URL
+#
+# Dependencies:
+#   None
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   hubot bijin now - Hubot responds bijin-tokei URL of 'all japan'
+#   美人なう - 'hubot bijin now'と同じ。
+#   hubot bijin now [local] - Hubot responds bijin-tokei URL of 'local'
+#   美人なう、[local] - 'hubot bijin now [local]'と同じ。
+#
+</code></pre>
+
+<h2>使用イメージ</h2>
+
+<p>使用イメージ。</p>
+
+<pre><code class="bash">user1&gt;&gt; hubot bijin now
+hubot&gt;&gt; 現在の時刻は15時46分です。[全国版]
+        http://www.bijint.com/assets/pict/jp/pc/1546.jpg
+
+user1&gt;&gt; hubot bijin now tokyo
+hubot&gt;&gt; 現在の時刻は15時48分です。[地域版: tokyo]
+        http://www.bijint.com/assets/pict/tokyo/pc/1548.jpg
+
+user1&gt;&gt; 美人なう
+hubot&gt;&gt; 現在の時刻は15時49分です。[全国版]
+        http://www.bijint.com/assets/pict/jp/pc/1549.jpg
+
+user1&gt;&gt; 美人なう、東京
+hubot&gt;&gt; 現在の時刻は15時51分です。[地域版: tokyo]
+        http://www.bijint.com/assets/pict/tokyo/pc/1551.jpg
+</code></pre>
+
+<h2>インストール方法</h2>
+
+<p>Hubotのプロジェクトディレクトリで以下のコマンドを実行する。</p>
+
+<pre><code class="bash">npm install succi0303/hubot-bijin-tokei --save
+</code></pre>
+
+<p><code>external-scripts.json</code>に以下の内容を追加する。</p>
+
+<pre><code class="JSON">[
+  "hubot-bijin-tokei"
+]
+</code></pre>
+
+<h2>メモ</h2>
+
+<p>システムのタイムゾーンに関わらず、日本時間の時刻を返す。<a href="https://www.heroku.com">Heroku</a>でHubotを動かすことを想定している。Herokuのタイムゾーンを変更するのが面倒だと思ったので、スクリプトで日本時間を返すようにした。</p>
+
+<p><code>[local]</code>は、URLに含まれるアルファベットを指定することが基本であるが、日本語の名称を指定することも出来る。日本語の<code>美人なう</code>は、<code>respond</code>ではなく<code>hear</code>で設定しているため、Hubotへの呼びかけでなくても反応する。IMEがONの時に、IMEをいじることなく、そのまま<code>美人なう、北海道</code>などと入力することを想定している。</p>
+
+<h2>リポジトリ</h2>
+
+<p>Githubでソースコードを公開しています。</p>
+
+<ul>
+<li><a href="https://github.com/succi0303/hubot-bijin-tokei" title="succi0303/hubot-bijin-tokei · GitHub">succi0303/hubot-bijin-tokei</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[VagrantとChefでRailsの開発環境を構築する]]></title>
+    <link href="http://succi0303.github.io/blog/2015/02/21/setup-rails-environment-with-vagrant-and-chef/"/>
+    <updated>2015-02-21T09:20:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2015/02/21/setup-rails-environment-with-vagrant-and-chef</id>
+    <content type="html"><![CDATA[<p>手元のMacBookにRailsの開発環境を構築した。手順と調べたことを記録しておく。</p>
+
+<h2>構築する環境について</h2>
+
+<p>開発用の仮想環境を作り、ゲストOSでRailsを動作させる。仮想環境の管理には<a href="https://www.vagrantup.com" title="Vagrant">Vagrant</a>を使用する。ゲストOSの環境構築は<a href="https://www.chef.io/chef/" title="Chef | IT automation for speed and awesomeness | Chef">Chef</a>を使用して自動化する。開発時のファイルの編集は、Vagrantの共有フォルダ機能を使用してホスト側で行うものとする。</p>
+
+<p>ホスト側の環境はOSX Yosemite 10.10.2である。</p>
+
+<p>ゲストOSにはCentOSを使用する。Rubyはrbenvで管理する。システムにインストールするgemはbundlerのみとし、railsを含めその他のgemはすべてbundlerで管理する。</p>
+
+<p>環境を構築するに当たって、事前にウェブの関連情報を探してみた。ヒットする情報の量は多いが、内容がまちまちなようである。同じことをするにも複数のやり方があったり、ツールのバージョンによってやり方が異なったりするようである。今回は、できる限り現時点の最新の公式情報に則り、公式のツールを使うことを目標とする。</p>
+
+<h2>Vagrantのインストールと設定</h2>
+
+<p>VagrantとVirtualBoxをインストールする。VagrantはHomebrewで、VirtualBoxはHomebrew Caskでインストールできる。</p>
+
+<pre><code class="bash">brew install vagrant
+brew cask install virtualbox
+</code></pre>
+
+<p>Vagrantのプラグインである「<a href="https://github.com/chef/vagrant-omnibus" title="chef/vagrant-omnibus · GitHub">vagrant-omnibus</a>」をインストールする。vagrant-omnibusは、ゲストOSのChefの状態を確認し、指定したバージョンのChefをゲストOSに自動的にインストールするか、または指定したバージョンにアップデートしてくれる。</p>
+
+<pre><code class="bash">vagrant plugin install vagrant-omnibus
+</code></pre>
+
+<p>プロジェクト用のディレクトリを作る。</p>
+
+<pre><code class="bash">mkdir project
+cd project
+</code></pre>
+
+<p><code>vagrant init</code>で、Vagrantfileを作成する。</p>
+
+<pre><code class="bash">vagrant init
+</code></pre>
+
+<p>Vagrantfileを編集する。Vagrantfileの設定方法は、<a href="https://docs.vagrantup.com/v2/" title="Vagrant Documentation">Vagrantの公式ドキュメント</a>を参考にする。</p>
+
+<pre><code class="ruby"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "chef/centos-6.5"
+
+  config.vm.network "forwarded_port", guest: 3000, host: 4000
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+
+  config.omnibus.chef_version = :latest
+
+  config.vm.provision "chef_solo" do |chef|
+    chef.cookbooks_path = ["chef-repo/cookbooks", "chef-repo/site-cookbooks"]
+
+    chef.add_recipe "nodejs"
+    chef.add_recipe "rbenv::default"
+    chef.add_recipe "rbenv::ruby_build"
+    chef.add_recipe "sqlite"
+    chef.add_recipe "vim"
+
+    chef.add_recipe "base"
+  end
+
+end
+</code></pre>
+
+<p><code>config.vm.box</code>について。どこからBoxを調達するのが良いかという点であるが、<a href="https://docs.vagrantup.com/v2/boxes.html" title="Boxes - Vagrant Documentation">公式ドキュメントの解説</a>では、<a href="https://atlas.hashicorp.com/boxes/search" title="Discover Vagrant Boxes | Atlas by HashiCorp">ATLASのDiscover Vagrant Boxesページ</a>が案内されている。<a href="https://atlas.hashicorp.com/help" title="Atlas by HashiCorp">ATLAS</a>は、Vagrantの開発主体である<a href="https://hashicorp.com" title="HashiCorp">HashiCorp</a>が運営するサービスであるらしい。また、<code>config.vm.box</code>に、<code>&lt;ユーザ名&gt;/&lt;Box名&gt;</code>の形式で設定を記述した場合、同名のBoxがローカルに存在しなければ、自動的にATLASのサイトを検索して、該当するBoxをダウンロードするようになっている。</p>
+
+<p>今回は、Discover Vagrant Boxesを「centos」で検索した時に最もダウンロード数が多い「<a href="https://atlas.hashicorp.com/chef/boxes/centos-6.5" title="chef/centos-6.5 | Atlas by HashiCorp">chef/centos-6.5</a>」を使うこととする。</p>
+
+<p><code>config.omnibus.chef_version</code>は、vagrant-omnibusのための設定である。<code>chef_version = :latest</code>は、最新版のChefを表す。</p>
+
+<p><code>config.vm.provision "chef_solo"</code>以下に、Chef Soloによるプロビジョニングの設定を記述する。設定方法は、<a href="https://docs.vagrantup.com/v2/provisioning/chef_solo.html" title="Chef Solo - Provisioning - Vagrant Documentation">公式のドキュメント</a>が詳しい。<code>cookbooks_path</code>に適用するクックブックの保存先ディレクトリを指定する。<code>add_recipe</code>で実行するレシピを指定する。</p>
+
+<h2>Chef関連ツールのインストール</h2>
+
+<p>Chef関連のツールをインストールする。Chefは関連するツールが様々あり、多くはgemを使ってインストールすることができる。<a href="https://learn.chef.io" title="Learn Chef">Chefの公式の案内</a>によると、これからChefの利用を始める場合には、<a href="https://downloads.chef.io/chef-dk/" title="Chef Development Kit | Chef Downloads | Chef">Chef Development Kit(ChefDK)</a>を利用することが推奨されているようである。</p>
+
+<p>ChefDKには、Chef、Berkshelf、Test Kitchen、ChefSpec、Foodcritic、Chef client、Knife、Ohai、Chef zeroが含まれている。それらのツール群と、それらのツール群が依存するRubyの処理系をパッケージにまとめたものが、Chef Development Kitであるらしい。</p>
+
+<p>ChefDKは、Homebrew-Caskでインストールすることができる。</p>
+
+<pre><code class="bash">brew cask install chefdk
+</code></pre>
+
+<p>ChefDKには、<a href="http://matschaffer.github.io/knife-solo/" title="knife-solo">knife solo</a>が含まれていない。ChefDKのインストール後に、knife-soloを個別にインストールする。<code>chef gem</code>コマンドを使うことで、ChefDKの処理系に対してknife-soloをインストールすることができる。</p>
+
+<pre><code class="bash">chef gem install knife-solo
+</code></pre>
+
+<h2>クックブックの準備</h2>
+
+<p><code>knife solo init</code>でChef関連ファイルのひな形を作る。</p>
+
+<pre><code class="bash">knife solo init chef-repo
+cd chef-repo
+</code></pre>
+
+<p>Berksfileを編集する。Berksfileは、サードパーティのクックブックを、依存関係を解決しつつまとめて管理するツールである<a href="http://berkshelf.com" title="Berkshelf">Berkshelf</a>の設定ファイルである。Berkshelfで取得できるクックブックは、<a href="https://supermarket.chef.io" title="Welcome - The resource for Chef cookbooks - Chef Supermarket">Chef Supermarket</a>で探すことができる。</p>
+
+<pre><code class="ruby">source "https://supermarket.chef.io"
+
+cookbook 'nodejs', '~&gt; 2.2.0'
+cookbook 'rbenv', '~&gt; 1.7.1'
+cookbook 'sqlite', '~&gt; 1.1.0'
+cookbook 'vim', '~&gt; 1.1.2'
+</code></pre>
+
+<p><code>berks vendor</code>で、必要なクックブックをcookbooksディレクトリ配下に取得する。</p>
+
+<pre><code class="bash">berks vendor cookbooks
+</code></pre>
+
+<p><code>knife cookbook create</code>で、新しいクックブックのひな形を、site-cookbooks配下に作成する。</p>
+
+<pre><code class="bash">knife cookbook create base -o site-cookbooks
+</code></pre>
+
+<p>新しく作成したクックブックのメタデータ(<code>site-cookbooks/base/metadata.rb</code>)とレシピファイル(<code>site-cookbooks/base/recipes/default.rb</code>)を編集する。</p>
+
+<p>メタデータには、依存するクックブックを<code>depends</code>で指定する。今回は、rbenvクックブックが提供するリソースを使用するため、<code>depends 'rbenv'</code>を指定する。</p>
+
+<pre><code class="ruby"># metadata.rb
+depends 'rbenv'
+</code></pre>
+
+<pre><code class="ruby">rbenv_ruby "2.1.5" do
+  ruby_version "2.1.5"
+  global true
+end
+
+rbenv_gem "bundler" do
+  ruby_version "2.1.5"
+  version "1.8.2"
+end
+
+service 'iptables' do
+  action [:disable, :stop]
+end
+</code></pre>
+
+<p>Chef Supermarketのrbenvクックブックは、rbenvを自動的にインストールしてくれる。また、カスタムクックブックでruby本体とgemをインストールするための、<code>rbenv_ruby</code>リソースと、<code>rbenv_gem</code>リソースを提供してくれる。詳しい使い方は<a href="https://supermarket.chef.io/cookbooks/rbenv" title="rbenv versions">Chef Supermarketのrbenvのページ</a>で解説されている。<code>rbenv_ruby</code>を使って、Ruby 2.1.5をグローバルにインストールし、<code>rbenv_gem</code>を使って、bundlerをインストールする。</p>
+
+<p>chef/centos-6.5のBoxは、デフォルトではssh以外のほとんどの通信を遮断するように設定されている。ホストのブラウザからゲストOSのRailsにアクセスするために、ここではiptablesを無効にすることとする。</p>
+
+<h2>vagrant upからrails sの実行まで</h2>
+
+<p>事前の準備が完了したので、ここで<code>vagrant up</code>する。</p>
+
+<pre><code class="bash">cd ../
+vagrant up
+</code></pre>
+
+<p>初回の<code>vagrant up</code>時に、自動的にプロヴィジョニングが実行される。起動とプロヴィジョニングが完了したら、ゲストOSにログインし、プロヴィジョニングが正しく完了していることを確認する。</p>
+
+<pre><code class="bash">vagrant ssh
+# 以下はゲストOSでの操作
+sqlite3 -version
+node -v
+rbenv -v
+ruby -v
+bundler -v
+</code></pre>
+
+<p>次にRailsアプリを作成するが、その際にプロジェクトのディレクトリとして<code>/vagrant</code>を使用する。<code>/vagrant</code>は、ホスト側のVagrantfileが存在するディレクトリと自動的に共有設定されている。そのため、<code>/vagrant</code>に保存したファイルは、ホスト側から編集することが可能になる。</p>
+
+<p><code>/vagrant</code>ディレクトリに移動して、Gemfileを作る。</p>
+
+<pre><code class="bash">cd /vagrant
+bundle init
+</code></pre>
+
+<p>Gemfileを編集する。</p>
+
+<pre><code class="ruby">source 'https://rubygems.org'
+gem 'rails', '4.2.0'
+</code></pre>
+
+<p><code>bundle install</code>を実行する。</p>
+
+<pre><code class="bash">bundle install --path vendor/bundle
+</code></pre>
+
+<p><code>rails new</code>を実行する。Gemfileを上書きするか確認されるので、Yesを選択する。</p>
+
+<pre><code class="bash">bundle exec rails new .
+</code></pre>
+
+<p><code>rails s</code>で動作確認用のサーバを起動する。Rails 4.2で、ゲストOSのRailsにホスト側から接続する場合、<code>-b 0.0.0.0</code>を指定しなければ接続することが出来ない。<a href="http://railsguides.jp/4_2_release_notes.html">Rails 4.2のリリースノート</a>によると、Rails 4.2からrails serverのデフォルトホストが<code>0.0.0.0</code>から<code>localhost</code>に変更されたことが原因であるらしい。</p>
+
+<pre><code class="bash">bundle exec rails s -b 0.0.0.0
+</code></pre>
+
+<p>ホスト側のブラウザで<code>http://localhost:4000</code>にアクセスする(Vagrantのポートフォワードでホストの4000をゲストの3000にフォワードしているため)。Railsのトップ画面が表示される。</p>
+
+<p>以上で開発環境の構築は完了である。以降、<code>rails g</code>、<code>rails s</code>などRailsのタスク実行、マイグレーション、Gemfileを更新した時の<code>bundle install</code>、テストの実行は、ゲストOS側で実行する。また、バージョン管理はホスト側のプロジェクトディレクトリで<code>git init</code>して、基本的にはホスト側で行う。</p>
+
+<p>ホスト側でも<code>rails s</code>できるか、試しに実行してみたが、<code>already initialized constant APP_PATH</code>というワーニングが発生して、起動することは出来なかった。ゲストOS側、ホスト側を意識せずに、どちらでもRailsのタスクが実行できたら便利なのにと思う。</p>
+
+<h2>その他の話題：vagrant provisionが失敗する</h2>
+
+<p>vagrantのプロヴィジョン機能について。</p>
+
+<p>私の環境では、初回の<code>vagrant up</code>時のプロヴィジョンは成功するが、２回目以降の<code>vagrant provision</code>、<code>vagrant reload --provision</code>は、cookbookがゲストOSに正しく転送されず、必ず<code>Cookbook (hoge) not found</code>のエラーが発生する現象が起きている。</p>
+
+<p>本来、<code>cookbooks_path</code>で指定したパスが共有フォルダに設定されなければいけないところが、初回の<code>vagrant up</code>時以外は、該当のパスが共有フォルダに指定されないためにエラーが発生しているらしい。このエラーが発生した場合、<code>.vagrant</code>ディレクトリ以下の<code>.vagrant/machines/default/virtualbox/synced_folders</code>を削除して、<code>vagrant reload --provision</code>を実行すると、正常にプロヴィジョンすることができる。</p>
+
+<p>ひとまず上記の方法で回避はできているが、根本的な原因と解決策は不明である。誰かわかる人がいたら教えてください。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[非Railsの環境でActiveRecordのマイグレーションを利用する]]></title>
+    <link href="http://succi0303.github.io/blog/2015/02/06/active-record-migration-at-non-rails-environment/"/>
+    <updated>2015-02-06T04:53:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2015/02/06/active-record-migration-at-non-rails-environment</id>
+    <content type="html"><![CDATA[<p>非Railsの環境でActiveRecordのマイグレーションを使う方法を調べた。</p>
+
+<p>まず、ディレクトリ構造を作成する。<code>db/migrate/</code>ディレクトリ以下にマイグレーションファイルを配置することとする。<code>config/</code>ディレクトリ以下、<code>database.yml</code>にデータベース接続の設定を記述する。<code>log/</code>ディレクトリ以下、<code>migration.log</code>にマイグレーション実行時のログを出力する。</p>
+
+<pre><code class="bash">mkdir -p db/migrate config log
+</code></pre>
+
+<p><code>database.yml</code>にデータベース接続の設定を記述する。</p>
+
+<pre><code class="yaml"># database.yml
+adapter: sqlite3
+database: db/database.sqlite3
+</code></pre>
+
+<p>マイグレーションタスクを実行するための<code>Rakefile</code>を作成する。</p>
+
+<pre><code class="ruby"># Rakefile
+require 'active_record'
+require 'logger'
+
+task :default =&gt; 'db:migrate'
+
+namespace :db do
+  MIGRATIONS_DIR = "db/migrate"
+
+  desc "Migrate the database"
+  task :migrate =&gt; :environment do
+    ActiveRecord::Migrator.migrate(MIGRATIONS_DIR, ENV["VERSION"] ? ENV["VERSION"] : nil)
+  end
+
+  desc "Roll back the database schema to the previous version"
+  task :rollback =&gt; :environment do
+    ActiveRecord::Migrator.rollback(MIGRATIONS_DIR, ENV["STEP"] ? ENV["STEP"] : 1)
+  end
+
+  task :environment do
+    ActiveRecord::Base.establish_connection(YAML.load(File.open('config/database.yml')))
+    ActiveRecord::Base.logger = Logger.new(File.open('log/migration.log', 'a'))
+  end
+end
+</code></pre>
+
+<p><code>db/migrate/</code>ディレクトリ以下にマイグレーションファイルを作成する。マイグレーションファイルのファイル名は、<code>001_create_tests.rb</code>というようにマイグレーションの順番を表す数字で始める。また、ファイル名とマイグレーションファイル内のクラス名を合わせる。</p>
+
+<pre><code class="ruby"># 001_create_tests.rb
+class CreateTests &lt; ActiveRecord::Migration
+  def self.up
+    create_table :tests do |t|
+      t.string :name
+
+      t.timestamps
+    end
+  end
+
+  def self.down
+    drop_table :tests
+  end
+end
+</code></pre>
+
+<p><code>rake</code>を実行すると、マイグレーションが実行される。<code>rake VERSION=x</code>でバージョンを指定したマイグレーションを実行する。また、<code>rake rollback</code>を実行すると、ロールバックが実行される。<code>rake rollback STEP=x</code>で、ステップ数を指定したロールバックを実行する。</p>
+
+<h3>参考にしたウェブサイト</h3>
+
+<p>以下のウェブサイトを参考にした。</p>
+
+<ul>
+<li><a href="http://easyramble.com/active-record-migration-for-sqlite3.html" title="ActiveRecord 単体をインストールして sqlite3 データベースのマイグレーション | EasyRamble">ActiveRecord 単体をインストールして sqlite3 データベースのマイグレーション | EasyRamble</a></li>
+<li><a href="http://blog.aizatto.com/2007/05/27/activerecord-migrations-without-rails/" title="ActiveRecord Migrations Without Rails | Strange Symphonies">ActiveRecord Migrations Without Rails | Strange Symphonies</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

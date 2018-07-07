@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[prime factor]]></title>
+  <link href="http://succi0303.github.io/atom.xml" rel="self"/>
+  <link href="http://succi0303.github.io/"/>
+  <updated>2018-07-07T09:34:47+00:00</updated>
+  <id>http://succi0303.github.io/</id>
+  <author>
+    <name><![CDATA[succi0303]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA["The Cucumber Book, 2nd Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/07/read-the-cucumber-book-2nd-edition/"/>
+    <updated>2018-07-07T03:33:22+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/07/read-the-cucumber-book-2nd-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;The Cucumber Book, 2nd Edition"を読んだ。</p>
+
+<p>ビヘイビア駆動開発のためのテストツール、cucumberの解説書である。</p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Developers-ebook/dp/B06XR5S98S?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B06XR5S98S">The Cucumber Book: Behaviour-Driven Development for Testers and Developers</a></p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Developers-ebook/dp/B06XR5S98S?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B06XR5S98S"><img src="https://images-fe.ssl-images-amazon.com/images/I/51h4PzZ3wDL._SL160_.jpg" /></a></p>
+
+<p>私が初めて読み通した英語の書籍が、確かこの本の1st Editionだったと思う。1st Edtionと2nd Editionの違いは、各種ツールの最新版（cucumber 2.4、Rails 5、RSpec 3.5)に対応した点のみのようである。</p>
+
+<p>cucumberの特徴は、Gherkinと呼ばれるシステムの振る舞いを記述する書式である。cucumberはGherkinを解釈して自動的にテストを実行する。</p>
+
+<p>Gherkinは、プログラム言語よりも一般言語に近く、ノンプログラマが読み書きできるように設計されている。そこで、システムの開発者=プログラマではなく、システムの利用者=顧客、プロダクトオーナーにGherkinの仕様を書いてもらうことで、仕様の齟齬をなくし、受入テストを自動化してしまおうというのがcucumberの思想である。</p>
+
+<p>現実のプロジェクトに適用するには相当の面倒を伴うと思うが、まずは開発者がビヘイビア駆動の考え方を学ぶ教材として、優れたツールだと思っている。</p>
+
+<p>TDD、BDD系の書籍は写経しながらテストを実行して、自分で結果を確認できるのが楽しい。言語はRubyだし、息抜きとしてさらっと読むことができた。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Tmux 2"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/03/read-tmux-2/"/>
+    <updated>2018-07-03T07:03:07+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/03/read-tmux-2</id>
+    <content type="html"><![CDATA[<p>&ldquo;tmux 2"を読んだ。</p>
+
+<p>ターミナルマルチプレクサ、tmuxの解説本である。2012年出版の"tmux"の第2版であるが、2016年の出版であり、最新情報という訳ではない。</p>
+
+<p><a href="https://www.amazon.co.jp/tmux-2-Productive-Mouse-Free-Development/dp/1680502212?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502212">tmux 2: Productive Mouse-Free Development</a></p>
+
+<p><a href="https://www.amazon.co.jp/tmux-2-Productive-Mouse-Free-Development/dp/1680502212?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502212"><img src="https://images-fe.ssl-images-amazon.com/images/I/413SRHn9MyL._SL160_.jpg" /></a></p>
+
+<p>改版による変更点は以下の通りである。</p>
+
+<ul>
+<li>tmux 2.3への対応</li>
+<li>Windows 10、Windows Subsystem for Linuxへのインストール</li>
+<li>&ldquo;Chapter 2, Configuring tmux"、設定の追加、変更
+
+<ul>
+<li>アクティブなペインを特定する</li>
+<li>アップデートされたビジュアルスタイルの設定方法への対応</li>
+<li>無効になった設定の削除</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 3, Scripting Customized tmux Environments&rdquo;
+
+<ul>
+<li>Tmuxinatorのアップデートされた命令への対応</li>
+<li>Tmuxinatorの新しい設定フォーマットへの対応</li>
+<li>Tmuxinatorからtmuxのスクリプトをエクスポートする方法を追加</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 4, Working With Text and Buffers&rdquo;
+
+<ul>
+<li>LinuxとMacのシステムクリップボードへのアクセス方法の変更</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 5, Pair Programming with tmux&rdquo;
+
+<ul>
+<li>SSH鍵の生成方法の追加</li>
+<li>tmateの紹介</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 6, Workflow"、セクションの追加
+
+<ul>
+<li>カレントディレクトリを維持してペインを開く</li>
+<li>特定の設定を分離する</li>
+<li>Vimとシームレスに統合する</li>
+<li>プラグインによる拡張</li>
+</ul>
+</li>
+</ul>
+
+
+<p>手元の<code>.tmux.conf</code>は旧版を元に設定していたので、今回読んだ新版の内容にアップデートした。</p>
+
+<p>悩ましいのは旧版を元にQiitaに投稿した記事「達人に学ぶ.tmux.confの基本設定」である。ありがたいことに、あちらの記事は今も結構な勢いで「いいね」を集めているが、今回"tmux 2"を読んで、記事の設定内容が古くなっていることを実感した。古い情報を拡散し続けている状況が、少々心苦しい。</p>
+
+<p>今更ではあるが、近いうちにQiitaの記事を"tmux 2"対応に更新することを計画中である。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[「プログラマのためのDocker教科書第2版」を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/06/03/read-docker-textbook-for-programmers-2nd-edition/"/>
+    <updated>2018-06-03T13:38:09+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/06/03/read-docker-textbook-for-programmers-2nd-edition</id>
+    <content type="html"><![CDATA[<p>「プログラマのためのDocker教科書第2版」を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E7%AC%AC2%E7%89%88-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4798153222?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798153222">プログラマのためのDocker教科書 第2版 インフラの基礎知識&amp;コードによる環境構築の自動化</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E7%AC%AC2%E7%89%88-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4798153222?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798153222"><img src="https://images-fe.ssl-images-amazon.com/images/I/5130HDgosML._SL160_.jpg" /></a></p>
+
+<p>Docker入門以前のインフラの基礎から始まり、Dockerの基本、Docker Composeによる複数コンテナ管理、Docker Machineによるマルチホスト管理、Google Cloud PlatformとKubernetesを使ったクラウド環境のDockerオーケストレーションという流れ。</p>
+
+<p>Kubernetesの日本語での読み方、書き方が気になっていたが、「クーバーネティス」と紹介されていた。念のため「クーバーネティス」で検索してみたところ、いくつかのIT系ニュースサイトで「クーバーネティス」表記を見つけた。それなりに市民権のある表記であるらしい。</p>
+
+<p>一応こんな動画も見つけたけれど、まぁ大体合っているか。</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=uMA7qqXIXBk">How Do You Pronounce Kubernetes? And What Is It? - YouTube</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Docker in Action"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/05/30/read-docker-in-action/"/>
+    <updated>2018-05-30T07:48:57+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/05/30/read-docker-in-action</id>
+    <content type="html"><![CDATA[<p>&ldquo;Docker in Action"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Action-Jeff-Nickoloff/dp/1633430235?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1633430235">Docker in Action</a></p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Action-Jeff-Nickoloff/dp/1633430235?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1633430235"><img src="https://images-fe.ssl-images-amazon.com/images/I/51q1IkCdKhL._SL160_.jpg" /></a></p>
+
+<p>Dockerの基礎を紹介する本である。先日読んだ"Docker for Developers"は、Dockerを開発環境で利用することに焦点を当てた本だった。それと比べると、"Docker in Action"はもう少し全体的、正統的なDockerの入門書である。</p>
+
+<p>全体の構成は３つに分かれている。</p>
+
+<ul>
+<li>Part 1. Keeping a Tidy Computer</li>
+<li>Part 2. Packaging Software for Distribution</li>
+<li>Part 3. Multi-Container and Multi-Host Environments</li>
+</ul>
+
+
+<p>Part 1は、Dockrおよびコンテナの概要、基本コマンド、ボリューム、ネットワークについて。Part 2は、Dockerfileの作成方法を含むイメージの作成、リポジトリの基本、プライベートなリポジトリの構築方法について。Part 3は、Docker Compose、Docker Machine、Swarmについて、という流れである。</p>
+
+<h2>WHY IS DOCKER IMPORTANT?</h2>
+
+<p>Part 1の冒頭で、「なぜDockerが重要なのか」について４つの理由が紹介されていたのでまとめておく。</p>
+
+<h3>1. Dockerはコンテナによる抽象化をもたらす</h3>
+
+<p>抽象化により複雑な事柄をシンプルに取り扱うことが可能になる。コンテナにより抽象化された環境において、システム管理者はインストールに伴う複雑性を考慮する必要がなく、ただどのアプリケーションをインストールしたいかを考えるだけでよくなる。Dockerは、全ての人にコンテナを利用可能にする点で重要なツールである。</p>
+
+<h3>2. Dokcerはコミュニティの強い後押しを受けている</h3>
+
+<p>Amazon、Microsoft、Googleのような企業がDockerの適用を強く推し進めている。現時点でそれらの企業は独自の技術を開発するよりもDockerを推進する立場で足並みを揃えている。</p>
+
+<h3>3.Dockerはアプリストア的なるものを実現する</h3>
+
+<p>Dockerはアプリケーションのインストールを劇的にシンプルにする。さらにDockerはクロスプラットフォームで利用できる。全てのスマートフォン、コンピュータが同じアプリストアを共有する。そんな仕組みをDockerなら実現することができる。</p>
+
+<h3>4. Dockerはより先進的な分離の仕組みである</h3>
+
+<p>コンテナ技術はより先進的な分離(isolation)の仕組みである。分離の仕組みを通じて、コンピュータをよりセキュアにする取り組みが進められている。コンテナ技術は10年以上前から存在していたもので、広く受け入れられるまでに長い時間を要したことは恥ずかしいことだと言える。この技術をシンプルに取り扱えるようした点でDockerはグレイトである。</p>
+
+<p>アプリストア云々の話題の中で、コンテナ技術が浸透することによってOSの違いが意識されなくなっていくという指摘があり、印象に残った。確かに、今私はmacOSを使っているけれど、Dockerがまともに使えるならWindowsでも問題ないと思えるし、今度PCを買い替える時には本当にそういう理由でMacから離れることもあるかもしれない。</p>
+
+<p>Part 1のボリューム、ネットワークの部分をもう少しきちんと理解したいと思っている。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Docker for Developers, 2nd Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/05/18/read-docker-for-developers-2nd-edition/"/>
+    <updated>2018-05-18T01:43:35+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/05/18/read-docker-for-developers-2nd-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;Docker for Developers, 2nd Edition"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Developers-2nd-Architect-Print/dp/1940111560?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1940111560">Docker for Developers, 2nd Edition: PHP[Architect] Print Edition</a></p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Developers-2nd-Architect-Print/dp/1940111560?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1940111560"><img src="https://images-fe.ssl-images-amazon.com/images/I/51bjH-3dlQL._SL160_.jpg" /></a></p>
+
+<h2>本の概要</h2>
+
+<p>この本は、Dockerを、仮想化による開発環境の置き換えとして考えている人に向けて書かれている、ということである。</p>
+
+<p>コンテナの概念、基本操作、カスタムイメージの作成、Docker Composeの解説の後、PHPのアプリケーションをコンテナ環境で開発する方法が紹介されている。</p>
+
+<h2>Docker本を読む動機</h2>
+
+<p>手元の開発環境をDocker化できないかと思っている。</p>
+
+<p>現在、開発環境には、Vagrantと構成管理ツールを組み合わせてVM環境を使用している。</p>
+
+<p>構成管理ツールは、以前はChefを使っていたが、少し前にAnsibleに乗り換えた。ChefでもAnsibleでも自動化スクリプトを書くことはそれなりに楽しかったが、少々飽きを感じていて、もう少し楽をしたいと思っている。</p>
+
+<p>最近、自分用のPCをCore M3のMacBook'12に買い換えた。以前はCore i7のMacBookPro'13を使っていたので結構なスペックダウンである。日常的な利用にはMacBook'12でほとんど不満はないが、流石にボコボコとVMを立てるのは厳しい感じである。コンテナなら負荷を減らせるのではないかと思っている。</p>
+
+<h2>感想</h2>
+
+<p>単純なスクリプトを実行するだけなら、実行環境のイメージをpullして<code>docker run</code>するだけで良い。</p>
+
+<p>gemなど依存するライブラリがある場合は、Dockerfileを書いてライブラリ込みのイメージをビルドし、ホストのディレクトリをマウントして、コンテナ内で実行する。</p>
+
+<p>必要なことは、だいたいあっけなく実現できることがわかった。</p>
+
+<p>手始めに、このブログのOctopress環境をコンテナ化したいと思っているが、いざやってるとどうやって実現すれば良いかよく分からない。</p>
+
+<p>もう少し情報を収集しようと思う。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Foundations for Data Analytics With Python"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/05/05/read-foundations-for-analytics-with-python/"/>
+    <updated>2018-05-05T02:18:56+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/05/05/read-foundations-for-analytics-with-python</id>
+    <content type="html"><![CDATA[<p>&ldquo;Foundation for Analytics with Python"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Foundations-Analytics-Python-Non-Programmer-Hacker/dp/1491922532?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491922532">Foundations for Analytics with Python: From Non-Programmer to Hacker</a></p>
+
+<p><a href="https://www.amazon.co.jp/Foundations-Analytics-Python-Non-Programmer-Hacker/dp/1491922532?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491922532"><img src="https://images-fe.ssl-images-amazon.com/images/I/51QAoOOCKsL._SL160_.jpg" /></a></p>
+
+<p>日頃からスプレッドシートでデータを扱っているがプログラミングの経験が無い人向けに、プログラミングによるデータ処理の手引きをする本である。</p>
+
+<p>最初に、環境構築を含めてPythonの基礎を押さえた後、一般的なデータ処理の解説に続く。対象となるデータ処理は、CSV、Excel、データベースの処理、図表の作成、統計処理である。最後の章では、スケジューリングによる自動実行の設定方法が紹介されている。</p>
+
+<p>図表の作成以降はオマケに近く、CSV、Excel、データベースの処理がメインのコンテンツであると感じた。それぞれ、行／列のフィルタリング、複数ファイルの結合など、ケースごとにサンプルコードが掲載され、サンプルコードの内容が細かく解説されている。特徴として、生のPythonコードに加えて、同じ内容をPandasを使って記述したコードが併記されている。</p>
+
+<p>サンプルコードが充実している点が嬉しかった。ファイルの読み書きのコードを指が覚えるくらい写経したため、簡単なファイル処理はリファレンスを見なくても書けるようになった。</p>
+
+<p>Pandasのサンプルコードは、ほぼ掲載されているだけで解説らしい解説はされていない。詳細を知りたければ、"Python for Data Analysis"を読め、とのことである。しかし、解説されなくて
+も、<code>DataFrame</code>の便利さはなんとなく伝わってきた。</p>
+
+<p>データ処理のプログラミングが少し楽しくなってきたので、次は案内に従って"Python for Data Analysis"を読むか、少し方向性を変えてRに手を出してみようかと思っている。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Making Data Visual"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/04/05/read-making-data-visual/"/>
+    <updated>2018-04-05T10:56:17+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/04/05/read-making-data-visual</id>
+    <content type="html"><![CDATA[<p>&ldquo;Making Data Visual"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Making-Data-Visual-Practical-Visualization/dp/1491928468?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491928468">Making Data Visual: A Practical Guide to Using Visualization for Insight</a></p>
+
+<p><a href="https://www.amazon.co.jp/Making-Data-Visual-Practical-Visualization/dp/1491928468?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491928468"><img src="https://images-fe.ssl-images-amazon.com/images/I/51rdESHnoKL._SL160_.jpg" /></a></p>
+
+<p>&ldquo;Data Visualizaition&rdquo; = 「データをビジュアルで表現すること」に関する本である。業務でデータ分析に関わる可能性が出てきたことがあり、予習のつもりで読んでみた。</p>
+
+<p>一般的なデータ分析の本は、データを集めさえすればビジュアル化はできる前提で書かれている。一方、ビジュアル化に関する本は、読者がビジュアル化すべき明確な課題をすでに持っていることが前提とされている。この本は、その両方を課題と考える人のための本である、とのことである。</p>
+
+<p>この本の特徴は、ビジュアル化による問題解決のプロセスに着目している点にあるとのこと。ここで言うプロセスとは、高いレベルの疑問を具体的なデータ分析のタスクに落とし込み、それらをビジュアルで表現することを通して、理解を深め、新たな気づきを得る一連の流れを指している。</p>
+
+<p>全体の構成は、最初に上記プロセスの概要と実践方法、次にビジュアル化の基本テクニックの紹介、最後に２つのケーススタディを通してプロセスと基本テクニックの応用方法を確認する形になっている。</p>
+
+<p>ケーススタディの２番目が、個人的には興味深かった。生物学の研究にData Visualizationの専門家が参加し、課題を分析して適切なビジュアル表現を提供する。その結果から研究メンバーが気づきを得て、新たな疑問が生まれ、研究が進展するという内容である。いわゆるデータ分析の専門家というのは、こんなように価値を提供するのだなというストーリーをイメージすることできた。</p>
+
+<p>データ分析の最初の一冊として、選んで正解の本だったと思う。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Head First Python"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/02/10/read-head-first-python/"/>
+    <updated>2018-02-10T09:26:25+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/02/10/read-head-first-python</id>
+    <content type="html"><![CDATA[<p>“Head First Python”を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Head-First-Python-Brain-Friendly-Guide/dp/1491919531?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491919531">Head First Python: A Brain-Friendly Guide</a></p>
+
+<p><a href="https://www.amazon.co.jp/Head-First-Python-Brain-Friendly-Guide/dp/1491919531?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491919531"><img src="https://images-fe.ssl-images-amazon.com/images/I/513GXqfvg-L._SL160_.jpg" /></a></p>
+
+<p>Head FirstシリーズのPython入門書である。</p>
+
+<p>安定のクオリティという感じ。充実した内容である。ただ、正直なところ、個人的には冗長な感じがしてしまい、後半は読み飛ばしてしまった。</p>
+
+<p>言語の本については、自分には、もう少し簡潔な本や固くて深い本のほうが面白く読めるらしい、ということが今回の発見だった。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Think Python, 2nd Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/01/03/read-think-python-2nd-edition/"/>
+    <updated>2018-01-03T07:36:55+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/01/03/read-think-python-2nd-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;Think Python, 2nd Edition"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Think-Python-Like-Computer-Scientist/dp/1491939362?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491939362">Think Python: How to Think Like a Computer Scientist</a></p>
+
+<p><a href="https://www.amazon.co.jp/Think-Python-Like-Computer-Scientist/dp/1491939362?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491939362"><img src="https://images-fe.ssl-images-amazon.com/images/I/51CxdWNJ%2BOL._SL160_.jpg" /></a></p>
+
+<p>Pythonの入門書を読むつもりで選んだ本だったが、実際の内容はPythonによるプログラミングの入門書だった。</p>
+
+<blockquote><p>The goal of this book is to teach you to think like a computer scientist.</p></blockquote>
+
+<p>とのことである。</p>
+
+<p>プログラミングの入門書としては、少ないページ数の割に骨太なものだと思う。オブジェクト指向プログラミングがメインではあるけれど、関数プログラミング（純粋関数の概念など）についても触れられている。また、プログラムを設計するスタンスや、一般的なデバッグのポイントが解説されていたりする。プログラミング全般のおさらいという感じで読むことができた。</p>
+
+<p>一方、Comprehension、GeneratorなどPython独自の機能については、最後の方でほんの少し紹介されているだけだった。次はもう少しPythonの特徴にフォーカスした本を読みたい。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[2017年に読んだ本]]></title>
+    <link href="http://succi0303.github.io/blog/2017/12/30/read-book-list-2017/"/>
+    <updated>2017-12-30T01:28:40+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/12/30/read-book-list-2017</id>
+    <content type="html"><![CDATA[<p>2017年に読んだ本をまとめてみる。</p>
+
+<h2>読んだ本一覧</h2>
+
+<h3>1月</h3>
+
+<ul>
+<li>Undestanding Computation</li>
+<li>Amazon Web Servicesではじめる新米プログラマのためのクラウド超入門</li>
+<li>Head First Object-Oriented Analysis and Design</li>
+</ul>
+
+
+<h3>2月</h3>
+
+<ul>
+<li>AWS for Admins for Dummies</li>
+</ul>
+
+
+<h3>3月</h3>
+
+<ul>
+<li>97 Things Every Software Architect Should Know</li>
+</ul>
+
+
+<h3>4月</h3>
+
+<ul>
+<li>ITエンジニアのためのデータベース再入門</li>
+<li>浜村渚の計算ノート7さつめ 悪魔とポタージュスープ</li>
+<li>プログラマ脳を鍛える数学パズル</li>
+<li>Bulletproof SSL and TLS</li>
+</ul>
+
+
+<h3>5月</h3>
+
+<ul>
+<li>プロフェッショナルSSL/TLS</li>
+<li>LPIC Level3 303 教科書+問題集</li>
+</ul>
+
+
+<h3>6月</h3>
+
+<ul>
+<li>Linuxセキュリティ標準教科書</li>
+<li>Linuxサーバセキュリティ徹底入門</li>
+</ul>
+
+
+<h3>7月</h3>
+
+<ul>
+<li>High Performance Browser Networking</li>
+<li>IPSec 2nd Edition</li>
+<li>Learning HTTP/2</li>
+<li>Real World HTTP</li>
+<li>High Performance Web Site</li>
+<li>IPv6 Essentials, 3rd Edition</li>
+<li>Identity and Data Security for Web Development</li>
+<li>The Go Programming Language</li>
+</ul>
+
+
+<h3>8月</h3>
+
+<ul>
+<li>Head First Design Patterns</li>
+<li>マスタリングTCP/IP入門編第5版</li>
+<li>TAC ネットワークスペシャリスト 合格テキスト</li>
+<li>TAC ネットワークスペシャリスト 合格トレーニング</li>
+</ul>
+
+
+<h3>9月</h3>
+
+<ul>
+<li>ネスペの基礎力</li>
+<li>ネスペ27 礎</li>
+<li>ネスペ26 道</li>
+<li>ネスペの剣 25</li>
+</ul>
+
+
+<h3>10月</h3>
+
+<ul>
+<li>ポケットスタディ ネットワークスペシャリスト第2版</li>
+<li>ネットワークスペシャリスト ポケット攻略本</li>
+<li>The Way of the Web Tester</li>
+<li>Software Defined Networking with OpenFlow</li>
+<li>キクタン英会話【基礎編】</li>
+</ul>
+
+
+<h3>11月</h3>
+
+<ul>
+<li>Ansible Up and Running, 2nd Edition</li>
+<li>Implementing DevOps with Ansible 2</li>
+<li>ITIL Foundation Essentials</li>
+<li>キクタン英会話【発展編】</li>
+</ul>
+
+
+<h3>12月</h3>
+
+<ul>
+<li>Practical Monitoring</li>
+<li>Azureテクノロジ入門 2018</li>
+<li>Mastering Ruby Closures</li>
+<li>Computer Networking Problems and Solutions (読書中)</li>
+</ul>
+
+
+<h2>振り返り</h2>
+
+<p>6月にLPICレベル3(303 Security)、10月にネットワークスペシャリストの受験を予定していたため、それらを意識しながら読書を進めた。7月は諸事情あって読書三昧だった。昨年から今年にかけて、ネットワークについて、下位レイヤから上位レイヤまで総ざらいすることができたと思う。</p>
+
+<p>一番印象に残った本は、"Bulletproof SSL and TLS"である。複雑な内容をコンパクトにまとめていて、なおかつこの分かり易さはすごい。細かいニュアンスを確認したくて、邦訳版の「プロフェッショナルSSL/TLS」も読んでしまった。</p>
+
+<p>また、年末に読んだ"Mastering Ruby Closures"は、久しぶりに言語仕様の話題に触れることができて、とても楽しかった。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Mastering Ruby Closures"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/12/24/read-mastering-ruby-closures/"/>
+    <updated>2017-12-24T13:19:57+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/12/24/read-mastering-ruby-closures</id>
+    <content type="html"><![CDATA[<p>&ldquo;Mastering Ruby Closures"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Mastering-Ruby-Closures-Blocks-Lambdas-ebook/dp/B0773ZMG58?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B0773ZMG58">Mastering Ruby Closures: A Guide to Blocks, Procs, and Lambdas</a></p>
+
+<p><a href="https://www.amazon.co.jp/Mastering-Ruby-Closures-Blocks-Lambdas-ebook/dp/B0773ZMG58?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B0773ZMG58"><img src="https://images-fe.ssl-images-amazon.com/images/I/518RcO9WjwL._SL160_.jpg" /></a></p>
+
+<p>クロージャの観点からRubyのBlock、Proc、Lambdaを解説する本である。</p>
+
+<p>1章でクロージャの基本を押さえ、2章でBlock、3章でProcとLambdaが解説されている。4章は、3章までの知識を使って自前のLazy Enumerableを実装する。</p>
+
+<p>わかりそうでわからないクロージャの定義が簡潔に説明されている。本文中でのクロージャの定義は以下の通り。</p>
+
+<blockquote><ol>
+<li>It needs to be a function&hellip;</li>
+<li>whose body references some variable that&hellip;</li>
+<li>is declared in a parent scope.</li>
+</ol>
+</blockquote>
+
+<p>もうひとつスッキリしない言葉として「レキシカルスコープ」があったが、これも一文で説明されている。</p>
+
+<blockquote><p>lexical scoping says that whichever assignment to a variable that is the closest gets that value.</p></blockquote>
+
+<p>残念ながら、こちらはあまりピンと来なかった。なんとなくは分かるのだけれども。</p>
+
+<p>100ページ程度のさっと読める本であるけれど内容は濃いと思う。4章をちゃんと理解したいので、もう一度読み返すつもりである。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[「Azureテクノロジ入門2018」を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/12/24/read-azure-technology-primer-2018/"/>
+    <updated>2017-12-24T00:28:07+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/12/24/read-azure-technology-primer-2018</id>
+    <content type="html"><![CDATA[<p>「Azureテクノロジ入門2018」を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Azure%E3%83%86%E3%82%AF%E3%83%8E%E3%83%AD%E3%82%B8%E5%85%A5%E9%96%80-%E9%81%94%E9%83%8E%E3%80%81%E7%9C%9F%E5%A3%81-%E6%98%8C%E5%B9%B8%E3%80%81%E8%97%A4%E6%9C%AC-%E6%B5%A9%E4%BB%8B%E3%80%81%E4%BD%90%E8%97%A4-%E7%9B%B4%E7%94%9F%E3%80%81%E5%AE%89%E7%B4%8D/dp/4822253635?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4822253635">Azureテクノロジ入門 2018</a></p>
+
+<p><a href="https://www.amazon.co.jp/Azure%E3%83%86%E3%82%AF%E3%83%8E%E3%83%AD%E3%82%B8%E5%85%A5%E9%96%80-%E9%81%94%E9%83%8E%E3%80%81%E7%9C%9F%E5%A3%81-%E6%98%8C%E5%B9%B8%E3%80%81%E8%97%A4%E6%9C%AC-%E6%B5%A9%E4%BB%8B%E3%80%81%E4%BD%90%E8%97%A4-%E7%9B%B4%E7%94%9F%E3%80%81%E5%AE%89%E7%B4%8D/dp/4822253635?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4822253635"><img src="https://images-fe.ssl-images-amazon.com/images/I/51CiMhIvwOL._SL160_.jpg" /></a></p>
+
+<p>Azureの基本と全体像の説明の後、IaaS、データベース・データ分析、PaaS、アイデンティティ管理、Azure Stackについてそれぞれ簡単に紹介されている。</p>
+
+<p>「Azureテクノロジ入門2016」のアップデート版のようである。出版は2017年11月17日。2017年9月末頃までのAzureが対象となっている。</p>
+
+<p>大手クラウドは何しろサービスの種類が膨大なので、現在の全体像を手軽に把握できる本があるのは貴重だと思う。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Practical Monitoring"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/12/23/read-practical-monitoring/"/>
+    <updated>2017-12-23T01:48:58+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/12/23/read-practical-monitoring</id>
+    <content type="html"><![CDATA[<p>&ldquo;Practical Monitoring"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Practical-Monitoring-Effective-Strategies-World/dp/1491957352?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491957352">Practical Monitoring: Effective Strategies for the Real World</a></p>
+
+<p><a href="https://www.amazon.co.jp/Practical-Monitoring-Effective-Strategies-World/dp/1491957352?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1491957352"><img src="https://images-fe.ssl-images-amazon.com/images/I/51qLBZbOmqL._SL160_.jpg" /></a></p>
+
+<p>システム監視に関する実践的な戦略を解説する本である。</p>
+
+<p>前半でシステム監視のアンチパターンと望ましいデザインパターンを示した後、後半では監視対象ごとの具体論が示されている。</p>
+
+<p>統合監視ツール（Nagiosなど）で全てを管理しようとせずに、適材適所でツールを使い分けましょう。まず、SaaSなどの既製のツールを検討しましょう、自作するのは既製品に満足できなくなってから。</p>
+
+<p>ユーザ目線の監視から始めましょう。まず、ビジネスのKPIを見える化しましょう。</p>
+
+<p>あたりが要点になろうかと思いました。</p>
+
+<p>監視と言えば、なんとなく、CPUやディスクの使用率を見て閾値を超えたらアラートを飛ばすといったことをイメージしますが、それらについて一段上のレイヤから考える視座を得ることができたと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["ITIL Foundation Essentials"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/11/18/read-itil-foundation-essentials/"/>
+    <updated>2017-11-18T03:34:49+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/11/18/read-itil-foundation-essentials</id>
+    <content type="html"><![CDATA[<p>&ldquo;ITIL Foundation Essentials"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/ITIL-Foundation-Essentials-Exam-Facts/dp/1849283990?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1849283990">ITIL Foundation Essentials: The Exam Facts You Need</a></p>
+
+<p><a href="https://www.amazon.co.jp/ITIL-Foundation-Essentials-Exam-Facts/dp/1849283990?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1849283990"><img src="https://images-fe.ssl-images-amazon.com/images/I/41bjuvh-HUL._SL160_.jpg" /></a></p>
+
+<p>ITILファンデーション（日本語）を取得するついでに読んでみた。</p>
+
+<p>ITILは、英語で読んだ方が分かり易いものの最たるものだと思った。</p>
+
+<p>ITILファンデーション自体は本当に基礎的な内容で、目新しいことはあまりなかったけれど、「普段の自分の仕事はサービス全体の中ではこのプロセス、機能に当たるのだなぁ、このプロセスはあんまり仕組み化ができていないなぁ」みたいな考え方ができ、有用だと感じた。</p>
+
+<p>試験は無事に合格しました。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Implementing DevOps With Ansible 2"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/11/11/read-implementing-devops-with-ansible-2/"/>
+    <updated>2017-11-11T05:33:09+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/11/11/read-implementing-devops-with-ansible-2</id>
+    <content type="html"><![CDATA[<p>&ldquo;Implementing DevOps with Ansible 2"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Implementing-DevOps-Ansible-step-step-ebook/dp/B06WGVWZT5?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B06WGVWZT5">Implementing DevOps with Ansible 2: A step-by-step guide to automating all DevOps stages with ease using Ansible</a></p>
+
+<p><a href="https://www.amazon.co.jp/Implementing-DevOps-Ansible-step-step-ebook/dp/B06WGVWZT5?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B06WGVWZT5"><img src="https://images-fe.ssl-images-amazon.com/images/I/51VB-MYFzJL._SL160_.jpg" /></a></p>
+
+<p>&ldquo;Ansible Up and Running"のついでに読んでみた。タイトルの通り、DepOpsの文脈の中でAnsibleをどのように使うかという観点の本である。</p>
+
+<p>CI/CDのパイプラインにおけるAnsibleの役割として、以下の6つの例が挙げられている。</p>
+
+<ol>
+<li>テスト環境のプロヴィジョニング</li>
+<li>デプロイ環境のプロヴィジョニング</li>
+<li>デプロイの実施</li>
+<li>デプロイ後のアプリケーションのローンチ</li>
+<li>障害発生時の環境のロールバック</li>
+<li>プロダクション環境へのインクリメンタルなリリース（rollout）</li>
+</ol>
+
+
+<p>上記の他にAnsibleとVagrantを連携してローカルの開発環境を構築する例も紹介されている。</p>
+
+<p>また、Ansibleの運用に関するベストプラクティスとして以下の9つが挙げられている。</p>
+
+<ol>
+<li>Ansibleのplaybookは常にバージョン管理する</li>
+<li>Ansibleのplaybookを製品（artifacts）に同梱する</li>
+<li>環境ごとにinventoryファイルを準備する</li>
+<li>開発環境とプロダクション環境のデプロイに可能な限り同じplaybookを使う</li>
+<li>インフラ周りの同期にAnsibleを活用する</li>
+<li>playbookを極力シンプルに保つ</li>
+<li>再利用可能な自動化の実現のためにroleを利用する</li>
+<li>環境（開発、QA、プロダクション）を常に同期させる</li>
+</ol>
+
+
+<p>これくらい活用できたら楽しいだろうな。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Ansible Up and Running, 2nd Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/11/04/read-ansible-up-and-running-2nd-edition/"/>
+    <updated>2017-11-04T12:10:45+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/11/04/read-ansible-up-and-running-2nd-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;Ansible Up and Running, 2nd Edition"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Ansible-Automating-Configuration-Management-Deployment-ebook/dp/B0743VR1MC?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B0743VR1MC">Ansible: Up and Running: Automating Configuration Management and Deployment the Easy Way</a></p>
+
+<p><a href="https://www.amazon.co.jp/Ansible-Automating-Configuration-Management-Deployment-ebook/dp/B0743VR1MC?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B0743VR1MC"><img src="https://images-fe.ssl-images-amazon.com/images/I/51Lg-azavKL._SL160_.jpg" /></a></p>
+
+<p>Ansibleの入門書である。Ansibleの基本的な設定方法の他、Vagrant、AWS EC2、Dockerとの連携方法が紹介されている。</p>
+
+<p>試しにvagrant + ansibleで、rbenvを使用してruby環境を構築してみた。</p>
+
+<p><code>Vagrantfile</code>で<code>ansible</code>プロヴィジョナを指定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Vagrantfile</span>
+</span><span class='line'><span class="no">VAGRANTFILE_API_VERSION</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="no">VAGRANTFILE_API_VERSION</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;ubuntu/trusty64&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;ansible&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">ansible</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">ansible</span><span class="o">.</span><span class="n">playbook</span> <span class="o">=</span> <span class="s2">&quot;playbook.yml&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>playbook.yml</code>に手順を記述する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ruby environment for octopress</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">all</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">vars</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">ruby_version</span><span class="p-Indicator">:</span> <span class="s">&quot;2.3.1&quot;</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">rbenv_home</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ansible_env.HOME}}/.rbenv&quot;</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">bash_profile_path</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">ansible_env.HOME</span><span class="nv"> </span><span class="s">}}/.bash_profile&quot;</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">install packages</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pkg={{ item }} update_cache=yes cache_valid_time=3600</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">become</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">True</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">libssl-dev</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">libreadline-dev</span>
+</span><span class='line'>        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">zlib1g-dev</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git checkout rbenv</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">git</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">repo</span><span class="p-Indicator">:</span> <span class="s">&quot;https://github.com/rbenv/rbenv.git&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">dest</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">rbenv_home</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">make sure ~/.bash_profile exists</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">file</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">bash_profile_path</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">state</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">touch</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">add PATH for rbenv to ~/.bash_profile</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">lineinfile</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">bash_profile_path</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">line</span><span class="p-Indicator">:</span> <span class="s">&#39;export</span><span class="nv"> </span><span class="s">PATH=&quot;$HOME/.rbenv/bin:$PATH&quot;&#39;</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">add rbenv init to ~/.bash_profile</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">lineinfile</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">bash_profile_path</span><span class="nv"> </span><span class="s">}}&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">line</span><span class="p-Indicator">:</span> <span class="s">&#39;eval</span><span class="nv"> </span><span class="s">&quot;$(rbenv</span><span class="nv"> </span><span class="s">init</span><span class="nv"> </span><span class="s">-)&quot;&#39;</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">git checkout ruby-build</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">git</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">repo</span><span class="p-Indicator">:</span> <span class="s">&quot;https://github.com/rbenv/ruby-build.git&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">dest</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">rbenv_home</span><span class="nv"> </span><span class="s">}}/plugins/ruby-build&quot;</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">check if ruby {{ ruby_version }} is installed via rbenv</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">shell</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/bin/bash -cl &quot;rbenv versions&quot;</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">register</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">result</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">install ruby {{ ruby_version }} via rbenv if not installed</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">shell</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/bin/bash -cl &quot;rbenv install {{ ruby_version }}&quot;</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">when</span><span class="p-Indicator">:</span> <span class="s">&quot;ruby_version</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">result.stdout&quot;</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">set ruby {{ ruby_version }} as global</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">shell</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/bin/bash -cl &quot;rbenv global {{ ruby_version }} &amp;&amp; rbenv rehash&quot;</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">install bundler</span>
+</span><span class='line'>      <span class="l-Scalar-Plain">gem</span><span class="p-Indicator">:</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">bundler</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">state</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">latest</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">executable</span><span class="p-Indicator">:</span> <span class="s">&quot;{{</span><span class="nv"> </span><span class="s">rbenv_home</span><span class="nv"> </span><span class="s">}}/shims/gem&quot;</span>
+</span><span class='line'>        <span class="l-Scalar-Plain">user_install</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">False</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>手軽な環境を、それ相応に手軽に準備できるところに好印象を覚えた。</p>
+
+<p>chefと比べると手書き感が強く、自分で頑張らないといけない感じはする。その分、ブラックボックスが少なく、何かあっても調べればなんとかなるという面があると思う。</p>
+
+<p>vagrantの<code>ansible_local</code>プロヴィジョナを使えば、ホスト側にAnsibleをインストールする必要がなくなるらしい。そちらについてもう少し調べてみたい。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Software Defined Networking With OpenFlow"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/10/27/read-software-defined-networking-with-openflow/"/>
+    <updated>2017-10-27T08:46:41+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/10/27/read-software-defined-networking-with-openflow</id>
+    <content type="html"><![CDATA[<p>“Software Defined Networking with OpenFlow”を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Software-Defined-Networking-OpenFlow-Azodolmolky-ebook/dp/B00G958192?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00G958192">Software Defined Networking with OpenFlow</a></p>
+
+<p><a href="https://www.amazon.co.jp/Software-Defined-Networking-OpenFlow-Azodolmolky-ebook/dp/B00G958192?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00G958192"><img src="https://images-fe.ssl-images-amazon.com/images/I/51jIgvNAWWL._SL160_.jpg" /></a></p>
+
+<p>先日、情報処理技術者試験のネットワークスペシャリストを受験した。噂によると、今年の午後２問題の問１はSDNを題材にした超難問であったようである。幸い、私は問２を選択した。SDNという時点で全く知見がなく、話にならないと思ったためである。試験後に試しに問１に挑戦してみたが、やはりさっぱりわからなかった。</p>
+
+<p>SDNについて多少の知識をつければ解けるようになるのだろうかということで、今回それらしい本を探して読んでみた。まず「OpenFlowをメインにしたSDNの入門書」というものが意外と見つからなかったが、その中でドンピシャなタイトルの一冊だった。</p>
+
+<p>そういう経緯で読んだわけであるが、正直なところよくわからなかったというのが感想である。私の前提知識が足りないのか、本の書き方が悪いのか、SDNの世界がまだ発展途上であるのか、その辺りが原因ではないかと思われる。</p>
+
+<p>SDNの話題ではないが、OpenStackの概要紹介を興味深く読んだので、機会があればOpenStackについてもう少し追ってみたいと思った。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["The Way of the Web Tester"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/10/27/read-the-way-of-the-web-tester/"/>
+    <updated>2017-10-27T03:58:12+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/10/27/read-the-way-of-the-web-tester</id>
+    <content type="html"><![CDATA[<p>“The Way of The Web Tester”を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Way-Web-Tester-Beginners-Automating-ebook/dp/B01MF92GTC?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B01MF92GTC">The Way of the Web Tester: A Beginner&rsquo;s Guide to Automating Tests</a></p>
+
+<p><a href="https://www.amazon.co.jp/Way-Web-Tester-Beginners-Automating-ebook/dp/B01MF92GTC?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B01MF92GTC"><img src="https://images-fe.ssl-images-amazon.com/images/I/512ZGsfn7BL._SL160_.jpg" /></a></p>
+
+<p>「初めての自動テスト」というタイトルで日本語訳が出版されている。</p>
+
+<p><a href="https://www.amazon.co.jp/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88-%E2%80%95Web%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88%E5%9F%BA%E7%A4%8E-Jonathan-Rasmusson/dp/4873118166?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4873118166">初めての自動テスト ―Webシステムのための自動テスト基礎</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88-%E2%80%95Web%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88%E5%9F%BA%E7%A4%8E-Jonathan-Rasmusson/dp/4873118166?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4873118166"><img src="https://images-fe.ssl-images-amazon.com/images/I/51ANm6GnYPL._SL160_.jpg" /></a></p>
+
+<p>ウェブシステムを対象とした自動テストの入門書である。</p>
+
+<p>前半では、自動テストをUIテスト、インテグレーションテスト、ユニットテスト（テストピラミッドと呼ぶ）に分類し、それぞれのテストの概要と実践方法が解説されている。</p>
+
+<p>また、テストピラミッドの組み合わせ方について説明されている。テスト項目はできるだけ下のレイヤに落とし込み、上のレイヤのテストを作りすぎない、など。</p>
+
+<p>後半では、テストコードのプログラミングテクニックが解説されており、最終章ではテスト駆動開発が紹介されている。</p>
+
+<p>自動テスト？当たり前でしょう。という人にとっては、本当に当たり前のことをまとめただけの本であると思う。一方、これまでテストコードがないレガシーなシステムを抱えていて、これから自動テストに取り組もうという現場の人にとっては、貴重な情報源になると思う。</p>
+
+<p>とくに、これまで自動テストに理解がなかった人たちに、正しい形の自動テストを布教する教材として有用になることを、個人的には期待している。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[「ネスペ 27 礎」、「ネスペ 26 道」、「ネスペの剣 25」を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/09/09/nesupe-27-26-25/"/>
+    <updated>2017-09-09T11:48:28+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/09/09/nesupe-27-26-25</id>
+    <content type="html"><![CDATA[<p>「ネスペ 27 礎」、「ネスペ 26 道」、「ネスペの剣 25」を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-27-%E7%A4%8E-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/dp/477418067X?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=477418067X">ネスペ 27 礎 -ネットワークスペシャリストの最も詳しい過去問解説 (情報処理技術者試験)</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-27-%E7%A4%8E-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/dp/477418067X?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=477418067X"><img src="https://images-fe.ssl-images-amazon.com/images/I/51p8YKFUPvL._SL160_.jpg" /></a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-26-%E9%81%93-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774172944?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774172944">ネスペ 26　道　－ネットワークスペシャリストの最も詳しい過去問解説 (情報処理技術者試験)</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-26-%E9%81%93-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774172944?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774172944"><img src="https://images-fe.ssl-images-amazon.com/images/I/51hISRhQOIL._SL160_.jpg" /></a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%81%BA%E3%81%AE%E5%89%A325-~%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774163899?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774163899">ネスぺの剣25 ~ネットワークスペシャリストの最も詳しい過去問解説 (情報処理技術者試験)</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%81%BA%E3%81%AE%E5%89%A325-~%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774163899?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774163899"><img src="https://images-fe.ssl-images-amazon.com/images/I/51P%2BydYf78L._SL160_.jpg" /></a></p>
+
+<p>各年度のネットワークスペシャリスト試験の午後問題を、まるごと一冊使ってみっちり解説する本である。</p>
+
+<p>サブタイトルに「最も詳しい」とある通り、本当に詳しく、懇切丁寧に解説してくれる。このネスペシリーズは基本的には過去問の解説本ではあるけれど、単なる試験対策に留まらずにネットワーク知識の応用の面で良い勉強になったと思う。</p>
+
+<p>試験勉強の進捗としては、午後１までは現時点で何とかなりそうな気がしている。午後２を確実に取るにはもう一歩レベルアップが必要。9月中にその辺りを対策したい。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[「ネスペの基礎力」を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2017/09/02/foundation-of-network-specialist/"/>
+    <updated>2017-09-02T00:01:02+00:00</updated>
+    <id>http://succi0303.github.io/blog/2017/09/02/foundation-of-network-specialist</id>
+    <content type="html"><![CDATA[<p>「ネスペの基礎力」を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A%E3%81%AE%E5%9F%BA%E7%A4%8E%E5%8A%9B-%E3%83%97%E3%83%A9%E3%82%B920%E7%82%B9%E3%81%AE%E5%8D%88%E5%BE%8C%E5%AF%BE%E7%AD%96-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774189863?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774189863">ネスペの基礎力 -プラス20点の午後対策 (情報処理技術者試験)</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A%E3%81%AE%E5%9F%BA%E7%A4%8E%E5%8A%9B-%E3%83%97%E3%83%A9%E3%82%B920%E7%82%B9%E3%81%AE%E5%8D%88%E5%BE%8C%E5%AF%BE%E7%AD%96-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774189863?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774189863"><img src="https://images-fe.ssl-images-amazon.com/images/I/512VkqLIVuL._SL160_.jpg" /></a></p>
+
+<p>秋の情報処理技術者試験でネットワークスペシャリストの取得を狙っている。</p>
+
+<p>過去問を解いてみたところ、午前問題はあまり問題ないけれど、午後問題になるとわかっているつもりでも回答が書けないことが多くあった。</p>
+
+<p>基礎力が足りていないのだと思う。ということで、そのものズバリの「ネスペの基礎力」というこの本を読んでみた。</p>
+
+<p>レイヤ別の基礎技術とセキュリティ、その他の関連技術（負荷分散など）が概要レベルで解説されている。</p>
+
+<p>知らない話題も結構あった。知っている話題についても、改めてそれぞれのネットワーク技術の中での位置付けを確認することができた。</p>
+
+<p>資格試験の醍醐味は、試験勉強を通して特定分野の知識を体系的に整理できる点だと思う。その点でこういう本が存在することはとてもありがたい。</p>
+]]></content>
+  </entry>
+  
+</feed>

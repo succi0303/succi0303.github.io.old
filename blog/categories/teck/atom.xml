@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Teck | prime factor]]></title>
+  <link href="http://succi0303.github.io/blog/categories/teck/atom.xml" rel="self"/>
+  <link href="http://succi0303.github.io/"/>
+  <updated>2018-07-07T09:34:47+00:00</updated>
+  <id>http://succi0303.github.io/</id>
+  <author>
+    <name><![CDATA[succi0303]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[グラフ描画ライブラリChartkickをRailsで使用する]]></title>
+    <link href="http://succi0303.github.io/blog/2014/05/09/chartkick-on-rails-project/"/>
+    <updated>2014-05-09T09:46:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2014/05/09/chartkick-on-rails-project</id>
+    <content type="html"><![CDATA[<p>Railsプロジェクトでグラフ描画用のライブラリ「<a href="http://chartkick.com/">Chartkick</a>」を使用する手順をまとめました。</p>
+
+<h2>Railsでグラフを描画する</h2>
+
+<p>Railsでグラフを描画する場合、「lazy_high_chart」「Chartkick」「Gruff」などのライブラリを利用することができます。</p>
+
+<ul>
+<li><a href="http://easyramble.com/graph-libraries-for-rails.html">Ruby on Rails で使えるグラフ・チャート用ライブラリまとめ | EasyRamble</a></li>
+</ul>
+
+
+<p>今回は、比較的簡単そうな「Chartkick」を使用してみました。</p>
+
+<ul>
+<li><a href="http://chartkick.com/">Chartkick</a></li>
+</ul>
+
+
+<h2>Chartkickの使用手順</h2>
+
+<ul>
+<li>Gemfileを編集する</li>
+<li>JavaScriptのライブラリを読み込む</li>
+<li>グラフ描画用のデータを準備する</li>
+<li>ヘルパーメソッドでグラフを描画する</li>
+</ul>
+
+
+<h2>1. Gemfileを編集する</h2>
+
+<p>Gemfileに<code>gem 'chartkick'</code>を追加します。</p>
+
+<pre><code class="ruby"># Gemfile
+gem "chartkick"
+</code></pre>
+
+<h2>2. JavaScriptのライブラリを読み込む</h2>
+
+<p>Chartkickを使用するためには、Chartkickのヘルパーメソッドを使用するより前にJavaScriptのライブラリを読み込む必要があります。ライブラリとして「Google Charts」を利用する場合、Google APIからファイルを読み込みます。</p>
+
+<p>ここでは<code>layouts/application.html.erb</code>のheadタグに<code>javascript_include_tag</code>を記述します。</p>
+
+<pre><code class="ruby"># layouts/application.html.erbのheadタグ内
+&lt;%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %&gt;
+</code></pre>
+
+<p>「Google Charts」の代わりに「<a href="http://www.highcharts.com/">High Charts</a>」を使用することもできるようです。</p>
+
+<h2>3. グラフ描画用のデータを準備する</h2>
+
+<p>グラフ描画用のデータは、配列かハッシュのいずれかの形式で準備します。</p>
+
+<p>たとえば、コントローラの中で以下のような形でデータを作成します。</p>
+
+<pre><code class="ruby"># charts_controller
+def index
+  # 配列の場合
+  @chart_data = [['2014-04-01', 60], ['2014-04-02', 65], ['2014-04-03', 64]]
+  # ハッシュの場合
+  @chart_data = {'2014-04-01' =&gt; 60, '2014-04-02' =&gt; 65, '2014-04-03' =&gt; 64}
+end
+</code></pre>
+
+<p>配列の1つめ(またはハッシュのkey)が横軸の値、配列の2つめ(またはハッシューのvalue)が縦軸の値になります。</p>
+
+<p>一般的にはモデルからデータを作成するはずですから、おおよそ以下のような形式になることが多いと思われます。</p>
+
+<pre><code class="ruby"># charts_controller
+def index
+  # 日ごとの件数
+  @chart_data = Model.order('date ASC').group(:date).count
+  # 日ごとの合計値
+  @chart_data = Model.order('date ASC').group(:date).sum(:value)
+end
+</code></pre>
+
+<h2>4. ヘルパーメソッドでグラフを描画する</h2>
+
+<p>ビューの中のグラフを表示したい場所にヘルパーメソッドを記述します。</p>
+
+<pre><code class="ruby">&lt;%= line_chart @chart_data %&gt;
+</code></pre>
+
+<p>準備したデータを渡すだけでグラフを描画することができます。上記の<code>line_chart</code>の他にグラフの種類ごとにヘルパーメソッドが準備されています。</p>
+
+<ul>
+<li>line_chart</li>
+<li>pie_chart</li>
+<li>column_chart</li>
+<li>bar_chart</li>
+<li>area_chart</li>
+<li>geo_chart</li>
+</ul>
+
+
+<p>詳細は<a href="http://chartkick.com/">公式ページ</a>を参照してください。</p>
+
+<h2>ヘルパーメソッドのオプション</h2>
+
+<p>ヘルパーメソッドにオプションを指定することで、見た目をカスタマイズすることができます。</p>
+
+<h3>グラフの高さを指定する</h3>
+
+<pre><code class="ruby">&lt;%= line_chart @chart_data, height: "500px" %&gt;
+</code></pre>
+
+<h3>グラフの最小値、最大値を指定する</h3>
+
+<pre><code class="ruby">&lt;%= line_chart @chart_data, min: 50, max: 100 %&gt;
+</code></pre>
+
+<h3>グラフの色を指定する</h3>
+
+<pre><code class="ruby">&lt;%= line_chart @chart_data, colors: ["pink", "#999"] %&gt;
+</code></pre>
+
+<h2>複数のグラフを重ねて表示する方法</h2>
+
+<p>複数のグラフを重ねて表示する場合は、ひとつひとつのグラフを表すハッシュを配列にしてヘルパーメソッドに渡します。グラフを表すハッシュは、<code>name</code>と<code>data</code>で構成します。<code>name</code>にはグラフを表す名前、<code>data</code>にはグラフ描画用のデータを指定します。<code>name</code>に指定した名前は、グラフの凡例に反映されます。</p>
+
+<pre><code class="ruby">&lt;%= line_chart [
+  { name: "グラフA", data: @data_a },
+  { name: "グラフB", data: @data_b }
+] %&gt;
+</code></pre>
+
+<p>以上です。</p>
+
+<h2>参考URL</h2>
+
+<ul>
+<li><a href="http://chartkick.com/">Chartkick</a></li>
+<li><a href="http://rubydoc.info/gems/chartkick/1.2.4/frames">Documentation for chartkick (1.2.4)</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Lifehack | prime factor]]></title>
+  <link href="http://succi0303.github.io/blog/categories/lifehack/atom.xml" rel="self"/>
+  <link href="http://succi0303.github.io/"/>
+  <updated>2018-07-07T09:34:47+00:00</updated>
+  <id>http://succi0303.github.io/</id>
+  <author>
+    <name><![CDATA[succi0303]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iMacのディスプレイをスリープするショートカットキー]]></title>
+    <link href="http://succi0303.github.io/blog/2013/01/01/shortcut-key-to-sleep-dispaly-on-imac/"/>
+    <updated>2013-01-01T07:01:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2013/01/01/shortcut-key-to-sleep-dispaly-on-imac</id>
+    <content type="html"><![CDATA[<p>年末年始のお休み中に自宅で映画を観たい。ということで、Apple TVを購入しました。</p>
+
+<p>Apple TVのセットアップを首尾よく完了し、部屋の照明を落として、iTunesに登録した映画を再生、そしてAir Playを実行、大画面で映画が始まる。しかし、大画面の隣で煌々と存在感を放つiMacのディスプレイ…。
+そんな経験ありませんか？僕はこの大晦日に経験しました。</p>
+
+<h2>iMacのディスプレイをスリープするショートカット</h2>
+
+<p>MacBookの場合、輝度調整のボタンで輝度を最低まで下げると、ディスプレイが真っ暗になります。でも、iMacの場合は輝度を最低まで下げても、少し暗くなるだけで真っ暗にはなりません。
+そんなわけで、どうしたものかといろいろ調べたところ、見つけました。
+「Ctrl+Shift+▲(取り出しボタン)」
+これでiMacのディスプレイをスリープさせることができます。
+このショートカットを使うと、たとえば、iMacの作業を中断して、少し席を離れる際にもささっと画面をスリープさせることができます。セキュリティ的にも望ましいし、ちょっとした節電にもなります。なかなか有用なショートカットではないかと思います。</p>
+
+<p>ちなみに大晦日に見た映画は<a href="http://www.musicline.de/de/product/Original+Cast+Wien+2005/Elisabeth-Das+Musical+Sammler+Edition/DVD-Video+Album///9120006682800">こちら</a>。ミュージカル「エリザベート」の2005年ウィーン・キャスト、DVDコレクターズ・エディション。ルイジ・ルキーニ役のセルカン・カヤが熱い。一度で良いからこの人のルキーニを生で観たいなぁ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Macでバックスラッシュを入力する方法]]></title>
+    <link href="http://succi0303.github.io/blog/2012/03/26/back-slash-on-mac/"/>
+    <updated>2012-03-26T15:04:00+00:00</updated>
+    <id>http://succi0303.github.io/blog/2012/03/26/back-slash-on-mac</id>
+    <content type="html"><![CDATA[<p>ものすごく基本的なことですが、はまってしまったのでメモしておきます。</p>
+
+<h2>optionを押しながら¥(円マーク)</h2>
+
+<p>Macでバックスラッシュを入力する時に「¥(円マーク)」をそのまま使うと、式展開されなかったり、エラーが発生したりします。</p>
+
+<pre><code class="ruby">"hogehoge¥n" #=&gt; "hogehoge¥n"
+</code></pre>
+
+<p>これを回避するためには、optionを押しながら「¥(円マーク)」を押します。すると、「(バックスラッシュ)」が入力されます。</p>
+
+<pre><code class="ruby">"hogehoge\n" #=&gt; "hogehoge"(改行)
+</code></pre>
+
+<p>Macでは、OSのレベルで円マークとバックスラッシュを区別しており、円マークとバックスラッシュは別の文字として扱われることがエラーの原因のようです。</p>
+
+<p>プログラミングの参考書では、「¥(円マーク)」でソースを記載していたりするので、見た目はまったく一緒なのに、Macで入力するとエラーが発生する!!という場合には、チェックしてみると良いかも知れません。</p>
+]]></content>
+  </entry>
+  
+</feed>

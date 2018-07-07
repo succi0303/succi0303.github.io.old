@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Book | prime factor]]></title>
+  <link href="http://succi0303.github.io/blog/categories/book/atom.xml" rel="self"/>
+  <link href="http://succi0303.github.io/"/>
+  <updated>2018-07-07T09:34:47+00:00</updated>
+  <id>http://succi0303.github.io/</id>
+  <author>
+    <name><![CDATA[succi0303]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA["The Cucumber Book, 2nd Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/07/read-the-cucumber-book-2nd-edition/"/>
+    <updated>2018-07-07T03:33:22+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/07/read-the-cucumber-book-2nd-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;The Cucumber Book, 2nd Edition"を読んだ。</p>
+
+<p>ビヘイビア駆動開発のためのテストツール、cucumberの解説書である。</p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Developers-ebook/dp/B06XR5S98S?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B06XR5S98S">The Cucumber Book: Behaviour-Driven Development for Testers and Developers</a></p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Developers-ebook/dp/B06XR5S98S?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B06XR5S98S"><img src="https://images-fe.ssl-images-amazon.com/images/I/51h4PzZ3wDL._SL160_.jpg" /></a></p>
+
+<p>私が初めて読み通した英語の書籍が、確かこの本の1st Editionだったと思う。1st Edtionと2nd Editionの違いは、各種ツールの最新版（cucumber 2.4、Rails 5、RSpec 3.5)に対応した点のみのようである。</p>
+
+<p>cucumberの特徴は、Gherkinと呼ばれるシステムの振る舞いを記述する書式である。cucumberはGherkinを解釈して自動的にテストを実行する。</p>
+
+<p>Gherkinは、プログラム言語よりも一般言語に近く、ノンプログラマが読み書きできるように設計されている。そこで、システムの開発者=プログラマではなく、システムの利用者=顧客、プロダクトオーナーにGherkinの仕様を書いてもらうことで、仕様の齟齬をなくし、受入テストを自動化してしまおうというのがcucumberの思想である。</p>
+
+<p>現実のプロジェクトに適用するには相当の面倒を伴うと思うが、まずは開発者がビヘイビア駆動の考え方を学ぶ教材として、優れたツールだと思っている。</p>
+
+<p>TDD、BDD系の書籍は写経しながらテストを実行して、自分で結果を確認できるのが楽しい。言語はRubyだし、息抜きとしてさらっと読むことができた。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Tmux 2"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/03/read-tmux-2/"/>
+    <updated>2018-07-03T07:03:07+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/03/read-tmux-2</id>
+    <content type="html"><![CDATA[<p>&ldquo;tmux 2"を読んだ。</p>
+
+<p>ターミナルマルチプレクサ、tmuxの解説本である。2012年出版の"tmux"の第2版であるが、2016年の出版であり、最新情報という訳ではない。</p>
+
+<p><a href="https://www.amazon.co.jp/tmux-2-Productive-Mouse-Free-Development/dp/1680502212?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502212">tmux 2: Productive Mouse-Free Development</a></p>
+
+<p><a href="https://www.amazon.co.jp/tmux-2-Productive-Mouse-Free-Development/dp/1680502212?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502212"><img src="https://images-fe.ssl-images-amazon.com/images/I/413SRHn9MyL._SL160_.jpg" /></a></p>
+
+<p>改版による変更点は以下の通りである。</p>
+
+<ul>
+<li>tmux 2.3への対応</li>
+<li>Windows 10、Windows Subsystem for Linuxへのインストール</li>
+<li>&ldquo;Chapter 2, Configuring tmux"、設定の追加、変更
+
+<ul>
+<li>アクティブなペインを特定する</li>
+<li>アップデートされたビジュアルスタイルの設定方法への対応</li>
+<li>無効になった設定の削除</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 3, Scripting Customized tmux Environments&rdquo;
+
+<ul>
+<li>Tmuxinatorのアップデートされた命令への対応</li>
+<li>Tmuxinatorの新しい設定フォーマットへの対応</li>
+<li>Tmuxinatorからtmuxのスクリプトをエクスポートする方法を追加</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 4, Working With Text and Buffers&rdquo;
+
+<ul>
+<li>LinuxとMacのシステムクリップボードへのアクセス方法の変更</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 5, Pair Programming with tmux&rdquo;
+
+<ul>
+<li>SSH鍵の生成方法の追加</li>
+<li>tmateの紹介</li>
+</ul>
+</li>
+<li>&ldquo;Chapter 6, Workflow"、セクションの追加
+
+<ul>
+<li>カレントディレクトリを維持してペインを開く</li>
+<li>特定の設定を分離する</li>
+<li>Vimとシームレスに統合する</li>
+<li>プラグインによる拡張</li>
+</ul>
+</li>
+</ul>
+
+
+<p>手元の<code>.tmux.conf</code>は旧版を元に設定していたので、今回読んだ新版の内容にアップデートした。</p>
+
+<p>悩ましいのは旧版を元にQiitaに投稿した記事「達人に学ぶ.tmux.confの基本設定」である。ありがたいことに、あちらの記事は今も結構な勢いで「いいね」を集めているが、今回"tmux 2"を読んで、記事の設定内容が古くなっていることを実感した。古い情報を拡散し続けている状況が、少々心苦しい。</p>
+
+<p>今更ではあるが、近いうちにQiitaの記事を"tmux 2"対応に更新することを計画中である。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[「プログラマのためのDocker教科書第2版」を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/06/03/read-docker-textbook-for-programmers-2nd-edition/"/>
+    <updated>2018-06-03T13:38:09+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/06/03/read-docker-textbook-for-programmers-2nd-edition</id>
+    <content type="html"><![CDATA[<p>「プログラマのためのDocker教科書第2版」を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E7%AC%AC2%E7%89%88-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4798153222?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798153222">プログラマのためのDocker教科書 第2版 インフラの基礎知識&amp;コードによる環境構築の自動化</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E7%AC%AC2%E7%89%88-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4798153222?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798153222"><img src="https://images-fe.ssl-images-amazon.com/images/I/5130HDgosML._SL160_.jpg" /></a></p>
+
+<p>Docker入門以前のインフラの基礎から始まり、Dockerの基本、Docker Composeによる複数コンテナ管理、Docker Machineによるマルチホスト管理、Google Cloud PlatformとKubernetesを使ったクラウド環境のDockerオーケストレーションという流れ。</p>
+
+<p>Kubernetesの日本語での読み方、書き方が気になっていたが、「クーバーネティス」と紹介されていた。念のため「クーバーネティス」で検索してみたところ、いくつかのIT系ニュースサイトで「クーバーネティス」表記を見つけた。それなりに市民権のある表記であるらしい。</p>
+
+<p>一応こんな動画も見つけたけれど、まぁ大体合っているか。</p>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=uMA7qqXIXBk">How Do You Pronounce Kubernetes? And What Is It? - YouTube</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Docker in Action"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/05/30/read-docker-in-action/"/>
+    <updated>2018-05-30T07:48:57+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/05/30/read-docker-in-action</id>
+    <content type="html"><![CDATA[<p>&ldquo;Docker in Action"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Action-Jeff-Nickoloff/dp/1633430235?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1633430235">Docker in Action</a></p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Action-Jeff-Nickoloff/dp/1633430235?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1633430235"><img src="https://images-fe.ssl-images-amazon.com/images/I/51q1IkCdKhL._SL160_.jpg" /></a></p>
+
+<p>Dockerの基礎を紹介する本である。先日読んだ"Docker for Developers"は、Dockerを開発環境で利用することに焦点を当てた本だった。それと比べると、"Docker in Action"はもう少し全体的、正統的なDockerの入門書である。</p>
+
+<p>全体の構成は３つに分かれている。</p>
+
+<ul>
+<li>Part 1. Keeping a Tidy Computer</li>
+<li>Part 2. Packaging Software for Distribution</li>
+<li>Part 3. Multi-Container and Multi-Host Environments</li>
+</ul>
+
+
+<p>Part 1は、Dockrおよびコンテナの概要、基本コマンド、ボリューム、ネットワークについて。Part 2は、Dockerfileの作成方法を含むイメージの作成、リポジトリの基本、プライベートなリポジトリの構築方法について。Part 3は、Docker Compose、Docker Machine、Swarmについて、という流れである。</p>
+
+<h2>WHY IS DOCKER IMPORTANT?</h2>
+
+<p>Part 1の冒頭で、「なぜDockerが重要なのか」について４つの理由が紹介されていたのでまとめておく。</p>
+
+<h3>1. Dockerはコンテナによる抽象化をもたらす</h3>
+
+<p>抽象化により複雑な事柄をシンプルに取り扱うことが可能になる。コンテナにより抽象化された環境において、システム管理者はインストールに伴う複雑性を考慮する必要がなく、ただどのアプリケーションをインストールしたいかを考えるだけでよくなる。Dockerは、全ての人にコンテナを利用可能にする点で重要なツールである。</p>
+
+<h3>2. Dokcerはコミュニティの強い後押しを受けている</h3>
+
+<p>Amazon、Microsoft、Googleのような企業がDockerの適用を強く推し進めている。現時点でそれらの企業は独自の技術を開発するよりもDockerを推進する立場で足並みを揃えている。</p>
+
+<h3>3.Dockerはアプリストア的なるものを実現する</h3>
+
+<p>Dockerはアプリケーションのインストールを劇的にシンプルにする。さらにDockerはクロスプラットフォームで利用できる。全てのスマートフォン、コンピュータが同じアプリストアを共有する。そんな仕組みをDockerなら実現することができる。</p>
+
+<h3>4. Dockerはより先進的な分離の仕組みである</h3>
+
+<p>コンテナ技術はより先進的な分離(isolation)の仕組みである。分離の仕組みを通じて、コンピュータをよりセキュアにする取り組みが進められている。コンテナ技術は10年以上前から存在していたもので、広く受け入れられるまでに長い時間を要したことは恥ずかしいことだと言える。この技術をシンプルに取り扱えるようした点でDockerはグレイトである。</p>
+
+<p>アプリストア云々の話題の中で、コンテナ技術が浸透することによってOSの違いが意識されなくなっていくという指摘があり、印象に残った。確かに、今私はmacOSを使っているけれど、Dockerがまともに使えるならWindowsでも問題ないと思えるし、今度PCを買い替える時には本当にそういう理由でMacから離れることもあるかもしれない。</p>
+
+<p>Part 1のボリューム、ネットワークの部分をもう少しきちんと理解したいと思っている。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA["Docker for Developers, 2nd Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/05/18/read-docker-for-developers-2nd-edition/"/>
+    <updated>2018-05-18T01:43:35+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/05/18/read-docker-for-developers-2nd-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;Docker for Developers, 2nd Edition"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Developers-2nd-Architect-Print/dp/1940111560?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1940111560">Docker for Developers, 2nd Edition: PHP[Architect] Print Edition</a></p>
+
+<p><a href="https://www.amazon.co.jp/Docker-Developers-2nd-Architect-Print/dp/1940111560?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1940111560"><img src="https://images-fe.ssl-images-amazon.com/images/I/51bjH-3dlQL._SL160_.jpg" /></a></p>
+
+<h2>本の概要</h2>
+
+<p>この本は、Dockerを、仮想化による開発環境の置き換えとして考えている人に向けて書かれている、ということである。</p>
+
+<p>コンテナの概念、基本操作、カスタムイメージの作成、Docker Composeの解説の後、PHPのアプリケーションをコンテナ環境で開発する方法が紹介されている。</p>
+
+<h2>Docker本を読む動機</h2>
+
+<p>手元の開発環境をDocker化できないかと思っている。</p>
+
+<p>現在、開発環境には、Vagrantと構成管理ツールを組み合わせてVM環境を使用している。</p>
+
+<p>構成管理ツールは、以前はChefを使っていたが、少し前にAnsibleに乗り換えた。ChefでもAnsibleでも自動化スクリプトを書くことはそれなりに楽しかったが、少々飽きを感じていて、もう少し楽をしたいと思っている。</p>
+
+<p>最近、自分用のPCをCore M3のMacBook'12に買い換えた。以前はCore i7のMacBookPro'13を使っていたので結構なスペックダウンである。日常的な利用にはMacBook'12でほとんど不満はないが、流石にボコボコとVMを立てるのは厳しい感じである。コンテナなら負荷を減らせるのではないかと思っている。</p>
+
+<h2>感想</h2>
+
+<p>単純なスクリプトを実行するだけなら、実行環境のイメージをpullして<code>docker run</code>するだけで良い。</p>
+
+<p>gemなど依存するライブラリがある場合は、Dockerfileを書いてライブラリ込みのイメージをビルドし、ホストのディレクトリをマウントして、コンテナ内で実行する。</p>
+
+<p>必要なことは、だいたいあっけなく実現できることがわかった。</p>
+
+<p>手始めに、このブログのOctopress環境をコンテナ化したいと思っているが、いざやってるとどうやって実現すれば良いかよく分からない。</p>
+
+<p>もう少し情報を収集しようと思う。</p>
+]]></content>
+  </entry>
+  
+</feed>

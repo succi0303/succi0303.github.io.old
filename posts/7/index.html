@@ -1,0 +1,1604 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>prime factor</title>
+  <meta name="author" content="succi0303">
+
+  
+  <meta name="description" content="Cucumberによる受入テストでテストカバレッジを取得するには「SimpleCov」を使うと良い。 colszowka/simplecov SimpleCovのインストール まず「SimpleCov」のgemをインストールする 1
+$ gem install simplecov &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://succi0303.github.io/posts/7">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="prime factor" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-28929380-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">prime factor</a></h1>
+  
+    <h2>blog by @succi0303</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscribe" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 13.310204,73.332654 C 5.967347,73.332654 0,79.322448 0,86.621428 c 0,7.338776 5.967347,13.262246 13.310204,13.262246 7.370408,0 13.328572,-5.92245 13.328572,-13.262246 0,-7.29898 -5.958164,-13.288774 -13.328572,-13.288774 z M 0.01530612,33.978572 V 53.143878 C 12.493878,53.143878 24.229592,58.02347 33.068368,66.865306 41.894898,75.685714 46.767346,87.47449 46.767346,100 h 19.25 C 66.017346,63.592858 36.4,33.979592 0.01530612,33.978572 l 0,0 z M 0.03877552,0 V 19.17449 C 44.54796,19.17551 80.77551,55.437756 80.77551,100 H 100 C 100,44.87653 55.15102,0 0.03877552,0 z"></path></svg></a></li>
+  
+</ul>
+  
+  
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://github.com/succi0303" rel="subscribe-github" title="@succi0303 on GitHub" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewbox="0 0 100 100"><path class="social" d="M 50,0 C 22.385714,0 0,22.385714 0,50 0,77.614286 22.385714,100 50,100 77.614286,100 100,77.614286 100,50 100,22.385714 77.614286,0 50,0 z m 29.692858,79.692858 c -3.859184,3.859182 -8.351022,6.887754 -13.35,9.00306 -1.27041,0.536736 -2.560204,1.009184 -3.867348,1.415306 v -7.493878 c 0,-3.938774 -1.35102,-6.835714 -4.053062,-8.690816 1.692858,-0.163264 3.24694,-0.390816 4.663266,-0.683672 1.416326,-0.292858 2.913266,-0.716328 4.491838,-1.27041 1.57857,-0.55408 2.994896,-1.213264 4.247958,-1.97755 1.253062,-0.765306 2.458164,-1.758164 3.613266,-2.978572 1.155102,-1.220408 2.12449,-2.604082 2.905102,-4.15 0.780612,-1.545918 1.4,-3.40204 1.855102,-5.566326 0.455102,-2.164286 0.683674,-4.54898 0.683674,-7.153062 0,-5.045918 -1.643878,-9.341836 -4.931634,-12.890816 C 77.44796,33.35 77.285714,29.10204 75.463266,24.512244 l -1.22143,-0.145918 c -0.845918,-0.09796 -2.368366,0.260204 -4.565306,1.07449 -2.196938,0.814286 -4.663264,2.14796 -7.396938,4.004082 -3.87449,-1.07449 -7.893878,-1.611224 -12.061224,-1.611224 -4.19898,0 -8.203062,0.536734 -12.012246,1.611224 -1.72449,-1.17245 -3.361224,-2.139796 -4.907142,-2.905102 C 31.753062,25.77449 30.516326,25.254082 29.587756,24.97653 28.660204,24.7 27.79796,24.528572 27,24.463266 c -0.79796,-0.0653 -1.310204,-0.08062 -1.537756,-0.04898 -0.22755,0.03164 -0.390816,0.0653 -0.487754,0.09796 -1.82347,4.62245 -1.985714,8.87143 -0.487756,12.743878 -3.287754,3.54796 -4.931632,7.844898 -4.931632,12.890816 0,2.604082 0.227552,4.988776 0.683674,7.153062 0.456122,2.164286 1.07449,4.020408 1.855102,5.566326 0.780612,1.545918 1.75,2.929592 2.905102,4.15 1.155102,1.220408 2.360204,2.213266 3.613264,2.978572 1.253062,0.766326 2.669388,1.42449 4.24796,1.97755 1.578572,0.554082 3.07551,0.976532 4.491836,1.27041 1.416328,0.292856 2.970408,0.521428 4.663266,0.683672 -2.669388,1.82347 -4.004082,4.720408 -4.004082,8.690816 v 7.639796 C 36.536734,89.818368 35.083674,89.3 33.656122,88.695918 c -4.99898,-2.115306 -9.490816,-5.143878 -13.35,-9.00306 -3.859184,-3.859184 -6.887754,-8.351022 -9.00306,-13.35 C 9.1163263,61.171428 8.0071428,55.67347 8.0071428,50 c 0,-5.67347 1.1091835,-11.171428 3.2969392,-16.342858 2.115306,-4.998978 5.143878,-9.490816 9.00306,-13.35 3.859184,-3.859182 8.351022,-6.887754 13.35,-9.00306 C 38.828572,9.1163266 44.32653,8.0071428 50,8.0071428 c 5.67347,0 11.171428,1.1091838 16.342858,3.2969392 5,2.115306 9.490816,5.143878 13.35,9.00306 3.859182,3.859184 6.887754,8.351022 9.00306,13.35 2.186736,5.17245 3.295918,10.67041 3.295918,16.342858 0,5.672448 -1.109182,11.171428 -3.296938,16.342858 -2.115306,4.998978 -5.143878,9.490816 -9.00204,13.35 l 0,0 z"></path></svg></a></li>
+</ul>
+  
+  
+  
+<ul class="subscribe">
+  <li><a href="https://twitter.com/succi0303" rel="subscribe-twitter" title="@succi0303 on Twitter" target="_blank"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25" viewBox="0 0 512 512"><path class="social" d="M0.001,334.932c33.327,30.816,118.891,59.981,188.517-8.271c-12.52,1.955-22.972-0.416-30.913-8.269
+  c-7.531-7.465-7.945-15.182-3.914-22.202c3.275-5.725,10.184-9.741,16.977-13.934c-12.323,2.285-22.829,1.095-32.218-3.706
+  c-12.604-6.444-24.863-13.228-28.3-27.207c7.71-8.112,16.28-15.359,34.831-12.627c-17.45-5.83-33.087-13.429-44.41-24.815
+  c-11.028-11.091-12.163-18.302-13.932-26.996c9.632-3.567,19.688-5.421,30.478-4.353c-24.397-12.476-34.757-29.63-40.487-48.325
+  c-1.731-5.652-2.044-11.03-1.31-16.545c98.826,37.305,145.11,64.109,170.662,89.251c11.496-30.589,38.3-99.868,78.371-123.646
+  c0.191,3.77-1.309,7.837-4.357,12.189c11.863-6.609,21.125-17.188,37.445-16.98c-1.879,7.723-7.279,13.904-17.85,17.854
+  c10.662-4.084,21.463-7.545,32.65-9.578c10.375-1.881,10.229,6.304,4.355,10.444c-11.916,8.412-24.578,9.456-37.006,13.498
+  c38.105,0.949,69.266,18.994,93.604,58.343c8.088,13.074,13.52,26.149,14.807,40.487c16.254,4.563,32.426,5.494,48.76,2.61
+  c4.475-0.796,8.645-1.63,12.627-3.482c-6.354,9.529-13.686,17.356-23.947,20.899c-9.811,3.387-19.637,6.688-30.473,6.968
+  c17.641,6.675,37.082,7.045,57.033,5.659c-24.402,23.486-43.08,22.922-61.824,22.642c-8.221,34.703-25.025,69.315-60.52,101.005
+  c-46.559,41.569-96.678,61.397-148.457,65.742c-48.552,4.07-95.488,3.512-146.726-20.464
+  C56.486,393.349,24.648,368.884,0.001,334.932L0.001,334.932z"/></svg></a></li>
+</ul>
+  
+  
+  
+  
+  
+  
+    
+      <form action="https://www.google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="sitesearch" value="succi0303.github.io" />
+    
+          <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/30/get-test-coverage-with-simplecov/">SimpleCovでCucumberのテストカバレッジを取得する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-30T01:00:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>1:00 am</span></time>
+        
+         | <a href="/blog/2013/12/30/get-test-coverage-with-simplecov/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Cucumberによる受入テストでテストカバレッジを取得するには「SimpleCov」を使うと良い。</p>
+
+<ul>
+<li><a href="https://github.com/colszowka/simplecov">colszowka/simplecov</a></li>
+</ul>
+
+
+<h2>SimpleCovのインストール</h2>
+
+<p>まず「SimpleCov」のgemをインストールする</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gem install simplecov
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>またはGemfileを書いて、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Gemfile</span>
+</span><span class='line'>gem <span class="s1">&#39;simplecov&#39;</span>, :require <span class="o">=</span>&gt; <span class="nb">false</span>, :group <span class="o">=</span>&gt; :test
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>インストールを実行する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CucumberでSimpleCovを実行する方法</h2>
+
+<p>「features/support/env.rb」に以下を記述する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># features/support.env</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;simplecov&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">SimpleCov</span><span class="o">.</span><span class="n">start</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでCucumberの実行結果の最後にテストカバレッジを示す一文が出力される。同時に<code>coverage/</code>ディレクトリ配下にHTMLのレポートが出力される。</p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808">The Cucumber Book: Behaviour-Driven Development for Testers and Developers (Pragmatic Programmers)</a></p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808"><img src="https://images-fe.ssl-images-amazon.com/images/I/51dKVQPJolL._SL160_.jpg" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/22/read-build-awesome-command-line-applications-in-ruby-2/">"Build Awesome Command-Line Applications in Ruby 2"を読んだ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-22T03:00:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2013</span></span> <span class='time'>3:00 am</span></time>
+        
+         | <a href="/blog/2013/12/22/read-build-awesome-command-line-applications-in-ruby-2/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>「Build Awesome Command-Line Applications in Ruby 2」を読んでいます。タイトルの通り、Rubyで良いコマンドラインアプリケーションを作ることを目的とする本です。いずれ日本語版が出るんじゃないかと待っていましたが、とくにそういった動きはなさそうなので思い切って英語の原書を購入しました。</p>
+
+<p>良いコマンドラインアプリケーションとは何か。本の中で良いアプリケーションの条件が数点挙げられています。その中でも、まず、良いアプリケーションはユーザが使いやすいものでなければならないとのこと。そして、使いやすいアプリケーションに作るには一般的な規約・慣例(Convention)に従うことが必要だとされています。一般的な規約に従うことでユーザーは違和感なくそのアプリを使うことができます。</p>
+
+<p>そして本の第2章では一般的な規約としてGNUスタイルのコマンドラインアプリケーションの構成が説明されています。言われれば当たり前のことばかりですが、意識的に考えたことがない領域だったので新鮮に読むことができました。そこで、第2章の規約の話についてまとめてみました。</p>
+
+<h2>コマンドラインアプリケーションの基本的なパーツ</h2>
+
+<p>コマンドラインアプリケーションはコマンド本体に加えて「オプション」「引数」「コマンド」の3つのパーツで構成されます。</p>
+
+<ul>
+<li>オプション (Options)</li>
+<li>引数 (Arguments)</li>
+<li>コマンド (Commands)</li>
+</ul>
+
+
+<h2>1. オプション</h2>
+
+<p>オプションはコマンドの振る舞いを制御するために使用します。オプションには「ショートフォーム」と「ロングフォーム」の2種類の表記方法があります。</p>
+
+<ul>
+<li>ショートフォーム (Short form)</li>
+<li>ロングフォーム (Long form)</li>
+</ul>
+
+
+<p>「ショートフォーム」はハイフンと一文字のアルファベットで構成されます。ex) -l -t -a&hellip;
+複数のショートフォームオプションを指定する場合、アルファベットを連続させることができます。ex) -lta</p>
+
+<p>「ロングフォーム」は2つのハイフンとオプションの意味を表す単語で構成されます。ex) &ndash;verbose &ndash;query&hellip;</p>
+
+<p>オプションは「スイッチ」と「フラグ」の2つに分類することができます。</p>
+
+<ul>
+<li>スイッチ (switch)</li>
+<li>フラグ (flag)</li>
+</ul>
+
+
+<p>「スイッチ」は、オプションのOn/Offの切り替えに使用します。引数は取りません。ロングフォームのスイッチの場合、先頭に「no-」を付加することでオプションのオフを指定します。</p>
+
+<p>「フラグ」は引数を取るオプションです。</p>
+
+<h2>2. 引数</h2>
+
+<p>引数は、コマンドラインアプリの処理の対象を指定するために使用します。フラグの後にスペースをおいて入力します。</p>
+
+<p>「ロングフォーム」のフラグの場合、フラグと引数を「=」でつないで入力することもできます。ex) &ndash;query=hogehoge 「ショートフォーム」のフラグの場合、一般的には「=」には対応しません。</p>
+
+<h2>3. コマンド</h2>
+
+<p>単純なコマンドラインアプリケーションは、本体とオプション、引数のみで構成しますが、複雑なアプリケーションは、コマンドラインのスイート (Suite)として、コマンドを受け付けるようします。</p>
+
+<p>コマンドラインスイートの場合、「グローバルオプション」と「コマンドオプション」の2つのオプションが必要になります。</p>
+
+<ul>
+<li>グローバルオプション (Global Option)</li>
+<li>コマンドオプション (Command Option)</li>
+</ul>
+
+
+<p>「グローバルオプション」はコマンドの前に入力します。アプリケーション全体の振る舞いに影響します。</p>
+
+<p>「コマンドオプション」はコマンドの後に入力し、コマンドの振る舞いに影響します。</p>
+
+<p>グローバルオプションとコマンドオプションは位置で見分けがつくため、同名のオプションを使用することもあり得ます。</p>
+
+<h2>まとめ</h2>
+
+<p>ロングフォームのフラグでは「=」が使えるという点は意識していなかったですね。正確には、利用する場合には意識していましたが、オレオレツールを作る場合に対応が必要なものとしては意識していませんでした。optparseを使えば、とくに意識しなくてもよしなにしてくれるということではありますが。</p>
+
+<p>英語のプログラム本を読むのはこれが初めてですが、意外と普通に読めるものですね。集中して読むからか、日本語書籍よりも頭に入ってくる気がします。そう思って、Pragmatic Bookshelfのページをつらつらと見ていると面白そうな本が他にもたくさんあって困ります、主に時間とお金・・・。</p>
+
+<h2>リンク</h2>
+
+<ul>
+<li><a href="http://pragprog.com/book/dccar2/build-awesome-command-line-applications-in-ruby-2">Build Awesome Command-Line Applications in Ruby 2: Control Your Computer, Simplify Your Life</a></a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/13/read-technolog-supporting-web/">「Webを支える技術」を読みました</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-13T07:22:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:22 am</span></time>
+        
+         | <a href="/blog/2013/12/13/read-technolog-supporting-web/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>山本陽平『Webを支える技術 HTTP、URI、HTML、そしてREST』を読みました。</p>
+
+<p><a href="https://www.amazon.co.jp/Web%E3%82%92%E6%94%AF%E3%81%88%E3%82%8B%E6%8A%80%E8%A1%93-HTTP%E3%80%81URI%E3%80%81HTML%E3%80%81%E3%81%9D%E3%81%97%E3%81%A6REST-WEB-PRESS-plus/dp/4774142042?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774142042">Webを支える技術 -HTTP、URI、HTML、そしてREST (WEB+DB PRESS plus)</a></p>
+
+<p><a href="https://www.amazon.co.jp/Web%E3%82%92%E6%94%AF%E3%81%88%E3%82%8B%E6%8A%80%E8%A1%93-HTTP%E3%80%81URI%E3%80%81HTML%E3%80%81%E3%81%9D%E3%81%97%E3%81%A6REST-WEB-PRESS-plus/dp/4774142042?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774142042"><img src="https://images-fe.ssl-images-amazon.com/images/I/51qo6pgjaSL._SL160_.jpg" /></a></p>
+
+<h2>「REST」の入門書</h2>
+
+<p>「Webを支える技術」としてHTTP、URI、HTMLの仕様を解説する内容ですが、この本の何よりの特徴は「REST」の入門書である点だと思います。Webフレームワークの界隈で目にする「REST」「RESTful」といった言葉が示すものの概要がわかります。</p>
+
+<p>第1部「Web概論」はRESTに至るWebの歴史とRESTの概要、第2部「URI」、第3部「HTTP」、第4部「ハイパーメディアフォーマット」はWebを構成する技術仕様の解説、そして第5部「Webサービスの設計」はRESTfulなWebサービスを設計するための「リソース指向アーキテクチャ」の設計手法の説明となっています。</p>
+
+<h2>RailsとREST</h2>
+
+<p>「RESTful」を謳うフレームワークの代表と言えばRuby on Railsです。先日『Ruby on Railsチュートリアル』に取り組んだところですが、第2章でいきなり「リソース」という表現が出てきて面食らいました。この本を読んでそのバックグラウンドが何となく理解できた気がします。同じくチュートリアルの第8章では「セッションをリソースとして扱う」という部分に少し違和感を覚えましたが、それもリソース指向アーキテクチャというバックグラウンドの上にあるものとして少し理解できた気がします。</p>
+
+<h2>RESTとは</h2>
+
+<p>この本によると「REST」とは、システムを構成するアーキテクチャのスタイルです。また、「REST」アーキテクチャは複数のアーキテクチャの複合体です。この複合アーキテクチャを構成する要素は6つあります。</p>
+
+<ul>
+<li>クライアント／サーバ : ユーザインタフェースと処理を分離する</li>
+<li>ステートレスサーバ : サーバ側でアプリケーション状態を持たない</li>
+<li>キャッシュ : クライアントとサーバの通信回数と量を減らす</li>
+<li>統一インタフェース : インタフェースを固定する</li>
+<li>階層化システム : システムを階層に分離する</li>
+<li>コードオンデマンド : プログラムをクライアントにダウンロードして実行する</li>
+</ul>
+
+
+<p>『Ruby on Rails チュートリアル』から受ける印象だと、Railsの言うRESTfulは「REST」アーキテクチャの「統一インタフェース」に偏っている印象を受けます。リソース指向の設計と統一インタフェースによって、ルーティングとメソッド定義の設計負荷を下げるみたいな。もっと勉強すれば、その他の今は見えない意図も見えてくるのかもしれません。</p>
+
+<h2>RESTの関連書籍</h2>
+
+<p>「REST」に関する日本語書籍は、ネットで検索する限り、この本とオライリーの<a href="http://www.amazon.co.jp/exec/obidos/asin/4873113539/succi-22/">『RESTful Webサービス』</a>、同じくオライリーの<a href="http://www.amazon.co.jp/exec/obidos/asin/4873114675/succi-22/">『JavaによるRESTfulシステム構築』</a>の3冊でした。このうち「Javaによる〜」は「JAX-RS」の説明という位置づけのようなのでJavaに馴染みのない人には辛そうです。また、『RESTful Webサービス』も非常に大容量で気軽に読める類いの本ではありません。その中でお手軽に読めるこの本は入門本としてなかなか貴重な位置づけだと思います。</p>
+
+<p>ちなみにこの本の著者山本陽平さんは『RESTful Webサービス』の翻訳者でもあります。『RESTful Webサービス』に気後れして手が出せない方はまず本書に当たってみると良いのではないでしょうか。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/27/bundle-update-error-on-rails-tutorial-chapter-1/">「Ruby on Railsチュートリアル」第1章でbundle Updateエラー</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-27T10:06:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>10:06 am</span></time>
+        
+         | <a href="/blog/2013/11/27/bundle-update-error-on-rails-tutorial-chapter-1/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>『Ruby on Rails チュートリアル（2013-11-21版 達人出版会 発行）に取り組んでいます。第1章の31ページでbundle updateを実行した際にエラーが発生したのでその際の対処のメモです。</p>
+
+<h2>エラーの内容と対処</h2>
+
+<p>エラーの内容はこちらです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle update
+</span><span class='line'>Fetching gem metadata from https://rubygems...
+</span><span class='line'>Fetching gem metadata from https://rubygems.org/..
+</span><span class='line'>Resolving dependencies...
+</span><span class='line'>Bundler could not find compatible versions <span class="k">for</span> gem <span class="s2">&quot;railties&quot;</span>:
+</span><span class='line'>  In Gemfile:
+</span><span class='line'>    rails <span class="o">(=</span> 4.0.0<span class="o">)</span> ruby depends on
+</span><span class='line'>      railties <span class="o">(=</span> 4.0.0<span class="o">)</span> ruby
+</span><span class='line'>
+</span><span class='line'>    sass-rails <span class="o">(=</span> 4.0.0<span class="o">)</span> ruby depends on
+</span><span class='line'>      railties <span class="o">(=</span> 4.0.1<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>対処。Gemfileのcoffee-railsとsass-railsのバージョン指定を変更しました。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Gemfile</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 変更前</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;coffee-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;4.0.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sass-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;4.0.0&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 変更後</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;coffee-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.0.0&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;sass-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.0.0&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>チュートリアルの内容と厳密なバージョンはズレてしまいますが、先に進めない以上いたしかたないかと。</p>
+
+<h2>参考URL</h2>
+
+<p>対処にあたって参考にしたページです。</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/17327953/rails-4-0-0-bundler-could-not-find-compatible-versions-for-gem-railties">Rails 4.0.0 - Bundler could not find compatible versions for gem &ldquo;railties&rdquo; - Stack Overflow</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/23/install-jenkins-and-subversion-on-centos/">CentOSにJenkinsとSubversionをインストールする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-23T09:04:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2013</span></span> <span class='time'>9:04 am</span></time>
+        
+         | <a href="/blog/2013/11/23/install-jenkins-and-subversion-on-centos/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>『Jenkins実践入門』を参考にJenkinsのインストールを実施しました。インストールした環境はCentOS6.3です。CentOS6.3自体はOSX Mavericks上にVagrantで作成した仮想マシンです。また、『Jenkins実践入門』ではSubversionのインストールに<a href="http://www.collab.net/jp/downloads/subversion">CollabNetのSubversion Edge</a>を使用していますが、今回は個別にSubversionをインストールしてApacheで公開するようにしました。</p>
+
+<h2>アウトライン</h2>
+
+<ul>
+<li>仮想マシン(CentOS 6.3)の準備</li>
+<li>Jenkinsのインストールと設定</li>
+<li>Subversionのインストールと設定</li>
+</ul>
+
+
+<h2>1. 仮想マシン(CentOS 6.3)の準備</h2>
+
+<p>vagrantでCentOS 6.3の仮想マシンを作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Boxの追加</span>
+</span><span class='line'><span class="nv">$ </span>vagrant box add cenos63 http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.3-x86_64-v20130101.box
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの初期化</span>
+</span><span class='line'><span class="nv">$ </span>mkdir vagrant
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>vagrant
+</span><span class='line'><span class="nv">$ </span>vagrant init centos63
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの起動</span>
+</span><span class='line'><span class="nv">$ </span>vagrant up
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Jenkinsのインストールと設定</h2>
+
+<p>仮想マシンにログインしてJenkinsをインストールします。<code>yum install jenkins</code>を実行する前にOpenJDKのインストールとJenkinsのRPMパッケージの公開鍵のインストールが必要です。</p>
+
+<p>Jenkinsのインストールが終わったらホストマシンから仮想マシンのJenkinsに接続するための設定を行います。</p>
+
+<p>作成した仮想マシンにログインします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vagrant ssh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OpenJDKをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo yum install java-1.6.0-openjdk
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jenkins RPMパッケージの公開鍵をインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+</span><span class='line'><span class="nv">$ </span>sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jenkinsをインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo yum install jenkins
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jenkinsのデーモンを起動します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo /sbin/service jenkins start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>動作確認のためファイアウォールを無効にします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># iptablesの停止</span>
+</span><span class='line'><span class="nv">$ </span>sudo /etc/init.d/iptables stop
+</span><span class='line'>
+</span><span class='line'><span class="c"># OS起動時にiptablesが起動しないようにする</span>
+</span><span class='line'><span class="nv">$ </span>chkconfig iptables off
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>仮想マシンからログアウトします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">exit</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ホストマシンのブラウザから仮想マシンのJenkinsに接続するために仮想マシンのネットワークアダプタを設定します。Vagrantfileを開いて下記の行を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Vagrant</span><span class="o">::</span><span class="no">Config</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">forward_port</span> <span class="mi">8080</span><span class="p">,</span> <span class="mi">18080</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記の設定でホストマシンのポート18080への接続を仮想マシンの8080へ転送します。</p>
+
+<p>仮想マシンを再起動します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant reload
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再起動が完了したらホストマシンのブラウザで<code>http://localhost:18080/</code>に接続し、Jenkinsのトップページが表示されることを確認します。</p>
+
+<h2>3. Subversionのインストールと設定</h2>
+
+<p>まずSubversion、Apache、mod_dav_svnをまとめてインストールします。その後Subversionのリポジトリを作成し、Apacheを設定してホストマシンからの接続を試します。</p>
+
+<p>仮想マシンにログインします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vagrant ssh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Subversion、Apache、mod_dav_svnをインストールします。yumの-yオプションは(yes/no)を無条件でyesにするオプションです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo yum -y httpd subversion mod_dav_svn
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Subversionのリポジトリを作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo mkdir /var/www/svn
+</span><span class='line'><span class="nv">$ </span>svnadmin create /var/www/svn/sample
+</span><span class='line'><span class="nv">$ </span>svn mkdir file:///var/www/svn/sample/trunk file:///var/www/svn/sample/tags file:///var/svn/sample/branches -m <span class="s1">&#39;first commit.&#39;</span>
+</span><span class='line'><span class="nv">$ </span>chown -R apache:apache /var/www/svn
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>/etc/httpd/conf.d/subversion.conf</code>を編集します。下記の設定を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;Location /Repos&gt;
+</span><span class='line'>    DAV svn
+</span><span class='line'>    SVNParentPath /var/www/svn
+</span><span class='line'>&lt;/Location&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Apacheを起動します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># apacheの起動</span>
+</span><span class='line'><span class="nv">$ </span>sudo /etc/init.d/httpd start
+</span><span class='line'>
+</span><span class='line'><span class="c"># OS起動時にapacheが起動するようにする</span>
+</span><span class='line'><span class="nv">$ </span>sudo chkconfig httpd on
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>仮想マシンからログアウトします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">exit</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ホストマシンのブラウザから仮想マシンのSubversionに接続するために仮想マシンのネットワークアダプタを設定します。Vigrantfileを開いて下記の行を追加します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Vagrant</span><span class="o">::</span><span class="no">Config</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">forward_port</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">18081</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>仮想マシンを再起動します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant reload
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再起動が完了したらホストマシンのブラウザで<code>http://localhost:18081/repos/sample</code>に接続し、Subversionのリポジトリが表示されることを確認します。</p>
+
+<p>とりあえずこれで『Jenkins実践入門』の「第2章 インストールと設定」相当のJenkins+Subversion環境ができました。</p>
+
+<p><a href="https://www.amazon.co.jp/Jenkins%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80-%EF%BD%9E%E3%83%93%E3%83%AB%E3%83%89%E3%83%BB%E3%83%86%E3%82%B9%E3%83%88%E3%83%BB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B%E6%8A%80%E8%A1%93-WEB-DB-PRESS-plus/dp/4774148911?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774148911">Jenkins実践入門　～ビルド・テスト・デプロイを自動化する技術 (WEB+DB PRESS plus)</a></p>
+
+<p><a href="https://www.amazon.co.jp/Jenkins%E5%AE%9F%E8%B7%B5%E5%85%A5%E9%96%80-%EF%BD%9E%E3%83%93%E3%83%AB%E3%83%89%E3%83%BB%E3%83%86%E3%82%B9%E3%83%88%E3%83%BB%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%82%92%E8%87%AA%E5%8B%95%E5%8C%96%E3%81%99%E3%82%8B%E6%8A%80%E8%A1%93-WEB-DB-PRESS-plus/dp/4774148911?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774148911"><img src="https://images-fe.ssl-images-amazon.com/images/I/51bR%2Bvw-EvL._SL160_.jpg" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/21/vagrant-up-error-hostonlyif-create/">Vagrant Upした時に["hostonlyif", "Crette"]のエラーが発生する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-21T11:00:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>11:00 am</span></time>
+        
+         | <a href="/blog/2013/11/21/vagrant-up-error-hostonlyif-create/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>発生した現象</h2>
+
+<p>発生した現象は以下の通りです。</p>
+
+<h3>エラーの内容</h3>
+
+<p>Vagrantfileでホストオンリーネットワークを設定してvagrant up を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Vagrantfile</span>
+</span><span class='line'><span class="no">Vagrant</span><span class="o">::</span><span class="no">Config</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:hostonly</span><span class="p">,</span> <span class="s2">&quot;192.168.33.10&quot;</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下記のエラーが発生しVMを起動できません。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>vagrant up
+</span><span class='line'>
+</span><span class='line'>...
+</span><span class='line'>There was an error executing the following <span class="nb">command </span>with VBoxManage:
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="s2">&quot;hostonlyif&quot;</span>, <span class="s2">&quot;create&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>For moreinformation  on the failure, <span class="nb">enable </span>detailed logging with
+</span><span class='line'>VAGRANT_LOG.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>環境</h3>
+
+<p>エラーが発生した際の環境はこちらです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Mac OSのバージョン</span>
+</span><span class='line'><span class="nv">$ </span>sw_vers
+</span><span class='line'>ProductName:    Mac OS X
+</span><span class='line'>ProductVersion: 10.9
+</span><span class='line'>BuildVersion:   13A2093
+</span><span class='line'>
+</span><span class='line'><span class="c"># Vagrantのバージョン</span>
+</span><span class='line'><span class="nv">$ </span>vagrant -v
+</span><span class='line'>Vagrant version 1.0.7
+</span><span class='line'>
+</span><span class='line'><span class="c"># VirtualBoxのバージョン</span>
+</span><span class='line'><span class="nv">$ </span>VBoxManage -v
+</span><span class='line'>4.2.18r88780
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今回検証したゲストOSは、CentOS 6.3とCent OS 6.4。それぞれ以下URLから取得しました。いずれも同様のエラーが発生していました。また前回の記事を書いたときはUbuntuでしたが、そちらも同様のエラーが発生しています。</p>
+
+<ul>
+<li><a href="http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.3-x86_64-v20130101.box">CentOS 6.3 x86_64 minimal</a></li>
+<li><a href="https://github.com/2creatives/vagrant-centos/releases/download/v0.1.0/centos64-x86_64-20131030.box">CentOS 6.4 x86_64</a></li>
+</ul>
+
+
+<h2>対処方法</h2>
+
+<p>下記のコマンドを実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo /Library/StartupItems/VirtualBox/VirtualBox restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで完了です。再度 vagrant up するとVMが正常に起動します。</p>
+
+<p><code>/Library/StartupItems/</code>はOS起動時にスタートされるサービスが配置されるディレクトリで、サービスごとにディレクトリが作成されるとのこと。<code>VirtualBox/</code>ディレクトリの中にある<code>VirtualBox</code>は実行属性のついたシェルスクリプトです。StartService、StopServiceといった関数が定義されています。サービスの起動、停止を管理するスクリプトですね。</p>
+
+<p>要はVirtualBoxのサービスを再起動しろということのようです。</p>
+
+<h2>参考URL</h2>
+
+<ul>
+<li><a href="https://coderwall.com/p/ydma0q">Thibault Milan : Resolve a hostonlyif create error with vagrant</a></li>
+<li><a href="http://stackoverflow.com/questions/14404777/vagrant-hostonlyif-create-not-working">archlinux - vagrant &lsquo;hostonlyif&rsquo; create not working - Stack Overflow</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/15/read-unix-shellscript-sample-book/">「UNIXシェルスクリプトサンプルブック」を読んだ</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-15T13:03:59+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>1:03 pm</span></time>
+        
+         | <a href="/blog/2013/11/15/read-unix-shellscript-sample-book/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>シェルスクリプトととかLL言語って、日頃のちょっとした処理に手軽に使えて便利ですよね？「うんうん、その通り」と思った方にはもうあまり関係ないかもしれません。「ちょっとした処理」ってなんだよ「ちょっとした処理」って！！という話です。</p>
+
+<p>シェルスクリプトやいわゆるLL言語、Ruby、Perlなどが「日頃のちょっとした処理に便利に使える」という話をよく見かけます。入門書によくそういうこと、書いてますよね。じゃあその「ちょっとした処理」っていうのがどういうものかというと・・・。だいたいのところ入門書は言語仕様の説明ばっかりです。一番最後の章におまけのようなスクリプトがあったりしますが、まぁそれだけ。そこでレシピ本をめくってみるわけですが、こちらはおおかたライブラリ関数の説明がほとんどだと思います。処理というにはやっていることが断片的すぎてやっぱりイメージがわいてきません。</p>
+
+<p><a href="https://www.amazon.co.jp/UNIX%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%96%E3%83%83%E3%82%AF-%E3%83%87%E3%82%A4%E3%83%96-%E3%83%86%E3%82%A4%E3%83%A9%E3%83%BC/dp/4797327286?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4797327286">UNIXシェルスクリプトサンプルブック</a></p>
+
+<p><a href="https://www.amazon.co.jp/UNIX%E3%82%B7%E3%82%A7%E3%83%AB%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%83%96%E3%83%83%E3%82%AF-%E3%83%87%E3%82%A4%E3%83%96-%E3%83%86%E3%82%A4%E3%83%A9%E3%83%BC/dp/4797327286?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4797327286"><img src="https://images-fe.ssl-images-amazon.com/images/I/41CNcqUy50L._SL160_.jpg" /></a></p>
+
+<p>そんなところで見つけた本がこちらでした。Dave Taylor『UNIXシェルスクリプトサンプルブック』。まさに「ちょっとした処理」と言えそうなスクリプトのサンプルが100個ちかく掲載されています。記事の最後に掲載されているスクリプトの一覧を付けておきます。どういうことができるのか、おおよそのイメージが掴めると思います。</p>
+
+<p>掲載されているスクリプトは30行〜200行程度で、難易度の面でも難しすぎず簡単すぎない、写経するのにもってこいの内容です。僕自身一通り写経したのですが、投げ出したくならない程度に複雑すぎず、十分歯応えを感じる程度に単純すぎないという良い感じの内容でした。</p>
+
+<p>シェルスクリプトのみを対象にした本ですが、掲載されているサンプルをRubyで実装すればどうなるか考えるなど、他の言語目線でも十分に参考になる本だと思います。あと出版が2004年と結構古い本なのですが、掲載されているサンプルの多くはOSX Mavericksでも動作しました。この辺りはさすがシェルスクリプトということなんでしょうね。</p>
+
+<h2>掲載されているスクリプトの一覧</h2>
+
+<h3>第1章 不足するコードを補うライブラリ</h3>
+
+<ul>
+<li>指定されたプログラムがPATHに存在するかどうか調べるスクリプト</li>
+<li>入力内容が英数字だけかどうかをチェックするスクリプト</li>
+<li>日付の形式を整えるスクリプト</li>
+<li>値の大きな数を見やすくするスクリプト</li>
+<li>入力が整数値として有効かどうか確認するスクリプト</li>
+<li>入力が浮動小数点数として有効かどうか確認するスクリプト</li>
+<li>入力された日付が有効かどうか確認するスクリプト</li>
+<li>echoの動作の違いを吸収するスクリプト</li>
+<li>任意精度浮動小数点電卓スクリプト</li>
+<li>ファイルをロックするスクリプト</li>
+<li>ANSIカラーシーケンスを利用可能にするスクリプト</li>
+</ul>
+
+
+<h3>第2章 ユーザーコマンドの拡張</h3>
+
+<ul>
+<li>長い行を整形するスクリプト</li>
+<li>ファイルを削除すると同時にアーカイブに保管するスクリプト</li>
+<li>削除ファイルのアーカイブを操作するスクリプト</li>
+<li>ファイルの削除操作を記録するスクリプト</li>
+<li>ディレクトリの内容を表示するスクリプト</li>
+<li>ファイル名からファイルのある場所を探すスクリプト</li>
+<li>他の環境をエミュレートするDIRスクリプト</li>
+<li>マニュアルページを検索するスクリプト</li>
+<li>異なるタイムゾーンの時刻を表示するスクリプト</li>
+</ul>
+
+
+<h3>第3章 ユーティリティの作成</h3>
+
+<ul>
+<li>メモ書きユーティリティ</li>
+<li>対話的に使える電卓</li>
+<li>単独の語のスペルチェックを行うスクリプト</li>
+<li>対話的なスペルチェックを可能にするshpellスクリプト</li>
+<li>個人用辞書を利用するスクリプト</li>
+<li>温度の単位を変換するスクリプト</li>
+<li>ローンの返済額を計算するスクリプト</li>
+<li>行事を記録するスクリプト</li>
+</ul>
+
+
+<h3>第4章 Unixのカスタマイズ</h3>
+
+<ul>
+<li>行番号をつけてファイルを表示するスクリプト</li>
+<li>ファイルの内容とファイルに関する情報を表示するスクリプト</li>
+<li>長い行だけを折り返すスクリプト</li>
+<li>quotaコマンドでGNUスタイルのフラグをエミュレートするスクリプト</li>
+<li>sftpの動作をftpの動作に似せるスクリプト</li>
+<li>grepで前後のコンテキストを表示するスクリプト</li>
+<li>圧縮ファイルを表示するスクリプト</li>
+<li>ファイルを最大限に圧縮するスクリプト</li>
+</ul>
+
+
+<h3>第5章 システムの管理 ユーザーの管理</h3>
+
+<ul>
+<li>ディスクの使用状況を分析するスクリプト</li>
+<li>ディスクを大量に消費しているユーザーにメールで注意するスクリプト</li>
+<li>ディスクの空き容量を調べるスクリプト</li>
+<li>dfからの出力を読みやすくするスクリプト</li>
+<li>セキュリティを考慮したlocate</li>
+<li>システムにユーザーを追加するスクリプト</li>
+<li>ユーザーアカウントを追加するスクリプト</li>
+<li>ユーザーアカウントを削除するスクリプト</li>
+<li>ユーザーの環境が適切かどうか検証するスクリプト</li>
+<li>ゲストのシステム使用後に後始末をするスクリプト</li>
+</ul>
+
+
+<h3>第6章 システムの管理 システムの保守</h3>
+
+<ul>
+<li>setuidプログラムを見つけるスクリプト</li>
+<li>システムの日付と時刻を設定するスクリプト</li>
+<li>有効になっているサービスを表示するスクリプト</li>
+<li>名前で指定したプロセスにシグナルを送るスクリプト</li>
+<li>ユーザーのcrontabのエントリが有効かどうか調べるスクリプト</li>
+<li>システムのcronジョブをコマンドラインで実行するスクリプト</li>
+<li>ログファイルをローテートするスクリプト</li>
+<li>データのバックアップを行うスクリプト</li>
+<li>ディレクトリをバックアップするスクリプト</li>
+</ul>
+
+
+<h3>第7章 ウェブとインターネットの活用</h3>
+
+<ul>
+<li>接続時間を計算するスクリプト</li>
+<li>FTPでファイルをダウンロードするスクリプト</li>
+<li>lynxでBBCニュースを追いかけるスクリプト</li>
+<li>ウェブページ内のURLを取り出すスクリプト</li>
+<li>オンライン辞書で単語の定義を調べるスクリプト</li>
+<li>天気予報を調べるスクリプト</li>
+<li>図書館で借りた本の貸出期限を調べるスクリプト</li>
+<li>IMDbで映画について調べるスクリプト</li>
+<li>通貨を変換するスクリプト</li>
+<li>ポートフォリオを管理するスクリプト</li>
+<li>サイトの更新をチェックするスクリプト</li>
+</ul>
+
+
+<h3>第8章 ウェブページへの応用</h3>
+
+<ul>
+<li>CGI実行時の環境を表示するスクリプト</li>
+<li>イベントを記録するスクリプト</li>
+<li>ウェブページを動的に作成するスクリプト</li>
+<li>問い合わせようフォームを処理するスクリプト</li>
+<li>ウェブベースのフォトアルバムを作成するスクリプト</li>
+<li>ゲストブックを作成するスクリプト</li>
+<li>テキストベースのアクセスカウンタを作成するスクリプト</li>
+<li>ファイルの中の1行をランダムに表示するスクリプト</li>
+</ul>
+
+
+<h3>第9章 ウェブとインターネットの管理</h3>
+
+<ul>
+<li>サイト内部へのリンクミスを見つけるスクリプト</li>
+<li>サイト外部へのリンクミスを見つけるスクリプト</li>
+<li>ウェブページのスペルチェックを行うスクリプト</li>
+<li>Apacheのパスワードを管理するスクリプト</li>
+<li>FTPを使ってリモートディレクトリをローカルディレクトリに同期させるスクリプト</li>
+<li>SFTPでファイルを同期させるスクリプト</li>
+</ul>
+
+
+<h3>第10章 インターネットサーバーの管理</h3>
+
+<ul>
+<li>Apacheのaccess_logを分析するスクリプト</li>
+<li>検索エンジンからのアクセスを分析するスクリプト</li>
+<li>Apacheのerror_logを分析するスクリプト</li>
+<li>重要なファイルを他のシステムに保管するスクリプト</li>
+<li>ウェブサイトをミラーリングするスクリプト</li>
+<li>FTPの利用状況を分析するスクリプト</li>
+<li>ネットワークの状態を監視するスクリプト</li>
+<li>プロセスを名前で指定してreniceするスクリプト</li>
+<li>Apacheの設定ファイルにバーチャルホストを追加するスクリプト</li>
+</ul>
+
+
+<h3>第11章 Mac OSX スクリプト</h3>
+
+<ul>
+<li>NetInfoに登録されているユーザーを表示するスクリプト</li>
+<li>Mac OSXシステムにユーザーを追加するスクリプト</li>
+<li>メールエイリアスを追加するスクリプト</li>
+<li>ターミナルウィンドウのタイトルを設定するスクリプト</li>
+<li>iTunesライブラリの簡単な一覧を出力するスクリプト</li>
+<li>openコマンドの代わりに使えるスクリプト</li>
+</ul>
+
+
+<h3>第12章 シェルスクリプトで遊ぶ</h3>
+
+<ul>
+<li>unscramble</li>
+<li>hangman</li>
+<li>州都当てクイズ</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/14/check-leap-year/">うるう年を判定するプログラム</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-14T09:03:42+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>9:03 am</span></time>
+        
+         | <a href="/blog/2013/11/14/check-leap-year/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ある年が閏年かどうかは次の4つの条件で判断できます。</p>
+
+<ol>
+<li>4で割り切れない年は閏年ではない。</li>
+<li>4でも400でも割り切れる年は閏年である</li>
+<li>4で割り切れるが400では割り切れず、100で割り切れる年は、閏年ではない。</li>
+<li>それ以外の4で割り切れるすべての年は閏年である</li>
+</ol>
+
+
+<p>この条件をもとに閏年を判定するプログラムをRubyで書いてみます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># coding: utf-8</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 閏年探査機 leap_year_probe.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">LeapYearProbe</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># 引数の年が閏年のときtrue、それ以外のときfalseを返す</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">is_leap_year?</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">400</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="kp">true</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>irbで動作確認してみます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>irb
+</span><span class='line'>irb&gt; require <span class="s2">&quot;./leap_year_probe&quot;</span>
+</span><span class='line'>irb&gt; <span class="nv">probe</span> <span class="o">=</span> LeapYearProbe.new
+</span><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2004</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2006</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一応正しく動いているようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2020</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>「夏季オリンピックは閏年に開催される」ということで、2020年東京オリンピックの年はもちろん閏年、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">1192</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>良い国作ろう鎌倉幕府の1192年は閏年、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">1492</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>意欲に燃えるコロンブスの1492年も閏年だったようですね。</p>
+
+<p>ちなみに同じ閏年の判定をシェルスクリプトで書くとこうなるようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>isLeapYear<span class="o">()</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$((year % 4))&quot;</span> -ne <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">1</span> <span class="c"># not LeapYear</span>
+</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$((year % 400))&quot;</span> -eq <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">0</span> <span class="c"># LeapYear</span>
+</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$((year % 100))&quot;</span> -eq <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">1</span> <span class="c"># not LeapYear</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">0</span> <span class="c"># LeapYear</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/10/coding-style-for-sql/">SQLのコーディングスタイル</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-10T06:34:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>6:34 am</span></time>
+        
+         | <a href="/blog/2013/11/10/coding-style-for-sql/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>業務系のSEにとって一番身近なプログラム言語は、実はSQLではないかと思います。業務系のシステムの大半は突き詰めればほとんどの場合、要するにデータベースです。まずはデータベースがあって、あとはそこにどんな皮をかぶせるか、というのが業務システムの実態ではないでしょうか。そのため、プログラミングの現場を離れたSEも、お客様からの問い合わせ対応の調査や何か問題が発生して原因究明をするときにはデータベースに直接問い合わせるためにSQLを叩くことになります。</p>
+
+<p>SQLのコーディング・スタイルについて意識している人はどれくらいいるでしょうか。たとえばRubyの場合、インデントはスペース2つだとかクラス名はキャメルケース、メソッド名はスネークケースだとか一般的なコーディング・スタイルがあります。そういったプログラム言語と比べるとSQLの場合にはコーディング・スタイルが意識されることが少ないように思います。かくいう僕もほとんど意識していませんでしたし、業務上目にする他の人が書いたSQLも十人十様でさまざまです。</p>
+
+<p>少し前にミックさん著『達人に学ぶSQL徹底指南書』という本を読みました。そちらの本に「SQLプログラミング作法」というSQLのコーディング・スタイルに関する章がありました。「未来のDBエンジニアが必要とするであろうコーディング・スタイルの確立へ向けて、叩き台となる私案を提出してみたい」として、コーディング・スタイルの案を提示するものでした。</p>
+
+<p>SQLのコーディング・スタイルが統一されていない理由のひとつは、SQLの利用の裾野が広く、いわゆるプログラマでない人も使用することが多いからではないかと思います。でも、本来は裾野が広いからこそ、コミュニケーションのギャップをなくすために、統一されたスタイルがあることが望ましいはずです。</p>
+
+<p>前置きが長くなりましたが、そういう訳で、これまで意識していなかったなりに、何となく定まっていた自分のSQLの書き方について一度まとめておこうと思いました。この記事を読んだそこのあなたはどんな風にSQLを書いていますか？</p>
+
+<h2>自分のSQLの書き方</h2>
+
+<p>SELECT文とUPDATE文について普段自分が意識している書き方をまとめておきます。INSERT文は手動で実行する機会がほとんどないので割愛します。</p>
+
+<h3>SELECT文</h3>
+
+<p>問い合わせ対応の調査や問題発生時の原因究明など一番実行する機会が多いのがSELECT文です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">a</span><span class="p">.</span><span class="n">col2</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span><span class='line'>  <span class="k">FROM</span> <span class="n">tbl_A</span> <span class="n">a</span>
+</span><span class='line'>  <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">tbl_B</span> <span class="n">b</span>
+</span><span class='line'>         <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">col1</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;hoge&#39;</span>
+</span><span class='line'> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col2</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span><span class='line'> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col2</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>予約語は大文字にする</li>
+<li>列名、テーブル名は極力小文字にする（案件、システムによる）</li>
+<li>ひとつめの予約語の末尾を揃えるようインデントする</li>
+</ul>
+
+
+<p>列名を区切るカンマは原則後ろ側につけています。次の行の前側につける人も多い印象があります。カンマを前側につけると、列ごとにコメントアウトしやすいのが良いですよね。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span>
+</span><span class='line'><span class="c1">--      ,a.col2</span>
+</span><span class='line'>      <span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>UPDATE文</h3>
+
+<p>データの修正依頼や不具合の修正等、いわゆるデータパッチとして実行する際に主に使用します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">-- SELECT col1, col2, col3 FROM tbl_A</span>
+</span><span class='line'><span class="k">UPDATE</span> <span class="n">tbl_A</span> <span class="k">SET</span> <span class="n">col2</span><span class="o">=</span><span class="s1">&#39;hoge&#39;</span><span class="p">,</span> <span class="n">col3</span><span class="o">=</span><span class="s1">&#39;fuga&#39;</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>まず、UPDATEの行をコメントアウトし、SELECTを実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">col3</span> <span class="k">FROM</span> <span class="n">tbl_A</span>
+</span><span class='line'><span class="c1">-- UPDATE tbl_A SET col2=&#39;hoge&#39;, col3=&#39;fuga&#39;</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>目的のデータがヒットすることを確認してから、今度はSELECTの行をコメントアウトしてUPDATE文を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">-- SELECT col1, col2, col3 FROM tbl_A</span>
+</span><span class='line'><span class="k">UPDATE</span> <span class="n">tbl_A</span> <span class="k">SET</span> <span class="n">co2</span><span class="o">=</span><span class="s1">&#39;hoge&#39;</span><span class="p">,</span> <span class="n">col3</span><span class="o">=</span><span class="s1">&#39;fuga&#39;</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考書籍</h2>
+
+<p>ミック『達人に学ぶSQL徹底指南書』。CASE式の使い方、SQLの土台になる三値論理の解説など、実務ですぐ使えるテクニックから理論的な話まで盛りだくさんな内容でした。ふだん何となく使っているSQLを一歩引いて見直すことができる良書だと思います。</p>
+
+<p><a href="https://www.amazon.co.jp/%E9%81%94%E4%BA%BA%E3%81%AB%E5%AD%A6%E3%81%B6-SQL%E5%BE%B9%E5%BA%95%E6%8C%87%E5%8D%97%E6%9B%B8-CodeZine-BOOKS-%E3%83%9F%E3%83%83%E3%82%AF/dp/4798115169?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798115169">達人に学ぶ SQL徹底指南書 (CodeZine BOOKS)</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E9%81%94%E4%BA%BA%E3%81%AB%E5%AD%A6%E3%81%B6-SQL%E5%BE%B9%E5%BA%95%E6%8C%87%E5%8D%97%E6%9B%B8-CodeZine-BOOKS-%E3%83%9F%E3%83%83%E3%82%AF/dp/4798115169?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798115169"><img src="https://images-fe.ssl-images-amazon.com/images/I/51CGypjLrvL._SL160_.jpg" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/07/read-nyumon-chef-solo/">『入門 Chef Solo -Infrastructure as Code-』を読みました。</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-07T13:54:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>1:54 pm</span></time>
+        
+         | <a href="/blog/2013/11/07/read-nyumon-chef-solo/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>伊藤直也さん著『入門 Chef Solo -INFRASTRUCTURE AS CODE-』を読みました。</p>
+
+<p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80Chef-Solo-Infrastructure-as-Code-ebook/dp/B00BSPH158?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00BSPH158">入門Chef Solo - Infrastructure as Code</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80Chef-Solo-Infrastructure-as-Code-ebook/dp/B00BSPH158?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00BSPH158"><img src="https://images-fe.ssl-images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" /></a></p>
+
+<p>Amazonのリンクを貼っておきながら言うのもなんですが、達人出版会でepub/pdfのダウンロード販売があるのを知ってそちらで購入しました。どうも僕は、Kindleなど特定のアプリケーションに関連付いた電子書籍が苦手です。紙の実物か、ファイルがあると安心します。我ながらオールドタイプだとは思いますが。達人出版会さんのページはこちらです。</p>
+
+<p><a href="http://tatsu-zine.com/books/chef-solo">入門Chef Solo - Infrastructure as Code - 達人出版会</a></p>
+
+<h2>サンプル実行ではまったポイント</h2>
+
+<p>サンプルを実行する際にいくつか引っかかった点がありました。はまったポイントはQiitaにまとめました。</p>
+
+<p><a href="http://qiita.com/succi0303/items/37776c696eb8a7313bd7">「入門 Chef Solo」on MacOSXではまったこと。 - Qiita</a></p>
+
+<h3>Vagrant 1.0.7 で使えるVirtualBoxは4.2まで</h3>
+
+<p>Qiitaに書き忘れていましたが、もう一点はまったポイントがありました。Vagrant(バージョンは1.0.7)がサポートしているVirtualBoxのバージョンは4.2までのようです。現在VirtualBoxの最新版は4.3です。Latestをそのままインストールすると4.3で、Vagrantを実行した際にエラーが発生しました。いったん4.3をアンインストールして、4.2をインストールし直しました。</p>
+
+<h2>VagrantとChef Soloの基本操作</h2>
+
+<p>VagrantとChef Soloの基本操作をまとめておきます。</p>
+
+<h3>Vagrant チートシート</h3>
+
+<p>Vagrantの基本的な操作</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Vagrantのインストール</span>
+</span><span class='line'>gem install vagrant
+</span><span class='line'>
+</span><span class='line'><span class="c"># boxの追加</span>
+</span><span class='line'>vagrant box add &lt;box名&gt; &lt;URL&gt;
+</span><span class='line'>
+</span><span class='line'><span class="c"># Vagrantの初期化</span>
+</span><span class='line'>vagrant init &lt;box名&gt;
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの起動</span>
+</span><span class='line'>vagrant up
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの停止</span>
+</span><span class='line'>vagrant halt
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの廃棄</span>
+</span><span class='line'>vagrant destroy
+</span><span class='line'>
+</span><span class='line'><span class="c"># ssh-configの確認</span>
+</span><span class='line'>vagrant ssh-config --host &lt;ホスト名&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Chef Solo (+ knife solo) チートシート</h3>
+
+<p>chef soloとknife soloで仮想マシンを設定する基本操作</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># chefリポジトリの作成</span>
+</span><span class='line'>knife solo init chef-repo
+</span><span class='line'><span class="nb">cd </span>chef-repo
+</span><span class='line'>git init
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;first commit&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンにchefをインストール</span>
+</span><span class='line'>knife solo prepare &lt;ホスト名&gt;
+</span><span class='line'>git add nodes/&lt;ホスト名&gt;.json
+</span><span class='line'>git commit -m <span class="s2">&quot;add node json file&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># クックブック作成</span>
+</span><span class='line'>knife cookbook create &lt;クックブック名&gt; -o site-cookbooks
+</span><span class='line'>
+</span><span class='line'><span class="c"># レシピとjsonファイルの編集</span>
+</span><span class='line'>vi site-cookbooks/&lt;クックブック名&gt;/recipes/default.rb
+</span><span class='line'>vi nodes/&lt;ホスト名&gt;.json
+</span><span class='line'>
+</span><span class='line'><span class="c"># chef solo実行 + バージョン管理</span>
+</span><span class='line'>knife solo cook &lt;ホスト名&gt;
+</span><span class='line'>git add site-cookbooks/&lt;クックブック名&gt;
+</span><span class='line'>git commit -m <span class="s2">&quot;add recipe&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上です。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/8">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/6">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - succi0303 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'prime-factor';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
