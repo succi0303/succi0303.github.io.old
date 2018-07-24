@@ -9,9 +9,7 @@
   <meta name="author" content="succi0303">
 
   
-  <meta name="description" content="rbenvを使ってMacBookにRuby 2.0をインストールしました。 rbenvのインストール homebrewを使ってrbenvをインストールします。 1
-$ brew install rbenv rbenvに続いてruby-buildをインストールします。 1
-$ brew &hellip;">
+  <meta name="description" content="伊藤直也さん著『入門 Chef Solo -INFRASTRUCTURE AS CODE-』を読みました。 入門Chef Solo - Infrastructure as Code Amazonのリンクを貼っておきながら言うのもなんですが、達人出版会でepub/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -115,6 +113,162 @@ $ brew &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/07/read-nyumon-chef-solo/">『入門 Chef Solo -Infrastructure as Code-』を読みました。</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-07T13:54:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>1:54 pm</span></time>
+        
+         | <a href="/blog/2013/11/07/read-nyumon-chef-solo/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>伊藤直也さん著『入門 Chef Solo -INFRASTRUCTURE AS CODE-』を読みました。</p>
+
+<p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80Chef-Solo-Infrastructure-as-Code-ebook/dp/B00BSPH158?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00BSPH158">入門Chef Solo - Infrastructure as Code</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80Chef-Solo-Infrastructure-as-Code-ebook/dp/B00BSPH158?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00BSPH158"><img src="https://images-fe.ssl-images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" /></a></p>
+
+<p>Amazonのリンクを貼っておきながら言うのもなんですが、達人出版会でepub/pdfのダウンロード販売があるのを知ってそちらで購入しました。どうも僕は、Kindleなど特定のアプリケーションに関連付いた電子書籍が苦手です。紙の実物か、ファイルがあると安心します。我ながらオールドタイプだとは思いますが。達人出版会さんのページはこちらです。</p>
+
+<p><a href="http://tatsu-zine.com/books/chef-solo">入門Chef Solo - Infrastructure as Code - 達人出版会</a></p>
+
+<h2>サンプル実行ではまったポイント</h2>
+
+<p>サンプルを実行する際にいくつか引っかかった点がありました。はまったポイントはQiitaにまとめました。</p>
+
+<p><a href="http://qiita.com/succi0303/items/37776c696eb8a7313bd7">「入門 Chef Solo」on MacOSXではまったこと。 - Qiita</a></p>
+
+<h3>Vagrant 1.0.7 で使えるVirtualBoxは4.2まで</h3>
+
+<p>Qiitaに書き忘れていましたが、もう一点はまったポイントがありました。Vagrant(バージョンは1.0.7)がサポートしているVirtualBoxのバージョンは4.2までのようです。現在VirtualBoxの最新版は4.3です。Latestをそのままインストールすると4.3で、Vagrantを実行した際にエラーが発生しました。いったん4.3をアンインストールして、4.2をインストールし直しました。</p>
+
+<h2>VagrantとChef Soloの基本操作</h2>
+
+<p>VagrantとChef Soloの基本操作をまとめておきます。</p>
+
+<h3>Vagrant チートシート</h3>
+
+<p>Vagrantの基本的な操作</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Vagrantのインストール</span>
+</span><span class='line'>gem install vagrant
+</span><span class='line'>
+</span><span class='line'><span class="c"># boxの追加</span>
+</span><span class='line'>vagrant box add &lt;box名&gt; &lt;URL&gt;
+</span><span class='line'>
+</span><span class='line'><span class="c"># Vagrantの初期化</span>
+</span><span class='line'>vagrant init &lt;box名&gt;
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの起動</span>
+</span><span class='line'>vagrant up
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの停止</span>
+</span><span class='line'>vagrant halt
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンの廃棄</span>
+</span><span class='line'>vagrant destroy
+</span><span class='line'>
+</span><span class='line'><span class="c"># ssh-configの確認</span>
+</span><span class='line'>vagrant ssh-config --host &lt;ホスト名&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Chef Solo (+ knife solo) チートシート</h3>
+
+<p>chef soloとknife soloで仮想マシンを設定する基本操作</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># chefリポジトリの作成</span>
+</span><span class='line'>knife solo init chef-repo
+</span><span class='line'><span class="nb">cd </span>chef-repo
+</span><span class='line'>git init
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m <span class="s2">&quot;first commit&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 仮想マシンにchefをインストール</span>
+</span><span class='line'>knife solo prepare &lt;ホスト名&gt;
+</span><span class='line'>git add nodes/&lt;ホスト名&gt;.json
+</span><span class='line'>git commit -m <span class="s2">&quot;add node json file&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># クックブック作成</span>
+</span><span class='line'>knife cookbook create &lt;クックブック名&gt; -o site-cookbooks
+</span><span class='line'>
+</span><span class='line'><span class="c"># レシピとjsonファイルの編集</span>
+</span><span class='line'>vi site-cookbooks/&lt;クックブック名&gt;/recipes/default.rb
+</span><span class='line'>vi nodes/&lt;ホスト名&gt;.json
+</span><span class='line'>
+</span><span class='line'><span class="c"># chef solo実行 + バージョン管理</span>
+</span><span class='line'>knife solo cook &lt;ホスト名&gt;
+</span><span class='line'>git add site-cookbooks/&lt;クックブック名&gt;
+</span><span class='line'>git commit -m <span class="s2">&quot;add recipe&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上です。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -808,100 +962,6 @@ j
 <p><a href="http://sai-zen-sen.jp/fictions/bianca/">http://sai-zen-sen.jp/fictions/bianca/</a></p>
 
 <p>ネタとしては、あとがきが本編です。太田が悪い。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/06/23/read-hamamura-nagisa-3/">「浜村渚の計算ノート3さつめ 水色コンパスと恋する幾何学」の感想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2012-06-23T16:25:00+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2012</span></span> <span class='time'>4:25 pm</span></time>
-        
-         | <a href="/blog/2012/06/23/read-hamamura-nagisa-3/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>青柳碧人「浜村渚の計算ノート3さつめ 水色コンパスと恋する幾何学」(講談社文庫)を読みました。</p>
-
-<p><a href="https://www.amazon.co.jp/%E6%B5%9C%E6%9D%91%E6%B8%9A%E3%81%AE%E8%A8%88%E7%AE%97%E3%83%8E%E3%83%BC%E3%83%88-3%E3%81%95%E3%81%A4%E3%82%81-%E6%B0%B4%E8%89%B2%E3%82%B3%E3%83%B3%E3%83%91%E3%82%B9%E3%81%A8%E6%81%8B%E3%81%99%E3%82%8B%E5%B9%BE%E4%BD%95%E5%AD%A6-%E8%AC%9B%E8%AB%87%E7%A4%BE%E6%96%87%E5%BA%AB-%E9%9D%92%E6%9F%B3/dp/4062772515?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4062772515">浜村渚の計算ノート 3さつめ 水色コンパスと恋する幾何学 (講談社文庫)</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E6%B5%9C%E6%9D%91%E6%B8%9A%E3%81%AE%E8%A8%88%E7%AE%97%E3%83%8E%E3%83%BC%E3%83%88-3%E3%81%95%E3%81%A4%E3%82%81-%E6%B0%B4%E8%89%B2%E3%82%B3%E3%83%B3%E3%83%91%E3%82%B9%E3%81%A8%E6%81%8B%E3%81%99%E3%82%8B%E5%B9%BE%E4%BD%95%E5%AD%A6-%E8%AC%9B%E8%AB%87%E7%A4%BE%E6%96%87%E5%BA%AB-%E9%9D%92%E6%9F%B3/dp/4062772515?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4062772515"><img src="https://images-fe.ssl-images-amazon.com/images/I/61s3-xIJF2L._SL160_.jpg" /></a></p>
-
-<h2>浜村渚の計算ノートのあらすじ</h2>
-
-<p>政府の教育刷新において「物事を数値化し、数理現象・物理現象など事実だけを重んじる科目は、心を尊重し他人をいつくしむ人間性を否定しうる」という理由で、義務教育から数学が削除された。これに対し、数学テロ集団「黒い三角定規」は、義務教育における数学の地位向上を要求して、テロ行為を繰り返す。警視庁「黒い三角定規・特別対策本部」の武藤刑事は、数学が好きな中学2年生、浜村渚の力を借りて「黒い三角定規」に立ち向かう。 というのが、「浜村渚の計算ノート」シリーズのあらすじです。</p>
-
-<h2>計算ノート1さつめ、2さつめ、そして3さつめ</h2>
-
-<p>1さつめ「浜村渚の計算ノート」、2さつめ「浜村渚の計算ノート2さつめ ふしぎの国の期末テスト」で、警視庁「黒い三角定規・特別対策本部」の面々と浜村渚は、キャプテン・ルドルフ、ルービック王子、キューティー・オイラーなど、次々と現われる「黒い三角定規」と激闘を繰り広げました。渚と対決した数学テロリストたちは、渚の数学に対する深い愛情と真摯な想いに心を動かされ、また同じように対策本部の面々も少しずつ数学の面白さに気付かされていきます。それにつづくのが今回の3さつめ「浜村渚の計算ノート3さつめ 水色コンパスと恋する幾何学」です。</p>
-
-<h2>シリーズを追うごとに面白くなっている</h2>
-
-<p>全体を通しての感想ですが、「上手くなった！おもしろくなった！」と思いました。なんて、上から目線な感じが恐縮なのですが。小ネタの挟み方、オチのつけ方、数学ネタとストーリーの絡み方などなどが、とても気持ちよい感じになっています。1さつめより2さつめ、2さつめより3さつめと、このシリーズは回を追うごとにどんどん面白くなっていると感じます。</p>
-
-<h2>武藤刑事が成長しているのが嬉しい</h2>
-
-<p>全体を通しての感想をもうひとつ。今回の武藤刑事は、前2作と較べて頼れる男になっていました。渚よりも先に回答に辿りついたり、事件を解決するために自分から積極的に動いたり。渚といっしょに問題に取り組む中で、武藤刑事も成長しているんだなあと。そういう風に思えることが嬉しく感じました。数学に限らず、何かを学ぶことの楽しみは、成長を感じられることにあると気付かされます。</p>
-
-<h2>目次</h2>
-
-<p>以下「浜村渚の計算ノート3さつめ 水色コンパスと恋する幾何学」の目次です。章ごとのちょっとした感想をまとめておきます。</p>
-
-<ul>
-<li>ことのはじまり</li>
-<li>log10.クレタ島・嘘つき迷宮</li>
-<li>log100.アイシテルの正弦</li>
-<li>log1000.「プラトン立体城」殺人事件</li>
-<li>log10000.武田斐三郎の街で</li>
-<li>エピローグ</li>
-</ul>
-
-
-<h2>log10.クレタ島・嘘つき迷宮</h2>
-
-<p>警視庁のシステムに侵入した時限式ウイルスソフトを止めるために、テロリストが作ったゲームに挑戦するというお話。メインの数学ネタは、論理とパラドクスです。</p>
-
-<p>犯人であるテロリスト「えぴめにDeath」が良い味を出しています。</p>
-
-<h2>log100.アイシテルの正弦</h2>
-
-<p>失踪したシステム開発会社の女社長を探すために暗号に挑戦するお話。メインの数学ネタは、三角関数です。ストーリーは恋愛成分が多めです。</p>
-
-<p>三角関数を、三角関係に例えて説明するところが凄いです。武藤刑事と浜村渚の関係はこれからどうなっていくのか。中学2年生に手を出したら普通に犯罪だと思いますが。</p>
-
-<h2>log1000.「プラトン立体城」殺人事件</h2>
-
-<p>函館に向かう新幹線の中で読んだ推理小説、という作中作の形式で進む本格ミステリなお話です。重要人物になると思われる"司会者"マダム・エミーが登場します。</p>
-
-<h2>log10000.武田斐三郎の街で</h2>
-
-<p>舞台は函館、霧雨リチャードソンによるテロを止めるために奮闘するお話です。函館の見所を巡る旅情物の要素もあります。 非常事態を前に、前作で対決した宿敵キューティー・オイラーと共闘する展開が熱いです。</p>
-
-<h2>付録がついてた</h2>
-
-<p>本作には、付録として「浜村渚の計算ノート0さつめ 夏休みのトモ」がついていました。登場人物のイラストとミニコミックが掲載されています。 付録中の記載によると来月には次回作「浜村渚の計算ノート 3と1/2さつめ ふえるま島の最終定理」が発売されるそうです。</p>
-
-<h2>次回作が楽しみ</h2>
-
-<p>本作エピローグで、黒い三角定規にマークされてしまった浜村渚は、これからいったいどうなっていくのか。次回作がとても楽しみな作品です。さらに面白くなっているものと期待しています。</p>
 </div>
   
   

@@ -9,23 +9,7 @@
   <meta name="author" content="succi0303">
 
   
-  <meta name="description" content="現在時刻の美人時計の画像URLを返すHubotスクリプト「hubot-bijin-tokei」を作った。 仕様は以下の通り。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-# Description:
-# Hubot responds current time bijin &hellip;">
+  <meta name="description" content="『JS+Node.jsによるWebクローラー／ネットエージェント[開発テクニック]』のサンプルを試すためにNode.jsの開発環境を作った。本の紹介に従ってVagrantを使用し、CentOS6.5の環境を作った。ゲストOSの設定を手動でポチポチするのは面倒だったので、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -129,6 +113,253 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef/">VagrantとChefでNode.jsの開発環境を構築する</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-30T02:25:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>2:25 am</span></time>
+        
+         | <a href="/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>『JS+Node.jsによるWebクローラー／ネットエージェント[開発テクニック]』のサンプルを試すためにNode.jsの開発環境を作った。本の紹介に従ってVagrantを使用し、CentOS6.5の環境を作った。ゲストOSの設定を手動でポチポチするのは面倒だったので、プロヴィジョニングにChefを使用した。</p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930">JS+Node.jsによるWebクローラー/ネットエージェント開発テクニック</a></p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930"><img src="https://images-fe.ssl-images-amazon.com/images/I/61DHJGf1uSL._SL160_.jpg" /></a></p>
+
+<p>基本的には以前に書いた<a href="https://succi0303.github.io/blog/2015/02/21/setup-rails-environment-with-vagrant-and-chef/">VagrantとChefでRailsの開発環境を構築する</a>と同じ。主な変更点は以下の通り。</p>
+
+<ul>
+<li>knife soloを使わない。</li>
+<li>Chef soloではなく、Chef zeroを使う。</li>
+</ul>
+
+
+<h2>利用したツールのバージョン</h2>
+
+<ul>
+<li>ゲストOS: OSX El Capitan 10.11.2</li>
+<li>VirtualBox 5.0.10 r104061</li>
+<li>Vagrant 1.7.4</li>
+<li>Chef Development Kit Version: 0.10.0</li>
+</ul>
+
+
+<h2>事前準備</h2>
+
+<p>VagrantとVirtualBox、ChefDKをインストールする。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install vagrant
+</span><span class='line'>brew cask install virtualbox
+</span><span class='line'>brew cask install chefdk
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vagrantのプラグインをインストールする。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant plugin install vagrant-omnibus
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>プロジェクトのディレクトリを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir node_crawler
+</span><span class='line'><span class="nb">cd </span>node_crawler
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>クックブックの配置</h2>
+
+<p>クックブックのリポジトリを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>chef generate repo chef-repo
+</span><span class='line'><span class="nb">cd </span>chef-repo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Berksfileを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Berksfile</span>
+</span><span class='line'><span class="n">source</span> <span class="s2">&quot;https://supermarket.chef.io&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;nvm&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 0.1.7&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.3.5&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;vim&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.0.0&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>berkshelfを実行する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>berks vendor cookbooks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>カスタムクックブックを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>knife cookbook create base -o site-cookbooks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>metadata.rbに<code>depends 'nvm'</code>を追加する。</p>
+
+<p><code>default.rb</code>を編集する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">nvm_install</span> <span class="s1">&#39;v0.12.4&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">from_source</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">alias_as_default</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">action</span> <span class="ss">:create</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>vagrant up</h2>
+
+<p>Vagrantfileを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd</span> ../
+</span><span class='line'>vagrant init
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vagrantfileを編集する。</p>
+
+<ul>
+<li>boxは<code>puphpet/centos65-x64</code>を使用する。</li>
+<li>provisionerにchef_zeroを指定する。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Vagrantfile</span>
+</span><span class='line'><span class="c1"># -*- mode: ruby -*-</span>
+</span><span class='line'><span class="c1"># vi: set ft=ruby :</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;puphpet/centos65-x64&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;forwarded_port&quot;</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">8080</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;private_network&quot;</span><span class="p">,</span> <span class="ss">ip</span><span class="p">:</span> <span class="s2">&quot;192.168.33.10&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">omnibus</span><span class="o">.</span><span class="n">chef_version</span> <span class="o">=</span> <span class="ss">:latest</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;chef_zero&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">cookbooks_path</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;chef-repo/cookbooks&quot;</span><span class="p">,</span> <span class="s2">&quot;chef-repo/site-cookbooks&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s1">&#39;nvm&#39;</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s1">&#39;git&#39;</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s1">&#39;vim&#39;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s1">&#39;base&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vagrant up。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant up
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>しばらく待てばプロヴィジョニングと仮想マシンの起動が完了する。</p>
+
+<h2>動作確認</h2>
+
+<p>仮想マシンにログインしてnvmとnodeがインストールされていることを確認する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>vagrant ssh
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>nvm --version
+</span><span class='line'>0.30.1
+</span><span class='line'><span class="nv">$ </span>node -v
+</span><span class='line'>v0.12.4
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>感想</h2>
+
+<ul>
+<li>Chef関連の手順は、あまり情報を追っていないこともあり、正直よくわからない。</li>
+<li>Chef soloとChef zeroの違いがよくわからない。</li>
+<li><code>chef/centos-6.5</code>のboxがなくなっていて驚いた。</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2099,114 +2330,6 @@
 <h2>そのほか</h2>
 
 <p>ここで挙げたものの他に、「<a href="http://ruby.bastardsbook.com/chapters/web-crawling%22>Writing%20a%20Web%20Crawler&lt;/a>%E3%80%8D%E3%81%A7%E3%81%AF%E3%80%81&lt;a%20href=%22http://www.fec.gov/">連邦選挙委員会(Federal Election Commision)のページ</a>の検索機能を使ってレポートを検索して、検索結果に付随するPDFファイル(必要な場合はPOSTリクエストでPDF生成を自動実行する)を片っ端からダウンロードするという、かなりガチなサンプルも紹介されています。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/31/failure-screenshot-with-cucumber-and-capybara/">CucumberとCapybaraでシナリオ失敗時にスクリーンショットを撮る</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-12-31T05:32:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:32 am</span></time>
-        
-         | <a href="/blog/2013/12/31/failure-screenshot-with-cucumber-and-capybara/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Cucumber + Capybaraの環境で、CucumberのシナリオがFailした時にスクリーンショットを取る方法です。</p>
-
-<h2>スクリーンショット取得の設定方法</h2>
-
-<p>「features/support」ディレクトリ配下に以下の内容でファイルを作成する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># features/support/screenshot.rb</span>
-</span><span class='line'><span class="no">After</span><span class="p">(</span><span class="s1">&#39;@javascript&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">scenario</span><span class="o">|</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">scenario</span><span class="o">.</span><span class="n">fialed?</span>
-</span><span class='line'>    <span class="n">page</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="s2">&quot;html-report/</span><span class="si">#{</span><span class="n">scenario</span><span class="o">.</span><span class="n">__id__</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">embed</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">scenario</span><span class="o">.</span><span class="n">__id__</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="s2">&quot;image/png&quot;</span><span class="p">,</span> <span class="s2">&quot;SCREENSHOT&quot;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="err">「</span><span class="n">html</span><span class="o">-</span><span class="n">report</span><span class="err">」ディレクトリを作成しておく。</span>
-</span><span class='line'>
-</span><span class='line'><span class="err">以下のオプションで</span><span class="n">cucumber</span><span class="err">を実行する。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>bash
-$ cucumber &ndash;format html &ndash;out html-report/index.html</p>
-
-<p>「html-report/index.html」をブラウザで開くとテストレポートが表示されます。</p>
-
-<p>シナリオが失敗した箇所に「SCREENSHOT」のリンクが表示され、クリックすると画像を確認できます。お手軽な割にリッチなレポートになるので、初めてやると感動しますね。</p>
-
-<h2>補足</h2>
-
-<p>上記の設定についての補足です。</p>
-
-<h3>Before/Afterフック</h3>
-
-<p>Cucumberでは、Before/Afterフックを使って各シナリオの実行の前後に特定の処理を実行します。上記のコードではAfterフックでシナリオ実行後の処理を指定しています。</p>
-
-<h3>Taggedフック</h3>
-
-<p>Before/Afterの引数にタグを与えることで、Cucumberは特定のタグがついたシナリオのみを対象に処理を実行します。上記のコードではAfterフックに@javascriptタグを与えることで、「@javascript」のタグがついたシナリオの後にのみ処理を実行します。</p>
-
-<h3>@javascriptタグ</h3>
-
-<p>Capybaraは通常rack-testを通じてIn-Processアプローチでテストを実行します。しかし、In-ProcessアプローチではJavaScriptを利用したページのテストができません。そこでJavaScriptを利用するシナリオには@javascriptタグを指定します。</p>
-
-<p>Capybaraは、@javascriptタグがついたシナリオを見つけるとOut-of-Processでテストを実行します。デフォルトではSeleniumを利用してブラウザを操作します。</p>
-
-<p>スクリーンショットを取得する場合、ブラウザを使用することが前提になるため、上記のコードでは@javascriptタグで対象のシナリオを絞り込んでいます。</p>
-
-<h3>scenarioオブジェクト</h3>
-
-<p>Before/Afterフックはブロック引数にscenarioオブジェクトを引き渡します。scenarioオブジェクトにはシナリオ名、ID、シナリオの正否などが含まれます。上記のコードでは、scenario.faild?でシナリオの正否を判定しています。</p>
-
-<h3>Selenium, save_screenshot</h3>
-
-<p>page.driver.browserでSeleniumのbrowserオブジェクトにアクセスし、save_screenshotでスクリーンショットを取得します。</p>
-
-<h3>embedメソッド</h3>
-
-<p>embedメソッドは、ファイル名、MIMEタイプ、ラベルの3つの引数を取り、HTML形式の出力に対してファイルを紐づけます。</p>
-
-<p>上記のコードでは、スクリーンショットのpngファイルを「SCREENSHOT」というラベルでレポートに紐づけています。ラベルはレポート中のリンクテキストになります。</p>
-
-<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808">The Cucumber Book: Behaviour-Driven Development for Testers and Developers (Pragmatic Programmers)</a></p>
-
-<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808"><img src="https://images-fe.ssl-images-amazon.com/images/I/51dKVQPJolL._SL160_.jpg" /></a></p>
 </div>
   
   

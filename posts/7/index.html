@@ -9,8 +9,17 @@
   <meta name="author" content="succi0303">
 
   
-  <meta name="description" content="Cucumberによる受入テストでテストカバレッジを取得するには「SimpleCov」を使うと良い。 colszowka/simplecov SimpleCovのインストール まず「SimpleCov」のgemをインストールする 1
-$ gem install simplecov &hellip;">
+  <meta name="description" content="Cucumber + Capybaraの環境で、CucumberのシナリオがFailした時にスクリーンショットを取る方法です。 スクリーンショット取得の設定方法 「features/support」ディレクトリ配下に以下の内容でファイルを作成する。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -114,6 +123,114 @@ $ gem install simplecov &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/31/failure-screenshot-with-cucumber-and-capybara/">CucumberとCapybaraでシナリオ失敗時にスクリーンショットを撮る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-12-31T05:32:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>5:32 am</span></time>
+        
+         | <a href="/blog/2013/12/31/failure-screenshot-with-cucumber-and-capybara/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Cucumber + Capybaraの環境で、CucumberのシナリオがFailした時にスクリーンショットを取る方法です。</p>
+
+<h2>スクリーンショット取得の設定方法</h2>
+
+<p>「features/support」ディレクトリ配下に以下の内容でファイルを作成する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># features/support/screenshot.rb</span>
+</span><span class='line'><span class="no">After</span><span class="p">(</span><span class="s1">&#39;@javascript&#39;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">scenario</span><span class="o">|</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">scenario</span><span class="o">.</span><span class="n">fialed?</span>
+</span><span class='line'>    <span class="n">page</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">save_screenshot</span><span class="p">(</span><span class="s2">&quot;html-report/</span><span class="si">#{</span><span class="n">scenario</span><span class="o">.</span><span class="n">__id__</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">embed</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">scenario</span><span class="o">.</span><span class="n">__id__</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="s2">&quot;image/png&quot;</span><span class="p">,</span> <span class="s2">&quot;SCREENSHOT&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="err">「</span><span class="n">html</span><span class="o">-</span><span class="n">report</span><span class="err">」ディレクトリを作成しておく。</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">以下のオプションで</span><span class="n">cucumber</span><span class="err">を実行する。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>bash
+$ cucumber &ndash;format html &ndash;out html-report/index.html</p>
+
+<p>「html-report/index.html」をブラウザで開くとテストレポートが表示されます。</p>
+
+<p>シナリオが失敗した箇所に「SCREENSHOT」のリンクが表示され、クリックすると画像を確認できます。お手軽な割にリッチなレポートになるので、初めてやると感動しますね。</p>
+
+<h2>補足</h2>
+
+<p>上記の設定についての補足です。</p>
+
+<h3>Before/Afterフック</h3>
+
+<p>Cucumberでは、Before/Afterフックを使って各シナリオの実行の前後に特定の処理を実行します。上記のコードではAfterフックでシナリオ実行後の処理を指定しています。</p>
+
+<h3>Taggedフック</h3>
+
+<p>Before/Afterの引数にタグを与えることで、Cucumberは特定のタグがついたシナリオのみを対象に処理を実行します。上記のコードではAfterフックに@javascriptタグを与えることで、「@javascript」のタグがついたシナリオの後にのみ処理を実行します。</p>
+
+<h3>@javascriptタグ</h3>
+
+<p>Capybaraは通常rack-testを通じてIn-Processアプローチでテストを実行します。しかし、In-ProcessアプローチではJavaScriptを利用したページのテストができません。そこでJavaScriptを利用するシナリオには@javascriptタグを指定します。</p>
+
+<p>Capybaraは、@javascriptタグがついたシナリオを見つけるとOut-of-Processでテストを実行します。デフォルトではSeleniumを利用してブラウザを操作します。</p>
+
+<p>スクリーンショットを取得する場合、ブラウザを使用することが前提になるため、上記のコードでは@javascriptタグで対象のシナリオを絞り込んでいます。</p>
+
+<h3>scenarioオブジェクト</h3>
+
+<p>Before/Afterフックはブロック引数にscenarioオブジェクトを引き渡します。scenarioオブジェクトにはシナリオ名、ID、シナリオの正否などが含まれます。上記のコードでは、scenario.faild?でシナリオの正否を判定しています。</p>
+
+<h3>Selenium, save_screenshot</h3>
+
+<p>page.driver.browserでSeleniumのbrowserオブジェクトにアクセスし、save_screenshotでスクリーンショットを取得します。</p>
+
+<h3>embedメソッド</h3>
+
+<p>embedメソッドは、ファイル名、MIMEタイプ、ラベルの3つの引数を取り、HTML形式の出力に対してファイルを紐づけます。</p>
+
+<p>上記のコードでは、スクリーンショットのpngファイルを「SCREENSHOT」というラベルでレポートに紐づけています。ラベルはレポート中のリンクテキストになります。</p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808">The Cucumber Book: Behaviour-Driven Development for Testers and Developers (Pragmatic Programmers)</a></p>
+
+<p><a href="https://www.amazon.co.jp/Cucumber-Book-Behaviour-Driven-Development-Programmers/dp/1934356808?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1934356808"><img src="https://images-fe.ssl-images-amazon.com/images/I/51dKVQPJolL._SL160_.jpg" /></a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1366,162 +1483,6 @@ $ gem install simplecov &hellip;">
 <p><a href="https://www.amazon.co.jp/%E9%81%94%E4%BA%BA%E3%81%AB%E5%AD%A6%E3%81%B6-SQL%E5%BE%B9%E5%BA%95%E6%8C%87%E5%8D%97%E6%9B%B8-CodeZine-BOOKS-%E3%83%9F%E3%83%83%E3%82%AF/dp/4798115169?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798115169">達人に学ぶ SQL徹底指南書 (CodeZine BOOKS)</a></p>
 
 <p><a href="https://www.amazon.co.jp/%E9%81%94%E4%BA%BA%E3%81%AB%E5%AD%A6%E3%81%B6-SQL%E5%BE%B9%E5%BA%95%E6%8C%87%E5%8D%97%E6%9B%B8-CodeZine-BOOKS-%E3%83%9F%E3%83%83%E3%82%AF/dp/4798115169?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798115169"><img src="https://images-fe.ssl-images-amazon.com/images/I/51CGypjLrvL._SL160_.jpg" /></a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/07/read-nyumon-chef-solo/">『入門 Chef Solo -Infrastructure as Code-』を読みました。</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-11-07T13:54:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>1:54 pm</span></time>
-        
-         | <a href="/blog/2013/11/07/read-nyumon-chef-solo/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>伊藤直也さん著『入門 Chef Solo -INFRASTRUCTURE AS CODE-』を読みました。</p>
-
-<p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80Chef-Solo-Infrastructure-as-Code-ebook/dp/B00BSPH158?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00BSPH158">入門Chef Solo - Infrastructure as Code</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E5%85%A5%E9%96%80Chef-Solo-Infrastructure-as-Code-ebook/dp/B00BSPH158?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00BSPH158"><img src="https://images-fe.ssl-images-amazon.com/images/I/31u6VLGX2kL._SL160_.jpg" /></a></p>
-
-<p>Amazonのリンクを貼っておきながら言うのもなんですが、達人出版会でepub/pdfのダウンロード販売があるのを知ってそちらで購入しました。どうも僕は、Kindleなど特定のアプリケーションに関連付いた電子書籍が苦手です。紙の実物か、ファイルがあると安心します。我ながらオールドタイプだとは思いますが。達人出版会さんのページはこちらです。</p>
-
-<p><a href="http://tatsu-zine.com/books/chef-solo">入門Chef Solo - Infrastructure as Code - 達人出版会</a></p>
-
-<h2>サンプル実行ではまったポイント</h2>
-
-<p>サンプルを実行する際にいくつか引っかかった点がありました。はまったポイントはQiitaにまとめました。</p>
-
-<p><a href="http://qiita.com/succi0303/items/37776c696eb8a7313bd7">「入門 Chef Solo」on MacOSXではまったこと。 - Qiita</a></p>
-
-<h3>Vagrant 1.0.7 で使えるVirtualBoxは4.2まで</h3>
-
-<p>Qiitaに書き忘れていましたが、もう一点はまったポイントがありました。Vagrant(バージョンは1.0.7)がサポートしているVirtualBoxのバージョンは4.2までのようです。現在VirtualBoxの最新版は4.3です。Latestをそのままインストールすると4.3で、Vagrantを実行した際にエラーが発生しました。いったん4.3をアンインストールして、4.2をインストールし直しました。</p>
-
-<h2>VagrantとChef Soloの基本操作</h2>
-
-<p>VagrantとChef Soloの基本操作をまとめておきます。</p>
-
-<h3>Vagrant チートシート</h3>
-
-<p>Vagrantの基本的な操作</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Vagrantのインストール</span>
-</span><span class='line'>gem install vagrant
-</span><span class='line'>
-</span><span class='line'><span class="c"># boxの追加</span>
-</span><span class='line'>vagrant box add &lt;box名&gt; &lt;URL&gt;
-</span><span class='line'>
-</span><span class='line'><span class="c"># Vagrantの初期化</span>
-</span><span class='line'>vagrant init &lt;box名&gt;
-</span><span class='line'>
-</span><span class='line'><span class="c"># 仮想マシンの起動</span>
-</span><span class='line'>vagrant up
-</span><span class='line'>
-</span><span class='line'><span class="c"># 仮想マシンの停止</span>
-</span><span class='line'>vagrant halt
-</span><span class='line'>
-</span><span class='line'><span class="c"># 仮想マシンの廃棄</span>
-</span><span class='line'>vagrant destroy
-</span><span class='line'>
-</span><span class='line'><span class="c"># ssh-configの確認</span>
-</span><span class='line'>vagrant ssh-config --host &lt;ホスト名&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Chef Solo (+ knife solo) チートシート</h3>
-
-<p>chef soloとknife soloで仮想マシンを設定する基本操作</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># chefリポジトリの作成</span>
-</span><span class='line'>knife solo init chef-repo
-</span><span class='line'><span class="nb">cd </span>chef-repo
-</span><span class='line'>git init
-</span><span class='line'>git add .
-</span><span class='line'>git commit -m <span class="s2">&quot;first commit&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># 仮想マシンにchefをインストール</span>
-</span><span class='line'>knife solo prepare &lt;ホスト名&gt;
-</span><span class='line'>git add nodes/&lt;ホスト名&gt;.json
-</span><span class='line'>git commit -m <span class="s2">&quot;add node json file&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># クックブック作成</span>
-</span><span class='line'>knife cookbook create &lt;クックブック名&gt; -o site-cookbooks
-</span><span class='line'>
-</span><span class='line'><span class="c"># レシピとjsonファイルの編集</span>
-</span><span class='line'>vi site-cookbooks/&lt;クックブック名&gt;/recipes/default.rb
-</span><span class='line'>vi nodes/&lt;ホスト名&gt;.json
-</span><span class='line'>
-</span><span class='line'><span class="c"># chef solo実行 + バージョン管理</span>
-</span><span class='line'>knife solo cook &lt;ホスト名&gt;
-</span><span class='line'>git add site-cookbooks/&lt;クックブック名&gt;
-</span><span class='line'>git commit -m <span class="s2">&quot;add recipe&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上です。</p>
 </div>
   
   

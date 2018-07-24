@@ -4,7 +4,7 @@
   <title><![CDATA[prime factor]]></title>
   <link href="http://succi0303.github.io/atom.xml" rel="self"/>
   <link href="http://succi0303.github.io/"/>
-  <updated>2018-07-07T09:34:47+00:00</updated>
+  <updated>2018-07-24T01:19:30+00:00</updated>
   <id>http://succi0303.github.io/</id>
   <author>
     <name><![CDATA[succi0303]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA["Learn Functional Programming With Elixir"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/24/read-learn-functional-programming-with-elixir/"/>
+    <updated>2018-07-24T01:14:18+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/24/read-learn-functional-programming-with-elixir</id>
+    <content type="html"><![CDATA[<p>&ldquo;Learn Functional Programming with Elixir"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Learn-Functional-Programming-Elixir-Foundations-ebook/dp/B07BRDXN4B?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07BRDXN4B">Learn Functional Programming with Elixir: New Foundations for a New World (The Pragmatic Programmers)</a></p>
+
+<p><a href="https://www.amazon.co.jp/Learn-Functional-Programming-Elixir-Foundations-ebook/dp/B07BRDXN4B?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07BRDXN4B"><img src="https://images-fe.ssl-images-amazon.com/images/I/51BU3yEPxDL._SL160_.jpg" /></a></p>
+
+<p>Elixirの解説を通じて、関数型プログラミングの考え方を身につけようという趣旨の本である。
+タイトルの印象からは「関数型プログラミング」に重きを置いているように見えるが、実際に読んだ印象では「速習Elixir」くらいのタイトルが相応しいのではないかと感じた。</p>
+
+<p>正直に言えば、関数型プログラミングの書籍としては物足りなかった。</p>
+
+<p>パターンマッチ、再帰処理、高階関数にそれぞれ一章が割り当てられているが、モナド、カリー化などの話題は出てこない。手続き型、オブジェクト指向との違いが感じられるのはパターンマッチくらいだろうか。</p>
+
+<p>Elixir自体が、オブジェクト指向言語（主にRuby）使用者が気軽に扱える関数型言語という立ち位置だと思うので、Elixir入門としてはこのくらいで十分と言えるのかもしれない。</p>
+
+<p>関数型プログラミングの考え方自体を楽しみたいという場合には、少し無理をしてでも厚めのHaskellの本を読むのが良さそうだと思った。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA["The Cucumber Book, 2nd Edition"を読んだ]]></title>
@@ -817,31 +841,6 @@
 <p>サブタイトルに「最も詳しい」とある通り、本当に詳しく、懇切丁寧に解説してくれる。このネスペシリーズは基本的には過去問の解説本ではあるけれど、単なる試験対策に留まらずにネットワーク知識の応用の面で良い勉強になったと思う。</p>
 
 <p>試験勉強の進捗としては、午後１までは現時点で何とかなりそうな気がしている。午後２を確実に取るにはもう一歩レベルアップが必要。9月中にその辺りを対策したい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[「ネスペの基礎力」を読んだ]]></title>
-    <link href="http://succi0303.github.io/blog/2017/09/02/foundation-of-network-specialist/"/>
-    <updated>2017-09-02T00:01:02+00:00</updated>
-    <id>http://succi0303.github.io/blog/2017/09/02/foundation-of-network-specialist</id>
-    <content type="html"><![CDATA[<p>「ネスペの基礎力」を読んだ。</p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A%E3%81%AE%E5%9F%BA%E7%A4%8E%E5%8A%9B-%E3%83%97%E3%83%A9%E3%82%B920%E7%82%B9%E3%81%AE%E5%8D%88%E5%BE%8C%E5%AF%BE%E7%AD%96-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774189863?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774189863">ネスペの基礎力 -プラス20点の午後対策 (情報処理技術者試験)</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A%E3%81%AE%E5%9F%BA%E7%A4%8E%E5%8A%9B-%E3%83%97%E3%83%A9%E3%82%B920%E7%82%B9%E3%81%AE%E5%8D%88%E5%BE%8C%E5%AF%BE%E7%AD%96-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774189863?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774189863"><img src="https://images-fe.ssl-images-amazon.com/images/I/512VkqLIVuL._SL160_.jpg" /></a></p>
-
-<p>秋の情報処理技術者試験でネットワークスペシャリストの取得を狙っている。</p>
-
-<p>過去問を解いてみたところ、午前問題はあまり問題ないけれど、午後問題になるとわかっているつもりでも回答が書けないことが多くあった。</p>
-
-<p>基礎力が足りていないのだと思う。ということで、そのものズバリの「ネスペの基礎力」というこの本を読んでみた。</p>
-
-<p>レイヤ別の基礎技術とセキュリティ、その他の関連技術（負荷分散など）が概要レベルで解説されている。</p>
-
-<p>知らない話題も結構あった。知っている話題についても、改めてそれぞれのネットワーク技術の中での位置付けを確認することができた。</p>
-
-<p>資格試験の醍醐味は、試験勉強を通して特定分野の知識を体系的に整理できる点だと思う。その点でこういう本が存在することはとてもありがたい。</p>
 ]]></content>
   </entry>
   

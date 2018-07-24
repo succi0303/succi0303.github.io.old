@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://succi0303.github.io/blog/2018/07/24/read-learn-functional-programming-with-elixir/</loc>
+<lastmod>2018-07-24T01:14:18+00:00</lastmod>
+</url>
+<url>
 <loc>http://succi0303.github.io/blog/2018/07/07/read-the-cucumber-book-2nd-edition/</loc>
 <lastmod>2018-07-07T03:33:22+00:00</lastmod>
 </url>

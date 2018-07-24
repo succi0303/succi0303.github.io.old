@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Book | prime factor]]></title>
   <link href="http://succi0303.github.io/blog/categories/book/atom.xml" rel="self"/>
   <link href="http://succi0303.github.io/"/>
-  <updated>2018-07-07T09:34:47+00:00</updated>
+  <updated>2018-07-24T01:19:30+00:00</updated>
   <id>http://succi0303.github.io/</id>
   <author>
     <name><![CDATA[succi0303]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA["Learn Functional Programming With Elixir"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/24/read-learn-functional-programming-with-elixir/"/>
+    <updated>2018-07-24T01:14:18+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/24/read-learn-functional-programming-with-elixir</id>
+    <content type="html"><![CDATA[<p>&ldquo;Learn Functional Programming with Elixir"を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/Learn-Functional-Programming-Elixir-Foundations-ebook/dp/B07BRDXN4B?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07BRDXN4B">Learn Functional Programming with Elixir: New Foundations for a New World (The Pragmatic Programmers)</a></p>
+
+<p><a href="https://www.amazon.co.jp/Learn-Functional-Programming-Elixir-Foundations-ebook/dp/B07BRDXN4B?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07BRDXN4B"><img src="https://images-fe.ssl-images-amazon.com/images/I/51BU3yEPxDL._SL160_.jpg" /></a></p>
+
+<p>Elixirの解説を通じて、関数型プログラミングの考え方を身につけようという趣旨の本である。
+タイトルの印象からは「関数型プログラミング」に重きを置いているように見えるが、実際に読んだ印象では「速習Elixir」くらいのタイトルが相応しいのではないかと感じた。</p>
+
+<p>正直に言えば、関数型プログラミングの書籍としては物足りなかった。</p>
+
+<p>パターンマッチ、再帰処理、高階関数にそれぞれ一章が割り当てられているが、モナド、カリー化などの話題は出てこない。手続き型、オブジェクト指向との違いが感じられるのはパターンマッチくらいだろうか。</p>
+
+<p>Elixir自体が、オブジェクト指向言語（主にRuby）使用者が気軽に扱える関数型言語という立ち位置だと思うので、Elixir入門としてはこのくらいで十分と言えるのかもしれない。</p>
+
+<p>関数型プログラミングの考え方自体を楽しみたいという場合には、少し無理をしてでも厚めのHaskellの本を読むのが良さそうだと思った。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA["The Cucumber Book, 2nd Edition"を読んだ]]></title>
@@ -176,47 +200,6 @@
 <p>アプリストア云々の話題の中で、コンテナ技術が浸透することによってOSの違いが意識されなくなっていくという指摘があり、印象に残った。確かに、今私はmacOSを使っているけれど、Dockerがまともに使えるならWindowsでも問題ないと思えるし、今度PCを買い替える時には本当にそういう理由でMacから離れることもあるかもしれない。</p>
 
 <p>Part 1のボリューム、ネットワークの部分をもう少しきちんと理解したいと思っている。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA["Docker for Developers, 2nd Edition"を読んだ]]></title>
-    <link href="http://succi0303.github.io/blog/2018/05/18/read-docker-for-developers-2nd-edition/"/>
-    <updated>2018-05-18T01:43:35+00:00</updated>
-    <id>http://succi0303.github.io/blog/2018/05/18/read-docker-for-developers-2nd-edition</id>
-    <content type="html"><![CDATA[<p>&ldquo;Docker for Developers, 2nd Edition"を読んだ。</p>
-
-<p><a href="https://www.amazon.co.jp/Docker-Developers-2nd-Architect-Print/dp/1940111560?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1940111560">Docker for Developers, 2nd Edition: PHP[Architect] Print Edition</a></p>
-
-<p><a href="https://www.amazon.co.jp/Docker-Developers-2nd-Architect-Print/dp/1940111560?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1940111560"><img src="https://images-fe.ssl-images-amazon.com/images/I/51bjH-3dlQL._SL160_.jpg" /></a></p>
-
-<h2>本の概要</h2>
-
-<p>この本は、Dockerを、仮想化による開発環境の置き換えとして考えている人に向けて書かれている、ということである。</p>
-
-<p>コンテナの概念、基本操作、カスタムイメージの作成、Docker Composeの解説の後、PHPのアプリケーションをコンテナ環境で開発する方法が紹介されている。</p>
-
-<h2>Docker本を読む動機</h2>
-
-<p>手元の開発環境をDocker化できないかと思っている。</p>
-
-<p>現在、開発環境には、Vagrantと構成管理ツールを組み合わせてVM環境を使用している。</p>
-
-<p>構成管理ツールは、以前はChefを使っていたが、少し前にAnsibleに乗り換えた。ChefでもAnsibleでも自動化スクリプトを書くことはそれなりに楽しかったが、少々飽きを感じていて、もう少し楽をしたいと思っている。</p>
-
-<p>最近、自分用のPCをCore M3のMacBook'12に買い換えた。以前はCore i7のMacBookPro'13を使っていたので結構なスペックダウンである。日常的な利用にはMacBook'12でほとんど不満はないが、流石にボコボコとVMを立てるのは厳しい感じである。コンテナなら負荷を減らせるのではないかと思っている。</p>
-
-<h2>感想</h2>
-
-<p>単純なスクリプトを実行するだけなら、実行環境のイメージをpullして<code>docker run</code>するだけで良い。</p>
-
-<p>gemなど依存するライブラリがある場合は、Dockerfileを書いてライブラリ込みのイメージをビルドし、ホストのディレクトリをマウントして、コンテナ内で実行する。</p>
-
-<p>必要なことは、だいたいあっけなく実現できることがわかった。</p>
-
-<p>手始めに、このブログのOctopress環境をコンテナ化したいと思っているが、いざやってるとどうやって実現すれば良いかよく分からない。</p>
-
-<p>もう少し情報を収集しようと思う。</p>
 ]]></content>
   </entry>
   
