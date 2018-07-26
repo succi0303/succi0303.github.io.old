@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Book | prime factor]]></title>
   <link href="http://succi0303.github.io/blog/categories/book/atom.xml" rel="self"/>
   <link href="http://succi0303.github.io/"/>
-  <updated>2018-07-24T01:19:30+00:00</updated>
+  <updated>2018-07-26T01:54:35+00:00</updated>
   <id>http://succi0303.github.io/</id>
   <author>
     <name><![CDATA[succi0303]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[「ネスぺ 29 魂」を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/26/read-network-specialist-29-spirit/"/>
+    <updated>2018-07-26T01:49:41+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/26/read-network-specialist-29-spirit</id>
+    <content type="html"><![CDATA[<p>「ネスぺ 29 魂」を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-29-%E9%AD%82-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0-ebook/dp/B07C2ZJ1GG?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07C2ZJ1GG">ネスペ 29　魂　－ネットワークスペシャリストの最も詳しい過去問解説</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-29-%E9%AD%82-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0-ebook/dp/B07C2ZJ1GG?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07C2ZJ1GG"><img src="https://images-fe.ssl-images-amazon.com/images/I/51muHvU8maL._SL160_.jpg" /></a></p>
+
+<p>昨年の秋に受験した、情報処理技術者試験ネットワークスペシャリストの午後問題（記述式問題）を徹底的に解説した本である。
+昨年の受験にあたっては、過去のネスぺシリーズ（基礎力、27礎、26道、25剣）を全て読み、そのおかげもあって無事に合格することができた。</p>
+
+<p>今回は答え合せとして読んだ。試験センターのIPAからも模範解答が公表されているが、問い毎の解説がついていないため、どうしてその解答が正解になるのかよくわからない。しっかりとした答え合わせができる点でも、このシリーズはありがたい存在だと思う。</p>
+
+<p>午後Ⅱは、問２の無線LAN問題を選択して自己採点の結果も良かったが、今回の解説の内容もほぼ理解していた通りで、自分の理解に問題がなかったことを確認できた。</p>
+
+<p>午後Ⅱ、問１のOpenFlow問題は、選択しなくて本当に良かったと改めて思う。</p>
+
+<p>問題があったのは午後Ⅰの問３、ルーティング問題で、本質的な部分はほとんど理解できていなかったことがわかった。ルーティングの問題は、本来的には、最低限の基礎知識と愚直に考える力があれば解けるものだと思うので、なんというか堪え性の無さが出た結果かなと思う。</p>
+
+<p>ネットワークスペシャリストの午後問題は、しっかり読み込むと様々な知識と考え方が身につく、良くできた教材だと思う。ただし、その中で設問が設定される部分は絶妙に浅い。かつ、採点基準はめちゃくちゃ甘い。というのが、個人的な合格体験から得た率直な感想である。なので、現在ネットワークスペシャリストの勉強をされている方におかれては、午後問題のぱっと見の重さに心を折られる必要はありませんよ、という点を伝えておきたいと思う。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA["Learn Functional Programming With Elixir"を読んだ]]></title>
@@ -150,56 +176,6 @@
 <li><a href="https://www.youtube.com/watch?v=uMA7qqXIXBk">How Do You Pronounce Kubernetes? And What Is It? - YouTube</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA["Docker in Action"を読んだ]]></title>
-    <link href="http://succi0303.github.io/blog/2018/05/30/read-docker-in-action/"/>
-    <updated>2018-05-30T07:48:57+00:00</updated>
-    <id>http://succi0303.github.io/blog/2018/05/30/read-docker-in-action</id>
-    <content type="html"><![CDATA[<p>&ldquo;Docker in Action"を読んだ。</p>
-
-<p><a href="https://www.amazon.co.jp/Docker-Action-Jeff-Nickoloff/dp/1633430235?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1633430235">Docker in Action</a></p>
-
-<p><a href="https://www.amazon.co.jp/Docker-Action-Jeff-Nickoloff/dp/1633430235?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1633430235"><img src="https://images-fe.ssl-images-amazon.com/images/I/51q1IkCdKhL._SL160_.jpg" /></a></p>
-
-<p>Dockerの基礎を紹介する本である。先日読んだ"Docker for Developers"は、Dockerを開発環境で利用することに焦点を当てた本だった。それと比べると、"Docker in Action"はもう少し全体的、正統的なDockerの入門書である。</p>
-
-<p>全体の構成は３つに分かれている。</p>
-
-<ul>
-<li>Part 1. Keeping a Tidy Computer</li>
-<li>Part 2. Packaging Software for Distribution</li>
-<li>Part 3. Multi-Container and Multi-Host Environments</li>
-</ul>
-
-
-<p>Part 1は、Dockrおよびコンテナの概要、基本コマンド、ボリューム、ネットワークについて。Part 2は、Dockerfileの作成方法を含むイメージの作成、リポジトリの基本、プライベートなリポジトリの構築方法について。Part 3は、Docker Compose、Docker Machine、Swarmについて、という流れである。</p>
-
-<h2>WHY IS DOCKER IMPORTANT?</h2>
-
-<p>Part 1の冒頭で、「なぜDockerが重要なのか」について４つの理由が紹介されていたのでまとめておく。</p>
-
-<h3>1. Dockerはコンテナによる抽象化をもたらす</h3>
-
-<p>抽象化により複雑な事柄をシンプルに取り扱うことが可能になる。コンテナにより抽象化された環境において、システム管理者はインストールに伴う複雑性を考慮する必要がなく、ただどのアプリケーションをインストールしたいかを考えるだけでよくなる。Dockerは、全ての人にコンテナを利用可能にする点で重要なツールである。</p>
-
-<h3>2. Dokcerはコミュニティの強い後押しを受けている</h3>
-
-<p>Amazon、Microsoft、Googleのような企業がDockerの適用を強く推し進めている。現時点でそれらの企業は独自の技術を開発するよりもDockerを推進する立場で足並みを揃えている。</p>
-
-<h3>3.Dockerはアプリストア的なるものを実現する</h3>
-
-<p>Dockerはアプリケーションのインストールを劇的にシンプルにする。さらにDockerはクロスプラットフォームで利用できる。全てのスマートフォン、コンピュータが同じアプリストアを共有する。そんな仕組みをDockerなら実現することができる。</p>
-
-<h3>4. Dockerはより先進的な分離の仕組みである</h3>
-
-<p>コンテナ技術はより先進的な分離(isolation)の仕組みである。分離の仕組みを通じて、コンピュータをよりセキュアにする取り組みが進められている。コンテナ技術は10年以上前から存在していたもので、広く受け入れられるまでに長い時間を要したことは恥ずかしいことだと言える。この技術をシンプルに取り扱えるようした点でDockerはグレイトである。</p>
-
-<p>アプリストア云々の話題の中で、コンテナ技術が浸透することによってOSの違いが意識されなくなっていくという指摘があり、印象に残った。確かに、今私はmacOSを使っているけれど、Dockerがまともに使えるならWindowsでも問題ないと思えるし、今度PCを買い替える時には本当にそういう理由でMacから離れることもあるかもしれない。</p>
-
-<p>Part 1のボリューム、ネットワークの部分をもう少しきちんと理解したいと思っている。</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="succi0303">
 
   
-  <meta name="description" content="『JS+Node.jsによるWebクローラー／ネットエージェント[開発テクニック]』のサンプルを試すためにNode.jsの開発環境を作った。本の紹介に従ってVagrantを使用し、CentOS6.5の環境を作った。ゲストOSの設定を手動でポチポチするのは面倒だったので、 &hellip;">
+  <meta name="description" content="『JS+Node.jsによるWebクローラー／ネットエージェント開発テクニック』のサンプル実行環境の構築について。 JS+Node.jsによるWebクローラー/ネットエージェント開発テクニック 一つ前のエントリでnvmクックブックを使ってNode.jsの開発環境を構築する手順をまとめたが、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +113,254 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef-part2/">VagrantとChefでNode.jsの開発環境を構築する2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-30T09:15:00+00:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:15 am</span></time>
+        
+         | <a href="/blog/2015/12/30/setup-nodejs-environment-with-vagrant-and-chef-part2/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>『JS+Node.jsによるWebクローラー／ネットエージェント開発テクニック』のサンプル実行環境の構築について。</p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930">JS+Node.jsによるWebクローラー/ネットエージェント開発テクニック</a></p>
+
+<p><a href="https://www.amazon.co.jp/JS-Node-js%E3%81%AB%E3%82%88%E3%82%8BWeb%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC-%E3%83%8D%E3%83%83%E3%83%88%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%8B%E7%99%BA%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF-%E3%82%AF%E3%82%B8%E3%83%A9%E9%A3%9B%E8%A1%8C%E6%9C%BA/dp/4883379930?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4883379930"><img src="https://images-fe.ssl-images-amazon.com/images/I/61DHJGf1uSL._SL160_.jpg" /></a></p>
+
+<p><a href="http://succi.jp/blog/?p=1614">一つ前のエントリ</a>でnvmクックブックを使ってNode.jsの開発環境を構築する手順をまとめたが、いくつか不便な点があった。</p>
+
+<ul>
+<li>sudoでnode、npmを使うために設定ファイルの編集が必要</li>
+<li>npmパッケージのインストールは別途コマンドを打つ必要がある</li>
+</ul>
+
+
+<p>上記の点を解決できないかと、nvmクックブックを使うのをやめて、nodejsクックブックで環境を作り直してみた。そもそもNode.jsのバージョンを変更する場合は、仮想マシンそのものを作り直すので敢えてnvmを使う必要もないと思う。</p>
+
+<p>npmモジュールのインストールに合わせて、freetype、fontconfig、mecabなど必要なツールのインストールも追加した。</p>
+
+<p>手順の差分を記載する。</p>
+
+<h2>Berksfile</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Berksfile</span>
+</span><span class='line'><span class="n">source</span> <span class="s1">&#39;https://supermarket.chef.io&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;nodejs&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.4.4&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 4.3.5&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;sqlite&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 1.1.2&#39;</span>
+</span><span class='line'><span class="n">cookbook</span> <span class="s1">&#39;vim&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 2.0.0&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>カスタムクックブック</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># metadata.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">depends</span> <span class="s2">&quot;nodejs&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># default.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># iconvモジュールインストール時に発生する下記エラーの対処</span>
+</span><span class='line'><span class="c1"># error: ‘REPLACE_INVALID_UTF8’ is not a member of ‘v8::String’</span>
+</span><span class='line'><span class="c1"># https://github.com/nodejs/nan/issues/414</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s2">&quot;npm&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s2">&quot;cheerio-httpcli&quot;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s2">&quot;request&quot;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s2">&quot;xml2js&quot;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s2">&quot;phantomjs&quot;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s2">&quot;casperjs&quot;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;iconv&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;jschardet&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;iconv-lite&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;json5&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;cson&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;js-yaml&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;ini&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;comma-separated-values&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;coffee-script&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;sqlite3&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;cheerio&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;level&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;pdfkit&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;officegen&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;twit&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;fb&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;apac&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;node-flickr&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;youtube-node&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;bayes&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;mecab-lite&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;svm&#39;</span>
+</span><span class='line'><span class="n">nodejs_npm</span> <span class="s1">&#39;topojson&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># for PhantomJS &amp; CasperJS</span>
+</span><span class='line'><span class="sx">%w{freetype fontconfig}</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">package</span> <span class="n">pkg</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">action</span> <span class="ss">:install</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">%w{gdal wget curl}</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">pkg</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">package</span> <span class="n">pkg</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">action</span> <span class="ss">:install</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Vagrantfile</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Vagrantfile</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># -*- mode: ruby -*-</span>
+</span><span class='line'><span class="c1"># vi: set ft=ruby :</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;puphpet/centos65-x64&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;forwarded_port&quot;</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">8080</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;private_network&quot;</span><span class="p">,</span> <span class="ss">ip</span><span class="p">:</span> <span class="s2">&quot;192.168.33.10&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">omnibus</span><span class="o">.</span><span class="n">chef_version</span> <span class="o">=</span> <span class="ss">:latest</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;chef_zero&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">chef</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">cookbooks_path</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;chef-repo/cookbooks&quot;</span><span class="p">,</span> <span class="s2">&quot;chef-repo/site-cookbooks&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;mecab&quot;</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;nodejs&quot;</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;git&quot;</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;sqlite&quot;</span>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;vim&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">chef</span><span class="o">.</span><span class="n">add_recipe</span> <span class="s2">&quot;base&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>感想</h2>
+
+<ul>
+<li>nodejsモジュールでは、Node.jsのバージョンを指定することはできないらしい。今回実行したところ、v0.10.36がインストールされた。</li>
+<li>npmパッケージのインストールをレシピにまとめることができた。</li>
+</ul>
+
+
+<p>iconvモジュールのインストールで<code>'REPLACE_INVALID_UTF8’ is not a member of ‘v8::String'</code>というエラーが発生した。理由はよくわかっていないが、事前に<code>npm install -g npm</code>を実行することでエラーを回避することができた。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1720,616 +1968,6 @@
 <p>設定が読み込まれ、RSpecとCucumberが実行されます。</p>
 
 <p>以降、関連するファイルを更新するたびにRSpecとCucumberが自動的に実行されます。端末がOSXでGrowlをインストールしていれば、あわせてGrowlでテスト結果が通知されます。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/08/web-site-for-learning-web-scraping-by-ruby/">Rubyによるスクレイピングが学べるウェブサイト</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-08T09:39:00+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:39 am</span></time>
-        
-         | <a href="/blog/2014/01/08/web-site-for-learning-web-scraping-by-ruby/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Rubyを使ったウェブのスパイダリング、スクレイピングを学べる情報源がないか探していたところ<a href="http://ruby.bastardsbook.com/chapters/mechanize">こちらのサイト</a>を見つけました。</p>
-
-<ul>
-<li><a href="http://ruby.bastardsbook.com/">The Bastards Book of Ruby</a></li>
-</ul>
-
-
-<p>トップページから「Contents」「Supplements」と順に追っていくと、ウェブ・スクレイピングの基礎をテーマにした以下の記事が見つかります。</p>
-
-<ul>
-<li><a href="http://ruby.bastardsbook.com/chapters/web-scraping">An Intro to Web Scraping</a></li>
-<li><a href="http://ruby.bastardsbook.com/chapters/web-inspecting-html">Meet Your Web Inspector</a></li>
-<li><a href="http://ruby.bastardsbook.com/chapters/web-inspecting-traffic">Inspecting a Webpage&rsquo;s Traffic</a></li>
-<li><a href="http://ruby.bastardsbook.com/chapters/html-parsing">Parsing HTML with Nokogiri</a></li>
-<li><a href="http://ruby.bastardsbook.com/chapters/web-crawling">Writing a Web Crawler</a></li>
-<li><a href="http://ruby.bastardsbook.com/chapters/mechanize">The Mechanize Gem</a></li>
-</ul>
-
-
-<p>スクレイピングの基本的な考え方から始まって、ブラウザ付属のインスペクタの使い方、「<a href="http://nokogiri.org/%22>Nokogiri&lt;/a>%E3%80%8D%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9FHTML%E3%81%AE%E3%83%91%E3%83%BC%E3%82%B9%E3%80%81%E5%AE%9F%E9%9A%9B%E3%81%AE%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E5%AF%BE%E8%B1%A1%E3%81%AB%E3%81%97%E3%81%9F%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%81%AE%E4%BD%9C%E6%88%90%E3%80%81%E3%80%8C&lt;a%20href=%22http://mechanize.rubyforge.org/Mechanize.html">Mechanize</a>」の紹介と、ひととおりの情報がまとまっています。</p>
-
-<p>実用的なスクリプトを書くにはまだ少しハードルがありそうですが、基本的な考え方はこちらの記事で理解できたと思います。復習を兼ねてサンプルスクリプトを少しいじってみました。</p>
-
-<h2>1. Wikipedia 検索ボックスのサジェスト情報を取得する</h2>
-
-<p>「<a href="http://ruby.bastardsbook.com/chapters/web-inspecting-traffic">Inspecting a Webpage&rsquo;s Traffic</a>」のサンプルを元に、Wikipediaの検索ボックスからサジェスト情報を取得してみます。元のサンプルでは英語版のWikipediaを対象にアルファベット毎のサジェスト情報を取得しています。少し手を加えて日本語版のWikipediaから五十音毎のサジェスト情報を取得してみます。</p>
-
-<p>できあがったのものはこちら。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;restclient&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;crack&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;cgi&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">WURL</span><span class="o">=</span> <span class="s1">&#39;http://ja.wikipedia.org/w/api.php?action=opensearch&amp;format=json&amp;namespace=0&amp;suggest=&amp;search=&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">hiragana</span> <span class="o">=</span> <span class="s1">&#39;あいうえおかきくけこたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">hiragana</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">letter</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">resp</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">WURL</span><span class="si">}#{</span><span class="no">CGI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s1">&#39;User-Agent&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Ruby&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">array</span> <span class="o">=</span> <span class="no">Crack</span><span class="o">::</span><span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="n">array</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最初にrequireしている「<a href="https://github.com/jnunemaker/crack">crack</a>」は、調べてみるとJSON/XML用のシンプルなパーサでした。</p>
-
-<p>リクエストの送信に「<a href="https://github.com/rest-client/rest-client%22>rest-client&lt;/a>%E3%80%8D%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%81%8C%E3%80%81%E5%8D%98%E7%B4%94%E3%81%AAGET%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AA%E3%81%AE%E3%81%A7%E3%81%8A%E3%81%9D%E3%82%89%E3%81%8F%E3%80%8C&lt;a%20href=%22http://docs.ruby-lang.org/ja/2.0.0/library/open=2duri.html">open-uri</a>」でopenするのでも問題はないと思われます。</p>
-
-<p>ひらがなはそのままでは送信することができないので、CGI.escapeでURIエンコードしています。もしかすると、<a href="http://docs.ruby-lang.org/ja/2.0.0/class/URI.html">URI.encode</a>を使う方が正しいのかも。使い分けがあまり理解できていません。</p>
-
-<p>実行すると、Wikipediaの検索ボックスにひらがな一文字を入力したときサジェストされる単語の一覧が取得できます。</p>
-
-<p>結果はこちら。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">あ</span><span class="p">,</span> <span class="err">あ</span><span class="p">,</span> <span class="err">あいテレビ</span><span class="p">,</span> <span class="err">あしたのジョー</span><span class="p">,</span> <span class="err">あっ</span><span class="o">!</span><span class="err">とおどろく放送局</span><span class="p">,</span> <span class="err">あらびき団</span><span class="p">,</span> <span class="err">あぶない刑事</span><span class="p">,</span> <span class="err">あたしンち</span><span class="p">,</span> <span class="err">ああっ女神さまっ</span><span class="p">,</span> <span class="err">あきる野市</span><span class="p">,</span> <span class="err">あまちゃん</span>
-</span><span class='line'><span class="err">い</span><span class="p">,</span> <span class="err">い</span><span class="p">,</span> <span class="err">いわき市</span><span class="p">,</span> <span class="err">いすゞ自動車</span><span class="p">,</span> <span class="err">いじめ</span><span class="p">,</span> <span class="err">いとこ</span><span class="p">,</span> <span class="err">いのちのことば社</span><span class="p">,</span> <span class="err">いきものがかり</span><span class="p">,</span> <span class="err">いしだあゆみ</span><span class="p">,</span> <span class="err">いきなり</span><span class="o">!</span><span class="err">黄金伝説。</span><span class="p">,</span> <span class="err">いて座</span>
-</span><span class='line'><span class="err">う</span><span class="p">,</span> <span class="err">う</span><span class="p">,</span> <span class="err">うつ病</span><span class="p">,</span> <span class="err">うどん</span><span class="p">,</span> <span class="err">うたばん</span><span class="p">,</span> <span class="err">うえだゆうじ</span><span class="p">,</span> <span class="err">うるま市</span><span class="p">,</span> <span class="err">うる星やつら</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">う蝕</span><span class="p">,</span> <span class="err">うた・ホーダイ</span><span class="p">,</span> <span class="err">うる星やつら</span>
-</span><span class='line'><span class="err">え</span><span class="p">,</span> <span class="err">え</span><span class="p">,</span> <span class="err">えびの市</span><span class="p">,</span> <span class="err">えら</span><span class="p">,</span> <span class="err">えちぜん鉄道</span><span class="p">,</span> <span class="err">えびす</span><span class="p">,</span> <span class="err">えなりかずき</span><span class="p">,</span> <span class="err">えびす</span> <span class="p">(</span><span class="err">曖昧さ回避</span><span class="p">),</span> <span class="err">えんじ色</span><span class="p">,</span> <span class="err">えちぜん鉄道三国芦原線</span><span class="p">,</span> <span class="err">えちぜん鉄道勝山永平寺線</span>
-</span><span class='line'><span class="err">お</span><span class="p">,</span> <span class="err">お笑いタレント</span><span class="p">,</span> <span class="err">おたく</span><span class="p">,</span> <span class="err">お</span><span class="p">,</span> <span class="err">お笑いコンビ</span><span class="p">,</span> <span class="err">おサイフケータイ</span><span class="p">,</span> <span class="err">お茶の水女子大学</span><span class="p">,</span> <span class="err">お台場</span><span class="p">,</span> <span class="err">おはスタ</span><span class="p">,</span> <span class="err">おかあさんといっしょ</span><span class="p">,</span> <span class="err">おニャン子クラブ</span>
-</span><span class='line'><span class="err">か</span><span class="p">,</span> <span class="err">か</span><span class="p">,</span> <span class="err">がん保険</span><span class="p">,</span> <span class="err">かないみか</span><span class="p">,</span> <span class="err">かつら</span> <span class="p">(</span><span class="err">装身具</span><span class="p">),</span> <span class="err">かまやつひろし</span><span class="p">,</span> <span class="err">から揚げ</span><span class="p">,</span> <span class="err">かご形三相誘導電動機</span><span class="p">,</span> <span class="err">がん診療連携拠点病院</span><span class="p">,</span> <span class="err">かんぽ生命保険</span><span class="p">,</span> <span class="err">かいけつゾロリ</span>
-</span><span class='line'><span class="err">き</span><span class="p">,</span> <span class="err">き</span><span class="p">,</span> <span class="err">ぎょうせい</span><span class="p">,</span> <span class="err">きらりん☆レボリューション</span><span class="p">,</span> <span class="err">きかんしゃトーマス</span><span class="p">,</span> <span class="err">きたろう</span><span class="p">,</span> <span class="err">きまぐれオレンジ☆ロード</span><span class="p">,</span> <span class="err">きゃりーぱみゅぱみゅ</span><span class="p">,</span> <span class="err">きさらぎ賞</span><span class="p">,</span> <span class="err">きょうの料理</span><span class="p">,</span> <span class="err">ぎゃろっぷ</span>
-</span><span class='line'><span class="err">く</span><span class="p">,</span> <span class="err">く</span><span class="p">,</span> <span class="err">ぐるぐるナインティナイン</span><span class="p">,</span> <span class="err">くりぃむしちゅー</span><span class="p">,</span> <span class="err">くるり</span><span class="p">,</span> <span class="err">くちばし</span><span class="p">,</span> <span class="err">くるみ割り人形</span><span class="p">,</span> <span class="err">くまいもとこ</span><span class="p">,</span> <span class="err">くノ一</span><span class="p">,</span> <span class="err">くじ</span><span class="p">,</span> <span class="err">くりぃむナントカ</span>
-</span><span class='line'><span class="err">け</span><span class="p">,</span> <span class="err">け</span><span class="p">,</span> <span class="err">けいおん</span><span class="o">!</span><span class="p">,</span> <span class="err">げんしけん</span><span class="p">,</span> <span class="err">けものみち</span><span class="p">,</span> <span class="err">けんぷファー</span><span class="p">,</span> <span class="err">けん玉</span><span class="p">,</span> <span class="err">けいおん</span><span class="o">!</span><span class="err">の登場人物</span><span class="p">,</span> <span class="err">けっこう仮面</span><span class="p">,</span> <span class="err">けん銃</span><span class="p">,</span> <span class="err">けろっこデメタン</span>
-</span><span class='line'><span class="err">こ</span><span class="p">,</span> <span class="err">こ</span><span class="p">,</span> <span class="err">こちら葛飾区亀有公園前派出所</span><span class="p">,</span> <span class="err">こちら葛飾区亀有公園前派出所</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">こおろぎさとみ</span><span class="p">,</span> <span class="err">ごくせん</span> <span class="p">(</span><span class="err">テレビドラマ</span><span class="p">),</span> <span class="err">ことわざ</span><span class="p">,</span> <span class="err">ごみ</span><span class="p">,</span> <span class="err">こだまさおり</span><span class="p">,</span> <span class="err">ご当地グルメ</span><span class="p">,</span> <span class="err">こけら落し</span>
-</span><span class='line'><span class="err">た</span><span class="p">,</span> <span class="err">た</span><span class="p">,</span> <span class="err">ため池</span><span class="p">,</span> <span class="err">たつの市</span><span class="p">,</span> <span class="err">たむらけんじ</span><span class="p">,</span> <span class="err">たんぱく質</span><span class="p">,</span> <span class="err">たこ焼き</span><span class="p">,</span> <span class="err">たかはし智秋</span><span class="p">,</span> <span class="err">たかじんのそこまで言って委員会</span><span class="p">,</span> <span class="err">たまごっち</span><span class="o">!</span><span class="p">,</span> <span class="err">たまごっち</span>
-</span><span class='line'><span class="err">ち</span><span class="p">,</span> <span class="err">ちびまる子ちゃん</span><span class="p">,</span> <span class="err">ち</span><span class="p">,</span> <span class="err">ちくま学芸文庫</span><span class="p">,</span> <span class="err">ちくま文庫</span><span class="p">,</span> <span class="err">ちちんぷいぷい</span> <span class="p">(</span><span class="err">テレビ番組</span><span class="p">),</span> <span class="err">ちゃお</span><span class="p">,</span> <span class="err">ちあきなおみ</span><span class="p">,</span> <span class="err">ちくま新書</span><span class="p">,</span> <span class="err">ちはやふる</span><span class="p">,</span> <span class="err">ちばてつや</span>
-</span><span class='line'><span class="err">つ</span><span class="p">,</span> <span class="err">つんく♂</span><span class="p">,</span> <span class="err">つ</span><span class="p">,</span> <span class="err">つくば市</span><span class="p">,</span> <span class="err">つなぎ番組</span><span class="p">,</span> <span class="err">つるの剛士</span><span class="p">,</span> <span class="err">つる植物</span><span class="p">,</span> <span class="err">つくばみらい市</span><span class="p">,</span> <span class="err">つぼみ</span> <span class="p">(</span><span class="no">AV</span><span class="err">女優</span><span class="p">),</span> <span class="err">つがる市</span><span class="p">,</span> <span class="err">つり革</span>
-</span><span class='line'><span class="err">て</span><span class="p">,</span> <span class="err">て</span><span class="p">,</span> <span class="err">てらそままさき</span><span class="p">,</span> <span class="err">てんかん</span><span class="p">,</span> <span class="err">てれびくん</span><span class="p">,</span> <span class="err">でんでん</span><span class="p">,</span> <span class="err">てんとう虫コミックス</span><span class="p">,</span> <span class="err">てんびん座</span><span class="p">,</span> <span class="err">できちゃった結婚</span><span class="p">,</span> <span class="err">てこ</span><span class="p">,</span> <span class="err">てるてる家族</span>
-</span><span class='line'><span class="err">と</span><span class="p">,</span> <span class="err">と</span><span class="p">,</span> <span class="err">とんねるず</span><span class="p">,</span> <span class="err">とんねるずのみなさんのおかげでした</span><span class="p">,</span> <span class="err">とちぎテレビ</span><span class="p">,</span> <span class="err">とっとこハム太郎</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">とある科学の超電磁砲</span><span class="p">,</span> <span class="err">ときめきメモリアル</span><span class="p">,</span> <span class="err">ど根性ガエル</span><span class="p">,</span> <span class="err">となりのトトロ</span><span class="p">,</span> <span class="err">ともさかりえ</span>
-</span><span class='line'><span class="err">な</span><span class="p">,</span> <span class="err">なかよし</span><span class="p">,</span> <span class="err">な</span><span class="p">,</span> <span class="err">なかにし礼</span><span class="p">,</span> <span class="err">なんばグランド花月</span><span class="p">,</span> <span class="err">なるほど</span><span class="o">!</span><span class="err">ザ・ワールド</span><span class="p">,</span> <span class="err">なぎら健壱</span><span class="p">,</span> <span class="err">なべおさみ</span><span class="p">,</span> <span class="err">なだぎ武</span><span class="p">,</span> <span class="err">なかやまきんに君</span><span class="p">,</span> <span class="err">なるトモ</span><span class="o">!</span>
-</span><span class='line'><span class="err">に</span><span class="p">,</span> <span class="err">に</span><span class="p">,</span> <span class="err">にっかつ</span><span class="p">,</span> <span class="err">にっぽん</span><span class="o">!</span><span class="err">いい旅</span><span class="p">,</span> <span class="err">にかほ市</span><span class="p">,</span> <span class="err">にっぽんの歌</span><span class="p">,</span> <span class="err">にしおかすみこ</span><span class="p">,</span> <span class="err">におい</span><span class="p">,</span> <span class="err">にちりん</span> <span class="p">(</span><span class="err">列車</span><span class="p">),</span> <span class="err">にじいろジーン</span><span class="p">,</span> <span class="err">にんじん</span>
-</span><span class='line'><span class="err">ぬ</span><span class="p">,</span> <span class="err">ぬ</span><span class="p">,</span> <span class="err">ぬいぐるみ</span><span class="p">,</span> <span class="err">ぬらりひょんの孫</span><span class="p">,</span> <span class="err">ぬらりひょん</span><span class="p">,</span> <span class="err">ぬかるみの女</span><span class="p">,</span> <span class="err">ぬっぺふほふ</span><span class="p">,</span> <span class="err">ぬれせんべい</span><span class="p">,</span> <span class="err">ぬりかべ</span> <span class="p">(</span><span class="err">ゲゲゲの鬼太郎</span><span class="p">),</span> <span class="err">ぬた</span><span class="p">,</span> <span class="err">ぬらりひょん</span> <span class="p">(</span><span class="err">ゲゲゲの鬼太郎</span><span class="p">)</span>
-</span><span class='line'><span class="err">ね</span><span class="p">,</span> <span class="err">ね</span><span class="p">,</span> <span class="err">ねじ</span><span class="p">,</span> <span class="err">ねぎぼうずのあさたろう</span><span class="p">,</span> <span class="err">ねるとん紅鯨団</span><span class="p">,</span> <span class="err">ねんどろいど</span><span class="p">,</span> <span class="err">ねぎ</span><span class="p">,</span> <span class="err">ねぶた</span><span class="p">,</span> <span class="err">ねじれ国会</span><span class="p">,</span> <span class="err">ねじめ正一</span><span class="p">,</span> <span class="err">ねじ式</span>
-</span><span class='line'><span class="err">の</span><span class="p">,</span> <span class="err">の</span><span class="p">,</span> <span class="err">のだめカンタービレ</span><span class="p">,</span> <span class="err">のだめカンタービレ</span> <span class="p">(</span><span class="err">テレビドラマ</span><span class="p">),</span> <span class="err">のぞみ</span> <span class="p">(</span><span class="err">列車</span><span class="p">),</span> <span class="err">のらみみ</span><span class="p">,</span> <span class="err">のと鉄道</span><span class="p">,</span> <span class="err">ののちゃん</span><span class="p">,</span> <span class="err">のと里山海道</span><span class="p">,</span> <span class="err">のらくろ</span><span class="p">,</span> <span class="err">のりスタ</span><span class="o">!</span>
-</span><span class='line'><span class="err">は</span><span class="p">,</span> <span class="err">はぐれ刑事純情派</span><span class="p">,</span> <span class="err">は</span><span class="p">,</span> <span class="err">はなまるマーケット</span><span class="p">,</span> <span class="err">はがき</span><span class="p">,</span> <span class="err">はみだし刑事情熱系</span><span class="p">,</span> <span class="err">はじめの一歩</span><span class="p">,</span> <span class="err">ばね</span><span class="p">,</span> <span class="err">はるな愛</span><span class="p">,</span> <span class="err">はなわ</span><span class="p">,</span> <span class="err">はねるのトびら</span>
-</span><span class='line'><span class="err">ひ</span><span class="p">,</span> <span class="err">ひ</span><span class="p">,</span> <span class="err">ぴあ</span><span class="p">,</span> <span class="err">びわ湖放送</span><span class="p">,</span> <span class="err">ひたちなか市</span><span class="p">,</span> <span class="err">ひみつのアッコちゃん</span><span class="p">,</span> <span class="err">ぴえろ</span><span class="p">,</span> <span class="err">ひるおび</span><span class="o">!</span><span class="p">,</span> <span class="err">ひらけ</span><span class="o">!</span><span class="err">ポンキッキ</span><span class="p">,</span> <span class="err">ひぐらしのなく頃に</span><span class="p">,</span> <span class="err">ひかり</span><span class="no">TV</span>
-</span><span class='line'><span class="err">ふ</span><span class="p">,</span> <span class="err">ぶんか社</span><span class="p">,</span> <span class="err">ふ</span><span class="p">,</span> <span class="err">ふたりはプリキュア</span><span class="p">,</span> <span class="err">ぷろだくしょんバオバブ</span><span class="p">,</span> <span class="err">ふんどし</span><span class="p">,</span> <span class="err">ふかわりょう</span><span class="p">,</span> <span class="err">ふしぎの海のナディア</span><span class="p">,</span> <span class="err">ふしぎ遊戯</span><span class="p">,</span> <span class="err">ふじみ野市</span><span class="p">,</span> <span class="err">ふたご座</span>
-</span><span class='line'><span class="err">へ</span><span class="p">,</span> <span class="err">へ</span><span class="p">,</span> <span class="err">べるぜバブ</span><span class="p">,</span> <span class="err">へうげもの</span><span class="p">,</span> <span class="err">へびつかい座</span><span class="p">,</span> <span class="err">へそ</span><span class="p">,</span> <span class="err">ぺりかん社</span><span class="p">,</span> <span class="err">へたれ</span><span class="p">,</span> <span class="err">へろへろくん</span><span class="p">,</span> <span class="err">ぺとぺとさん</span><span class="p">,</span> <span class="err">へら</span>
-</span><span class='line'><span class="err">ほ</span><span class="p">,</span> <span class="err">ほ</span><span class="p">,</span> <span class="err">ほんとにあった怖い話</span><span class="p">,</span> <span class="err">ほしのあき</span><span class="p">,</span> <span class="err">ほっしゃん。</span><span class="p">,</span> <span class="err">ほ乳類</span><span class="p">,</span> <span class="err">ほるぷ出版</span><span class="p">,</span> <span class="err">ほくろ</span><span class="p">,</span> <span class="err">ほんこん</span><span class="p">,</span> <span class="err">ぼのぼの</span><span class="p">,</span> <span class="err">ぼくらの</span>
-</span><span class='line'><span class="err">ま</span><span class="p">,</span> <span class="err">ま</span><span class="p">,</span> <span class="err">ますだおかだ</span><span class="p">,</span> <span class="err">まじめにふまじめ</span> <span class="err">かいけつゾロリ</span><span class="p">,</span> <span class="err">まるマシリーズ</span><span class="p">,</span> <span class="err">まんが日本昔ばなし</span><span class="p">,</span> <span class="err">まんがタイムきらら</span><span class="p">,</span> <span class="err">まいっちんぐマチコ先生</span><span class="p">,</span> <span class="err">まんのう町</span><span class="p">,</span> <span class="err">まちづくり</span><span class="p">,</span> <span class="err">まじかる☆タルるートくん</span>
-</span><span class='line'><span class="err">み</span><span class="p">,</span> <span class="err">みどりの窓口</span><span class="p">,</span> <span class="err">みんなのうた</span><span class="p">,</span> <span class="err">みずほ銀行</span><span class="p">,</span> <span class="err">みすず書房</span><span class="p">,</span> <span class="err">みんなの党</span><span class="p">,</span> <span class="err">み</span><span class="p">,</span> <span class="err">みのもんた</span><span class="p">,</span> <span class="err">みのもんたの朝ズバッ</span><span class="o">!</span><span class="p">,</span> <span class="err">みずほコーポレート銀行</span><span class="p">,</span> <span class="err">みうらじゅん</span>
-</span><span class='line'><span class="err">む</span><span class="p">,</span> <span class="err">む</span><span class="p">,</span> <span class="err">むつ市</span><span class="p">,</span> <span class="err">むかわ町</span><span class="p">,</span> <span class="err">むらさめ型護衛艦</span><span class="p">,</span> <span class="err">むちゃぶり</span><span class="o">!</span><span class="p">,</span> <span class="err">むたあきこ</span><span class="p">,</span> <span class="err">むつ</span> <span class="p">(</span><span class="err">原子力船</span><span class="p">),</span> <span class="err">むさしの</span> <span class="p">(</span><span class="err">列車</span><span class="p">),</span> <span class="err">むかいねね</span><span class="p">,</span> <span class="err">むち</span> <span class="p">(</span><span class="err">楽器</span><span class="p">)</span>
-</span><span class='line'><span class="err">め</span><span class="p">,</span> <span class="err">めざましテレビ</span><span class="p">,</span> <span class="err">めちゃ×</span><span class="mi">2</span><span class="err">イケてるッ</span><span class="o">!</span><span class="p">,</span> <span class="err">め</span><span class="p">,</span> <span class="err">めっき</span><span class="p">,</span> <span class="err">めざましどようび</span><span class="p">,</span> <span class="err">めまい</span><span class="p">,</span> <span class="err">めぞん一刻</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">めぞん一刻</span><span class="p">,</span> <span class="err">めだかボックス</span><span class="p">,</span> <span class="err">めざにゅ〜</span>
-</span><span class='line'><span class="err">も</span><span class="p">,</span> <span class="err">も</span><span class="p">,</span> <span class="err">ももいろクローバー</span><span class="n">Z</span><span class="p">,</span> <span class="err">もののけ姫</span><span class="p">,</span> <span class="err">ものまね</span><span class="p">,</span> <span class="err">ものまねタレント</span><span class="p">,</span> <span class="err">ものまね王座決定戦</span><span class="p">,</span> <span class="err">もやしもん</span><span class="p">,</span> <span class="err">もーれつア太郎</span><span class="p">,</span> <span class="err">ものまねバトル</span><span class="p">,</span> <span class="err">もしものシミュレーションバラエティー</span> <span class="err">お試しかっ</span><span class="o">!</span>
-</span><span class='line'><span class="err">や</span><span class="p">,</span> <span class="err">や</span><span class="p">,</span> <span class="err">やりすぎコージー</span><span class="p">,</span> <span class="err">やしきたかじん</span><span class="p">,</span> <span class="err">やり投</span><span class="p">,</span> <span class="err">やらせ</span><span class="p">,</span> <span class="err">やくみつる</span><span class="p">,</span> <span class="err">やまと学校</span><span class="p">,</span> <span class="err">やなせたかし</span><span class="p">,</span> <span class="err">やじうまプラス</span><span class="p">,</span> <span class="err">やぎ座</span>
-</span><span class='line'><span class="err">ゆ</span><span class="p">,</span> <span class="err">ゆうちょ銀行</span><span class="p">,</span> <span class="err">ゆうパック</span><span class="p">,</span> <span class="err">ゆうゆう窓口</span><span class="p">,</span> <span class="err">ゆ</span><span class="p">,</span> <span class="err">ゆず</span> <span class="p">(</span><span class="err">音楽グループ</span><span class="p">),</span> <span class="err">ゆるキャラ</span><span class="p">,</span> <span class="err">ゆかな</span><span class="p">,</span> <span class="err">ゆりかもめ東京臨海新交通臨海線</span><span class="p">,</span> <span class="err">ゆうどきネットワーク</span><span class="p">,</span> <span class="err">ゆうばり国際ファンタスティック映画祭</span>
-</span><span class='line'><span class="err">よ</span><span class="p">,</span> <span class="err">よしもとクリエイティブ・エージェンシー</span><span class="p">,</span> <span class="err">よ</span><span class="p">,</span> <span class="err">よみうりテレビ</span><span class="p">,</span> <span class="err">よしもとアール・アンド・シー</span><span class="p">,</span> <span class="err">よゐこ</span><span class="p">,</span> <span class="err">よみうりランド</span><span class="p">,</span> <span class="err">よしもと新喜劇</span><span class="p">,</span> <span class="err">よんでますよ、アザゼルさん。</span><span class="p">,</span> <span class="err">よど号ハイジャック事件</span><span class="p">,</span> <span class="err">よしもとばなな</span>
-</span><span class='line'><span class="err">ら</span><span class="p">,</span> <span class="err">ら</span><span class="p">,</span> <span class="err">らんま</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="err">らき☆すた</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">らき☆すた</span><span class="p">,</span> <span class="err">らいむいろ戦奇譚</span><span class="p">,</span> <span class="err">ららぽーと</span><span class="p">,</span> <span class="err">ららぽーと</span><span class="no">TOKYO</span><span class="o">-</span><span class="no">BAY</span><span class="p">,</span> <span class="err">らぶドル</span> <span class="err">〜</span><span class="no">Lovely</span> <span class="no">Idol</span><span class="err">〜</span><span class="p">,</span> <span class="err">らせん</span> <span class="p">(</span><span class="err">鈴木光司の小説</span><span class="p">),</span> <span class="err">らき☆すたの登場人物</span>
-</span><span class='line'><span class="err">り</span><span class="p">,</span> <span class="err">り</span><span class="p">,</span> <span class="err">りそな銀行</span><span class="p">,</span> <span class="err">りぼん</span><span class="p">,</span> <span class="err">りぼんマスコットコミックス</span><span class="p">,</span> <span class="err">りょう</span><span class="p">,</span> <span class="err">りりィ</span><span class="p">,</span> <span class="err">りそなホールディングス</span><span class="p">,</span> <span class="err">りゅう座</span><span class="p">,</span> <span class="err">りんたろう</span><span class="p">,</span> <span class="err">りゅうこつ座</span>
-</span><span class='line'><span class="err">る</span><span class="p">,</span> <span class="err">る</span><span class="p">,</span> <span class="err">るろうに剣心</span> <span class="o">-</span><span class="err">明治剣客浪漫譚</span><span class="o">-</span> <span class="p">(</span><span class="err">アニメ</span><span class="p">),</span> <span class="err">るろうに剣心</span> <span class="o">-</span><span class="err">明治剣客浪漫譚</span><span class="o">-</span><span class="p">,</span> <span class="err">るろうに剣心</span> <span class="p">(</span><span class="err">実写映画</span><span class="p">),</span> <span class="err">るるぶ</span><span class="p">,</span> <span class="err">るつぼ</span><span class="p">,</span> <span class="err">るんるん</span> <span class="p">(</span><span class="err">講談社</span><span class="p">),</span> <span class="err">るーぷる仙台</span><span class="p">,</span> <span class="err">るくなす</span><span class="p">,</span> <span class="err">るろうに剣心</span> <span class="o">-</span><span class="err">明治剣客浪漫譚</span><span class="o">-</span><span class="err">の登場人物一覧</span>
-</span><span class='line'><span class="err">れ</span><span class="p">,</span> <span class="err">れ</span><span class="p">,</span> <span class="err">れでぃ×ばと</span><span class="o">!</span><span class="p">,</span> <span class="err">れいめい中学校・高等学校</span><span class="p">,</span> <span class="err">れんこん</span><span class="p">,</span> <span class="err">れんが書房新社</span><span class="p">,</span> <span class="err">れいめい</span><span class="p">,</span> <span class="err">れい子内親王</span><span class="p">,</span> <span class="err">れすきゅー</span><span class="no">ME</span><span class="o">!</span><span class="p">,</span> <span class="err">れいか</span><span class="p">,</span> <span class="err">れっつ</span><span class="o">!</span><span class="err">おひめさまだっこ</span><span class="o">/</span><span class="err">オトメチック初心者でーす</span>
-</span><span class='line'><span class="err">ろ</span><span class="p">,</span> <span class="err">ろ</span><span class="p">,</span> <span class="err">ろうそく</span><span class="p">,</span> <span class="err">ろ過</span><span class="p">,</span> <span class="err">ろくでなし</span><span class="no">BLUES</span><span class="p">,</span> <span class="err">ろう者</span><span class="p">,</span> <span class="err">ろう教育</span><span class="p">,</span> <span class="err">ろう学校</span><span class="p">,</span> <span class="err">ろみひー</span><span class="p">,</span> <span class="err">ろくろ首</span><span class="p">,</span> <span class="err">ろぼっ子ビートン</span>
-</span><span class='line'><span class="err">わ</span><span class="p">,</span> <span class="err">わ</span><span class="p">,</span> <span class="err">わいせつ</span><span class="p">,</span> <span class="err">わがまま☆フェアリー</span> <span class="err">ミルモでポン</span><span class="o">!</span><span class="p">,</span> <span class="err">わたらせ渓谷鐵道わたらせ渓谷線</span><span class="p">,</span> <span class="err">わたらせ渓谷鐵道</span><span class="p">,</span> <span class="err">わが家の歴史</span><span class="p">,</span> <span class="err">わるいやつら</span><span class="p">,</span> <span class="err">わたしが子どもだったころ</span> <span class="p">(</span><span class="err">テレビ番組</span><span class="p">),</span> <span class="err">わがまま</span><span class="o">!</span><span class="err">気まま</span><span class="o">!</span><span class="err">旅気分</span><span class="p">,</span> <span class="err">わんわん物語</span>
-</span><span class='line'><span class="err">を</span><span class="p">,</span> <span class="err">を</span><span class="p">,</span> <span class="err">をはり万造</span><span class="p">,</span> <span class="err">をかし</span><span class="p">,</span> <span class="err">をちこち</span><span class="no">Magazine</span><span class="p">,</span> <span class="err">をなり神</span><span class="p">,</span> <span class="err">を除いて一意的</span><span class="p">,</span> <span class="err">をぐら山春秋</span><span class="p">,</span> <span class="err">をけら参り</span>
-</span><span class='line'><span class="err">ん</span><span class="p">,</span> <span class="err">ん</span><span class="p">,</span> <span class="err">ん廻し</span><span class="p">,</span> <span class="err">んぐるわ会報</span><span class="p">,</span> <span class="err">んなことあるか</span><span class="p">,</span> <span class="err">んだスタ</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ジャンルと年代にひどく偏りがある気がしますね。コミック、アニメ、エロ、あと年代的にわりとおっさん向けのような。</p>
-
-<h2>2. Recovery.govから州ごとの資金情報を取得するスクリプトの修正</h2>
-
-<p>「<a href="http://ruby.bastardsbook.com/chapters/web-inspecting-traffic%22>Inspecting%20a%20Webpage's%20Traffic&lt;/a>%E3%80%8D%E3%81%AB%E3%80%81%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%81%AE%E3%80%8C&lt;a%20href=%22http://ruby.bastardsbook.com/chapters/web-inspecting-traffic/">Recovery.gov</a>」というサイトから、フラッシュの地図が利用しているXML情報を解析して、州ごとの資金の情報を取得する、というサンプルがあるのですが、対象データのレイアウトが変わったのか、そのままでは動作しませんでした。正しく動作するように修正してみます。</p>
-
-<p>修正後のスクリプトがこちら。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;crack&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">URL</span> <span class="o">=</span> <span class="s1">&#39;http://www.recovery.gov/arra/pages/GetXmlData.aspx?data=recipientHomeMap&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;awarded&#39;</span><span class="p">,</span> <span class="s1">&#39;received&#39;</span><span class="p">,</span> <span class="s1">&#39;jobs&#39;</span><span class="o">].</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">Crack</span><span class="o">::</span><span class="no">XML</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="no">URL</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">)</span><span class="o">[</span><span class="s2">&quot;map&quot;</span><span class="o">][</span><span class="s2">&quot;view&quot;</span><span class="o">][</span><span class="s2">&quot;totals&quot;</span><span class="o">][</span><span class="s2">&quot;state&quot;</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">state</span><span class="o">|</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;awarded&#39;</span><span class="p">,</span> <span class="s1">&#39;received&#39;</span><span class="p">,</span> <span class="s1">&#39;jobs&#39;</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">state</span><span class="o">[</span><span class="n">f</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>パース後のハッシュのネストが元のサンプルスクリプトが想定しているよりも深くなっていることがエラーの原因だったようです。</p>
-
-<p>実行するとこんなデータを取得できます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">id</span><span class="p">,</span> <span class="nb">name</span><span class="p">,</span> <span class="n">awarded</span><span class="p">,</span> <span class="n">received</span><span class="p">,</span> <span class="n">jobs</span>
-</span><span class='line'><span class="no">AL</span><span class="p">,</span> <span class="no">Alabama</span><span class="p">,</span> <span class="mi">3683</span><span class="o">.</span><span class="mi">18</span><span class="p">,</span> <span class="mi">3371</span><span class="o">.</span><span class="mo">04</span><span class="p">,</span> <span class="mi">655</span><span class="o">.</span><span class="mi">98</span>
-</span><span class='line'><span class="no">AK</span><span class="p">,</span> <span class="no">Alaska</span><span class="p">,</span> <span class="mi">2312</span><span class="o">.</span><span class="mi">17</span><span class="p">,</span> <span class="mi">2046</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">396</span><span class="o">.</span><span class="mo">03</span>
-</span><span class='line'><span class="no">AZ</span><span class="p">,</span> <span class="no">Arizona</span><span class="p">,</span> <span class="mi">7689</span><span class="o">.</span><span class="mi">68</span><span class="p">,</span> <span class="mi">7098</span><span class="o">.</span><span class="mi">27</span><span class="p">,</span> <span class="mi">2105</span><span class="o">.</span><span class="mi">26</span>
-</span><span class='line'><span class="no">AR</span><span class="p">,</span> <span class="no">Arkansas</span><span class="p">,</span> <span class="mi">2335</span><span class="p">,</span> <span class="mi">2125</span><span class="o">.</span><span class="mi">54</span><span class="p">,</span> <span class="mi">556</span><span class="o">.</span><span class="mi">58</span>
-</span><span class='line'><span class="no">CA</span><span class="p">,</span> <span class="no">California</span><span class="p">,</span> <span class="mi">34577</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mi">29156</span><span class="o">.</span><span class="mi">76</span><span class="p">,</span> <span class="mi">9414</span><span class="o">.</span><span class="mi">91</span>
-</span><span class='line'><span class="no">CO</span><span class="p">,</span> <span class="no">Colorado</span><span class="p">,</span> <span class="mi">5660</span><span class="o">.</span><span class="mi">26</span><span class="p">,</span> <span class="mi">4774</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1325</span><span class="o">.</span><span class="mi">56</span>
-</span><span class='line'><span class="no">CT</span><span class="p">,</span> <span class="no">Connecticut</span><span class="p">,</span> <span class="mi">2540</span><span class="o">.</span><span class="mi">72</span><span class="p">,</span> <span class="mi">2358</span><span class="o">.</span><span class="mi">99</span><span class="p">,</span> <span class="mi">273</span><span class="o">.</span><span class="mi">87</span>
-</span><span class='line'><span class="no">DE</span><span class="p">,</span> <span class="no">Delaware</span><span class="p">,</span> <span class="mi">957</span><span class="o">.</span><span class="mi">28</span><span class="p">,</span> <span class="mi">832</span><span class="o">.</span><span class="mi">74</span><span class="p">,</span> <span class="mi">350</span><span class="o">.</span><span class="mi">33</span>
-</span><span class='line'><span class="no">DC</span><span class="p">,</span> <span class="no">District</span> <span class="n">of</span> <span class="no">Columbia</span><span class="p">,</span> <span class="mi">5987</span><span class="o">.</span><span class="mo">03</span><span class="p">,</span> <span class="mi">4796</span><span class="o">.</span><span class="mi">41</span><span class="p">,</span> <span class="mi">1743</span><span class="o">.</span><span class="mi">65</span>
-</span><span class='line'><span class="no">FL</span><span class="p">,</span> <span class="no">Florida</span><span class="p">,</span> <span class="mi">11210</span><span class="o">.</span><span class="mi">61</span><span class="p">,</span> <span class="mi">10117</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">3810</span><span class="o">.</span><span class="mi">37</span>
-</span><span class='line'><span class="no">GA</span><span class="p">,</span> <span class="no">Georgia</span><span class="p">,</span> <span class="mi">7003</span><span class="o">.</span><span class="mi">78</span><span class="p">,</span> <span class="mi">6082</span><span class="o">.</span><span class="mi">77</span><span class="p">,</span> <span class="mi">1265</span><span class="o">.</span><span class="mi">44</span>
-</span><span class='line'><span class="no">HI</span><span class="p">,</span> <span class="no">Hawaii</span><span class="p">,</span> <span class="mi">1432</span><span class="o">.</span><span class="mi">42</span><span class="p">,</span> <span class="mi">1238</span><span class="o">.</span><span class="mi">77</span><span class="p">,</span> <span class="mi">490</span><span class="o">.</span><span class="mi">84</span>
-</span><span class='line'><span class="no">ID</span><span class="p">,</span> <span class="no">Idaho</span><span class="p">,</span> <span class="mi">1698</span><span class="o">.</span><span class="mo">04</span><span class="p">,</span> <span class="mi">1623</span><span class="o">.</span><span class="mi">77</span><span class="p">,</span> <span class="mi">240</span><span class="o">.</span><span class="mi">51</span>
-</span><span class='line'><span class="no">IL</span><span class="p">,</span> <span class="no">Illinois</span><span class="p">,</span> <span class="mi">11933</span><span class="o">.</span><span class="mi">95</span><span class="p">,</span> <span class="mi">9350</span><span class="o">.</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1696</span><span class="o">.</span><span class="mi">32</span>
-</span><span class='line'><span class="no">IN</span><span class="p">,</span> <span class="no">Indiana</span><span class="p">,</span> <span class="mi">4510</span><span class="o">.</span><span class="mi">18</span><span class="p">,</span> <span class="mi">4203</span><span class="o">.</span><span class="mi">24</span><span class="p">,</span> <span class="mi">865</span><span class="o">.</span><span class="mi">91</span>
-</span><span class='line'><span class="no">IA</span><span class="p">,</span> <span class="no">Iowa</span><span class="p">,</span> <span class="mi">2268</span><span class="o">.</span><span class="mi">72</span><span class="p">,</span> <span class="mi">2035</span><span class="o">.</span><span class="mi">15</span><span class="p">,</span> <span class="mi">393</span><span class="o">.</span><span class="mi">43</span>
-</span><span class='line'><span class="no">KS</span><span class="p">,</span> <span class="no">Kansas</span><span class="p">,</span> <span class="mi">2324</span><span class="o">.</span><span class="mi">38</span><span class="p">,</span> <span class="mi">2093</span><span class="o">.</span><span class="mi">49</span><span class="p">,</span> <span class="mi">208</span><span class="o">.</span><span class="mi">83</span>
-</span><span class='line'><span class="no">KY</span><span class="p">,</span> <span class="no">Kentucky</span><span class="p">,</span> <span class="mi">3583</span><span class="o">.</span><span class="mi">37</span><span class="p">,</span> <span class="mi">3252</span><span class="o">.</span><span class="mo">04</span><span class="p">,</span> <span class="mi">969</span><span class="o">.</span><span class="mi">99</span>
-</span><span class='line'><span class="no">LA</span><span class="p">,</span> <span class="no">Louisiana</span><span class="p">,</span> <span class="mi">3328</span><span class="o">.</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3008</span><span class="o">.</span><span class="mi">65</span><span class="p">,</span> <span class="mi">706</span>
-</span><span class='line'><span class="no">ME</span><span class="p">,</span> <span class="no">Maine</span><span class="p">,</span> <span class="mi">1451</span><span class="o">.</span><span class="mi">87</span><span class="p">,</span> <span class="mi">1399</span><span class="o">.</span><span class="mi">49</span><span class="p">,</span> <span class="mi">302</span><span class="o">.</span><span class="mi">77</span>
-</span><span class='line'><span class="no">MD</span><span class="p">,</span> <span class="no">Maryland</span><span class="p">,</span> <span class="mi">7019</span><span class="o">.</span><span class="mi">52</span><span class="p">,</span> <span class="mi">5913</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3134</span><span class="o">.</span><span class="mo">07</span>
-</span><span class='line'><span class="no">MA</span><span class="p">,</span> <span class="no">Massachusetts</span><span class="p">,</span> <span class="mi">7648</span><span class="o">.</span><span class="mi">29</span><span class="p">,</span> <span class="mi">6687</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2552</span><span class="o">.</span><span class="mi">87</span>
-</span><span class='line'><span class="no">MI</span><span class="p">,</span> <span class="no">Michigan</span><span class="p">,</span> <span class="mi">8671</span><span class="o">.</span><span class="mi">94</span><span class="p">,</span> <span class="mi">7798</span><span class="o">.</span><span class="mi">87</span><span class="p">,</span> <span class="mi">1551</span><span class="o">.</span><span class="mi">3</span>
-</span><span class='line'><span class="no">MN</span><span class="p">,</span> <span class="no">Minnesota</span><span class="p">,</span> <span class="mi">4026</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">3655</span><span class="o">.</span><span class="mi">08</span><span class="p">,</span> <span class="mi">532</span><span class="o">.</span><span class="mo">06</span>
-</span><span class='line'><span class="no">MS</span><span class="p">,</span> <span class="no">Mississippi</span><span class="p">,</span> <span class="mi">2767</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2391</span><span class="o">.</span><span class="mi">72</span><span class="p">,</span> <span class="mi">407</span><span class="o">.</span><span class="mi">61</span>
-</span><span class='line'><span class="no">MO</span><span class="p">,</span> <span class="no">Missouri</span><span class="p">,</span> <span class="mi">4956</span><span class="o">.</span><span class="mi">85</span><span class="p">,</span> <span class="mi">4632</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1265</span><span class="o">.</span><span class="mi">28</span>
-</span><span class='line'><span class="no">MT</span><span class="p">,</span> <span class="no">Montana</span><span class="p">,</span> <span class="mi">1525</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">1382</span><span class="o">.</span><span class="mo">01</span><span class="p">,</span> <span class="mi">506</span><span class="o">.</span><span class="mi">33</span>
-</span><span class='line'><span class="no">NE</span><span class="p">,</span> <span class="no">Nebraska</span><span class="p">,</span> <span class="mi">1333</span><span class="o">.</span><span class="mi">93</span><span class="p">,</span> <span class="mi">1278</span><span class="o">.</span><span class="mi">13</span><span class="p">,</span> <span class="mi">235</span><span class="o">.</span><span class="mo">03</span>
-</span><span class='line'><span class="no">NV</span><span class="p">,</span> <span class="no">Nevada</span><span class="p">,</span> <span class="mi">2886</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2468</span><span class="o">.</span><span class="mi">96</span><span class="p">,</span> <span class="mi">2191</span><span class="o">.</span><span class="mi">68</span>
-</span><span class='line'><span class="no">NH</span><span class="p">,</span> <span class="no">New</span> <span class="no">Hampshire</span><span class="p">,</span> <span class="mi">977</span><span class="o">.</span><span class="mi">95</span><span class="p">,</span> <span class="mi">911</span><span class="p">,</span> <span class="mi">275</span><span class="o">.</span><span class="mi">25</span>
-</span><span class='line'><span class="no">NJ</span><span class="p">,</span> <span class="no">New</span> <span class="no">Jersey</span><span class="p">,</span> <span class="mi">5400</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">4982</span><span class="o">.</span><span class="mi">08</span><span class="p">,</span> <span class="mi">630</span><span class="o">.</span><span class="mi">31</span>
-</span><span class='line'><span class="no">NM</span><span class="p">,</span> <span class="no">New</span> <span class="no">Mexico</span><span class="p">,</span> <span class="mi">2718</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">2533</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">366</span><span class="o">.</span><span class="mo">04</span>
-</span><span class='line'><span class="no">NY</span><span class="p">,</span> <span class="no">New</span> <span class="no">York</span><span class="p">,</span> <span class="mi">17163</span><span class="o">.</span><span class="mi">48</span><span class="p">,</span> <span class="mi">15188</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">4107</span><span class="o">.</span><span class="mi">69</span>
-</span><span class='line'><span class="no">NC</span><span class="p">,</span> <span class="no">North</span> <span class="no">Carolina</span><span class="p">,</span> <span class="mi">7617</span><span class="o">.</span><span class="mi">62</span><span class="p">,</span> <span class="mi">6373</span><span class="o">.</span><span class="mi">42</span><span class="p">,</span> <span class="mi">2497</span><span class="o">.</span><span class="mi">45</span>
-</span><span class='line'><span class="no">ND</span><span class="p">,</span> <span class="no">North</span> <span class="no">Dakota</span><span class="p">,</span> <span class="mi">1098</span><span class="o">.</span><span class="mi">35</span><span class="p">,</span> <span class="mi">993</span><span class="o">.</span><span class="mi">47</span><span class="p">,</span> <span class="mi">375</span><span class="o">.</span><span class="mi">79</span>
-</span><span class='line'><span class="no">OH</span><span class="p">,</span> <span class="no">Ohio</span><span class="p">,</span> <span class="mi">8745</span><span class="o">.</span><span class="mi">91</span><span class="p">,</span> <span class="mi">7982</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">3011</span><span class="o">.</span><span class="mi">61</span>
-</span><span class='line'><span class="no">OK</span><span class="p">,</span> <span class="no">Oklahoma</span><span class="p">,</span> <span class="mi">3056</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span> <span class="mi">2836</span><span class="o">.</span><span class="mi">09</span><span class="p">,</span> <span class="mi">1271</span><span class="o">.</span><span class="mi">97</span>
-</span><span class='line'><span class="no">OR</span><span class="p">,</span> <span class="no">Oregon</span><span class="p">,</span> <span class="mi">3257</span><span class="o">.</span><span class="mi">39</span><span class="p">,</span> <span class="mi">3080</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span> <span class="mi">524</span><span class="o">.</span><span class="mi">23</span>
-</span><span class='line'><span class="no">PA</span><span class="p">,</span> <span class="no">Pennsylvania</span><span class="p">,</span> <span class="mi">9305</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">8620</span><span class="o">.</span><span class="mi">98</span><span class="p">,</span> <span class="mi">1700</span><span class="o">.</span><span class="mi">43</span>
-</span><span class='line'><span class="no">RI</span><span class="p">,</span> <span class="no">Rhode</span> <span class="no">Island</span><span class="p">,</span> <span class="mi">1222</span><span class="o">.</span><span class="mi">83</span><span class="p">,</span> <span class="mi">1066</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1392</span><span class="o">.</span><span class="mi">22</span>
-</span><span class='line'><span class="no">SC</span><span class="p">,</span> <span class="no">South</span> <span class="no">Carolina</span><span class="p">,</span> <span class="mi">4658</span><span class="o">.</span><span class="mi">81</span><span class="p">,</span> <span class="mi">4420</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">517</span><span class="o">.</span><span class="mi">77</span>
-</span><span class='line'><span class="no">SD</span><span class="p">,</span> <span class="no">South</span> <span class="no">Dakota</span><span class="p">,</span> <span class="mi">1351</span><span class="o">.</span><span class="mi">51</span><span class="p">,</span> <span class="mi">1254</span><span class="o">.</span><span class="mi">67</span><span class="p">,</span> <span class="mi">304</span><span class="o">.</span><span class="mi">61</span>
-</span><span class='line'><span class="no">TN</span><span class="p">,</span> <span class="no">Tennessee</span><span class="p">,</span> <span class="mi">6521</span><span class="o">.</span><span class="mi">49</span><span class="p">,</span> <span class="mi">5699</span><span class="o">.</span><span class="mi">83</span><span class="p">,</span> <span class="mi">1908</span><span class="o">.</span><span class="mi">9</span>
-</span><span class='line'><span class="no">TX</span><span class="p">,</span> <span class="no">Texas</span><span class="p">,</span> <span class="mi">17043</span><span class="o">.</span><span class="mi">36</span><span class="p">,</span> <span class="mi">15424</span><span class="o">.</span><span class="mi">96</span><span class="p">,</span> <span class="mi">4030</span><span class="o">.</span><span class="mi">79</span>
-</span><span class='line'><span class="no">UT</span><span class="p">,</span> <span class="no">Utah</span><span class="p">,</span> <span class="mi">2260</span><span class="o">.</span><span class="mi">62</span><span class="p">,</span> <span class="mi">2118</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="mi">378</span><span class="o">.</span><span class="mi">13</span>
-</span><span class='line'><span class="no">VT</span><span class="p">,</span> <span class="no">Vermont</span><span class="p">,</span> <span class="mi">1055</span><span class="o">.</span><span class="mi">71</span><span class="p">,</span> <span class="mi">909</span><span class="o">.</span><span class="mi">63</span><span class="p">,</span> <span class="mi">249</span><span class="o">.</span><span class="mi">93</span>
-</span><span class='line'><span class="no">VA</span><span class="p">,</span> <span class="no">Virginia</span><span class="p">,</span> <span class="mi">6462</span><span class="o">.</span><span class="mi">13</span><span class="p">,</span> <span class="mi">5701</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span> <span class="mi">1485</span><span class="o">.</span><span class="mi">98</span>
-</span><span class='line'><span class="no">WA</span><span class="p">,</span> <span class="no">Washington</span><span class="p">,</span> <span class="mi">8394</span><span class="o">.</span><span class="mi">24</span><span class="p">,</span> <span class="mi">7216</span><span class="o">.</span><span class="mi">52</span><span class="p">,</span> <span class="mi">1211</span><span class="o">.</span><span class="mi">72</span>
-</span><span class='line'><span class="no">WV</span><span class="p">,</span> <span class="no">West</span> <span class="no">Virginia</span><span class="p">,</span> <span class="mi">1802</span><span class="o">.</span><span class="mi">33</span><span class="p">,</span> <span class="mi">1636</span><span class="o">.</span><span class="mi">31</span><span class="p">,</span> <span class="mi">399</span><span class="o">.</span><span class="mi">09</span>
-</span><span class='line'><span class="no">WI</span><span class="p">,</span> <span class="no">Wisconsin</span><span class="p">,</span> <span class="mi">4042</span><span class="o">.</span><span class="mo">07</span><span class="p">,</span> <span class="mi">3636</span><span class="o">.</span><span class="mi">97</span><span class="p">,</span> <span class="mi">666</span><span class="o">.</span><span class="mi">84</span>
-</span><span class='line'><span class="no">WY</span><span class="p">,</span> <span class="no">Wyoming</span><span class="p">,</span> <span class="mi">665</span><span class="o">.</span><span class="mi">57</span><span class="p">,</span> <span class="mi">621</span><span class="o">.</span><span class="mi">09</span><span class="p">,</span> <span class="mi">39</span><span class="o">.</span><span class="mi">18</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>3. Wikipediaから歴代の総理大臣の一覧を取得する</h2>
-
-<p>「<a href="http://ruby.bastardsbook.com/chapters/web-crawling">Writing a Web Crawler</a>」の、Wikipedaからノーベル賞受賞者のページをまとめてダウンロードする、というサンプルを参考にして、日本語版Wikipediaから歴代総理大臣の一覧を取得するスクリプトを作ってみます。</p>
-
-<p>スクレイピング対象のページは<a href="http://ja.wikipedia.org/wiki/%E5%86%85%E9%96%A3%E7%B7%8F%E7%90%86%E5%A4%A7%E8%87%A3%E3%81%AE%E4%B8%80%E8%A6%A7">こちら</a>。</p>
-
-<p>表になっている部分から情報を抜き出してみます。</p>
-
-<ul>
-<li><a href="http://ja.wikipedia.org/wiki/%E5%86%85%E9%96%A3%E7%B7%8F%E7%90%86%E5%A4%A7%E8%87%A3%E3%81%AE%E4%B8%80%E8%A6%A7">内閣総理大臣の一覧 - Wikipedia</a></li>
-</ul>
-
-
-<p>こんな感じ。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;nokogiri&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;open-uri&#39;</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;cgi&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">BASE_URL</span> <span class="o">=</span> <span class="s1">&#39;http://ja.wikipedia.org&#39;</span>
-</span><span class='line'><span class="no">LIST_URL</span> <span class="o">=</span> <span class="no">BASE_URL</span> <span class="o">+</span> <span class="s1">&#39;/wiki/&#39;</span> <span class="o">+</span> <span class="no">CGI</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="s1">&#39;内閣総理大臣の一覧&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">page</span> <span class="o">=</span> <span class="no">Nokogiri</span><span class="o">::</span><span class="no">HTML</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="no">LIST_URL</span><span class="p">))</span>
-</span><span class='line'><span class="n">rows</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;div.mw-content-ltr table.wikitable tr&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">ministers</span> <span class="o">=</span> <span class="o">[]</span>
-</span><span class='line'><span class="n">prev_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">rows</span><span class="o">[</span><span class="mi">3</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">4</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">time</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;th&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">time</span> <span class="o">=~</span> <span class="sr">/\d/</span>
-</span><span class='line'>    <span class="nb">name</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s1">&#39;td b&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">chomp</span>
-</span><span class='line'>    <span class="k">if</span> <span class="nb">name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>      <span class="nb">name</span> <span class="o">=</span> <span class="n">prev_name</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">prev_name</span> <span class="o">=</span> <span class="nb">name</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">ministers</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">time</span><span class="p">,</span> <span class="nb">name</span><span class="o">]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;代, 名前&#39;</span>
-</span><span class='line'><span class="n">ministers</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">minister</span><span class="o">|</span>
-</span><span class='line'>  <span class="nb">puts</span> <span class="n">minister</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>代と名前をカンマ区切りで出力します。「代」の部分をフィルタリングして余分な行を切り落としています。また、同一人物が連続で勤めた場合に名前の欄が空欄になってしまうため、一つ前の名前を保存して使い回すようにしました。</p>
-
-<p>実行結果はこちら。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">代</span><span class="p">,</span> <span class="err">名前</span>
-</span><span class='line'><span class="mi">1</span><span class="p">,</span> <span class="err">伊藤博文</span>
-</span><span class='line'><span class="mi">2</span><span class="p">,</span> <span class="err">黒田清隆</span>
-</span><span class='line'><span class="mi">3</span><span class="p">,</span> <span class="err">山縣有朋</span>
-</span><span class='line'><span class="mi">4</span><span class="p">,</span> <span class="err">松方正義</span>
-</span><span class='line'><span class="mi">5</span><span class="p">,</span> <span class="err">伊藤博文</span>
-</span><span class='line'><span class="mi">6</span><span class="p">,</span> <span class="err">松方正義</span>
-</span><span class='line'><span class="mi">7</span><span class="p">,</span> <span class="err">伊藤博文</span>
-</span><span class='line'><span class="mi">8</span><span class="p">,</span> <span class="err">大隈重信</span>
-</span><span class='line'><span class="mi">9</span><span class="p">,</span> <span class="err">山縣有朋</span>
-</span><span class='line'><span class="mi">10</span><span class="p">,</span> <span class="err">伊藤博文</span>
-</span><span class='line'><span class="mi">11</span><span class="p">,</span> <span class="err">桂太郎</span>
-</span><span class='line'><span class="mi">12</span><span class="p">,</span> <span class="err">西園寺公望</span>
-</span><span class='line'><span class="mi">13</span><span class="p">,</span> <span class="err">桂太郎</span>
-</span><span class='line'><span class="mi">14</span><span class="p">,</span> <span class="err">西園寺公望</span>
-</span><span class='line'><span class="mi">15</span><span class="p">,</span> <span class="err">桂太郎</span>
-</span><span class='line'><span class="mi">16</span><span class="p">,</span> <span class="err">山本権兵衛</span>
-</span><span class='line'><span class="mi">17</span><span class="p">,</span> <span class="err">大隈重信</span>
-</span><span class='line'><span class="mi">18</span><span class="p">,</span> <span class="err">寺内正毅</span>
-</span><span class='line'><span class="mi">19</span><span class="p">,</span> <span class="err">原敬</span>
-</span><span class='line'><span class="mi">20</span><span class="p">,</span> <span class="err">高橋是清</span>
-</span><span class='line'><span class="mi">21</span><span class="p">,</span> <span class="err">加藤友三郎</span>
-</span><span class='line'><span class="mi">22</span><span class="p">,</span> <span class="err">山本権兵衛</span>
-</span><span class='line'><span class="mi">23</span><span class="p">,</span> <span class="err">清浦奎吾</span>
-</span><span class='line'><span class="mi">24</span><span class="p">,</span> <span class="err">加藤高明</span>
-</span><span class='line'><span class="mi">25</span><span class="p">,</span> <span class="err">若槻禮次郎</span>
-</span><span class='line'><span class="mi">26</span><span class="p">,</span> <span class="err">田中義一</span>
-</span><span class='line'><span class="mi">27</span><span class="p">,</span> <span class="err">濱口雄幸</span>
-</span><span class='line'><span class="mi">28</span><span class="p">,</span> <span class="err">若槻禮次郎</span>
-</span><span class='line'><span class="mi">29</span><span class="p">,</span> <span class="err">犬養毅</span>
-</span><span class='line'><span class="mi">30</span><span class="p">,</span> <span class="err">齋藤実</span>
-</span><span class='line'><span class="mi">31</span><span class="p">,</span> <span class="err">岡田啓介</span>
-</span><span class='line'><span class="mi">32</span><span class="p">,</span> <span class="err">廣田弘毅</span>
-</span><span class='line'><span class="mi">33</span><span class="p">,</span> <span class="err">林銑十郎</span>
-</span><span class='line'><span class="mi">34</span><span class="p">,</span> <span class="err">近衛文麿</span>
-</span><span class='line'><span class="mi">35</span><span class="p">,</span> <span class="err">平沼騏一郎</span>
-</span><span class='line'><span class="mi">36</span><span class="p">,</span> <span class="err">阿部信行</span>
-</span><span class='line'><span class="mi">37</span><span class="p">,</span> <span class="err">米内光政</span>
-</span><span class='line'><span class="mi">38</span><span class="p">,</span> <span class="err">近衛文麿</span>
-</span><span class='line'><span class="mi">39</span><span class="p">,</span> <span class="err">近衛文麿</span>
-</span><span class='line'><span class="mi">40</span><span class="p">,</span> <span class="err">東條英機</span>
-</span><span class='line'><span class="mi">41</span><span class="p">,</span> <span class="err">小磯國昭</span>
-</span><span class='line'><span class="mi">42</span><span class="p">,</span> <span class="err">鈴木貫太郎</span>
-</span><span class='line'><span class="mi">43</span><span class="p">,</span> <span class="err">東久邇宮稔彦王</span>
-</span><span class='line'><span class="mi">44</span><span class="p">,</span> <span class="err">幣原喜重郎</span>
-</span><span class='line'><span class="mi">45</span><span class="p">,</span> <span class="err">吉田茂</span>
-</span><span class='line'><span class="mi">46</span><span class="p">,</span> <span class="err">片山哲</span>
-</span><span class='line'><span class="mi">47</span><span class="p">,</span> <span class="err">芦田均</span>
-</span><span class='line'><span class="mi">48</span><span class="p">,</span> <span class="err">吉田茂</span>
-</span><span class='line'><span class="mi">49</span><span class="p">,</span> <span class="err">吉田茂</span>
-</span><span class='line'><span class="mi">50</span><span class="p">,</span> <span class="err">吉田茂</span>
-</span><span class='line'><span class="mi">51</span><span class="p">,</span> <span class="err">吉田茂</span>
-</span><span class='line'><span class="mi">52</span><span class="p">,</span> <span class="err">鳩山一郎</span>
-</span><span class='line'><span class="mi">53</span><span class="p">,</span> <span class="err">鳩山一郎</span>
-</span><span class='line'><span class="mi">54</span><span class="p">,</span> <span class="err">鳩山一郎</span>
-</span><span class='line'><span class="mi">55</span><span class="p">,</span> <span class="err">石橋湛山</span>
-</span><span class='line'><span class="mi">56</span><span class="p">,</span> <span class="err">岸信介</span>
-</span><span class='line'><span class="mi">57</span><span class="p">,</span> <span class="err">岸信介</span>
-</span><span class='line'><span class="mi">58</span><span class="p">,</span> <span class="err">池田勇人</span>
-</span><span class='line'><span class="mi">59</span><span class="p">,</span> <span class="err">池田勇人</span>
-</span><span class='line'><span class="mi">60</span><span class="p">,</span> <span class="err">池田勇人</span>
-</span><span class='line'><span class="mi">61</span><span class="p">,</span> <span class="err">佐藤栄作</span>
-</span><span class='line'><span class="mi">62</span><span class="p">,</span> <span class="err">佐藤栄作</span>
-</span><span class='line'><span class="mi">63</span><span class="p">,</span> <span class="err">佐藤栄作</span>
-</span><span class='line'><span class="mi">64</span><span class="p">,</span> <span class="err">田中角栄</span>
-</span><span class='line'><span class="mi">65</span><span class="p">,</span> <span class="err">田中角栄</span>
-</span><span class='line'><span class="mi">66</span><span class="p">,</span> <span class="err">三木武夫</span>
-</span><span class='line'><span class="mi">67</span><span class="p">,</span> <span class="err">福田赳夫</span>
-</span><span class='line'><span class="mi">68</span><span class="p">,</span> <span class="err">大平正芳</span>
-</span><span class='line'><span class="mi">69</span><span class="p">,</span> <span class="err">大平正芳</span>
-</span><span class='line'><span class="mi">70</span><span class="p">,</span> <span class="err">鈴木善幸</span>
-</span><span class='line'><span class="mi">71</span><span class="p">,</span> <span class="err">中曽根康弘</span>
-</span><span class='line'><span class="mi">72</span><span class="p">,</span> <span class="err">中曽根康弘</span>
-</span><span class='line'><span class="mi">73</span><span class="p">,</span> <span class="err">中曽根康弘</span>
-</span><span class='line'><span class="mi">74</span><span class="p">,</span> <span class="err">竹下登</span>
-</span><span class='line'><span class="mi">75</span><span class="p">,</span> <span class="err">宇野宗佑</span>
-</span><span class='line'><span class="mi">76</span><span class="p">,</span> <span class="err">海部俊樹</span>
-</span><span class='line'><span class="mi">77</span><span class="p">,</span> <span class="err">海部俊樹</span>
-</span><span class='line'><span class="mi">78</span><span class="p">,</span> <span class="err">宮澤喜一</span>
-</span><span class='line'><span class="mi">79</span><span class="p">,</span> <span class="err">細川護熙</span>
-</span><span class='line'><span class="mi">80</span><span class="p">,</span> <span class="err">羽田孜</span>
-</span><span class='line'><span class="mi">81</span><span class="p">,</span> <span class="err">村山富市</span>
-</span><span class='line'><span class="mi">82</span><span class="p">,</span> <span class="err">橋本龍太郎</span>
-</span><span class='line'><span class="mi">83</span><span class="p">,</span> <span class="err">橋本龍太郎</span>
-</span><span class='line'><span class="mi">84</span><span class="p">,</span> <span class="err">小渕恵三</span>
-</span><span class='line'><span class="mi">85</span><span class="p">,</span> <span class="err">森喜朗</span>
-</span><span class='line'><span class="mi">86</span><span class="p">,</span> <span class="err">森喜朗</span>
-</span><span class='line'><span class="mi">87</span><span class="p">,</span> <span class="err">小泉純一郎</span>
-</span><span class='line'><span class="mi">88</span><span class="p">,</span> <span class="err">小泉純一郎</span>
-</span><span class='line'><span class="mi">89</span><span class="p">,</span> <span class="err">小泉純一郎</span>
-</span><span class='line'><span class="mi">90</span><span class="p">,</span> <span class="err">安倍晋三</span>
-</span><span class='line'><span class="mi">91</span><span class="p">,</span> <span class="err">福田康夫</span>
-</span><span class='line'><span class="mi">92</span><span class="p">,</span> <span class="err">麻生太郎</span>
-</span><span class='line'><span class="mi">93</span><span class="p">,</span> <span class="err">鳩山由紀夫</span>
-</span><span class='line'><span class="mi">94</span><span class="p">,</span> <span class="err">菅直人</span>
-</span><span class='line'><span class="mi">95</span><span class="p">,</span> <span class="err">野田佳彦</span>
-</span><span class='line'><span class="mi">96</span><span class="p">,</span> <span class="err">安倍晋三</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>そのほか</h2>
-
-<p>ここで挙げたものの他に、「<a href="http://ruby.bastardsbook.com/chapters/web-crawling%22>Writing%20a%20Web%20Crawler&lt;/a>%E3%80%8D%E3%81%A7%E3%81%AF%E3%80%81&lt;a%20href=%22http://www.fec.gov/">連邦選挙委員会(Federal Election Commision)のページ</a>の検索機能を使ってレポートを検索して、検索結果に付随するPDFファイル(必要な場合はPOSTリクエストでPDF生成を自動実行する)を片っ端からダウンロードするという、かなりガチなサンプルも紹介されています。</p>
 </div>
   
   

@@ -9,7 +9,7 @@
   <meta name="author" content="succi0303">
 
   
-  <meta name="description" content="伊藤直也さん著『入門 Chef Solo -INFRASTRUCTURE AS CODE-』を読みました。 入門Chef Solo - Infrastructure as Code Amazonのリンクを貼っておきながら言うのもなんですが、達人出版会でepub/ &hellip;">
+  <meta name="description" content="業務系のSEにとって一番身近なプログラム言語は、実はSQLではないかと思います。業務系のシステムの大半は突き詰めればほとんどの場合、要するにデータベースです。まずはデータベースがあって、あとはそこにどんな皮をかぶせるか、というのが業務システムの実態ではないでしょうか。そのため、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +113,136 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/10/coding-style-for-sql/">SQLのコーディングスタイル</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-10T06:34:00+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>6:34 am</span></time>
+        
+         | <a href="/blog/2013/11/10/coding-style-for-sql/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>業務系のSEにとって一番身近なプログラム言語は、実はSQLではないかと思います。業務系のシステムの大半は突き詰めればほとんどの場合、要するにデータベースです。まずはデータベースがあって、あとはそこにどんな皮をかぶせるか、というのが業務システムの実態ではないでしょうか。そのため、プログラミングの現場を離れたSEも、お客様からの問い合わせ対応の調査や何か問題が発生して原因究明をするときにはデータベースに直接問い合わせるためにSQLを叩くことになります。</p>
+
+<p>SQLのコーディング・スタイルについて意識している人はどれくらいいるでしょうか。たとえばRubyの場合、インデントはスペース2つだとかクラス名はキャメルケース、メソッド名はスネークケースだとか一般的なコーディング・スタイルがあります。そういったプログラム言語と比べるとSQLの場合にはコーディング・スタイルが意識されることが少ないように思います。かくいう僕もほとんど意識していませんでしたし、業務上目にする他の人が書いたSQLも十人十様でさまざまです。</p>
+
+<p>少し前にミックさん著『達人に学ぶSQL徹底指南書』という本を読みました。そちらの本に「SQLプログラミング作法」というSQLのコーディング・スタイルに関する章がありました。「未来のDBエンジニアが必要とするであろうコーディング・スタイルの確立へ向けて、叩き台となる私案を提出してみたい」として、コーディング・スタイルの案を提示するものでした。</p>
+
+<p>SQLのコーディング・スタイルが統一されていない理由のひとつは、SQLの利用の裾野が広く、いわゆるプログラマでない人も使用することが多いからではないかと思います。でも、本来は裾野が広いからこそ、コミュニケーションのギャップをなくすために、統一されたスタイルがあることが望ましいはずです。</p>
+
+<p>前置きが長くなりましたが、そういう訳で、これまで意識していなかったなりに、何となく定まっていた自分のSQLの書き方について一度まとめておこうと思いました。この記事を読んだそこのあなたはどんな風にSQLを書いていますか？</p>
+
+<h2>自分のSQLの書き方</h2>
+
+<p>SELECT文とUPDATE文について普段自分が意識している書き方をまとめておきます。INSERT文は手動で実行する機会がほとんどないので割愛します。</p>
+
+<h3>SELECT文</h3>
+
+<p>問い合わせ対応の調査や問題発生時の原因究明など一番実行する機会が多いのがSELECT文です。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">a</span><span class="p">.</span><span class="n">col2</span><span class="p">,</span>
+</span><span class='line'>       <span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span><span class='line'>  <span class="k">FROM</span> <span class="n">tbl_A</span> <span class="n">a</span>
+</span><span class='line'>  <span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">tbl_B</span> <span class="n">b</span>
+</span><span class='line'>         <span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">col1</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;hoge&#39;</span>
+</span><span class='line'> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col2</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span><span class='line'> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col2</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>予約語は大文字にする</li>
+<li>列名、テーブル名は極力小文字にする（案件、システムによる）</li>
+<li>ひとつめの予約語の末尾を揃えるようインデントする</li>
+</ul>
+
+
+<p>列名を区切るカンマは原則後ろ側につけています。次の行の前側につける人も多い印象があります。カンマを前側につけると、列ごとにコメントアウトしやすいのが良いですよね。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">a</span><span class="p">.</span><span class="n">col1</span>
+</span><span class='line'><span class="c1">--      ,a.col2</span>
+</span><span class='line'>      <span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">col3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>UPDATE文</h3>
+
+<p>データの修正依頼や不具合の修正等、いわゆるデータパッチとして実行する際に主に使用します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">-- SELECT col1, col2, col3 FROM tbl_A</span>
+</span><span class='line'><span class="k">UPDATE</span> <span class="n">tbl_A</span> <span class="k">SET</span> <span class="n">col2</span><span class="o">=</span><span class="s1">&#39;hoge&#39;</span><span class="p">,</span> <span class="n">col3</span><span class="o">=</span><span class="s1">&#39;fuga&#39;</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>まず、UPDATEの行をコメントアウトし、SELECTを実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">col3</span> <span class="k">FROM</span> <span class="n">tbl_A</span>
+</span><span class='line'><span class="c1">-- UPDATE tbl_A SET col2=&#39;hoge&#39;, col3=&#39;fuga&#39;</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>目的のデータがヒットすることを確認してから、今度はSELECTの行をコメントアウトしてUPDATE文を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">-- SELECT col1, col2, col3 FROM tbl_A</span>
+</span><span class='line'><span class="k">UPDATE</span> <span class="n">tbl_A</span> <span class="k">SET</span> <span class="n">co2</span><span class="o">=</span><span class="s1">&#39;hoge&#39;</span><span class="p">,</span> <span class="n">col3</span><span class="o">=</span><span class="s1">&#39;fuga&#39;</span>
+</span><span class='line'> <span class="k">WHERE</span> <span class="n">col1</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考書籍</h2>
+
+<p>ミック『達人に学ぶSQL徹底指南書』。CASE式の使い方、SQLの土台になる三値論理の解説など、実務ですぐ使えるテクニックから理論的な話まで盛りだくさんな内容でした。ふだん何となく使っているSQLを一歩引いて見直すことができる良書だと思います。</p>
+
+<p><a href="https://www.amazon.co.jp/%E9%81%94%E4%BA%BA%E3%81%AB%E5%AD%A6%E3%81%B6-SQL%E5%BE%B9%E5%BA%95%E6%8C%87%E5%8D%97%E6%9B%B8-CodeZine-BOOKS-%E3%83%9F%E3%83%83%E3%82%AF/dp/4798115169?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798115169">達人に学ぶ SQL徹底指南書 (CodeZine BOOKS)</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E9%81%94%E4%BA%BA%E3%81%AB%E5%AD%A6%E3%81%B6-SQL%E5%BE%B9%E5%BA%95%E6%8C%87%E5%8D%97%E6%9B%B8-CodeZine-BOOKS-%E3%83%9F%E3%83%83%E3%82%AF/dp/4798115169?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798115169"><img src="https://images-fe.ssl-images-amazon.com/images/I/51CGypjLrvL._SL160_.jpg" /></a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -912,56 +1042,6 @@ Kernel#getsは、ARGFから一行読み込んでその値を返します。今�
 <p>僕にとって森博嗣はミステリ作家のイメージが強く、とくにエッセイはほとんど読んだことがありませんでしたが、本書は小ネタから人生論まで盛り沢山の味わい深い一冊でした。</p>
 
 <p>森博嗣の作品は、ミステリにおいても、作中の天才たち、犀川創平や瀬在丸紅子たちの一見物語と関係ない呟きが魅力のひとつです。そんな呟きが100個も凝縮された本と思えば面白くないはずがない。切れ味の鋭い洞察から、自身の日頃の行いを振り返って反省するきっかけになる本だと思います。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/31/read-bianca-overstudy/">筒井康隆「ビアンカ・オーバースタディ」の感想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2012-08-31T15:34:00+00:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2012</span></span> <span class='time'>3:34 pm</span></time>
-        
-         | <a href="/blog/2012/08/31/read-bianca-overstudy/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ちょっと気になっていた「ビアンカ・オーバースタディ」(星海社FICTIONS)を無事入手して読了しました。</p>
-
-<p>「ビアンカ・オーバースタディ」は巨匠筒井康隆御大が放つ渾身のライトノベルです。帯には「筒井康隆、ライトノベル始めました」のコピー。</p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%93%E3%82%A2%E3%83%B3%E3%82%AB%E3%83%BB%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B9%E3%82%BF%E3%83%87%E3%82%A3-%E6%98%9F%E6%B5%B7%E7%A4%BEFICTIONS-%E7%AD%92%E4%BA%95-%E5%BA%B7%E9%9A%86/dp/4061388371?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4061388371">ビアンカ・オーバースタディ (星海社FICTIONS)</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%93%E3%82%A2%E3%83%B3%E3%82%AB%E3%83%BB%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B9%E3%82%BF%E3%83%87%E3%82%A3-%E6%98%9F%E6%B5%B7%E7%A4%BEFICTIONS-%E7%AD%92%E4%BA%95-%E5%BA%B7%E9%9A%86/dp/4061388371?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4061388371"><img src="https://images-fe.ssl-images-amazon.com/images/I/615ZWmlR-xL._SL160_.jpg" /></a></p>
-
-<p>内容はちょっと公開の場で紹介できる代物ではないため自重します。僕自身は非常に楽しく読みました。
-j
-思った以上にちゃんとライトノベルしていました。そして、その中身はある意味そのまんま筒井康隆でした。もともと筒井康隆がライトノベルっぽい、というかライトノベルが筒井康隆っぽい、というところも多分にあると思われます。見た目が手に取りづらいという方も、勇気を出して購入しましょう。</p>
-
-<p>この「ビアンカ・オーバースタディ」は、同じ文章を繰り返す演出が印象的です。「ビアンカ・オーバースタディ」の物語自体はまっすぐ前へ進んでいきますが、反復する文章から「繰り返す日常」の空気が漂い、ある種「涼宮ハルヒ」のエンドレスエイトのループを彷彿させるようなところがあります。「繰り返す日常」「ループ」は、もろにライトノベルのモチーフです。しかし、この演出は、そもそも筒井康隆2008年発表の長編「ダンシング・ヴァニティ」がベースにあったりするので、結局そいういう意味では「筒井康隆xライトノベル」というのは、ごく自然に、なるべくしてなったものだよなぁと思いました。</p>
-
-<p>あとがきと第一章がウェブ公開されていますので興味がある人は読んでみてください。</p>
-
-<p><a href="http://sai-zen-sen.jp/fictions/bianca/">http://sai-zen-sen.jp/fictions/bianca/</a></p>
-
-<p>ネタとしては、あとがきが本編です。太田が悪い。</p>
 </div>
   
   

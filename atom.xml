@@ -4,7 +4,7 @@
   <title><![CDATA[prime factor]]></title>
   <link href="http://succi0303.github.io/atom.xml" rel="self"/>
   <link href="http://succi0303.github.io/"/>
-  <updated>2018-07-24T01:19:30+00:00</updated>
+  <updated>2018-07-26T01:54:35+00:00</updated>
   <id>http://succi0303.github.io/</id>
   <author>
     <name><![CDATA[succi0303]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[「ネスぺ 29 魂」を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/07/26/read-network-specialist-29-spirit/"/>
+    <updated>2018-07-26T01:49:41+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/07/26/read-network-specialist-29-spirit</id>
+    <content type="html"><![CDATA[<p>「ネスぺ 29 魂」を読んだ。</p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-29-%E9%AD%82-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0-ebook/dp/B07C2ZJ1GG?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07C2ZJ1GG">ネスペ 29　魂　－ネットワークスペシャリストの最も詳しい過去問解説</a></p>
+
+<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-29-%E9%AD%82-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0-ebook/dp/B07C2ZJ1GG?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B07C2ZJ1GG"><img src="https://images-fe.ssl-images-amazon.com/images/I/51muHvU8maL._SL160_.jpg" /></a></p>
+
+<p>昨年の秋に受験した、情報処理技術者試験ネットワークスペシャリストの午後問題（記述式問題）を徹底的に解説した本である。
+昨年の受験にあたっては、過去のネスぺシリーズ（基礎力、27礎、26道、25剣）を全て読み、そのおかげもあって無事に合格することができた。</p>
+
+<p>今回は答え合せとして読んだ。試験センターのIPAからも模範解答が公表されているが、問い毎の解説がついていないため、どうしてその解答が正解になるのかよくわからない。しっかりとした答え合わせができる点でも、このシリーズはありがたい存在だと思う。</p>
+
+<p>午後Ⅱは、問２の無線LAN問題を選択して自己採点の結果も良かったが、今回の解説の内容もほぼ理解していた通りで、自分の理解に問題がなかったことを確認できた。</p>
+
+<p>午後Ⅱ、問１のOpenFlow問題は、選択しなくて本当に良かったと改めて思う。</p>
+
+<p>問題があったのは午後Ⅰの問３、ルーティング問題で、本質的な部分はほとんど理解できていなかったことがわかった。ルーティングの問題は、本来的には、最低限の基礎知識と愚直に考える力があれば解けるものだと思うので、なんというか堪え性の無さが出た結果かなと思う。</p>
+
+<p>ネットワークスペシャリストの午後問題は、しっかり読み込むと様々な知識と考え方が身につく、良くできた教材だと思う。ただし、その中で設問が設定される部分は絶妙に浅い。かつ、採点基準はめちゃくちゃ甘い。というのが、個人的な合格体験から得た率直な感想である。なので、現在ネットワークスペシャリストの勉強をされている方におかれては、午後問題のぱっと見の重さに心を折られる必要はありませんよ、という点を伝えておきたいと思う。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA["Learn Functional Programming With Elixir"を読んだ]]></title>
@@ -814,33 +840,6 @@
 <p>自動テスト？当たり前でしょう。という人にとっては、本当に当たり前のことをまとめただけの本であると思う。一方、これまでテストコードがないレガシーなシステムを抱えていて、これから自動テストに取り組もうという現場の人にとっては、貴重な情報源になると思う。</p>
 
 <p>とくに、これまで自動テストに理解がなかった人たちに、正しい形の自動テストを布教する教材として有用になることを、個人的には期待している。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[「ネスペ 27 礎」、「ネスペ 26 道」、「ネスペの剣 25」を読んだ]]></title>
-    <link href="http://succi0303.github.io/blog/2017/09/09/nesupe-27-26-25/"/>
-    <updated>2017-09-09T11:48:28+00:00</updated>
-    <id>http://succi0303.github.io/blog/2017/09/09/nesupe-27-26-25</id>
-    <content type="html"><![CDATA[<p>「ネスペ 27 礎」、「ネスペ 26 道」、「ネスペの剣 25」を読んだ。</p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-27-%E7%A4%8E-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/dp/477418067X?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=477418067X">ネスペ 27 礎 -ネットワークスペシャリストの最も詳しい過去問解説 (情報処理技術者試験)</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-27-%E7%A4%8E-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93/dp/477418067X?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=477418067X"><img src="https://images-fe.ssl-images-amazon.com/images/I/51p8YKFUPvL._SL160_.jpg" /></a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-26-%E9%81%93-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774172944?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774172944">ネスペ 26　道　－ネットワークスペシャリストの最も詳しい過去問解説 (情報処理技術者試験)</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%83%9A-26-%E9%81%93-%EF%BC%8D%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774172944?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774172944"><img src="https://images-fe.ssl-images-amazon.com/images/I/51hISRhQOIL._SL160_.jpg" /></a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%81%BA%E3%81%AE%E5%89%A325-~%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774163899?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774163899">ネスぺの剣25 ~ネットワークスペシャリストの最も詳しい過去問解説 (情報処理技術者試験)</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%8D%E3%82%B9%E3%81%BA%E3%81%AE%E5%89%A325-~%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%82%B7%E3%83%A3%E3%83%AA%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%80%E3%82%82%E8%A9%B3%E3%81%97%E3%81%84%E9%81%8E%E5%8E%BB%E5%95%8F%E8%A7%A3%E8%AA%AC-%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86%E6%8A%80%E8%A1%93%E8%80%85%E8%A9%A6%E9%A8%93-%E5%B7%A6%E9%96%80-%E8%87%B3%E5%B3%B0/dp/4774163899?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4774163899"><img src="https://images-fe.ssl-images-amazon.com/images/I/51P%2BydYf78L._SL160_.jpg" /></a></p>
-
-<p>各年度のネットワークスペシャリスト試験の午後問題を、まるごと一冊使ってみっちり解説する本である。</p>
-
-<p>サブタイトルに「最も詳しい」とある通り、本当に詳しく、懇切丁寧に解説してくれる。このネスペシリーズは基本的には過去問の解説本ではあるけれど、単なる試験対策に留まらずにネットワーク知識の応用の面で良い勉強になったと思う。</p>
-
-<p>試験勉強の進捗としては、午後１までは現時点で何とかなりそうな気がしている。午後２を確実に取るにはもう一歩レベルアップが必要。9月中にその辺りを対策したい。</p>
 ]]></content>
   </entry>
   
