@@ -9,7 +9,10 @@
   <meta name="author" content="succi0303">
 
   
-  <meta name="description" content="業務系のSEにとって一番身近なプログラム言語は、実はSQLではないかと思います。業務系のシステムの大半は突き詰めればほとんどの場合、要するにデータベースです。まずはデータベースがあって、あとはそこにどんな皮をかぶせるか、というのが業務システムの実態ではないでしょうか。そのため、 &hellip;">
+  <meta name="description" content="ある年が閏年かどうかは次の4つの条件で判断できます。 4で割り切れない年は閏年ではない。
+4でも400でも割り切れる年は閏年である
+4で割り切れるが400では割り切れず、100で割り切れる年は、閏年ではない。
+それ以外の4で割り切れるすべての年は閏年である &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +116,166 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/14/check-leap-year/">うるう年を判定するプログラム</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-14T09:03:42+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>9:03 am</span></time>
+        
+         | <a href="/blog/2013/11/14/check-leap-year/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ある年が閏年かどうかは次の4つの条件で判断できます。</p>
+
+<ol>
+<li>4で割り切れない年は閏年ではない。</li>
+<li>4でも400でも割り切れる年は閏年である</li>
+<li>4で割り切れるが400では割り切れず、100で割り切れる年は、閏年ではない。</li>
+<li>それ以外の4で割り切れるすべての年は閏年である</li>
+</ol>
+
+
+<p>この条件をもとに閏年を判定するプログラムをRubyで書いてみます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># coding: utf-8</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 閏年探査機 leap_year_probe.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">LeapYearProbe</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># 引数の年が閏年のときtrue、それ以外のときfalseを返す</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">is_leap_year?</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">400</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="kp">true</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>irbで動作確認してみます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>irb
+</span><span class='line'>irb&gt; require <span class="s2">&quot;./leap_year_probe&quot;</span>
+</span><span class='line'>irb&gt; <span class="nv">probe</span> <span class="o">=</span> LeapYearProbe.new
+</span><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2004</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2006</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一応正しく動いているようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2020</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>「夏季オリンピックは閏年に開催される」ということで、2020年東京オリンピックの年はもちろん閏年、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">1192</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>良い国作ろう鎌倉幕府の1192年は閏年、</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">1492</span>
+</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>意欲に燃えるコロンブスの1492年も閏年だったようですね。</p>
+
+<p>ちなみに同じ閏年の判定をシェルスクリプトで書くとこうなるようです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>isLeapYear<span class="o">()</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$((year % 4))&quot;</span> -ne <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">1</span> <span class="c"># not LeapYear</span>
+</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$((year % 400))&quot;</span> -eq <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">0</span> <span class="c"># LeapYear</span>
+</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$((year % 100))&quot;</span> -eq <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">1</span> <span class="c"># not LeapYear</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="k">return</span> <span class="m">0</span> <span class="c"># LeapYear</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1002,46 +1165,6 @@ Kernel#getsは、ARGFから一行読み込んでその値を返します。今�
 <p>Gitの内部構造・仕組みについて詳しい本を読みたいなと思っています。そうなると、濱野純さんの「入門Git」かオライリーの「実用Git」が候補ですが、ウェブ上のレビューなどを見るとどちらも評価が微妙なところなのですよね…。</p>
 
 <p>まずは「Gitによるバージョン管理」を読み直してみます。今なら理解できる気がする！</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/09/16/read-the-cream-of-the-notes/">森博嗣「つぶやきのクリーム the Cream of the Notes」の感想</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2012-09-16T10:39:00+00:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>10:39 am</span></time>
-        
-         | <a href="/blog/2012/09/16/read-the-cream-of-the-notes/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>森博嗣「つぶやきのクリーム The cream of the notes」(講談社文庫)を読みました。2011年に単行本で出版された書籍の文庫版です。100個のつぶやきに、それぞれ見開き2ページ程度の解説がついたエッセイ集です。</p>
-
-<p><a href="https://www.amazon.co.jp/%E3%81%A4%E3%81%B6%E3%82%84%E3%81%8D%E3%81%AE%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0-cream-notes-%E8%AC%9B%E8%AB%87%E7%A4%BE%E6%96%87%E5%BA%AB-%E5%8D%9A%E5%97%A3/dp/4062772884?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4062772884">つぶやきのクリーム The cream of the notes (講談社文庫)</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%81%A4%E3%81%B6%E3%82%84%E3%81%8D%E3%81%AE%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0-cream-notes-%E8%AC%9B%E8%AB%87%E7%A4%BE%E6%96%87%E5%BA%AB-%E5%8D%9A%E5%97%A3/dp/4062772884?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4062772884"><img src="https://images-fe.ssl-images-amazon.com/images/I/51pkGmy7b6L._SL160_.jpg" /></a></p>
-
-<p>僕にとって森博嗣はミステリ作家のイメージが強く、とくにエッセイはほとんど読んだことがありませんでしたが、本書は小ネタから人生論まで盛り沢山の味わい深い一冊でした。</p>
-
-<p>森博嗣の作品は、ミステリにおいても、作中の天才たち、犀川創平や瀬在丸紅子たちの一見物語と関係ない呟きが魅力のひとつです。そんな呟きが100個も凝縮された本と思えば面白くないはずがない。切れ味の鋭い洞察から、自身の日頃の行いを振り返って反省するきっかけになる本だと思います。</p>
 </div>
   
   

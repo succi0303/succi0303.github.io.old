@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Book | prime factor]]></title>
   <link href="http://succi0303.github.io/blog/categories/book/atom.xml" rel="self"/>
   <link href="http://succi0303.github.io/"/>
-  <updated>2018-07-26T01:54:35+00:00</updated>
+  <updated>2018-08-14T23:56:55+00:00</updated>
   <id>http://succi0303.github.io/</id>
   <author>
     <name><![CDATA[succi0303]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA["Release It! Second Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/08/14/read-release-it-second-edition/"/>
+    <updated>2018-08-14T23:50:47+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/08/14/read-release-it-second-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;Release It! Second Edition"を読んだ。</p>
+
+<p>&ldquo;Release It!"というタイトルから、システムのデプロイに焦点を絞った本かと思っていたら全然違った。大雑把にまとめると、本番環境で落ちないシステムを構築するためのノウハウをまとめた本である。</p>
+
+<p><a href="https://www.amazon.co.jp/Release-Design-Deploy-Production-Ready-Software/dp/1680502395?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502395">Release It!: Design and Deploy Production-Ready Software</a></p>
+
+<p><a href="https://www.amazon.co.jp/Release-Design-Deploy-Production-Ready-Software/dp/1680502395?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502395"><img src="https://images-fe.ssl-images-amazon.com/images/I/414CRjLjwgL._SL160_.jpg" /></a></p>
+
+<p>とても読み応えがあった。システム構築に関わる人間には全方位におすすめしたい。アプリ・インフラ、設計・実装、オンプレ・クラウド問わず、どの立場でも学ぶ点があると思う。</p>
+
+<p>とくに安定性に関するパターン集(Stability AntipatternsとStability Patterns)は、開発現場の共通言語として認識されて良いものだと思う。安定性に悪影響を与える12のアンチパターンと、安定性の向上に貢献する12のパターンが紹介されている。</p>
+
+<p>著者本人によるパターンの紹介スライドが以下で閲覧できる。</p>
+
+<ul>
+<li><a href="https://speakerdeck.com/mtnygard/stability-patterns-and-antipatterns">Stability Patterns &hellip; and Antipatterns - Speaker Deck</a></li>
+</ul>
+
+
+<p>初版の"Release It!&ldquo;は、ほぼ10年前、2007年出版であるらしい。それにしては、CI/CD、カオスエンジニアリング、コンテナオーケストレーションなど、最新に近い話題が盛りだくさんに含まれている。改版にあたってかなりの改訂が入ったものと思われる。
+初版の目次をちらっと覗いてみたところ、目次構成からごっそりと変更されているようだ。削られた章もあるようなので、初版も読んでみたいと思った。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[「ネスぺ 29 魂」を読んだ]]></title>
@@ -152,30 +181,6 @@
 <p>悩ましいのは旧版を元にQiitaに投稿した記事「達人に学ぶ.tmux.confの基本設定」である。ありがたいことに、あちらの記事は今も結構な勢いで「いいね」を集めているが、今回"tmux 2"を読んで、記事の設定内容が古くなっていることを実感した。古い情報を拡散し続けている状況が、少々心苦しい。</p>
 
 <p>今更ではあるが、近いうちにQiitaの記事を"tmux 2"対応に更新することを計画中である。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[「プログラマのためのDocker教科書第2版」を読んだ]]></title>
-    <link href="http://succi0303.github.io/blog/2018/06/03/read-docker-textbook-for-programmers-2nd-edition/"/>
-    <updated>2018-06-03T13:38:09+00:00</updated>
-    <id>http://succi0303.github.io/blog/2018/06/03/read-docker-textbook-for-programmers-2nd-edition</id>
-    <content type="html"><![CDATA[<p>「プログラマのためのDocker教科書第2版」を読んだ。</p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E7%AC%AC2%E7%89%88-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4798153222?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798153222">プログラマのためのDocker教科書 第2版 インフラの基礎知識&amp;コードによる環境構築の自動化</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEDocker%E6%95%99%E7%A7%91%E6%9B%B8-%E7%AC%AC2%E7%89%88-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%AE%E5%9F%BA%E7%A4%8E%E7%9F%A5%E8%AD%98-%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96-WINGS%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/dp/4798153222?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4798153222"><img src="https://images-fe.ssl-images-amazon.com/images/I/5130HDgosML._SL160_.jpg" /></a></p>
-
-<p>Docker入門以前のインフラの基礎から始まり、Dockerの基本、Docker Composeによる複数コンテナ管理、Docker Machineによるマルチホスト管理、Google Cloud PlatformとKubernetesを使ったクラウド環境のDockerオーケストレーションという流れ。</p>
-
-<p>Kubernetesの日本語での読み方、書き方が気になっていたが、「クーバーネティス」と紹介されていた。念のため「クーバーネティス」で検索してみたところ、いくつかのIT系ニュースサイトで「クーバーネティス」表記を見つけた。それなりに市民権のある表記であるらしい。</p>
-
-<p>一応こんな動画も見つけたけれど、まぁ大体合っているか。</p>
-
-<ul>
-<li><a href="https://www.youtube.com/watch?v=uMA7qqXIXBk">How Do You Pronounce Kubernetes? And What Is It? - YouTube</a></li>
-</ul>
-
 ]]></content>
   </entry>
   

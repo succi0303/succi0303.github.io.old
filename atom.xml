@@ -4,7 +4,7 @@
   <title><![CDATA[prime factor]]></title>
   <link href="http://succi0303.github.io/atom.xml" rel="self"/>
   <link href="http://succi0303.github.io/"/>
-  <updated>2018-07-26T01:54:35+00:00</updated>
+  <updated>2018-08-14T23:56:55+00:00</updated>
   <id>http://succi0303.github.io/</id>
   <author>
     <name><![CDATA[succi0303]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA["Release It! Second Edition"を読んだ]]></title>
+    <link href="http://succi0303.github.io/blog/2018/08/14/read-release-it-second-edition/"/>
+    <updated>2018-08-14T23:50:47+00:00</updated>
+    <id>http://succi0303.github.io/blog/2018/08/14/read-release-it-second-edition</id>
+    <content type="html"><![CDATA[<p>&ldquo;Release It! Second Edition"を読んだ。</p>
+
+<p>&ldquo;Release It!"というタイトルから、システムのデプロイに焦点を絞った本かと思っていたら全然違った。大雑把にまとめると、本番環境で落ちないシステムを構築するためのノウハウをまとめた本である。</p>
+
+<p><a href="https://www.amazon.co.jp/Release-Design-Deploy-Production-Ready-Software/dp/1680502395?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502395">Release It!: Design and Deploy Production-Ready Software</a></p>
+
+<p><a href="https://www.amazon.co.jp/Release-Design-Deploy-Production-Ready-Software/dp/1680502395?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=1680502395"><img src="https://images-fe.ssl-images-amazon.com/images/I/414CRjLjwgL._SL160_.jpg" /></a></p>
+
+<p>とても読み応えがあった。システム構築に関わる人間には全方位におすすめしたい。アプリ・インフラ、設計・実装、オンプレ・クラウド問わず、どの立場でも学ぶ点があると思う。</p>
+
+<p>とくに安定性に関するパターン集(Stability AntipatternsとStability Patterns)は、開発現場の共通言語として認識されて良いものだと思う。安定性に悪影響を与える12のアンチパターンと、安定性の向上に貢献する12のパターンが紹介されている。</p>
+
+<p>著者本人によるパターンの紹介スライドが以下で閲覧できる。</p>
+
+<ul>
+<li><a href="https://speakerdeck.com/mtnygard/stability-patterns-and-antipatterns">Stability Patterns &hellip; and Antipatterns - Speaker Deck</a></li>
+</ul>
+
+
+<p>初版の"Release It!&ldquo;は、ほぼ10年前、2007年出版であるらしい。それにしては、CI/CD、カオスエンジニアリング、コンテナオーケストレーションなど、最新に近い話題が盛りだくさんに含まれている。改版にあたってかなりの改訂が入ったものと思われる。
+初版の目次をちらっと覗いてみたところ、目次構成からごっそりと変更されているようだ。削られた章もあるようなので、初版も読んでみたいと思った。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[「ネスぺ 29 魂」を読んだ]]></title>
@@ -809,37 +838,6 @@
 <p>そういう経緯で読んだわけであるが、正直なところよくわからなかったというのが感想である。私の前提知識が足りないのか、本の書き方が悪いのか、SDNの世界がまだ発展途上であるのか、その辺りが原因ではないかと思われる。</p>
 
 <p>SDNの話題ではないが、OpenStackの概要紹介を興味深く読んだので、機会があればOpenStackについてもう少し追ってみたいと思った。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA["The Way of the Web Tester"を読んだ]]></title>
-    <link href="http://succi0303.github.io/blog/2017/10/27/read-the-way-of-the-web-tester/"/>
-    <updated>2017-10-27T03:58:12+00:00</updated>
-    <id>http://succi0303.github.io/blog/2017/10/27/read-the-way-of-the-web-tester</id>
-    <content type="html"><![CDATA[<p>“The Way of The Web Tester”を読んだ。</p>
-
-<p><a href="https://www.amazon.co.jp/Way-Web-Tester-Beginners-Automating-ebook/dp/B01MF92GTC?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B01MF92GTC">The Way of the Web Tester: A Beginner&rsquo;s Guide to Automating Tests</a></p>
-
-<p><a href="https://www.amazon.co.jp/Way-Web-Tester-Beginners-Automating-ebook/dp/B01MF92GTC?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B01MF92GTC"><img src="https://images-fe.ssl-images-amazon.com/images/I/512ZGsfn7BL._SL160_.jpg" /></a></p>
-
-<p>「初めての自動テスト」というタイトルで日本語訳が出版されている。</p>
-
-<p><a href="https://www.amazon.co.jp/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88-%E2%80%95Web%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88%E5%9F%BA%E7%A4%8E-Jonathan-Rasmusson/dp/4873118166?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4873118166">初めての自動テスト ―Webシステムのための自動テスト基礎</a></p>
-
-<p><a href="https://www.amazon.co.jp/%E5%88%9D%E3%82%81%E3%81%A6%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88-%E2%80%95Web%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E8%87%AA%E5%8B%95%E3%83%86%E3%82%B9%E3%83%88%E5%9F%BA%E7%A4%8E-Jonathan-Rasmusson/dp/4873118166?SubscriptionId=AKIAIBGVUCXJLF44YBDA&amp;tag=succi-22&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=4873118166"><img src="https://images-fe.ssl-images-amazon.com/images/I/51ANm6GnYPL._SL160_.jpg" /></a></p>
-
-<p>ウェブシステムを対象とした自動テストの入門書である。</p>
-
-<p>前半では、自動テストをUIテスト、インテグレーションテスト、ユニットテスト（テストピラミッドと呼ぶ）に分類し、それぞれのテストの概要と実践方法が解説されている。</p>
-
-<p>また、テストピラミッドの組み合わせ方について説明されている。テスト項目はできるだけ下のレイヤに落とし込み、上のレイヤのテストを作りすぎない、など。</p>
-
-<p>後半では、テストコードのプログラミングテクニックが解説されており、最終章ではテスト駆動開発が紹介されている。</p>
-
-<p>自動テスト？当たり前でしょう。という人にとっては、本当に当たり前のことをまとめただけの本であると思う。一方、これまでテストコードがないレガシーなシステムを抱えていて、これから自動テストに取り組もうという現場の人にとっては、貴重な情報源になると思う。</p>
-
-<p>とくに、これまで自動テストに理解がなかった人たちに、正しい形の自動テストを布教する教材として有用になることを、個人的には期待している。</p>
 ]]></content>
   </entry>
   

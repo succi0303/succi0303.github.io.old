@@ -9,7 +9,7 @@
   <meta name="author" content="succi0303">
 
   
-  <meta name="description" content="Rubyを使ったウェブのスパイダリング、スクレイピングを学べる情報源がないか探していたところこちらのサイトを見つけました。 The Bastards Book of Ruby トップページから「Contents」「Supplements」と順に追っていくと、ウェブ・ &hellip;">
+  <meta name="description" content="Ruby on Rails開発向けです。CucumberとRSpecでBDD環境を作る手順をまとめました。テストの自動実行と高速化のためにguardとsporkを使用します。 プロジェクトの作成 rails newでプロジェクトを作成します。その際、--skip-test- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +113,164 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/24/setup-guard-and-spork-for-rails/">Rails開発時のguardとsporkの設定</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-24T06:54:00+00:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:54 am</span></time>
+        
+         | <a href="/blog/2014/01/24/setup-guard-and-spork-for-rails/#disqus_thread">Comments</a>
+        
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://rubyonrails.org/">Ruby on Rails</a>開発向けです。<a href="http://cukes.info/">Cucumber</a>と<a href="http://rspec.info/">RSpec</a>でBDD環境を作る手順をまとめました。テストの自動実行と高速化のために<a href="https://github.com/guard/guard">guard</a>と<a href="https://github.com/sporkrb/spork">spork</a>を使用します。</p>
+
+<h2>プロジェクトの作成</h2>
+
+<p><code>rails new</code>でプロジェクトを作成します。その際、<code>--skip-test-unit</code>を付加してTest::Unit関連のファイルが作成されないようにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails new sample_app --skip-test-unit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Gemのインストール</h2>
+
+<p><code>Gemfile</code>を編集して下記のGemを追加します。<code>selenium-webdriver</code>、<code>capybara</code>、<code>factory_girl</code>は必要に応じて。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">group</span> <span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;rspec-rails&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;guard-rspec&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;guard-cucumber&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;guard-spork&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;spork-rails&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;childprocess&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">gem</span> <span class="ss">:test</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;cucumber-rails&#39;</span><span class="p">,</span> <span class="nb">require</span><span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;database_cleaner&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;selenium-webdriver&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;factory_girl&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;factory_girl_rails&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># with &#39;osx&#39;</span>
+</span><span class='line'>  <span class="n">gem</span> <span class="s1">&#39;growl&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gemfileを編集したら<code>bundle install</code>を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>初期設定</h2>
+
+<p>RSpec、Cucumber、guard、sporkそれぞれの初期設定を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate rspec:install
+</span><span class='line'><span class="nv">$ </span>rails generate cucumber:install
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard init rspec
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard init cucumber
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard init spork
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>spork rspec --bootstrap
+</span><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>spork cucumber --bootstrap
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Guradfileの編集</h2>
+
+<p><code>Guardfile</code>を開き、以下のように編集します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># 編集前</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;rspec&#39;</span> <span class="k">do</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;cucumber&#39;</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 編集後</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;rsepc&#39;</span><span class="p">,</span> <span class="ss">after_all_pass</span><span class="p">:</span> <span class="kp">false</span><span class="p">,</span> <span class="ss">cli</span><span class="p">:</span> <span class="s1">&#39;--drb&#39;</span> <span class="k">do</span>
+</span><span class='line'><span class="n">guard</span> <span class="s1">&#39;cucumber&#39;</span><span class="p">,</span> <span class="ss">after_all_pass</span><span class="p">:</span> <span class="kp">false</span> <span class="k">do</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>--drb</code>はsporkを実行するためのオプションです。本当はCucumberもsporkで実行したいところですが、Cucumber 1.3からsporkはサポートされないようになったようです。</p>
+
+<h2>spec_helperの編集</h2>
+
+<p><code>spec/spec_helper</code>を開き、<code>ENV["RAILS_ENV"] ||= 'test'</code>以下をすべて<code>Spork.prefork</code>ブロック内に移動します。</p>
+
+<p>以上で設定は完了です。</p>
+
+<h2>実行方法</h2>
+
+<p>Railsのルートディレクトリで<code>guard</code>を実行します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle <span class="nb">exec </span>guard
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定が読み込まれ、RSpecとCucumberが実行されます。</p>
+
+<p>以降、関連するファイルを更新するたびにRSpecとCucumberが自動的に実行されます。端末がOSXでGrowlをインストールしていれば、あわせてGrowlでテスト結果が通知されます。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1792,166 +1950,6 @@ $ cucumber &ndash;format html &ndash;out html-report/index.html</p>
 <li>hangman</li>
 <li>州都当てクイズ</li>
 </ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/14/check-leap-year/">うるう年を判定するプログラム</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-11-14T09:03:42+00:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>9:03 am</span></time>
-        
-         | <a href="/blog/2013/11/14/check-leap-year/#disqus_thread">Comments</a>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ある年が閏年かどうかは次の4つの条件で判断できます。</p>
-
-<ol>
-<li>4で割り切れない年は閏年ではない。</li>
-<li>4でも400でも割り切れる年は閏年である</li>
-<li>4で割り切れるが400では割り切れず、100で割り切れる年は、閏年ではない。</li>
-<li>それ以外の4で割り切れるすべての年は閏年である</li>
-</ol>
-
-
-<p>この条件をもとに閏年を判定するプログラムをRubyで書いてみます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># coding: utf-8</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># 閏年探査機 leap_year_probe.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">LeapYearProbe</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># 引数の年が閏年のときtrue、それ以外のときfalseを返す</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">is_leap_year?</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
-</span><span class='line'>      <span class="k">return</span> <span class="kp">false</span>
-</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">400</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-</span><span class='line'>      <span class="k">return</span> <span class="kp">true</span>
-</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">year</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-</span><span class='line'>      <span class="k">return</span> <span class="kp">false</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="kp">true</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>irbで動作確認してみます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>irb
-</span><span class='line'>irb&gt; require <span class="s2">&quot;./leap_year_probe&quot;</span>
-</span><span class='line'>irb&gt; <span class="nv">probe</span> <span class="o">=</span> LeapYearProbe.new
-</span><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2004</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
-</span><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2006</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="nb">false</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>一応正しく動いているようです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">2020</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>「夏季オリンピックは閏年に開催される」ということで、2020年東京オリンピックの年はもちろん閏年、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">1192</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>良い国作ろう鎌倉幕府の1192年は閏年、</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>irb&gt; probe.is_leap_year? <span class="nv">1492</span>
-</span><span class='line'><span class="o">=</span>&gt; <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>意欲に燃えるコロンブスの1492年も閏年だったようですね。</p>
-
-<p>ちなみに同じ閏年の判定をシェルスクリプトで書くとこうなるようです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>isLeapYear<span class="o">()</span>
-</span><span class='line'><span class="o">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$((year % 4))&quot;</span> -ne <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="k">return</span> <span class="m">1</span> <span class="c"># not LeapYear</span>
-</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$((year % 400))&quot;</span> -eq <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="k">return</span> <span class="m">0</span> <span class="c"># LeapYear</span>
-</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$((year % 100))&quot;</span> -eq <span class="m">0</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="k">return</span> <span class="m">1</span> <span class="c"># not LeapYear</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="k">return</span> <span class="m">0</span> <span class="c"># LeapYear</span>
-</span><span class='line'>  <span class="k">fi</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
